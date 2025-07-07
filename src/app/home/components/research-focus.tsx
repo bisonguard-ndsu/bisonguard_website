@@ -23,39 +23,32 @@ const features: FeatureCard[] = [
     number: "01",
   },
   {
-    badge: "AUTONOMOUS VEHICLES",
-    title: "Autonomous and Connected Vehicles",
-    description:
-      "Exploring the development, deployment, and societal impacts of self-driving and networked vehicles",
-    number: "02",
-  },
-  {
     badge: "DIGITAL TWINS",
     title: "Digital Twins and Smart Cities",
     description:
       "Utilizing digital replicas of physical assets and urban environments to optimize city planning, operations, and sustainability",
-    number: "03",
+    number: "02",
   },
   {
     badge: "INTELLIGENT SYSTEMS",
     title: "Intelligent Transportation Systems",
     description:
       "Integrating advanced technologies to create smarter, adaptive transportation networks",
-    number: "04",
+    number: "03",
   },
   {
     badge: "ASSET MANAGEMENT",
     title: "Pavement and Asset Management",
     description:
       "Developing methods for monitoring, maintaining, and optimizing the lifecycle of roads, bridges, and other transportation assets",
-    number: "05",
+    number: "04",
   },
   {
     badge: "TRANSPORTATION SAFETY",
     title: "Transportation Safety",
     description:
       "Roadways accidents reduction using data analysis, simulation and safety interventions",
-    number: "06",
+    number: "05",
   },
 ];
 
@@ -100,8 +93,8 @@ export default function ResearchFocus() {
                       <span
                         className={`px-4 py-2 text-[10px] font-semibold uppercase tracking-wider ${
                           index % 2 === 0
-                            ? "bg-[#27ea9c] text-foreground"
-                            : "bg-[#27ea9c]/20 text-[#27ea9c]"
+                            ? "bg-neon text-foreground"
+                            : "bg-neon/20 text-neon"
                         }`}
                       >
                         {feature.badge}

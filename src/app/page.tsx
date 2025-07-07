@@ -3,6 +3,11 @@ import Hero from "@/components/hero";
 import ResearchFocus from "./home/components/research-focus";
 import About from "./home/components/about";
 import Projects from "./home/components/projects";
+import WhyChooseUs from "./home/components/why-choose-us";
+import Team from "./home/components/team";
+import Testimonials from "./home/components/testimonials";
+import Contact from "./home/components/contact";
+import Acreditations from "./home/components/acreditations";
 
 export default function Home() {
   return (
@@ -36,6 +41,11 @@ export default function Home() {
       <ResearchFocus />
       <About />
       <Projects />
+      <Team />
+      <WhyChooseUs />
+      <Testimonials />
+      <Acreditations />
+      <Contact />
     </>
   );
 }

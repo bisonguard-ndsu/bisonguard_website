@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { navItems, socialItems } from "@/lib/constants";
+import { navItems } from "@/lib/constants";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -13,7 +13,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between max-w-6xl mx-auto container min-h-16">
         {/* Logo - Far Left */}
         <Link href="/" className="flex items-center">
-          <span className="text-white font-bold text-lg">InfiniCityLabs</span>
+          <span className="text-white font-bold text-lg">InfiniCity Labs</span>
         </Link>
 
         {/* Navigation Links - Centered */}
@@ -25,13 +25,13 @@ export default function Navbar() {
                 key={item.name}
                 href={item.href}
                 className={`text-sm font-medium transition-colors duration-200 px-6 py-1 relative ${
-                  isActive ? "text-[#27ea9c]" : "text-gray-300 hover:text-white"
+                  isActive ? "text-neon" : "text-gray-300 hover:text-white"
                 }`}
               >
                 {isActive && (
                   <>
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-[#27ea9c]"></span>
-                    <span className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-[#27ea9c]"></span>
+                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neon"></span>
+                    <span className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neon"></span>
                   </>
                 )}
                 {item.name}
@@ -40,18 +40,18 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Social Icons - Far Right */}
-        <div className="flex items-center gap-2">
-          {socialItems.map((item) => (
-            <Button
-              key={item.name}
-              variant="ghost"
-              size="sm"
-              className="text-gray-300 hover:text-white hover:bg-[#27ea9c] p-2 h-auto"
-            >
-              <item.icon className="w-4 h-4" />
+        {/* Auth Buttons - Far Right */}
+        <div className="flex items-center space-x-3 ml-auto">
+          <Link href="/signin">
+            <Button className="border border-neon text-neon bg-transparent px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 focus:outline-none">
+              Sign In
             </Button>
-          ))}
+          </Link>
+          <Link href="/signup">
+            <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
+              Sign Up
+            </Button>
+          </Link>
         </div>
       </div>
     </nav>

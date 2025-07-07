@@ -10,8 +10,8 @@ export const navItems = [
     href: "/about",
   },
   {
-    name: "Expertise",
-    href: "/expertise",
+    name: "Team",
+    href: "/team",
   },
   {
     name: "Projects",
@@ -70,5 +70,60 @@ export const projects = [
     description:
       "Compliment favourable connection disa inner reprehenderit eugiat.",
     isActive: false,
+  },
+];
+
+export const team = [
+  {
+    name: "Josette Wadsworth",
+    position: "Senior Engineer",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+  },
+  {
+    name: "Beulah Arnold",
+    position: "Senior Architect",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+  },
+  {
+    name: "Melissa Figueroa",
+    position: "Senior Engineer",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+  },
+  {
+    name: "Monique Cannon",
+    position: "Junior Architect",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+  },
+];
+
+export const sponsors = [
+  {
+    name: "Farms",
+    image: "/farms.avif",
+    link: "",
+  },
+  {
+    name: "NDDOT",
+    image: "/nddot.jpg",
+    link: "",
+  },
+  {
+    name: "NDSU",
+    image: "/ndsu.png",
+    link: "",
+  },
+  {
+    name: "Sustein",
+    image: "/sustein.png",
+    link: "",
+  },
+  {
+    name: "USNF",
+    image: "/usnsf.jpg",
+    link: "",
   },
 ];

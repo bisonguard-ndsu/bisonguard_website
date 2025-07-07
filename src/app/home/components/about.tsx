@@ -17,8 +17,13 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="text-white">
-            {/* Small Badge Text */}
-            <p className="text-neon text-sm font-medium mb-6">About Us</p>
+            <div className="inline-flex items-center justify-center mb-6">
+              <div className="w-12 h-0.5 bg-neon mr-4" />
+              <span className="text-neon text-sm font-medium uppercase tracking-wider">
+                About Us
+              </span>
+              <div className="w-12 h-0.5 bg-neon ml-4" />
+            </div>
 
             {/* Main Heading */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8">
@@ -26,14 +31,14 @@ export default function About() {
             </h2>
 
             {/* Description */}
-            <p className="text-gray-300 text-sm lg:text-md leading-relaxed mb-12 max-w-lg">
+            <p className="text-gray-300 text-md lg:text-lg leading-relaxed mb-12 max-w-lg">
               Lorem ipsum, or lipsum as it is sometimes known is dummy text used
               in laying in the century who thought usually begins consectetur
               reprehenderit in voluptate velit esse.
             </p>
 
             {/* Call to Action Box */}
-            <Button className="bg-[#27ea9c] hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none">
+            <Button className="bg-neon hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none">
               Learn More
               {/* <ArrowRight className="ml-2" /> */}
             </Button>

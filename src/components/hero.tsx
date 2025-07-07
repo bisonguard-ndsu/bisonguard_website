@@ -67,9 +67,12 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
     initial: { opacity: 0 },
     animate: {
       opacity: 1,
-      transition: { duration: 1, ease: [0.4, 0, 0.2, 1] },
+      transition: { duration: 0.5, ease: [0.4, 0, 0.2, 1] },
     },
-    exit: { opacity: 0, transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] } },
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.1, ease: [0.4, 0, 0.2, 1] },
+    },
   };
 
   return (
@@ -84,7 +87,7 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
             backgroundImage: `url(${backgroundImage})`,
             backgroundColor: "#0a192f",
           }}
-          //@ts-expect-error from variants
+          // @ts-expect-error from framer motion
           variants={imageVariants}
           initial="initial"
           animate="animate"
@@ -113,7 +116,7 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
                 //@ts-expect-error from variants
                 variants={fadeUp}
               >
-                <span className="text-[#27ea9c] text-sm font-medium uppercase tracking-wider">
+                <span className="text-neon text-sm font-medium uppercase tracking-wider">
                   {badge}
                 </span>
               </motion.div>
@@ -133,9 +136,7 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
                   return (
                     <span
                       key={index}
-                      className={
-                        isHighlighted ? "text-[#27ea9c]" : "text-white"
-                      }
+                      className={isHighlighted ? "text-neon" : "text-white"}
                     >
                       {word}{" "}
                     </span>
@@ -160,14 +161,14 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
                 {onButtonClick ? (
                   <Button
                     onClick={onButtonClick}
-                    className="bg-[#27ea9c] hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none"
+                    className="bg-neon hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none"
                   >
                     {buttonText}
                   </Button>
                 ) : (
                   <Button
                     asChild
-                    className="bg-[#27ea9c] hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none"
+                    className="bg-neon hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none"
                   >
                     <a href={buttonHref}>{buttonText}</a>
                   </Button>
