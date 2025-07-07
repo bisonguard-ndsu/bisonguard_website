@@ -1,0 +1,129 @@
+"use client";
+
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
+
+interface FeatureCard {
+  badge: string;
+  title: string;
+  description: string;
+  number: string;
+}
+
+const features: FeatureCard[] = [
+  {
+    badge: "BIG DATA ANALYTICS",
+    title: "Big Data Analytics In Transportation",
+    description:
+      "Leveraging large-scale data and machine learning to uncover insights, predict trends, and support decision-making in transportation systems",
+    number: "01",
+  },
+  {
+    badge: "AUTONOMOUS VEHICLES",
+    title: "Autonomous and Connected Vehicles",
+    description:
+      "Exploring the development, deployment, and societal impacts of self-driving and networked vehicles",
+    number: "02",
+  },
+  {
+    badge: "DIGITAL TWINS",
+    title: "Digital Twins and Smart Cities",
+    description:
+      "Utilizing digital replicas of physical assets and urban environments to optimize city planning, operations, and sustainability",
+    number: "03",
+  },
+  {
+    badge: "INTELLIGENT SYSTEMS",
+    title: "Intelligent Transportation Systems",
+    description:
+      "Integrating advanced technologies to create smarter, adaptive transportation networks",
+    number: "04",
+  },
+  {
+    badge: "ASSET MANAGEMENT",
+    title: "Pavement and Asset Management",
+    description:
+      "Developing methods for monitoring, maintaining, and optimizing the lifecycle of roads, bridges, and other transportation assets",
+    number: "05",
+  },
+  {
+    badge: "TRANSPORTATION SAFETY",
+    title: "Transportation Safety",
+    description:
+      "Roadways accidents reduction using data analysis, simulation and safety interventions",
+    number: "06",
+  },
+];
+
+export default function ResearchFocus() {
+  return (
+    <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-white">
+      <div className="max-w-6xl mx-auto container">
+        <Carousel
+          plugins={[
+            Autoplay({
+              delay: 3000,
+            }),
+          ]}
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {features.map((feature, index) => (
+              <CarouselItem
+                key={index}
+                className="pl-4 md:basis-1/2 lg:basis-1/3"
+              >
+                <div
+                  className={`relative h-full p-10 ${
+                    index % 2 === 1
+                      ? "bg-bluish-white/10"
+                      : "bg-white border border-bluish-white/30"
+                  }`}
+                >
+                  {/* Background Number */}
+                  <div className="absolute top-5 right-5 text-6xl md:text-7xl lg:text-8xl font-bold text-gray-100 leading-none select-none">
+                    {feature.number}
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative z-10 pt-8">
+                    {/* Badge */}
+                    <div className="inline-block mb-8">
+                      <span
+                        className={`px-4 py-2 text-[10px] font-semibold uppercase tracking-wider ${
+                          index % 2 === 0
+                            ? "bg-[#27ea9c] text-foreground"
+                            : "bg-[#27ea9c]/20 text-[#27ea9c]"
+                        }`}
+                      >
+                        {feature.badge}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-3xl font-bold text-foreground mb-6 leading-tight">
+                      {feature.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-gray-600 leading-relaxed">
+                      {feature.description}
+                    </p>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+    </section>
+  );
+}
