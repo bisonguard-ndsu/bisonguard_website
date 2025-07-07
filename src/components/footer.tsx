@@ -1,0 +1,179 @@
+import Link from "next/link";
+import {
+  Instagram,
+  Twitter,
+  Facebook,
+  Mail,
+  Phone,
+  MapPin,
+  ArrowRight,
+  Github,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { navItems, projects } from "@/lib/constants";
+
+export default function Footer() {
+  return (
+    <footer className="bg-dark-blue text-white relative overflow-hidden">
+      <div className="relative z-10 py-16 px-4 sm:px-6 md:px-8 lg:px-16 flex flex-col gap-4">
+        {/* Main Footer Content */}
+        <div className="max-w-6xl mx-auto container">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+            {/* Company Info */}
+            <div className="lg:col-span-2 space-y-6">
+              <div className="flex items-center">
+                <Link href="/" className="flex items-center">
+                  <span className="text-white font-bold text-lg">
+                    InfiniCity Labs
+                  </span>
+                </Link>
+              </div>
+              <p className="text-md text-gray-300 leading-relaxed">
+                We provide cutting-edge transportation technology services based
+                on our research expertise in big data analytics, digital twins,
+                and intelligent systems to help cities optimize their
+                infrastructure and improve safety.
+              </p>
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white bg-neon/20 hover:text-foreground hover:bg-neon w-10 h-10 rounded-full"
+                >
+                  <Github className="w-5 h-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white bg-neon/20 hover:text-foreground hover:bg-neon w-10 h-10 rounded-full"
+                >
+                  <Instagram className="w-5 h-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white bg-neon/20 hover:text-foreground hover:bg-neon w-10 h-10 rounded-full"
+                >
+                  <Twitter className="w-5 h-5" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white bg-neon/20 hover:text-foreground hover:bg-neon w-10 h-10 rounded-full"
+                >
+                  <Facebook className="w-5 h-5" />
+                </Button>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div className="space-y-6">
+              <h3 className="text-white font-bold text-lg">Quick Links</h3>
+              <ul className="space-y-3">
+                {navItems.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      href={link.href}
+                      className="text-gray-300 hover:text-neon transition-colors duration-200 flex items-center group"
+                    >
+                      <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Services */}
+            <div className="space-y-6">
+              <h3 className="text-white font-bold text-lg">Our Solutions</h3>
+              <ul className="space-y-3">
+                {projects.map((service) => (
+                  <li key={service.title}>
+                    <Link
+                      href={service.href}
+                      className="text-gray-300 hover:text-neon transition-colors duration-200 flex items-center group"
+                    >
+                      <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                      {service.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-6">
+              <h3 className="text-white font-bold text-lg">Get In Touch</h3>
+              <div className="space-y-4">
+                <div className="flex items-start gap-3">
+                  <Mail className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-300">info@infinicitylabs.com</p>
+                    <p className="text-gray-300">research@infinicitylabs.com</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Phone className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-300">+1 (701) 555-0123</p>
+                    <p className="text-gray-300">+1 (701) 555-0124</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
+                  <div>
+                    <p className="text-gray-300">
+                      North Dakota State University
+                    </p>
+                    <p className="text-gray-300">Fargo, ND 58108</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="border-t border-gray-800 px-4 py-8">
+          <div className="max-w-6xl mx-auto container ">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h4 className="text-xl font-bold text-white mb-2">
+                  Ready to Transform Your Transportation Systems?
+                </h4>
+                <p className="text-gray-300">
+                  Join leading institutions and agencies who trust InfiniCity
+                  Labs with their transportation technology needs.
+                </p>
+              </div>
+              <div className="flex items-center gap-4">
+                <Button
+                  variant="outline"
+                  className="border border-neon text-neon bg-transparent px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 hover:text-neon focus:outline-none"
+                >
+                  Sign In
+                </Button>
+                <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
+                  Sign Up
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-gray-800 px-4 py-6">
+          <div className="max-w-6xl mx-auto container ">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4">
+              <p className="text-gray-400 text-sm">
+                © {new Date().getFullYear()} InfiniCity Labs. All rights
+                reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

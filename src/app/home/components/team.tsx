@@ -18,34 +18,46 @@ const Team = () => {
 
           {/* Main Heading */}
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8">
-            InfiniCityLabs is awesome architecture engineering company.
+            Meet Our <span className="text-neon">Research & Development</span>{" "}
+            Team
           </h2>
           <p className="text-gray-600 text-md lg:text-lg  max-w-3xl mx-auto leading-relaxed">
-            Lorem ipsum, or lipsum as it is sometimes known is dummy text used
-            in laying in the century who thought usually begins consectetur
-            reprehenderit in voluptate velit esse.
+            Our diverse team of transportation technology experts, data
+            scientists, and infrastructure specialists work together to pioneer
+            innovative solutions for smart cities and sustainable transportation
+            systems.
           </p>
         </div>
 
         {/* Team Members */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {team.map((member, index) => (
-            <div key={index} className="text-center">
-              {/* Image */}
-              <div className="mb-6">
+            <div
+              key={index}
+              className="group relative bg-white rounded-none overflow-hidden  transition-all duration-300 transform hover:-translate-y-2"
+            >
+              {/* Image Container */}
+              <div className="relative overflow-hidden">
                 <img
                   src={member.image || "/placeholder.svg"}
                   alt={member.name}
-                  className="w-full h-80 object-cover"
+                  className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110"
                 />
+                {/* Overlay on hover */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
               {/* Name and Position */}
-              <div
-                className={`p-4 hover:bg-blue-600 t bg-gray-50 text-foreground`}
-              >
-                <h3 className="text-xl font-bold mb-2">{member.name}</h3>
-                <p className={`text-sm text-foreground`}>{member.position}</p>
+              <div className="p-6 bg-white relative">
+                <h3 className="text-xl font-bold mb-2 text-foreground group-hover:text-neon transition-colors duration-300">
+                  {member.name}
+                </h3>
+                <p className="text-sm text-neon group-hover:text-gray-800 transition-colors duration-300">
+                  {member.position}
+                </p>
+
+                {/* Hover indicator */}
+                <div className="absolute bottom-0 left-0 w-0 h-1 bg-neon group-hover:w-full transition-all duration-300"></div>
               </div>
             </div>
           ))}

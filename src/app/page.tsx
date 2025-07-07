@@ -15,24 +15,26 @@ export default function Home() {
       <Hero
         items={[
           {
-            badge: "Company Since 1996",
-            title: "Work with the best shape makers for your home.",
+            badge: "Leading Transportation Innovation",
+            title: "Revolutionizing Transportation Through Advanced Technology",
             description:
-              "Compliment favourable connection and dispatched terminated esteem powerful excuse remove.",
-            buttonText: "OUR SERVICES",
-            buttonHref: "/services",
+              "InfiniCity Labs pioneers the future of smart transportation with cutting-edge big data analytics, digital twins, and intelligent systems that transform how cities move and operate.",
+            buttonText: "GET STARTED",
+            buttonHref: "/research",
             onButtonClick: () => null,
             backgroundImage:
               "https://static.vecteezy.com/system/resources/thumbnails/038/972/123/small_2x/ai-generated-construction-site-is-laying-new-asphalt-pavement-road-construction-workers-and-road-construction-machinery-scene-highway-construction-site-scene-photo.jpg",
+            highlightWords: ["transportation", "technology"],
           },
           {
-            badge: "Company Since 1996",
-            title: "Work with the best shape makers for your home.",
+            badge: "Smart Cities & Digital Twins",
+            title: "Building Tomorrow's Intelligent Infrastructure",
             description:
-              "Compliment favourable connection and dispatched terminated esteem powerful excuse remove.",
-            buttonText: "OUR SERVICES",
-            buttonHref: "/services",
+              "From pavement management to transportation safety, we develop innovative solutions that optimize asset lifecycle, reduce accidents, and create sustainable urban environments.",
+            buttonText: "GET STARTED",
+            buttonHref: "/about",
             onButtonClick: () => null,
+            highlightWords: ["tomorrow's", "infrastructure"],
             backgroundImage:
               "https://t3.ftcdn.net/jpg/11/46/94/78/360_F_1146947825_j3XI3vLcoiD123wv8ysBCbp1FNCEJG40.jpg",
           },
@@ -44,8 +46,8 @@ export default function Home() {
       <Team />
       <WhyChooseUs />
       <Testimonials />
-      <Acreditations />
       <Contact />
+      <Acreditations />
     </>
   );
 }

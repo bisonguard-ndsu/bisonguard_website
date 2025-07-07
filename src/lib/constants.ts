@@ -48,55 +48,59 @@ export const socialItems = [
 
 export const projects = [
   {
-    image:
-      "https://aboaharmstrong.vercel.app/_next/image?url=%2Fbison-sherperding.png&w=3840&q=75",
-    title: "Architecture",
+    image: "/adams.png",
+    title: "Advanced Infrastructure Asset Management System",
+    href: "",
     description:
-      "Compliment favourable connection disa inner reprehenderit eugiat.",
-    isActive: false,
+      "Comprehensive digital platform for monitoring, analyzing, and optimizing transportation infrastructure lifecycle using big data analytics and predictive maintenance algorithms.",
   },
   {
-    image:
-      "https://aboaharmstrong.vercel.app/_next/image?url=%2Felectric-grid.png&w=3840&q=75",
-    title: "3D Modeling",
+    image: "/tmc.png",
+    title: "Traffic Management Control System",
+    href: "",
     description:
-      "Compliment favourable connection disa inner reprehenderit eugiat.",
-    isActive: true,
+      "AI-powered traffic control solution utilizing real-time data analysis and machine learning to optimize traffic flow, reduce congestion, and enhance road safety across urban networks.",
   },
   {
-    image:
-      "https://aboaharmstrong.vercel.app/_next/image?url=%2Fbison-sherperding.png&w=3840&q=75",
-    title: "Interior Design",
+    image: "/bison-sherperding.png",
+    title: "Bison Sherperding Guard System",
+    href: "",
     description:
-      "Compliment favourable connection disa inner reprehenderit eugiat.",
-    isActive: false,
+      "Intelligent bison monitoring and management system utilizing IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
   },
 ];
 
 export const team = [
   {
-    name: "Josette Wadsworth",
-    position: "Senior Engineer",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+    name: "Prof. Aboah Armstrong",
+    position: "Principal Investigator",
+    image: "/aboah.png",
   },
   {
-    name: "Beulah Arnold",
-    position: "Senior Architect",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+    name: "Blessing Agyei Kyem",
+    position: "Data Scientist",
+    image: "/blessing.png",
   },
   {
-    name: "Melissa Figueroa",
-    position: "Senior Engineer",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+    name: "Joshua Asamoah",
+    position: "Data Scientist",
+    image: "/joshua.png",
   },
   {
-    name: "Monique Cannon",
-    position: "Junior Architect",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+    name: "Eugene Denteh",
+    position: "Data Scientist",
+    image: "/eugene-denteh.jpg",
+  },
+
+  {
+    name: "Andrews Danyo",
+    position: "Data Scientist",
+    image: "/andrews-danyo.jpg",
+  },
+  {
+    name: "Twitchell Addai",
+    position: "Data Scientist",
+    image: "/twitchell-addai.jpg",
   },
 ];
 

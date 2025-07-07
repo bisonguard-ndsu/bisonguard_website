@@ -14,39 +14,39 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Josette Wadsworth",
-    position: "Senior Engineer",
+    name: "Dr. Sarah Johnson",
+    position: "Transportation Research Director, NDSU",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
     testimonial:
-      "Nostrud exercitation ullamco laboris nisi ut aliquip exea commodo cillum dolore eum fugiat nulla pariatur excepteur sint occaecat cupidatat non proident and sunt in culpa qui officia deserunt mollit anim id est sint occaecat laborum.",
+      "InfiniCity Labs' big data analytics platform has revolutionized how we approach transportation research. Their innovative use of machine learning algorithms has provided unprecedented insights into traffic patterns and infrastructure performance.",
   },
   {
     id: 2,
     name: "Michael Rodriguez",
-    position: "Project Manager",
+    position: "Smart Cities Program Manager, NDDOT",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
     testimonial:
-      "Working with Arint has been an absolute pleasure. Their attention to detail and innovative approach to architecture has transformed our vision into reality. The team's professionalism and expertise are unmatched.",
+      "Working with InfiniCity Labs on our digital twin implementation has been transformative. Their expertise in real-time data processing and predictive modeling has enabled us to optimize our transportation networks like never before.",
   },
   {
     id: 3,
-    name: "Sarah Chen",
-    position: "Real Estate Developer",
+    name: "Dr. Chen Wei",
+    position: "Infrastructure Research Lead, USNSF",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
     testimonial:
-      "The quality of work delivered by Arint exceeded our expectations. From initial concept to final execution, they maintained the highest standards throughout the entire project.",
+      "The quality of research and technological innovation from InfiniCity Labs consistently exceeds expectations. Their asset management solutions have set new standards for infrastructure monitoring and maintenance optimization.",
   },
   {
     id: 4,
-    name: "David Thompson",
-    position: "Construction Director",
+    name: "Lisa Thompson",
+    position: "Urban Planning Director, Smart Cities Initiative",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
     testimonial:
-      "Arint's team brings creativity and technical excellence together seamlessly. Their 3D visualizations helped us identify potential issues early, saving both time and costs during construction.",
+      "InfiniCity Labs' intelligent transportation systems have been game-changing for our city planning efforts. Their safety analytics and predictive modeling capabilities have helped us reduce accidents and improve traffic flow significantly.",
   },
 ];
 
@@ -105,8 +105,8 @@ export default function Testimonials() {
 
             {/* Main Heading */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold max-w-4xl leading-tight mb-8">
-              We are always provide best services. What happy clients are{" "}
-              <span className="text-neon">saying about arkit.</span>
+              Trusted by transportation leaders. What our{" "}
+              <span className="text-neon">clients and partners say.</span>
             </h2>
           </div>
           {/* Testimonial Box - Bottom */}

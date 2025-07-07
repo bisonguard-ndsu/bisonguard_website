@@ -11,20 +11,20 @@ export default function Projects() {
           {/* Left - Heading */}
           <div>
             <h2 className="text-2xl md:text-3xl lg:text-4xl  font-bold text-foreground leading-tight">
-              InfiniCityLabs provide all service for implement{" "}
-              <span className="text-neon">your dream.</span>
+              Our Latest <span className="text-neon">Projects</span> &{" "}
+              <span className="text-neon">Solutions</span>
             </h2>
           </div>
 
           {/* Right - Description */}
           <div className="flex items-center justify-self-end-safe max-w-md">
             <p className="text-gray-600 leading-relaxed text-sm lg:text-md">
-              Compliment favourable connection dispatched terminated esteem
-              powerful excuse remove{" "}
+              We provide specialized transportation technology services based on{" "}
               <span className="underline font-bold">
-                inner reprehenderit voluptate
+                our research expertise
               </span>{" "}
-              velit esse cillum dolore eugiat.
+              in big data analytics, intelligent systems, and infrastructure
+              management.
             </p>
           </div>
         </div>

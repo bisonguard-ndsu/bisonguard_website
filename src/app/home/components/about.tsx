@@ -27,14 +27,17 @@ export default function About() {
 
             {/* Main Heading */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8">
-              InfiniCityLabs is awesome architecture engineering company.
+              Delivering Smart Transportation Solutions & Services
             </h2>
 
             {/* Description */}
             <p className="text-gray-300 text-md lg:text-lg leading-relaxed mb-12 max-w-lg">
-              Lorem ipsum, or lipsum as it is sometimes known is dummy text used
-              in laying in the century who thought usually begins consectetur
-              reprehenderit in voluptate velit esse.
+              InfiniCity Labs provides cutting-edge transportation technology
+              services based on our research expertise in big data analytics,
+              digital twins, and intelligent systems. We deliver practical
+              solutions for infrastructure asset management, traffic control
+              systems, and wildlife monitoring that help cities optimize their
+              transportation networks and improve safety.
             </p>
 
             {/* Call to Action Box */}

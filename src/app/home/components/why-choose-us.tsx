@@ -140,13 +140,15 @@ export default function WhyChooseUs() {
           </div>
 
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6 text-white">
-            Why <span className="text-neon">Arint</span> Stands Out
+            Why <span className="text-neon">InfiniCity Labs</span> Delivers
+            Excellence
           </h2>
 
           <p className="text-gray-300 text-md lg:text-lg max-w-3xl mx-auto leading-relaxed">
-            We combine cutting-edge technology with unparalleled expertise to
-            deliver solutions that transform your business operations and drive
-            sustainable growth.
+            Our unique combination of research-driven expertise, proven
+            technology solutions, and deep understanding of transportation
+            infrastructure enables us to deliver practical services that
+            transform how cities manage their transportation systems.
           </p>
         </div>
 

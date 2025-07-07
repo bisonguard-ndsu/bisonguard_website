@@ -72,7 +72,7 @@ export default function Accreditations() {
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-white">
+    <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-gray-50">
       <div className="container mx-auto max-w-5xl">
         <div className="text-center mx-auto container mb-16">
           <div className="inline-flex items-center justify-center mb-4">
@@ -85,12 +85,14 @@ export default function Accreditations() {
 
           {/* Main Heading */}
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8">
-            Trusted By Global Companies
+            Trusted By Leading{" "}
+            <span className="text-neon">Institutions & Agencies</span>
           </h2>
           <p className="text-gray-600 text-md lg:text-lg  max-w-3xl mx-auto leading-relaxed">
-            Lorem ipsum, or lipsum as it is sometimes known is dummy text used
-            in laying in the century who thought usually begins consectetur
-            reprehenderit in voluptate velit esse.
+            We collaborate with prestigious universities, government agencies,
+            and research organizations to provide transportation technology
+            services and develop innovative solutions for smart cities and
+            sustainable infrastructure.
           </p>
         </div>
         <motion.div

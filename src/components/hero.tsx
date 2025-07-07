@@ -12,6 +12,7 @@ interface HeroProps {
   buttonHref?: string;
   onButtonClick?: () => void;
   backgroundImage?: string;
+  highlightWords?: string[];
 }
 
 interface HeroCarouselProps {
@@ -37,6 +38,7 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
     buttonHref = "/services",
     onButtonClick,
     backgroundImage = "https://static.vecteezy.com/system/resources/thumbnails/038/972/123/small_2x/ai-generated-construction-site-is-laying-new-asphalt-pavement-road-construction-workers-and-road-construction-machinery-scene-highway-construction-site-scene-photo.jpg",
+    highlightWords = ["best", "makers", "shape"],
   } = items[current] || {};
 
   // Animation variants
@@ -129,7 +131,7 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
               >
                 {title.split(" ").map((word, index) => {
                   // Highlight specific words with the neon color
-                  const highlightWords = ["best", "makers", "shape"];
+
                   const isHighlighted = highlightWords.some((hw) =>
                     word.toLowerCase().includes(hw.toLowerCase())
                   );
