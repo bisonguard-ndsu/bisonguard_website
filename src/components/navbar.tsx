@@ -2,16 +2,27 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navItems, projects } from "@/lib/constants";
 import { useHash } from "@/hooks/useHash";
+import { useScroll } from "framer-motion";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
   const currentHash = useHash(); // Get the current hash from our custom hook
+  const { scrollY } = useScroll();
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  useEffect(() => {
+    function handleScroll(latest: number) {
+      setHasScrolled(latest > 10);
+    }
+    scrollY.on("change", handleScroll);
+    return () => scrollY.clearListeners();
+  }, [scrollY]);
 
   const isLinkActive = (href: string, name?: string) => {
     // 1. Handle "Projects" special case
@@ -46,7 +57,11 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-dark-blue px-4 sm:px-6 md:px-8 lg:px-16 sticky top-0 w-full z-50 transition-all duration-300">
+    <nav
+      className={`bg-dark-blue px-4 sm:px-6 md:px-8 lg:px-16 sticky top-0 w-full z-50 transition-all duration-300 ${
+        hasScrolled ? "shadow-md" : ""
+      }`}
+    >
       <div className="flex items-center justify-between max-w-6xl mx-auto container min-h-16">
         {/* Logo - Far Left */}
         <Link href="/" className="flex items-center">

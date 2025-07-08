@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Sparkles, Users, CheckCircle } from "lucide-react";
+import { ArrowRight, Sparkles, CheckCircle } from "lucide-react";
+import Link from "next/link";
 
 export default function Cta() {
   return (
@@ -70,10 +71,26 @@ export default function Cta() {
           <div className="flex items-center space-x-4 text-gray-300">
             <div className="flex -space-x-2">
               <div className="w-8 h-8 rounded-full bg-[#27ea9c]/20 border-2 border-[#27ea9c] flex items-center justify-center">
-                <Users className="w-4 h-4 text-[#27ea9c]" />
+                <img
+                  src="/farms.avif"
+                  alt="ndsu"
+                  className="w-full h-full rounded-full"
+                />
               </div>
-              <div className="w-8 h-8 rounded-full bg-[#27ea9c]/30 border-2 border-[#27ea9c]"></div>
-              <div className="w-8 h-8 rounded-full bg-[#27ea9c]/40 border-2 border-[#27ea9c]"></div>
+              <div className="w-8 h-8 rounded-full overflow-hidden bg-[#27ea9c]/30 border-2 border-[#27ea9c]">
+                <img
+                  src="/ndsu.png"
+                  alt="ndsu"
+                  className="w-full h-full rounded-full"
+                />
+              </div>
+              <div className="w-8 h-8 rounded-full bg-[#27ea9c]/40 border-2 border-[#27ea9c]">
+                <img
+                  src="/usnsf.jpg"
+                  alt="sustein"
+                  className="w-full h-full rounded-full"
+                />
+              </div>
             </div>
             <span className="text-sm">
               Trusted by 500+ organizations worldwide
@@ -93,26 +110,30 @@ export default function Cta() {
               </p>
             </div>
 
-            <div className="space-y-4">
-              <Button className="w-full rounded-lg bg-[#27ea9c] hover:bg-[#22d18a] text-[#0b243a] shadow-lg shadow-[#27ea9c]/20 transition-all duration-300 py-7 font-semibold focus:outline-none">
-                Start Free Trial
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-
-              <Button
-                variant="outline"
-                className="w-full rounded-lg border-2 border-[#27ea9c]/50 text-white hover:bg-[#27ea9c]/10 hover:border-[#27ea9c] transition-all duration-300 py-7 font-semibold bg-transparent"
-              >
-                Schedule Demo
-                <Sparkles className="ml-2 h-4 w-4" />
-              </Button>
-
-              <Button
-                variant="ghost"
-                className="w-full rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300 py-7 font-medium"
-              >
-                View Pricing Plans
-              </Button>
+            <div className="flex flex-col gap-1">
+              <Link href="/#contact" className="mb-4">
+                <Button className="w-full rounded-lg bg-[#27ea9c] hover:bg-[#22d18a] text-[#0b243a] shadow-lg shadow-[#27ea9c]/20 transition-all duration-300 py-7 font-semibold focus:outline-none">
+                  Start Free Trial
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/#contact">
+                <Button
+                  variant="outline"
+                  className="w-full rounded-lg border-2 border-[#27ea9c]/50 text-white hover:text-white hover:bg-[#27ea9c]/10 hover:border-[#27ea9c] transition-all duration-300 py-7 font-semibold bg-transparent"
+                >
+                  Schedule Demo
+                  <Sparkles className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link href="/#contact">
+                <Button
+                  variant="ghost"
+                  className="w-full rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300 py-7 font-medium"
+                >
+                  View Pricing Plans
+                </Button>
+              </Link>
             </div>
 
             <div className="border-t border-gray-600/30 pt-6">
@@ -121,20 +142,33 @@ export default function Cta() {
                   Need help deciding?
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-[#27ea9c] hover:text-white hover:bg-[#27ea9c]/20 transition-all duration-300"
-                  >
-                    Talk to Sales
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-[#27ea9c] hover:text-white hover:bg-[#27ea9c]/20 transition-all duration-300"
-                  >
-                    View Case Studies
-                  </Button>
+                  <Link href="/#contact">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-[#27ea9c] hover:text-white hover:bg-[#27ea9c]/20 transition-all duration-300"
+                    >
+                      Talk to Sales
+                    </Button>
+                  </Link>
+                  <Link href="/#projects">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-[#27ea9c] hover:text-white hover:bg-[#27ea9c]/20 transition-all duration-300"
+                    >
+                      View Case Studies
+                    </Button>
+                  </Link>
+                  <Link href="/#projects">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="text-[#27ea9c] hover:text-white hover:bg-[#27ea9c]/20 transition-all duration-300"
+                    >
+                      Contact Us
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
