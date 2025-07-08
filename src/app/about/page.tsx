@@ -9,15 +9,15 @@ const About = () => {
         items={[
           {
             badge: "About InfiniCity Labs",
-            title: "One tool to manage infrastructure assets and your team.",
+            title: "Delivering Smart Transportation Solutions & Services",
             description:
-              "AdAMS helps asset managers work faster, smarter and more efficiently, delivering the visibility and data-driven insights to mitigate risk and ensure compliance.",
+              "InfiniCity Labs provides cutting-edge transportation technology services based on our research expertise in big data analytics, digital twins, and intelligent systems. We deliver practical solutions for infrastructure asset management, traffic control systems, and wildlife monitoring that help cities optimize their transportation networks and improve safety.",
             buttonText: "LEARN MORE",
             buttonHref: "/services",
             onButtonClick: () => null,
             backgroundImage:
               "https://t3.ftcdn.net/jpg/11/46/94/78/360_F_1146947825_j3XI3vLcoiD123wv8ysBCbp1FNCEJG40.jpg",
-            highlightWords: ["asset", "team"],
+            highlightWords: ["smart"],
           },
         ]}
       />

@@ -27,11 +27,11 @@ const Adams = () => {
       <VideioViewer
         title="How AdAMS Works"
         highlightedWords={["AdAMS"]}
-        description="Watch a comprehensive demonstration of our Advanced Infrastructure Asset Management System in action. See how our platform monitors, analyzes, and optimizes transportation infrastructure using big data analytics and predictive maintenance algorithms."
+        description="Watch a comprehensive demonstration of our traffic counts at intersections. Traffic counts are crucial for analyzing and improving traffic flow at intersections."
         videoUrl="https://drive.google.com/file/d/1H_qqZTL5h9gW3YsbA2D_MKo1K8qng3Ra/preview"
         posterUrl="/adams.png"
         subtitles="/subtitles/adams.vtt"
-        badgeText="FEATURED DEMO"
+        badgeText="INTERSECTION TRAFFIC TRACKING AND COUNTING"
         useIFrame
       />
       <Solutions />

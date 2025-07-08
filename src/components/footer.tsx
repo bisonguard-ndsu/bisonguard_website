@@ -6,7 +6,6 @@ import {
   Mail,
   Phone,
   MapPin,
-  ArrowRight,
   Github,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -78,7 +77,6 @@ export default function Footer() {
                         href={link.href}
                         className="text-gray-300 hover:text-neon transition-colors duration-200 flex items-center group"
                       >
-                        <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                         {link.name}
                       </Link>
                     </li>
@@ -96,7 +94,6 @@ export default function Footer() {
                       href={service.href}
                       className="text-gray-300 hover:text-neon transition-colors duration-200 flex items-center group"
                     >
-                      <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
                       {service.title}
                     </Link>
                   </li>

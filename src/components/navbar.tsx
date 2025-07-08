@@ -63,7 +63,7 @@ export default function Navbar() {
               <div key={item.name} className="relative">
                 {isProjects ? (
                   <div
-                    className="relative"
+                    className="relative group"
                     onMouseEnter={() => setIsProjectsOpen(true)}
                     onMouseLeave={() => setIsProjectsOpen(false)}
                   >
@@ -90,11 +90,7 @@ export default function Navbar() {
 
                     {/* Projects Dropdown */}
                     {isProjectsOpen && (
-                      <div
-                        className="absolute top-full left-0 mt-2 w-64 bg-dark-blue shadow-lg py-2 z-50 rounded-none"
-                        // onMouseEnter={() => setIsProjectsOpen(true)}
-                        // onMouseLeave={() => setIsProjectsOpen(false)}
-                      >
+                      <div className="absolute top-full left-0 mt-0 w-64 bg-dark-blue shadow-lg py-2 z-50 rounded-none">
                         {projects.map((project) => (
                           <Link
                             key={project.title}
