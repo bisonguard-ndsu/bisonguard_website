@@ -43,8 +43,7 @@ export default function About() {
 
             {/* Main Heading */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8">
-              Delivering Smart Solutions & Services for Infrastructure,
-              Mobility, and Smart Systems
+              Delivering Smart Solutions & Services
             </h2>
 
             {/* Description */}

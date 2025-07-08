@@ -103,8 +103,8 @@ export const team = [
   // },
 
   {
-    name: "Chris",
-    position: "Chief Information Officer",
+    name: "Christian Shardey",
+    position: "Chief Solutions Architect",
     image: "/twitchell-addai.jpg",
   },
 ];
