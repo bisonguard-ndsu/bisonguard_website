@@ -15,11 +15,11 @@ const testimonials: Testimonial[] = [
   {
     id: 1,
     name: "Dr. Sarah Johnson",
-    position: "Transportation Research Director, NDSU",
+    position: "Infrastructure & Mobility Research Director, NDSU",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
     testimonial:
-      "InfiniCity Labs' big data analytics platform has revolutionized how we approach transportation research. Their innovative use of machine learning algorithms has provided unprecedented insights into traffic patterns and infrastructure performance.",
+      "InfiniCity Labs' big data analytics platform has revolutionized how we approach infrastructure and mobility research. Their innovative use of machine learning algorithms has provided unprecedented insights into mobility patterns and infrastructure performance.",
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const testimonials: Testimonial[] = [
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
     testimonial:
-      "Working with InfiniCity Labs on our digital twin implementation has been transformative. Their expertise in real-time data processing and predictive modeling has enabled us to optimize our transportation networks like never before.",
+      "Working with InfiniCity Labs on our digital twin implementation has been transformative. Their expertise in real-time data processing and predictive modeling has enabled us to optimize our infrastructure and mobility networks like never before.",
   },
   {
     id: 3,
@@ -46,7 +46,7 @@ const testimonials: Testimonial[] = [
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
     testimonial:
-      "InfiniCity Labs' intelligent transportation systems have been game-changing for our city planning efforts. Their safety analytics and predictive modeling capabilities have helped us reduce accidents and improve traffic flow significantly.",
+      "InfiniCity Labs' intelligent systems have been game-changing for our city planning efforts. Their safety analytics and predictive modeling capabilities have helped us reduce accidents and improve system flow significantly.",
   },
 ];
 
@@ -105,7 +105,7 @@ export default function Testimonials() {
 
             {/* Main Heading */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold max-w-4xl leading-tight mb-8">
-              Trusted by transportation leaders. What our{" "}
+              Trusted by infrastructure and mobility leaders. What our{" "}
               <span className="text-neon">clients and partners say.</span>
             </h2>
           </div>

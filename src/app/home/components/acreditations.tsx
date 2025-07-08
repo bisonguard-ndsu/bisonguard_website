@@ -90,9 +90,9 @@ export default function Accreditations() {
           </h2>
           <p className="text-gray-600 text-md lg:text-lg  max-w-3xl mx-auto leading-relaxed">
             We collaborate with prestigious universities, government agencies,
-            and research organizations to provide transportation technology
-            services and develop innovative solutions for smart cities and
-            sustainable infrastructure.
+            and research organizations to provide infrastructure, mobility, and
+            smart systems technology services and develop innovative solutions
+            for smart cities and sustainable infrastructure.
           </p>
         </div>
         <motion.div

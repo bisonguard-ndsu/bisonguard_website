@@ -28,19 +28,21 @@ export default function About() {
 
             {/* Main Heading */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8">
-              Delivering Smart Transportation Solutions & Services
+              Delivering Smart Solutions & Services for Infrastructure,
+              Mobility, and Smart Systems
             </h2>
 
             {/* Description */}
             <p className="text-gray-300 text-md lg:text-lg leading-relaxed mb-12 max-w-lg">
               At InfiniCity Labs, we are redefining the future of urban and
-              rural ecosystems. Since 1996, we’ve combined engineering expertise
-              with smart technologies to solve complex challenges across
-              infrastructure, transportation, and agriculture. Our mission is to
-              develop sustainable and data-driven systems that make cities more
-              livable and farming more productive. From intelligent traffic flow
-              to efficient asset management and smart herd monitoring, we bring
-              precision, innovation, and performance to every project.
+              rural ecosystems. We&apos;ve combined engineering expertise with
+              smart technologies to solve complex challenges across
+              infrastructure, mobility, smart systems, and agriculture. Our
+              mission is to develop sustainable and data-driven systems that
+              make cities more livable and farming more productive. From
+              intelligent traffic flow to efficient asset management and smart
+              herd monitoring, we bring precision, innovation, and performance
+              to every project.
             </p>
 
             {/* Call to Action Box */}
@@ -58,9 +60,10 @@ export default function About() {
               {/* Circular Image */}
               <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20">
                 <img
-                  src="https://static.vecteezy.com/system/resources/previews/038/946/939/non_2x/ai-generated-construction-site-is-laying-new-asphalt-pavement-road-construction-workers-and-road-construction-machinery-scene-highway-construction-site-scene-photo.jpg"
+                  src="https://ik.imagekit.io/5kwcgtj3iv/detail-shot-modern-business-buildings%20(1).png?updatedAt=1751966723273"
+                  loading="lazy"
                   alt="Architecture team working"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover bg-dark-blue"
                 />
               </div>
             </div>

@@ -12,14 +12,16 @@ export default function Projects() {
           {/* Left - Heading */}
           <div>
             <h2 className="text-2xl md:text-3xl lg:text-4xl  font-bold text-foreground leading-tight">
-              Our <span className="text-neon">Smart</span> Solutions
+              Our <span className="text-neon">Smart</span> Solutions and
+              Services
             </h2>
           </div>
 
           {/* Right - Description */}
           <div className="flex items-center justify-self-end-safe max-w-md">
             <p className="text-gray-600 leading-relaxed text-sm lg:text-md">
-              We provide specialized transportation technology services based on{" "}
+              We provide specialized infrastructure, mobility, and smart systems
+              technology services based on{" "}
               <span className="underline font-bold">
                 our research expertise
               </span>{" "}

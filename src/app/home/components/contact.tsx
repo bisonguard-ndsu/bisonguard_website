@@ -97,14 +97,16 @@ export default function ContactSection() {
 
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             Ready to transform your{" "}
-            <span className="text-[#27ea9c]">transportation systems?</span>
+            <span className="text-[#27ea9c]">
+              infrastructure, mobility, and smart systems?
+            </span>
           </h2>
 
           <p className="text-gray-300 mb-8 text-lg leading-relaxed">
             Interested in our services or partnership opportunities? Our team of
-            transportation technology experts is here to discuss how we can help
-            optimize your infrastructure, traffic management, and safety
-            systems.
+            infrastructure, mobility, and smart systems technology experts is
+            here to discuss how we can help optimize your infrastructure,
+            traffic management, and safety systems.
           </p>
 
           <div className="space-y-6">

@@ -146,9 +146,10 @@ export default function WhyChooseUs() {
 
           <p className="text-gray-300 text-md lg:text-lg max-w-3xl mx-auto leading-relaxed">
             Our unique combination of research-driven expertise, proven
-            technology solutions, and deep understanding of transportation
-            infrastructure enables us to deliver practical services that
-            transform how cities manage their transportation systems.
+            technology solutions, and deep understanding of infrastructure,
+            mobility, and smart systems enables us to deliver practical services
+            that transform how cities manage their infrastructure, mobility, and
+            smart systems.
           </p>
         </div>
 

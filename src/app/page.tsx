@@ -15,28 +15,37 @@ export default function Home() {
       <Hero
         items={[
           {
-            badge: "Leading Transportation Innovation",
+            badge:
+              "Leading Innovation in Infrastructure, Mobility & Smart Systems",
             title: "Transforming Cities, Empowering Progress",
             description:
-              "InfiniCity Labs pioneers the future of smart transportation with cutting-edge big data analytics, digital twins, and intelligent systems that transform how cities move and operate.",
+              "InfiniCity Labs pioneers the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics, digital twins, and intelligent systems that transform how cities, communities, and industries move and operate.",
             buttonText: "GET STARTED",
-            buttonHref: "/research",
-            onButtonClick: () => null,
-            backgroundImage:
-              "https://static.vecteezy.com/system/resources/thumbnails/038/972/123/small_2x/ai-generated-construction-site-is-laying-new-asphalt-pavement-road-construction-workers-and-road-construction-machinery-scene-highway-construction-site-scene-photo.jpg",
-            highlightWords: ["transforming", "technology"],
+            buttonHref: "/#contact",
+            backgroundImage: "/road.jpg",
+            highlightWords: [
+              "transforming",
+              "technology",
+              "infrastructure",
+              "mobility",
+              "smart systems",
+            ],
           },
           {
-            badge: "Smart Cities & Digital Twins",
+            badge: "Smart Cities, Digital Twins & Asset Management",
             title: "Building Tomorrow's Intelligent Infrastructure",
             description:
-              "From pavement management to transportation safety, we develop innovative solutions that optimize asset lifecycle, reduce accidents, and create sustainable urban environments.",
+              "From pavement management to safety, mobility, and digital twins, we develop innovative solutions that optimize asset lifecycle, improve system performance, and create sustainable, intelligent environments.",
             buttonText: "GET STARTED",
-            buttonHref: "/about",
-            onButtonClick: () => null,
-            highlightWords: ["tomorrow's", "infrastructure"],
-            backgroundImage:
-              "https://t3.ftcdn.net/jpg/11/46/94/78/360_F_1146947825_j3XI3vLcoiD123wv8ysBCbp1FNCEJG40.jpg",
+            buttonHref: "/#contact",
+            highlightWords: [
+              "tomorrow's",
+              "infrastructure",
+              "mobility",
+              "digital twins",
+              "asset management",
+            ],
+            backgroundImage: "/smartcity.jpg",
           },
         ]}
       />

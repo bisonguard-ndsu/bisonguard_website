@@ -139,7 +139,7 @@ export default function Footer() {
             <div className="flex flex-col md:flex-row items-center justify-between gap-6">
               <div>
                 <h4 className="text-xl font-bold text-white mb-2">
-                  Ready to Transform Your Transportation Systems?
+                  Ready to Transform Your Infrastructure Systems?
                 </h4>
                 <p className="text-gray-300">
                   Join leading institutions and agencies who trust InfiniCity
