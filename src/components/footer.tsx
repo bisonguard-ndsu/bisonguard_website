@@ -108,8 +108,8 @@ export default function Footer() {
                 <div className="flex items-start gap-3">
                   <Mail className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-gray-300">info@infinicitylabs.com</p>
-                    <p className="text-gray-300">research@infinicitylabs.com</p>
+                    <p className="text-gray-300">info@infinicitylabs.org</p>
+                    <p className="text-gray-300">research@infinicitylabs.org</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">

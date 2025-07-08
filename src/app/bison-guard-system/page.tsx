@@ -13,7 +13,7 @@ const BisonGuardSystem = () => {
             title: "Intelligent Bison Monitoring and Management System",
             description:
               "Our advanced farm system utilizes IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
-            buttonText: "SIGN UP TO FARM MANAGEMENT SYSTEM",
+            buttonText: "SIGN UP TO FMS",
             buttonHref: "/contact",
             onButtonClick: () => null,
             backgroundImage: "/bison-sherperding.png",

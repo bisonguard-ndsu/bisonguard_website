@@ -5,7 +5,16 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { Mail, Phone, MapPin, Clock, ArrowRight } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Clock,
+  ArrowRight,
+  Loader,
+  CheckCircle,
+  XCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,6 +25,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+import { sendFormSubmissionEmail } from "@/services/emailService";
 
 // Form validation schema
 const contactFormSchema = z.object({
@@ -43,19 +54,25 @@ export default function ContactSection() {
 
     try {
       // Simulate form submission
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-
-      console.log("Form submitted:", data);
+      await sendFormSubmissionEmail(data);
 
       // Reset form on success
       form.reset();
 
       // You can add success notification here
-      alert("Message sent successfully!");
+      toast.success("Message sent successfully!", {
+        description:
+          "Your message has successfully been sent to InfiniCity Labs. We'll get back to you very soon.",
+        icon: <CheckCircle className="text-neon w-6 h-6 mr-4" />,
+        richColors: true,
+      });
     } catch (error) {
       console.error("Error submitting form:", error);
       // You can add error notification here
-      alert("Error sending message. Please try again.");
+      toast.error("Error sending message. Please try again.", {
+        icon: <XCircle className="text-destructive w-6 h-6 mr-4" />,
+        richColors: true,
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -88,8 +105,8 @@ export default function ContactSection() {
 
         {/* Left Side - Contact Info */}
         <div className="relative z-10">
-          <div className="mb-4 inline-flex items-center bg-gray-800/50 backdrop-blur-sm border border-[#27ea9c]/30 rounded-full px-4 py-2">
-            <Mail className="w-3 h-3 mr-2 text-[#27ea9c]" />
+          <div className="mb-4 inline-flex items-center bg-gray-800/50 backdrop-blur-sm border border-neon/30 rounded-full px-4 py-2">
+            <Mail className="w-3 h-3 mr-2 text-neon" />
             <span className="text-gray-200 font-medium text-sm">
               Contact Us
             </span>
@@ -97,7 +114,7 @@ export default function ContactSection() {
 
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
             Ready to transform your{" "}
-            <span className="text-[#27ea9c]">
+            <span className="text-neon">
               infrastructure, mobility, and smart systems?
             </span>
           </h2>
@@ -111,26 +128,26 @@ export default function ContactSection() {
 
           <div className="space-y-6">
             <div className="flex items-center space-x-4 text-gray-200">
-              <div className="bg-[#27ea9c]/20 p-3 rounded-none">
-                <Phone className="w-5 h-5 text-[#27ea9c]" />
+              <div className="bg-neon/20 p-3 rounded-none">
+                <Phone className="w-5 h-5 text-neon" />
               </div>
               <span>+1 (701) 555-0123</span>
             </div>
             <div className="flex items-center space-x-4 text-gray-200">
-              <div className="bg-[#27ea9c]/20 p-3 rounded-none">
-                <Mail className="w-5 h-5 text-[#27ea9c]" />
+              <div className="bg-neon/20 p-3 rounded-none">
+                <Mail className="w-5 h-5 text-neon" />
               </div>
-              <span>info@infinicitylabs.com</span>
+              <span>info@infinicitylabs.org</span>
             </div>
             <div className="flex items-center space-x-4 text-gray-200">
-              <div className="bg-[#27ea9c]/20 p-3 rounded-none">
-                <MapPin className="w-5 h-5 text-[#27ea9c]" />
+              <div className="bg-neon/20 p-3 rounded-none">
+                <MapPin className="w-5 h-5 text-neon" />
               </div>
               <span>North Dakota State University, Fargo, ND</span>
             </div>
             <div className="flex items-center space-x-4 text-gray-200">
-              <div className="bg-[#27ea9c]/20 p-3 rounded-none">
-                <Clock className="w-5 h-5 text-[#27ea9c]" />
+              <div className="bg-neon/20 p-3 rounded-none">
+                <Clock className="w-5 h-5 text-neon" />
               </div>
               <span>Monday - Friday, 8:00 AM - 5:00 PM CST</span>
             </div>
@@ -152,7 +169,7 @@ export default function ContactSection() {
                     <FormControl>
                       <Input
                         placeholder="Your Name"
-                        className="w-full p-4  py-7 rounded-lg bg-white/10 border border-[#27ea9c]/30 text-white placeholder:text-gray-300/70 focus:outline-none focus:ring-2 focus:ring-[#27ea9c]/50 focus:border-[#27ea9c]/50 transition-all duration-300"
+                        className="w-full p-4  py-7 rounded-lg bg-white/10 border border-neon/30 text-white placeholder:text-gray-300/70 focus:outline-none focus:ring-2 focus:ring-neon/50 focus:border-neon/50 transition-all duration-300"
                         {...field}
                       />
                     </FormControl>
@@ -170,7 +187,7 @@ export default function ContactSection() {
                       <Input
                         type="email"
                         placeholder="Your Email"
-                        className="w-full p-4 py-7 rounded-lg bg-white/10 border border-[#27ea9c]/30 text-white placeholder:text-gray-300/70 focus:outline-none focus:ring-2 focus:ring-[#27ea9c]/50 focus:border-[#27ea9c]/50 transition-all duration-300"
+                        className="w-full p-4 py-7 rounded-lg bg-white/10 border border-neon/30 text-white placeholder:text-gray-300/70 focus:outline-none focus:ring-2 focus:ring-neon/50 focus:border-neon/50 transition-all duration-300"
                         {...field}
                       />
                     </FormControl>
@@ -188,7 +205,7 @@ export default function ContactSection() {
                       <Textarea
                         placeholder="Your Message"
                         rows={4}
-                        className="w-full p-4 py-7 rounded-lg bg-white/10 border border-[#27ea9c]/30 text-white placeholder:text-gray-300/70 focus:outline-none focus:ring-2 focus:ring-[#27ea9c]/50 focus:border-[#27ea9c]/50 transition-all duration-300 resize-none"
+                        className="w-full p-4 py-7 rounded-lg bg-white/10 border border-neon/30 text-white placeholder:text-gray-300/70 focus:outline-none focus:ring-2 focus:ring-neon/50 focus:border-neon/50 transition-all duration-300 resize-none"
                         {...field}
                       />
                     </FormControl>
@@ -200,10 +217,14 @@ export default function ContactSection() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-lg hover:bg-[#22d18a] shadow-lg shadow-[#27ea9c]/20 transition-all duration-300 py-7 font-semibold disabled:opacity-50 disabled:cursor-not-allowed bg-neon text-dark-blue px-5  focus:outline-none"
+                className="w-full rounded-lg hover:bg-[#22d18a] shadow-lg shadow-neon/20 transition-all duration-300 py-7 font-semibold disabled:opacity-50 disabled:cursor-not-allowed bg-neon text-dark-blue px-5  focus:outline-none"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
-                <ArrowRight className="ml-2 h-4 w-4" />
+                {isSubmitting ? (
+                  <Loader className="animate-spin ml-2 h-4 w-4" />
+                ) : (
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                )}
               </Button>
             </div>
           </form>

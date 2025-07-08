@@ -16,7 +16,7 @@ const TrafficManagementControl = () => {
             buttonText: "SIGN UP TO TMC",
             buttonHref: "/contact",
             onButtonClick: () => null,
-            backgroundImage: "/tmc2.jpg",
+            backgroundImage: "/adams.png",
             highlightWords: ["AI-powered", "control"],
           },
         ]}

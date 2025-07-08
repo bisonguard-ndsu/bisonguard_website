@@ -1,9 +1,18 @@
 "use client";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, CheckCircle } from "lucide-react";
 import Link from "next/link";
 
-export default function Cta() {
+export default function Cta({
+  title = "Ready to revolutionize your infrastructure management?",
+  description = "Join thousands of organizations already using our AI-powered solutions to optimize their infrastructure, reduce costs, and improve safety across their transportation networks.",
+  highlightWords = ["infrastructure"],
+}: Readonly<{
+  title?: string;
+  description?: string;
+  highlightWords?: string[];
+}>) {
   return (
     <section className="px-4 sm:px-6 md:px-8 lg:px-16 py-20">
       <div className="mx-auto container max-w-6xl grid md:grid-cols-2 gap-12 items-center bg-gradient-to-br from-[#0b243a] to-[#0f2a42] rounded-none p-8 md:p-16 shadow-2xl relative overflow-hidden">
@@ -31,60 +40,71 @@ export default function Cta() {
 
         {/* Left Side - CTA Content */}
         <div className="relative z-10">
-          <div className="mb-4 inline-flex items-center bg-gray-800/50 backdrop-blur-sm border border-[#27ea9c]/30 rounded-full px-4 py-2">
-            <Sparkles className="w-3 h-3 mr-2 text-[#27ea9c]" />
+          <div className="mb-4 inline-flex items-center bg-gray-800/50 backdrop-blur-sm border border-neon/30 rounded-full px-4 py-2">
+            <Sparkles className="w-3 h-3 mr-2 text-neon" />
             <span className="text-gray-200 font-medium text-sm">
               Get Started Today
             </span>
           </div>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Ready to revolutionize your{" "}
-            <span className="text-[#27ea9c]">infrastructure management?</span>
+            {title.split(" ").map((word, index) => {
+              // Highlight specific words with the neon color
+
+              const isHighlighted = highlightWords.some((hw) =>
+                word.toLowerCase().includes(hw.toLowerCase())
+              );
+              return (
+                <span
+                  key={index}
+                  className={isHighlighted ? "text-neon" : "text-white"}
+                >
+                  {word}{" "}
+                </span>
+              );
+            })}
           </h2>
 
           <p className="text-gray-300 mb-8 text-lg leading-relaxed">
-            Join thousands of organizations already using our AI-powered
-            solutions to optimize their infrastructure, reduce costs, and
-            improve safety across their transportation networks.
+            {description}
           </p>
 
           <div className="space-y-4 mb-8">
             <div className="flex items-center space-x-3 text-gray-200">
-              <CheckCircle className="w-5 h-5 text-[#27ea9c] flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-neon flex-shrink-0" />
               <span>Free 30-day trial with full access</span>
             </div>
             <div className="flex items-center space-x-3 text-gray-200">
-              <CheckCircle className="w-5 h-5 text-[#27ea9c] flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-neon flex-shrink-0" />
               <span>No setup fees or hidden costs</span>
             </div>
             <div className="flex items-center space-x-3 text-gray-200">
-              <CheckCircle className="w-5 h-5 text-[#27ea9c] flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-neon flex-shrink-0" />
               <span>24/7 expert support included</span>
             </div>
             <div className="flex items-center space-x-3 text-gray-200">
-              <CheckCircle className="w-5 h-5 text-[#27ea9c] flex-shrink-0" />
+              <CheckCircle className="w-5 h-5 text-neon flex-shrink-0" />
               <span>Cancel anytime, no questions asked</span>
             </div>
           </div>
 
           <div className="flex items-center space-x-4 text-gray-300">
             <div className="flex -space-x-2">
-              <div className="w-8 h-8 rounded-full bg-[#27ea9c]/20 border-2 border-[#27ea9c] flex items-center justify-center">
+              <div className="w-8 h-8 rounded-full bg-neon/20 border-2 border-neon flex items-center justify-center">
                 <img
                   src="/farms.avif"
                   alt="ndsu"
                   className="w-full h-full rounded-full"
                 />
               </div>
-              <div className="w-8 h-8 rounded-full overflow-hidden bg-[#27ea9c]/30 border-2 border-[#27ea9c]">
+              <div className="w-8 h-8 rounded-full overflow-hidden bg-neon/30 border-2 border-neon">
                 <img
                   src="/ndsu.png"
                   alt="ndsu"
                   className="w-full h-full rounded-full"
                 />
               </div>
-              <div className="w-8 h-8 rounded-full bg-[#27ea9c]/40 border-2 border-[#27ea9c]">
+              <div className="w-8 h-8 rounded-full bg-neon/40 border-2 border-neon">
                 <img
                   src="/usnsf.jpg"
                   alt="sustein"
@@ -112,7 +132,7 @@ export default function Cta() {
 
             <div className="flex flex-col gap-1">
               <Link href="/#contact" className="mb-4">
-                <Button className="w-full rounded-lg bg-[#27ea9c] hover:bg-[#22d18a] text-[#0b243a] shadow-lg shadow-[#27ea9c]/20 transition-all duration-300 py-7 font-semibold focus:outline-none">
+                <Button className="w-full rounded-lg bg-neon hover:bg-[#22d18a] text-[#0b243a] shadow-lg shadow-neon/20 transition-all duration-300 py-7 font-semibold focus:outline-none">
                   Start Free Trial
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
@@ -120,7 +140,7 @@ export default function Cta() {
               <Link href="/#contact">
                 <Button
                   variant="outline"
-                  className="w-full rounded-lg border-2 border-[#27ea9c]/50 text-white hover:text-white hover:bg-[#27ea9c]/10 hover:border-[#27ea9c] transition-all duration-300 py-7 font-semibold bg-transparent"
+                  className="w-full rounded-lg border-2 border-neon/50 text-white hover:text-white hover:bg-neon/10 hover:border-neon transition-all duration-300 py-7 font-semibold bg-transparent"
                 >
                   Schedule Demo
                   <Sparkles className="ml-2 h-4 w-4" />
@@ -146,7 +166,7 @@ export default function Cta() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-[#27ea9c] hover:text-white hover:bg-[#27ea9c]/20 transition-all duration-300"
+                      className="text-neon hover:text-white hover:bg-neon/20 transition-all duration-300"
                     >
                       Talk to Sales
                     </Button>
@@ -155,7 +175,7 @@ export default function Cta() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-[#27ea9c] hover:text-white hover:bg-[#27ea9c]/20 transition-all duration-300"
+                      className="text-neon hover:text-white hover:bg-neon/20 transition-all duration-300"
                     >
                       View Case Studies
                     </Button>
@@ -164,7 +184,7 @@ export default function Cta() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-[#27ea9c] hover:text-white hover:bg-[#27ea9c]/20 transition-all duration-300"
+                      className="text-neon hover:text-white hover:bg-neon/20 transition-all duration-300"
                     >
                       Contact Us
                     </Button>
@@ -178,15 +198,15 @@ export default function Cta() {
           <div className="mt-6 text-center">
             <div className="flex justify-center items-center space-x-6 text-gray-400 text-xs">
               <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-[#27ea9c] rounded-full"></div>
+                <div className="w-2 h-2 bg-neon rounded-full"></div>
                 <span>SOC 2 Certified</span>
               </div>
               <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-[#27ea9c] rounded-full"></div>
+                <div className="w-2 h-2 bg-neon rounded-full"></div>
                 <span>GDPR Compliant</span>
               </div>
               <div className="flex items-center space-x-1">
-                <div className="w-2 h-2 bg-[#27ea9c] rounded-full"></div>
+                <div className="w-2 h-2 bg-neon rounded-full"></div>
                 <span>99.9% Uptime</span>
               </div>
             </div>

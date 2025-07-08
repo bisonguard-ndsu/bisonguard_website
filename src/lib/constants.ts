@@ -48,14 +48,14 @@ export const socialItems = [
 
 export const projects = [
   {
-    image: "/adams.png",
+    image: "/tmc.png",
     title: "Advanced Asset & Infrastructure Management System",
     href: "/adams",
     description:
       "Comprehensive digital platform for monitoring, analyzing, and optimizing transportation infrastructure lifecycle using big data analytics and predictive maintenance algorithms.",
   },
   {
-    image: "/tmc.png",
+    image: "/adams.png",
     title: "Traffic Management Control System",
     href: "/tmc",
     description:
