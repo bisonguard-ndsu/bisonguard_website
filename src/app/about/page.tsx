@@ -9,9 +9,9 @@ const About = () => {
         items={[
           {
             badge: "About InfiniCity Labs",
-            title: "Delivering Smart Transportation Solutions & Services",
+            title: "Delivering Smart Solutions & Services",
             description:
-              "At InfiniCity Labs, we are redefining the future of urban and rural ecosystems. Since 1996, we’ve combined engineering expertise with smart technologies to solve complex challenges across infrastructure, transportation, and agriculture. Our mission is to develop sustainable and data-driven systems that make cities more livable and farming more productive. From intelligent traffic flow to efficient asset management and smart herd monitoring, we bring precision, innovation, and performance to every project.",
+              "At InfiniCity Labs, we are redefining the future of urban and rural ecosystems. We’ve combined engineering expertise with smart technologies to solve complex challenges across infrastructure, transportation, and agriculture. Our mission is to develop sustainable and data-driven systems that make cities more livable and farming more productive. From intelligent traffic flow to efficient asset management and smart herd monitoring, we bring precision, innovation, and performance to every project.",
             buttonText: "LEARN MORE",
             buttonHref: "/services",
             onButtonClick: () => null,
