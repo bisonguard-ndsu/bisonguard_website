@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { team } from "@/lib/constants";
+import Link from "next/link";
 import React from "react";
 
 const Team = () => {
@@ -40,11 +41,11 @@ const Team = () => {
               className="group relative bg-white rounded-none overflow-hidden  transition-all duration-300 transform hover:-translate-y-2"
             >
               {/* Image Container */}
-              <div className="relative overflow-hidden">
+              <div className="relative overflow-hidden bg-red-200">
                 <img
-                  src={member.image || "/placeholder.svg"}
+                  src={"/user.jpg"}
                   alt={member.name}
-                  className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110 bg-gray-200"
                 />
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -68,9 +69,11 @@ const Team = () => {
 
         {/* Join Team Button */}
         <div className="text-center">
-          <Button className="bg-dark-blue hover:bg-[#22d18a] text-white hover:text-dark-blue  capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none">
-            JOIN OUR TEAM +
-          </Button>
+          <Link href="/#contact">
+            <Button className="bg-dark-blue hover:bg-[#22d18a] text-white hover:text-dark-blue  capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none">
+              JOIN OUR TEAM +
+            </Button>
+          </Link>
         </div>
       </div>
     </section>

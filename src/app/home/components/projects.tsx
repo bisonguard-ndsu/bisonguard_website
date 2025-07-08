@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { projects } from "@/lib/constants";
 import { Plus } from "lucide-react";
+import Link from "next/link";
 
 export default function Projects() {
   return (
@@ -60,12 +61,14 @@ export default function Projects() {
                 </p>
 
                 {/* Button */}
-                <Button
-                  className={`text-dark-blue bg-neon capitalize px-6 py-3 text-xs font-semibold tracking-wider transition-all duration-300 rounded-none border border-bluish-white/30 hover:bg-neon cursor-pointer`}
-                >
-                  READ MORE
-                  <Plus className="w-2 h-2 ml-1" />
-                </Button>
+                <Link href={project.href}>
+                  <Button
+                    className={`text-dark-blue bg-neon capitalize px-6 py-3 text-xs font-semibold tracking-wider transition-all duration-300 rounded-none border border-bluish-white/30 hover:bg-neon cursor-pointer`}
+                  >
+                    READ MORE
+                    <Plus className="w-2 h-2 ml-1" />
+                  </Button>
+                </Link>
               </div>
             </div>
           ))}

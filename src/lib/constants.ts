@@ -73,33 +73,38 @@ export const projects = [
 export const team = [
   {
     name: "Prof. Aboah Armstrong",
-    position: "Principal Investigator",
+    position: "Co-Founder & President",
     image: "/aboah.png",
   },
   {
+    name: "Kelvin Kwakye",
+    position: "Chief Operating Officer",
+    image: "/aboah.png",
+  },
+  {
+    name: "Andrews Danyo",
+    position: "Co-Founder & CEO",
+    image: "/andrews-danyo.jpg",
+  },
+  {
     name: "Blessing Agyei Kyem",
-    position: "Data Scientist",
+    position: "Cheif Technology Officer",
     image: "/blessing.png",
   },
   {
     name: "Joshua Asamoah",
-    position: "Data Scientist",
+    position: "Chief Research Scientist",
     image: "/joshua.png",
   },
-  {
-    name: "Eugene Denteh",
-    position: "Data Scientist",
-    image: "/eugene-denteh.jpg",
-  },
+  // {
+  //   name: "Eugene Denteh",
+  //   position: "TBD",
+  //   image: "/eugene-denteh.jpg",
+  // },
 
   {
-    name: "Andrews Danyo",
-    position: "Data Scientist",
-    image: "/andrews-danyo.jpg",
-  },
-  {
-    name: "Twitchell Addai",
-    position: "Data Scientist",
+    name: "Chris",
+    position: "Chief Information Officer",
     image: "/twitchell-addai.jpg",
   },
 ];

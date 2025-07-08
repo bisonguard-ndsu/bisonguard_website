@@ -80,7 +80,7 @@ function WhyChooseUsCard({
   return (
     <div
       ref={cardRef}
-      className={`rounded-none group relative bg-white/10 backdrop-blur-sm border border-white/20 p-8 hover:bg-white/15 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
+      className={`rounded-none group relative bg-white/5 backdrop-blur-sm border border-white/20 p-8 hover:bg-white/15 transition-all duration-500 hover:scale-105 hover:shadow-2xl ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
@@ -104,7 +104,7 @@ function WhyChooseUsCard({
       </div>
 
       {/* Animated border */}
-      <div className="absolute inset-0 rounded-xl border-2 border-transparent group-hover:border-neon/50 transition-colors duration-300" />
+      <div className="absolute inset-0 rounded-none border-2 border-transparent group-hover:border-neon/50 transition-colors duration-300" />
     </div>
   );
 }

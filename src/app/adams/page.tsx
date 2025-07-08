@@ -3,6 +3,9 @@
 import Hero from "@/components/hero";
 import VideioViewer from "@/components/video-viewer";
 import React from "react";
+import Solutions from "./components/solutions";
+import Insights from "./components/insights";
+import Cta from "@/components/cta";
 
 const Adams = () => {
   return (
@@ -25,11 +28,15 @@ const Adams = () => {
         title="How AdAMS Works"
         highlightedWords={["AdAMS"]}
         description="Watch a comprehensive demonstration of our Advanced Infrastructure Asset Management System in action. See how our platform monitors, analyzes, and optimizes transportation infrastructure using big data analytics and predictive maintenance algorithms."
-        videoUrl="/videos/adams-demo.mp4"
+        videoUrl="https://drive.google.com/file/d/1H_qqZTL5h9gW3YsbA2D_MKo1K8qng3Ra/preview"
         posterUrl="/adams.png"
         subtitles="/subtitles/adams.vtt"
         badgeText="FEATURED DEMO"
+        useIFrame
       />
+      <Solutions />
+      <Insights />
+      <Cta />
     </>
   );
 };

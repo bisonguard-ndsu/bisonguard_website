@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -41,10 +42,12 @@ export default function About() {
             </p>
 
             {/* Call to Action Box */}
-            <Button className="bg-neon hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none">
-              Learn More
-              {/* <ArrowRight className="ml-2" /> */}
-            </Button>
+            <Link href={"/about"}>
+              <Button className="bg-neon hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none">
+                Learn More
+                {/* <ArrowRight className="ml-2" /> */}
+              </Button>
+            </Link>
           </div>
 
           {/* Right Image */}

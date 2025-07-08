@@ -70,17 +70,19 @@ export default function Footer() {
             <div className="space-y-6">
               <h3 className="text-white font-bold text-lg">Quick Links</h3>
               <ul className="space-y-3">
-                {navItems.map((link) => (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      className="text-gray-300 hover:text-neon transition-colors duration-200 flex items-center group"
-                    >
-                      <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                      {link.name}
-                    </Link>
-                  </li>
-                ))}
+                {navItems
+                  .filter((link) => link.name !== "Projects")
+                  .map((link) => (
+                    <li key={link.name}>
+                      <Link
+                        href={link.href}
+                        className="text-gray-300 hover:text-neon transition-colors duration-200 flex items-center group"
+                      >
+                        <ArrowRight className="w-4 h-4 mr-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
               </ul>
             </div>
 

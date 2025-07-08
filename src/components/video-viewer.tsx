@@ -6,6 +6,7 @@ type Props = {
   badgeText?: string;
   posterUrl: string;
   subtitles: string;
+  useIFrame?: boolean;
 };
 export default function VideioViewer({
   videoUrl,
@@ -15,6 +16,7 @@ export default function VideioViewer({
   badgeText,
   posterUrl,
   subtitles,
+  useIFrame,
 }: Props) {
   return (
     <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16">
@@ -53,24 +55,35 @@ export default function VideioViewer({
         </div>
         {/* Video Box */}
         <div className="mx-auto max-w-3xl">
-          <div className="relative overflow-hidden rounded-xl border bg-card shadow-lg">
-            <video
-              className="w-full aspect-video object-cover"
-              controls
-              preload="metadata"
-              poster={posterUrl}
-            >
-              <source src={videoUrl} type="video/mp4" />
-              {subtitles && (
-                <track
-                  src={subtitles}
-                  kind="subtitles"
-                  srcLang="en"
-                  label="English"
-                />
-              )}
-              Your browser does not support the video tag.
-            </video>
+          <div className="relative overflow-hidden rounded-xl border border-neon/20 bg-card shadow-lg">
+            {useIFrame ? (
+              <iframe
+                src={videoUrl}
+                // width="640"
+                // height="480"
+                allow="autoplay"
+                className="w-full aspect-video object-cover border"
+                title={description}
+              ></iframe>
+            ) : (
+              <video
+                className="w-full aspect-video object-cover"
+                controls
+                preload="metadata"
+                poster={posterUrl}
+              >
+                <source src={videoUrl} type="video/mp4" />
+                {subtitles && (
+                  <track
+                    src={subtitles}
+                    kind="subtitles"
+                    srcLang="en"
+                    label="English"
+                  />
+                )}
+                Your browser does not support the video tag.
+              </video>
+            )}
           </div>
         </div>
       </div>
