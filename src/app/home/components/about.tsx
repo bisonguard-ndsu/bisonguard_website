@@ -33,12 +33,14 @@ export default function About() {
 
             {/* Description */}
             <p className="text-gray-300 text-md lg:text-lg leading-relaxed mb-12 max-w-lg">
-              InfiniCity Labs provides cutting-edge transportation technology
-              services based on our research expertise in big data analytics,
-              digital twins, and intelligent systems. We deliver practical
-              solutions for infrastructure asset management, traffic control
-              systems, and wildlife monitoring that help cities optimize their
-              transportation networks and improve safety.
+              At InfiniCity Labs, we are redefining the future of urban and
+              rural ecosystems. Since 1996, we’ve combined engineering expertise
+              with smart technologies to solve complex challenges across
+              infrastructure, transportation, and agriculture. Our mission is to
+              develop sustainable and data-driven systems that make cities more
+              livable and farming more productive. From intelligent traffic flow
+              to efficient asset management and smart herd monitoring, we bring
+              precision, innovation, and performance to every project.
             </p>
 
             {/* Call to Action Box */}

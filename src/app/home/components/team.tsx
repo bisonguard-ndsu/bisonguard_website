@@ -22,14 +22,14 @@ const Team = () => {
 
           {/* Main Heading */}
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8">
-            Meet Our <span className="text-neon">Research & Development</span>{" "}
-            Team
+            Meet The <span className="text-neon">Team</span>
           </h2>
           <p className="text-gray-600 text-md lg:text-lg  max-w-3xl mx-auto leading-relaxed">
-            Our diverse team of transportation technology experts, data
-            scientists, and infrastructure specialists work together to pioneer
-            innovative solutions for smart cities and sustainable transportation
-            systems.
+            At InfiniCity Labs, our strength lies in our people. Our team of
+            engineers, analysts, and innovators brings decades of experience and
+            a shared passion for building smarter, more efficient systems.
+            Together, we turn complex challenges into sustainable solutions for
+            cities and communities around the world.
           </p>
         </div>
 
@@ -45,7 +45,7 @@ const Team = () => {
                 <img
                   src={"/user.jpg"}
                   alt={member.name}
-                  className="w-full h-80 object-cover transition-transform duration-300 group-hover:scale-110 bg-gray-200"
+                  className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110 bg-gray-200"
                 />
                 {/* Overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

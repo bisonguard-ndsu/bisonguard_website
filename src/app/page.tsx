@@ -16,7 +16,7 @@ export default function Home() {
         items={[
           {
             badge: "Leading Transportation Innovation",
-            title: "Revolutionizing Transportation Through Advanced Technology",
+            title: "Transforming Cities, Empowering Progress",
             description:
               "InfiniCity Labs pioneers the future of smart transportation with cutting-edge big data analytics, digital twins, and intelligent systems that transform how cities move and operate.",
             buttonText: "GET STARTED",
@@ -24,7 +24,7 @@ export default function Home() {
             onButtonClick: () => null,
             backgroundImage:
               "https://static.vecteezy.com/system/resources/thumbnails/038/972/123/small_2x/ai-generated-construction-site-is-laying-new-asphalt-pavement-road-construction-workers-and-road-construction-machinery-scene-highway-construction-site-scene-photo.jpg",
-            highlightWords: ["transportation", "technology"],
+            highlightWords: ["transforming", "technology"],
           },
           {
             badge: "Smart Cities & Digital Twins",
