@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -27,6 +27,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { sendFormSubmissionEmail } from "@/services/emailService";
+import { motion, useInView } from "framer-motion";
 
 // Form validation schema
 const contactFormSchema = z.object({
@@ -48,6 +49,11 @@ export default function ContactSection() {
       message: "",
     },
   });
+
+  const leftRef = useRef(null);
+  const formRef = useRef(null);
+  const leftInView = useInView(leftRef, { once: true, margin: "-100px" });
+  const formInView = useInView(formRef, { once: true, margin: "-100px" });
 
   const onSubmit = async (data: ContactFormValues) => {
     setIsSubmitting(true);
@@ -104,7 +110,13 @@ export default function ContactSection() {
         </div>
 
         {/* Left Side - Contact Info */}
-        <div className="relative z-10">
+        <motion.div
+          ref={leftRef}
+          initial={{ opacity: 0, y: 40 }}
+          animate={leftInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="relative z-10"
+        >
           <div className="mb-4 inline-flex items-center bg-gray-800/50 backdrop-blur-sm border border-neon/30 rounded-full px-4 py-2">
             <Mail className="w-3 h-3 mr-2 text-neon" />
             <span className="text-gray-200 font-medium text-sm">
@@ -152,11 +164,15 @@ export default function ContactSection() {
               <span>Monday - Friday, 8:00 AM - 5:00 PM CST</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Side - Contact Form */}
         <Form {...form}>
-          <form
+          <motion.form
+            ref={formRef}
+            initial={{ opacity: 0, y: 40 }}
+            animate={formInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
             onSubmit={form.handleSubmit(onSubmit)}
             className="space-y-4 relative z-10"
           >
@@ -227,7 +243,7 @@ export default function ContactSection() {
                 )}
               </Button>
             </div>
-          </form>
+          </motion.form>
         </Form>
       </div>
     </section>

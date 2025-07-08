@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Quote } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 interface Testimonial {
   id: number;
@@ -54,6 +55,11 @@ export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
 
+  const headerRef = useRef(null);
+  const boxRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const boxInView = useInView(boxRef, { once: true, margin: "-100px" });
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIsVisible(false);
@@ -96,21 +102,32 @@ export default function Testimonials() {
         <div className="absolute left-0 top-0 bottom-0 w-1 bg-neon" />
 
         <div className="pl-16">
-          <div className="mb-16">
+          <motion.div
+            ref={headerRef}
+            initial={{ opacity: 0, y: 40 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="mb-16"
+          >
             <div className="mb-4">
               <span className="text-neon text-sm font-medium uppercase tracking-wider">
                 Testimonials
               </span>
             </div>
-
             {/* Main Heading */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold max-w-4xl leading-tight mb-8">
               Trusted by infrastructure and mobility leaders. What our{" "}
               <span className="text-neon">clients and partners say.</span>
             </h2>
-          </div>
+          </motion.div>
           {/* Testimonial Box - Bottom */}
-          <div className="bg-dark-blue min-h-[200px] p-12 relative max-w-5xl">
+          <motion.div
+            ref={boxRef}
+            initial={{ opacity: 0, y: 40 }}
+            animate={boxInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="bg-dark-blue min-h-[200px] p-12 relative max-w-5xl"
+          >
             <div
               className={`transition-opacity duration-300 ${
                 isVisible ? "opacity-100" : "opacity-0"
@@ -165,7 +182,7 @@ export default function Testimonials() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

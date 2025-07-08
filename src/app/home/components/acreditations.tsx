@@ -2,8 +2,8 @@
 import { sponsors } from "@/lib/constants";
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
-import { useState, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 export default function Accreditations() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -71,6 +71,11 @@ export default function Accreditations() {
     if (emblaApi) emblaApi.scrollTo(idx);
   };
 
+  const headerRef = useRef(null);
+  const descRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const descInView = useInView(descRef, { once: true, margin: "-100px" });
+
   return (
     <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-gray-50">
       <div className="container mx-auto max-w-5xl">
@@ -84,16 +89,28 @@ export default function Accreditations() {
           </div>
 
           {/* Main Heading */}
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8">
+          <motion.h2
+            ref={headerRef}
+            initial={{ opacity: 0, y: 40 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-8"
+          >
             Trusted By Leading{" "}
             <span className="text-neon">Institutions & Agencies</span>
-          </h2>
-          <p className="text-gray-600 text-md lg:text-lg  max-w-3xl mx-auto leading-relaxed">
+          </motion.h2>
+          <motion.p
+            ref={descRef}
+            initial={{ opacity: 0, y: 40 }}
+            animate={descInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="text-gray-600 text-md lg:text-lg  max-w-3xl mx-auto leading-relaxed"
+          >
             We collaborate with prestigious universities, government agencies,
             and research organizations to provide infrastructure, mobility, and
             smart systems technology services and develop innovative solutions
             for smart cities and sustainable infrastructure.
-          </p>
+          </motion.p>
         </div>
         <motion.div
           initial={{ opacity: 0, y: 30 }}

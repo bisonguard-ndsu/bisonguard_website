@@ -4,6 +4,7 @@ import type React from "react";
 
 import { BarChart3, Shield, Zap, Globe, Users, Settings } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 
 interface WhyChooseUsItem {
   icon: React.ReactNode;
@@ -110,6 +111,11 @@ function WhyChooseUsCard({
 }
 
 export default function WhyChooseUs() {
+  const headerRef = useRef(null);
+  const descRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+  const descInView = useInView(descRef, { once: true, margin: "-100px" });
+
   return (
     <section className="relative py-20 px-4 sm:px-6 md:px-8 lg:px-16  bg-gradient-to-br from-dark-blue via-foreground to-dark-blue overflow-hidden">
       {/* Background Pattern */}
@@ -139,18 +145,30 @@ export default function WhyChooseUs() {
             <div className="w-12 h-0.5 bg-neon ml-4" />
           </div>
 
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6 text-white">
+          <motion.h2
+            ref={headerRef}
+            initial={{ opacity: 0, y: 40 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="text-2xl md:text-3xl lg:text-4xl font-bold leading-tight mb-6 text-white"
+          >
             Why <span className="text-neon">InfiniCity Labs</span> Delivers
             Excellence
-          </h2>
+          </motion.h2>
 
-          <p className="text-gray-300 text-md lg:text-lg max-w-3xl mx-auto leading-relaxed">
+          <motion.p
+            ref={descRef}
+            initial={{ opacity: 0, y: 40 }}
+            animate={descInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
+            className="text-gray-300 text-md lg:text-lg max-w-3xl mx-auto leading-relaxed"
+          >
             Our unique combination of research-driven expertise, proven
             technology solutions, and deep understanding of infrastructure,
             mobility, and smart systems enables us to deliver practical services
             that transform how cities manage their infrastructure, mobility, and
             smart systems.
-          </p>
+          </motion.p>
         </div>
 
         {/* Feature Cards */}

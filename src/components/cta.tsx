@@ -1,8 +1,9 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { motion, useInView } from "framer-motion";
 
 export default function Cta({
   title = "Ready to revolutionize your infrastructure management?",
@@ -13,9 +14,20 @@ export default function Cta({
   description?: string;
   highlightWords?: string[];
 }>) {
+  const containerRef = useRef(null);
+  const containerInView = useInView(containerRef, {
+    once: true,
+    margin: "-100px",
+  });
   return (
     <section className="px-4 sm:px-6 md:px-8 lg:px-16 py-20">
-      <div className="mx-auto container max-w-6xl grid md:grid-cols-2 gap-12 items-center bg-gradient-to-br from-[#0b243a] to-[#0f2a42] rounded-none p-8 md:p-16 shadow-2xl relative overflow-hidden">
+      <motion.div
+        ref={containerRef}
+        initial={{ opacity: 0, y: 40 }}
+        animate={containerInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+        className="mx-auto container max-w-6xl grid md:grid-cols-2 gap-12 items-center bg-gradient-to-br from-[#0b243a] to-[#0f2a42] rounded-none p-8 md:p-16 shadow-2xl relative overflow-hidden"
+      >
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div
@@ -212,7 +224,7 @@ export default function Cta({
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
