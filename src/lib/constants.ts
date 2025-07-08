@@ -11,7 +11,7 @@ export const navItems = [
   },
   {
     name: "Team",
-    href: "/team",
+    href: "/#team",
   },
   {
     name: "Projects",
@@ -19,7 +19,7 @@ export const navItems = [
   },
   {
     name: "Contact",
-    href: "/contact",
+    href: "/#contact",
   },
 ];
 
@@ -50,21 +50,21 @@ export const projects = [
   {
     image: "/adams.png",
     title: "Advanced Infrastructure Asset Management System",
-    href: "",
+    href: "/adams",
     description:
       "Comprehensive digital platform for monitoring, analyzing, and optimizing transportation infrastructure lifecycle using big data analytics and predictive maintenance algorithms.",
   },
   {
     image: "/tmc.png",
     title: "Traffic Management Control System",
-    href: "",
+    href: "/tmc",
     description:
       "AI-powered traffic control solution utilizing real-time data analysis and machine learning to optimize traffic flow, reduce congestion, and enhance road safety across urban networks.",
   },
   {
     image: "/bison-sherperding.png",
     title: "Bison Sherperding Guard System",
-    href: "",
+    href: "bison-guard-system",
     description:
       "Intelligent bison monitoring and management system utilizing IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
   },

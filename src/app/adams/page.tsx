@@ -1,6 +1,7 @@
 "use client";
 
 import Hero from "@/components/hero";
+import VideioViewer from "@/components/video-viewer";
 import React from "react";
 
 const Adams = () => {
@@ -14,13 +15,20 @@ const Adams = () => {
             description:
               "AdAMS helps asset managers work faster, smarter and more efficiently, delivering the visibility and data-driven insights to mitigate risk and ensure compliance.",
             buttonText: "SIGN UP TO AdAMS",
-            buttonHref: "/services",
-            onButtonClick: () => null,
-            backgroundImage:
-              "https://t3.ftcdn.net/jpg/11/46/94/78/360_F_1146947825_j3XI3vLcoiD123wv8ysBCbp1FNCEJG40.jpg",
+            buttonHref: "#",
+            backgroundImage: "/adams.png",
             highlightWords: ["asset", "team"],
           },
         ]}
+      />
+      <VideioViewer
+        title="How AdAMS Works"
+        highlightedWords={["AdAMS"]}
+        description="Watch a comprehensive demonstration of our Advanced Infrastructure Asset Management System in action. See how our platform monitors, analyzes, and optimizes transportation infrastructure using big data analytics and predictive maintenance algorithms."
+        videoUrl="/videos/adams-demo.mp4"
+        posterUrl="/adams.png"
+        subtitles="/subtitles/adams.vtt"
+        badgeText="FEATURED DEMO"
       />
     </>
   );

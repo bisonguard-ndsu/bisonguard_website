@@ -4,7 +4,10 @@ import React from "react";
 
 const Team = () => {
   return (
-    <section className="py-20 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16">
+    <section
+      id="team"
+      className="py-20 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16"
+    >
       <div className="max-w-6xl mx-auto container">
         {/* Header */}
         <div className="text-center mx-auto container mb-16">

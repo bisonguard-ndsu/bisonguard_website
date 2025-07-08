@@ -2,11 +2,48 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { navItems } from "@/lib/constants";
+import { navItems, projects } from "@/lib/constants";
+import { useHash } from "@/hooks/useHash";
 
 export default function Navbar() {
   const pathname = usePathname();
+  const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const currentHash = useHash(); // Get the current hash from our custom hook
+
+  const isLinkActive = (href: string, name?: string) => {
+    // 1. Handle "Projects" special case
+    if (name === "Projects") {
+      if (projects.map((project) => project.href).includes(pathname)) {
+        return true;
+      }
+    }
+
+    // 2. Handle hash links (e.g., "/#team", "/#contact")
+    if (href.includes("#")) {
+      // Split the href into path and hash parts
+      const [linkPath, linkHash] = href.split("#");
+
+      // Check if the current pathname matches the link's path
+      // AND if the current browser hash matches the link's hash
+      // Important: Ensure linkPath is explicitly checked against '/' if the hash link is for the home page.
+      const pathMatches =
+        linkPath === pathname || (linkPath === "" && pathname === "/");
+
+      return pathMatches && currentHash === `#${linkHash}`;
+    }
+
+    // 3. Handle the "Home" link without a hash
+    // This ensures that "/" is only active when there's no hash present
+    if (href === "/") {
+      return pathname === "/" && currentHash === ""; // `currentHash` will be '' if no hash
+    }
+
+    // 4. Default case: Check if pathname exactly matches href for regular links
+    return pathname === href;
+  };
 
   return (
     <nav className="bg-dark-blue px-4 sm:px-6 md:px-8 lg:px-16 sticky top-0 w-full z-50 transition-all duration-300">
@@ -19,23 +56,81 @@ export default function Navbar() {
         {/* Navigation Links - Centered */}
         <div className="hidden md:flex items-center space-x-4 absolute left-1/2 transform -translate-x-1/2">
           {navItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = isLinkActive(item.href, item.name);
+            const isProjects = item.name === "Projects";
+
             return (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`text-sm font-medium transition-colors duration-200 px-6 py-1 relative ${
-                  isActive ? "text-neon" : "text-gray-300 hover:text-white"
-                }`}
-              >
-                {isActive && (
-                  <>
-                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neon"></span>
-                    <span className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neon"></span>
-                  </>
+              <div key={item.name} className="relative">
+                {isProjects ? (
+                  <div
+                    className="relative"
+                    onMouseEnter={() => setIsProjectsOpen(true)}
+                    onMouseLeave={() => setIsProjectsOpen(false)}
+                  >
+                    <button
+                      className={`text-sm font-medium transition-colors duration-200 px-6 py-1 relative flex items-center gap-1 ${
+                        isActive
+                          ? "text-neon"
+                          : "text-gray-300 hover:text-white"
+                      }`}
+                    >
+                      {isActive && (
+                        <>
+                          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neon"></span>
+                          <span className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neon"></span>
+                        </>
+                      )}
+                      {item.name}
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          isProjectsOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    {/* Projects Dropdown */}
+                    {isProjectsOpen && (
+                      <div
+                        className="absolute top-full left-0 mt-2 w-64 bg-dark-blue shadow-lg py-2 z-50 rounded-none"
+                        // onMouseEnter={() => setIsProjectsOpen(true)}
+                        // onMouseLeave={() => setIsProjectsOpen(false)}
+                      >
+                        {projects.map((project) => (
+                          <Link
+                            key={project.title}
+                            href={project.href}
+                            className={`block px-4 py-2 hover:bg-gray-700 transition-colors duration-200`}
+                            onClick={() => setIsProjectsOpen(false)}
+                          >
+                            <div
+                              className={`text-sm text-white ${
+                                pathname === project.href ? "text-neon" : ""
+                              }`}
+                            >
+                              {project.title}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className={`text-sm font-medium transition-colors duration-200 px-6 py-1 relative ${
+                      isActive ? "text-neon" : "text-gray-300 hover:text-white"
+                    }`}
+                  >
+                    {isActive && (
+                      <>
+                        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neon"></span>
+                        <span className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-3 bg-neon"></span>
+                      </>
+                    )}
+                    {item.name}
+                  </Link>
                 )}
-                {item.name}
-              </Link>
+              </div>
             );
           })}
         </div>

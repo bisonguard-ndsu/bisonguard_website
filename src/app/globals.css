@@ -124,6 +124,7 @@
 @layer base {
   * {
     @apply font-ibm-plex;
+    @apply scroll-smooth;
   }
   body {
     @apply bg-background text-foreground;
