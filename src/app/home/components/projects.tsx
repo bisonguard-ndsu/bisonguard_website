@@ -12,8 +12,7 @@ export default function Projects() {
           {/* Left - Heading */}
           <div>
             <h2 className="text-2xl md:text-3xl lg:text-4xl  font-bold text-foreground leading-tight">
-              Our Latest <span className="text-neon">Projects</span> &{" "}
-              <span className="text-neon">Solutions</span>
+              Our <span className="text-neon">Smart</span> Solutions
             </h2>
           </div>
 
