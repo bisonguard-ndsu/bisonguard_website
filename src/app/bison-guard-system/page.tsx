@@ -9,11 +9,11 @@ const BisonGuardSystem = () => {
       <Hero
         items={[
           {
-            badge: "Bison Sherperding Guard System",
+            badge: "Farm Management System",
             title: "Intelligent Bison Monitoring and Management System",
             description:
-              "Our advanced wildlife protection system utilizes IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
-            buttonText: "SIGN UP TO BISON GUARD SYSTEM",
+              "Our advanced farm system utilizes IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
+            buttonText: "SIGN UP TO FARM MANAGEMENT SYSTEM",
             buttonHref: "/contact",
             onButtonClick: () => null,
             backgroundImage: "/bison-sherperding.png",

@@ -63,7 +63,7 @@ export const projects = [
   },
   {
     image: "/bison-sherperding.png",
-    title: "Bison Sherperding Guard System",
+    title: "Farm Management System",
     href: "bison-guard-system",
     description:
       "Intelligent bison monitoring and management system utilizing IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
@@ -72,19 +72,19 @@ export const projects = [
 
 export const team = [
   {
-    name: "Prof. Aboah Armstrong",
+    name: "Dr. Aboah Armstrong",
     position: "Co-Founder & President",
-    image: "/aboah.png",
-  },
-  {
-    name: "Kelvin Kwakye",
-    position: "Chief Operating Officer",
     image: "/aboah.png",
   },
   {
     name: "Andrews Danyo",
     position: "Co-Founder & CEO",
     image: "/andrews-danyo.jpg",
+  },
+  {
+    name: "Kelvin Kwakye",
+    position: "Chief Operating Officer",
+    image: "/aboah.png",
   },
   {
     name: "Blessing Agyei Kyem",
