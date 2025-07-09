@@ -10,13 +10,13 @@ const BisonGuardSystem = () => {
         items={[
           {
             badge: "Farm Management System",
-            title: "Intelligent Bison Monitoring and Management System",
+            title: "Intelligent Herd Monitoring and Management System",
             description:
-              "Our advanced farm system utilizes IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
+              "Our advanced farm management system uses IoT sensors, drones, GPS tracking, and predictive analytics to protect herds and prevent vehicle-wildlife collisions on transportation corridors.",
             buttonText: "SIGN UP TO FMS",
             buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
             target: "_blank",
-            backgroundImage: "/bison-sherperding.png",
+            backgroundImage: "/herd2.JPEG",
             highlightWords: ["monitoring", "management"],
           },
         ]}

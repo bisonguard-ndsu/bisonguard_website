@@ -62,11 +62,11 @@ export const projects = [
       "AI-powered traffic control solution utilizing real-time data analysis and machine learning to optimize traffic flow, reduce congestion, and enhance road safety across urban networks.",
   },
   {
-    image: "/bison-sherperding.png",
+    image: "/herd.jpg",
     title: "Farm Management System",
-    href: "bison-guard-system",
+    href: "/fms",
     description:
-      "Intelligent bison monitoring and management system utilizing IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
+      "Intelligent herd monitoring and management system using IoT sensors, drones, GPS tracking, and predictive analytics to protect herds and prevent vehicle-wildlife collisions on transportation corridors.",
   },
 ];
 
@@ -77,7 +77,7 @@ export const team = [
     image: "/andrews-danyo.jpg",
   },
   {
-    name: "Aboah Armstrong (Ph.D)",
+    name: "Armstrong Aboah (Ph.D)",
     position: "Co-Founder & President",
     image: "/aboah.png",
   },
