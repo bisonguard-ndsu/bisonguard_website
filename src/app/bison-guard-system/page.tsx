@@ -14,8 +14,8 @@ const BisonGuardSystem = () => {
             description:
               "Our advanced farm system utilizes IoT sensors, drones, GPS tracking, and predictive analytics to protect bison herds and prevent vehicle-wildlife collisions on transportation corridors.",
             buttonText: "SIGN UP TO FMS",
-            buttonHref: "/contact",
-            onButtonClick: () => null,
+            buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
+            target: "_blank",
             backgroundImage: "/bison-sherperding.png",
             highlightWords: ["monitoring", "management"],
           },

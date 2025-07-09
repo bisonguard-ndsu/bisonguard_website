@@ -143,7 +143,11 @@ export default function Cta({
             </div>
 
             <div className="flex flex-col gap-1">
-              <Link href="/#contact" className="mb-4">
+              <Link
+                href="https://appinfinicitylabs.vercel.app/auth/signup"
+                target="_blank"
+                className="mb-4"
+              >
                 <Button className="w-full rounded-lg bg-neon hover:bg-[#22d18a] text-[#0b243a] shadow-lg shadow-neon/20 transition-all duration-300 py-7 font-semibold focus:outline-none">
                   Start Free Trial
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -192,7 +196,7 @@ export default function Cta({
                       View Case Studies
                     </Button>
                   </Link>
-                  <Link href="/#projects">
+                  <Link href="/#contact">
                     <Button
                       variant="ghost"
                       size="sm"

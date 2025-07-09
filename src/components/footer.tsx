@@ -116,16 +116,26 @@ export default function Footer() {
                   <Phone className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
                   <div>
                     <p className="text-gray-300">+1 (701) 555-0123</p>
-                    <p className="text-gray-300">+1 (701) 555-0124</p>
+                    <p className="text-gray-300">+233 (208) 991-953</p>
+                    <p className="text-gray-300">+233 (556) 673-060</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
-                  <div>
-                    <p className="text-gray-300">
-                      North Dakota State University
-                    </p>
-                    <p className="text-gray-300">Fargo, ND 58108</p>
+                  <div className="flex flex-col gap-2">
+                    <div>
+                      <p className="text-gray-300">
+                        North Dakota State University
+                      </p>
+                      <p className="text-gray-300">Fargo, ND 58108</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-300">
+                        Ghana Kwetey Close, Golden Gate Estates, Regimanuel
+                        Estates
+                      </p>
+                      <p className="text-gray-300">Spintex Accra-Ghana</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -147,15 +157,25 @@ export default function Footer() {
                 </p>
               </div>
               <div className="flex items-center gap-4">
-                <Button
-                  variant="outline"
-                  className="border border-neon text-neon bg-transparent px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 hover:text-neon focus:outline-none"
+                <Link
+                  href="https://appinfinicitylabs.vercel.app/auth/signin"
+                  target="_blank"
                 >
-                  Sign In
-                </Button>
-                <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
-                  Sign Up
-                </Button>
+                  <Button
+                    variant="outline"
+                    className="border border-neon text-neon bg-transparent px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 hover:text-neon focus:outline-none"
+                  >
+                    Sign In
+                  </Button>
+                </Link>
+                <Link
+                  href="https://appinfinicitylabs.vercel.app/auth/signup"
+                  target="_blank"
+                >
+                  <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
+                    Sign Up
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

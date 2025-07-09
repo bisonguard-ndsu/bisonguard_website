@@ -148,12 +148,18 @@ export default function Navbar() {
 
         {/* Auth Buttons - Far Right */}
         <div className="flex items-center space-x-3 ml-auto">
-          <Link href="/signin">
+          <Link
+            href="https://appinfinicitylabs.vercel.app/auth/signin"
+            target="_blank"
+          >
             <Button className="border border-neon text-neon bg-transparent px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 focus:outline-none">
               Sign In
             </Button>
           </Link>
-          <Link href="/signup">
+          <Link
+            href="https://appinfinicitylabs.vercel.app/auth/signup"
+            target="_blank"
+          >
             <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
               Sign Up
             </Button>

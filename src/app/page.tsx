@@ -22,7 +22,8 @@ export default function Home() {
             description:
               "InfiniCity Labs pioneers the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics, digital twins, and intelligent systems that transform how cities, communities, and industries move and operate.",
             buttonText: "GET STARTED",
-            buttonHref: "/#contact",
+            buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
+            target: "_blank",
             backgroundImage: "/road.jpg",
             highlightWords: [
               "transforming",
@@ -38,7 +39,8 @@ export default function Home() {
             description:
               "From pavement management to safety, mobility, and digital twins, we develop innovative solutions that optimize asset lifecycle, improve system performance, and create sustainable, intelligent environments.",
             buttonText: "GET STARTED",
-            buttonHref: "/#contact",
+            buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
+            target: "_blank",
             highlightWords: [
               "tomorrow's",
               "infrastructure",

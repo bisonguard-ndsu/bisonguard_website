@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 interface HeroProps {
   badge?: string;
@@ -13,6 +14,7 @@ interface HeroProps {
   onButtonClick?: () => void;
   backgroundImage?: string;
   highlightWords?: string[];
+  target?: string;
 }
 
 interface HeroCarouselProps {
@@ -39,6 +41,7 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
     onButtonClick,
     backgroundImage = "https://static.vecteezy.com/system/resources/thumbnails/038/972/123/small_2x/ai-generated-construction-site-is-laying-new-asphalt-pavement-road-construction-workers-and-road-construction-machinery-scene-highway-construction-site-scene-photo.jpg",
     highlightWords = ["best", "makers", "shape"],
+    target,
   } = items[current] || {};
 
   // Animation variants
@@ -172,7 +175,9 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
                     asChild
                     className="bg-neon hover:bg-[#22d18a] text-dark-blue capitalize px-12 py-7 text-base font-semibold tracking-wider transition-all duration-300 rounded-none"
                   >
-                    <a href={buttonHref}>{buttonText}</a>
+                    <Link href={buttonHref} target={target ?? "_parent"}>
+                      {buttonText}
+                    </Link>
                   </Button>
                 )}
               </motion.div>

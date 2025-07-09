@@ -143,19 +143,34 @@ export default function ContactSection() {
               <div className="bg-neon/20 p-3 rounded-none">
                 <Phone className="w-5 h-5 text-neon" />
               </div>
-              <span>+1 (701) 555-0123</span>
+              <div>
+                <p>+1 (701) 555-0123</p>
+                <p>+233 (208) 991-953</p>
+                <p>+233 (556) 673-060</p>
+              </div>
             </div>
             <div className="flex items-center space-x-4 text-gray-200">
               <div className="bg-neon/20 p-3 rounded-none">
                 <Mail className="w-5 h-5 text-neon" />
               </div>
-              <span>info@infinicitylabs.org</span>
+              <div>
+                <p>info@infinicitylabs.org</p>
+                <p>research@infinicitylabs.org</p>
+              </div>
             </div>
             <div className="flex items-center space-x-4 text-gray-200">
               <div className="bg-neon/20 p-3 rounded-none">
                 <MapPin className="w-5 h-5 text-neon" />
               </div>
-              <span>North Dakota State University, Fargo, ND</span>
+              <div>
+                <div>
+                  <p>North Dakota State University, Fargo, ND 58108</p>
+                </div>
+                <div>
+                  <p>Ghana Kwetey Close, Golden Gate Estates,</p>
+                  <p>Regimanuel Estates, Spintex Accra-Ghana</p>
+                </div>
+              </div>
             </div>
             <div className="flex items-center space-x-4 text-gray-200">
               <div className="bg-neon/20 p-3 rounded-none">

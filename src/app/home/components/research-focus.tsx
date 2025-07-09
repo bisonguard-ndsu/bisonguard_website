@@ -57,10 +57,10 @@ const features: FeatureCard[] = [
 function FeatureCardMotion({
   feature,
   index,
-}: {
+}: Readonly<{
   feature: FeatureCard;
   index: number;
-}) {
+}>) {
   const cardRef = useRef<HTMLDivElement>(null);
   const cardInView = useInView(cardRef, { once: true, margin: "-100px" });
   return (
@@ -105,21 +105,9 @@ function FeatureCardMotion({
 }
 
 export default function ResearchFocus() {
-  const headerRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
   return (
     <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-white">
       <div className="max-w-6xl mx-auto container">
-        <motion.div
-          ref={headerRef}
-          initial={{ opacity: 0, y: 40 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-        >
-          <h2 className="text-3xl font-bold mb-12 text-foreground">
-            Research Focus
-          </h2>
-        </motion.div>
         <Carousel
           plugins={[
             Autoplay({
