@@ -130,11 +130,10 @@ export default function Footer() {
                       <p className="text-gray-300">Fargo, ND 58108</p>
                     </div>
                     <div>
-                      <p className="text-gray-300">
-                        Ghana Kwetey Close, Golden Gate Estates, Regimanuel
-                        Estates
-                      </p>
-                      <p className="text-gray-300">Spintex Accra-Ghana</p>
+                      <p className="text-gray-300">GHANA</p>
+                      <p className="text-gray-300">Kwetey Close, Golden Gate</p>
+                      <p className="text-gray-300">Regimanuel Estates,</p>
+                      <p className="text-gray-300">Spintex-Accra</p>
                     </div>
                   </div>
                 </div>

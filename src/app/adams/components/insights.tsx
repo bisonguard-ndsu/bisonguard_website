@@ -13,7 +13,7 @@ const insights = [
       "Real-time data collection",
       "Predictive analytics for maintenance planning",
     ],
-    image: "/pavecap-video.gif",
+    image: "/pci.png",
   },
   {
     title: "Pavement Distress Evaluation",
@@ -35,7 +35,7 @@ const insights = [
       "Compliance monitoring",
       "Maintenance prioritization",
     ],
-    image: "/pavecap-video.gif",
+    image: "/retroref.png",
   },
 ];
 

@@ -14,8 +14,8 @@ export const navItems = [
     href: "/#team",
   },
   {
-    name: "Projects",
-    href: "/projects",
+    name: "Services",
+    href: "/services",
   },
   {
     name: "Contact",
@@ -72,17 +72,17 @@ export const projects = [
 
 export const team = [
   {
-    name: "Dr. Aboah Armstrong",
-    position: "Co-Founder & President",
-    image: "/aboah.png",
-  },
-  {
     name: "Andrews Danyo",
     position: "Co-Founder & CEO",
     image: "/andrews-danyo.jpg",
   },
   {
-    name: "Kelvin Kwakye",
+    name: "Aboah Armstrong (Ph.D)",
+    position: "Co-Founder & President",
+    image: "/aboah.png",
+  },
+  {
+    name: "Kelvin Kwakye (Ph.D)",
     position: "Chief Operating Officer",
     image: "/aboah.png",
   },

@@ -26,7 +26,7 @@ export default function Navbar() {
 
   const isLinkActive = (href: string, name?: string) => {
     // 1. Handle "Projects" special case
-    if (name === "Projects") {
+    if (name === "Services") {
       if (projects.map((project) => project.href).includes(pathname)) {
         return true;
       }
@@ -72,7 +72,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center space-x-4 absolute left-1/2 transform -translate-x-1/2">
           {navItems.map((item) => {
             const isActive = isLinkActive(item.href, item.name);
-            const isProjects = item.name === "Projects";
+            const isProjects = item.name === "Services";
 
             return (
               <div key={item.name} className="relative">

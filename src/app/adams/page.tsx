@@ -20,7 +20,7 @@ const Adams = () => {
             buttonText: "SIGN UP TO AdAMS",
             buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
             target: "_blank",
-            backgroundImage: "/adams.png",
+            backgroundImage: "/tmc.png",
             highlightWords: ["asset", "team"],
           },
         ]}
