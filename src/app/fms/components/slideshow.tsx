@@ -17,7 +17,7 @@ interface HerdCard {
 const features: HerdCard[] = [
   {
     id: 1,
-    image: "/herd.jpg",
+    image: "/herd.JPG",
   },
   {
     id: 22,
@@ -25,7 +25,7 @@ const features: HerdCard[] = [
   },
   {
     id: 13,
-    image: "/herd.jpg",
+    image: "/herd.JPG",
   },
   {
     id: 42,
@@ -33,7 +33,7 @@ const features: HerdCard[] = [
   },
   {
     id: 16,
-    image: "/herd.jpg",
+    image: "/herd.JPG",
   },
   {
     id: 26,
