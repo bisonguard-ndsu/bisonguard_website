@@ -13,42 +13,41 @@ interface Testimonial {
 }
 
 const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Dr. Sarah Johnson",
-    position: "Infrastructure & Mobility Research Director, NDSU",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
-    testimonial:
-      "InfiniCity Labs' big data analytics platform has revolutionized how we approach infrastructure and mobility research. Their innovative use of machine learning algorithms has provided unprecedented insights into mobility patterns and infrastructure performance.",
-  },
-  {
-    id: 2,
-    name: "Michael Rodriguez",
-    position: "Smart Cities Program Manager, NDDOT",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
-    testimonial:
-      "Working with InfiniCity Labs on our digital twin implementation has been transformative. Their expertise in real-time data processing and predictive modeling has enabled us to optimize our infrastructure and mobility networks like never before.",
-  },
+  // {
+  //   id: 1,
+  //   name: "Dr. Sarah Johnson",
+  //   position: "Infrastructure & Mobility Research Director, NDSU",
+  //   image:
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+  //   testimonial:
+  //     "InfiniCity Labs' big data analytics platform has revolutionized how we approach infrastructure and mobility research. Their innovative use of machine learning algorithms has provided unprecedented insights into mobility patterns and infrastructure performance.",
+  // },
+  // {
+  //   id: 2,
+  //   name: "Michael Rodriguez",
+  //   position: "Smart Cities Program Manager, NDDOT",
+  //   image:
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+  //   testimonial:
+  //     "Working with InfiniCity Labs on our digital twin implementation has been transformative. Their expertise in real-time data processing and predictive modeling has enabled us to optimize our infrastructure and mobility networks like never before.",
+  // },
   {
     id: 3,
-    name: "Dr. Chen Wei",
-    position: "Infrastructure Research Lead, USNSF",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+    name: "Elijah Kofi Osei",
+    position: "The Greyspaces Ltd.",
+    image: "/user.jpg",
     testimonial:
       "The quality of research and technological innovation from InfiniCity Labs consistently exceeds expectations. Their asset management solutions have set new standards for infrastructure monitoring and maintenance optimization.",
   },
-  {
-    id: 4,
-    name: "Lisa Thompson",
-    position: "Urban Planning Director, Smart Cities Initiative",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
-    testimonial:
-      "InfiniCity Labs' intelligent systems have been game-changing for our city planning efforts. Their safety analytics and predictive modeling capabilities have helped us reduce accidents and improve system flow significantly.",
-  },
+  // {
+  //   id: 4,
+  //   name: "Lisa Thompson",
+  //   position: "Urban Planning Director, Smart Cities Initiative",
+  //   image:
+  //     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRr3qBVX4XIA8zq3LpBn64zAuOt9_IZ7_H5uA&s",
+  //   testimonial:
+  //     "InfiniCity Labs' intelligent systems have been game-changing for our city planning efforts. Their safety analytics and predictive modeling capabilities have helped us reduce accidents and improve system flow significantly.",
+  // },
 ];
 
 export default function Testimonials() {
@@ -139,7 +138,7 @@ export default function Testimonials() {
                 <div className="col-span-2 text-center md:text-left">
                   {/* Profile Image */}
                   <img
-                    src={currentTestimonial.image || "/placeholder.svg"}
+                    src={currentTestimonial.image || "/user.jpg"}
                     alt={currentTestimonial.name}
                     className="w-32 h-32 object-cover rounded mx-auto md:mx-0 mb-6"
                   />

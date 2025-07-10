@@ -24,7 +24,7 @@ function TeamMemberCard({
       {/* Image Container */}
       <div className="relative overflow-hidden bg-red-200">
         <img
-          src={"/user.jpg"}
+          src={member.image ?? "/user.jpg"}
           alt={member.name}
           className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110 bg-gray-200"
         />

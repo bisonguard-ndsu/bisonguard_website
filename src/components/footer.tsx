@@ -115,7 +115,7 @@ export default function Footer() {
                 <div className="flex items-start gap-3">
                   <Phone className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
                   <div>
-                    <p className="text-gray-300">+1 (701) 555-0123</p>
+                    <p className="text-gray-300">+1 (732) 322-8385</p>
                     <p className="text-gray-300">+233 (208) 991-953</p>
                     <p className="text-gray-300">+233 (556) 673-060</p>
                   </div>
@@ -172,7 +172,7 @@ export default function Footer() {
                   target="_blank"
                 >
                   <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
-                    Sign Up
+                    Create Account
                   </Button>
                 </Link>
               </div>

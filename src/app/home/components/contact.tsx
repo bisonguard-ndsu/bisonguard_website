@@ -144,7 +144,7 @@ export default function ContactSection() {
                 <Phone className="w-5 h-5 text-neon" />
               </div>
               <div>
-                <p>+1 (701) 555-0123</p>
+                <p>+1 (732) 322-8385</p>
                 <p>+233 (208) 991-953</p>
                 <p>+233 (556) 673-060</p>
               </div>

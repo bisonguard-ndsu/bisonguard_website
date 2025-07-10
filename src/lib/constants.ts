@@ -15,7 +15,7 @@ export const navItems = [
   },
   {
     name: "Services",
-    href: "/services",
+    href: "/#projects",
   },
   {
     name: "Contact",
@@ -74,7 +74,7 @@ export const team = [
   {
     name: "Andrews Danyo",
     position: "Co-Founder & CEO",
-    image: "/andrews-danyo.jpg",
+    // image: "/andrews-danyo.jpg",
   },
   {
     name: "Armstrong Aboah (Ph.D)",
@@ -84,28 +84,23 @@ export const team = [
   {
     name: "Kelvin Kwakye (Ph.D)",
     position: "Chief Operating Officer",
-    image: "/aboah.png",
+    image: "/kelvin.jpg",
   },
   {
     name: "Blessing Agyei Kyem",
     position: "Cheif Technology Officer",
-    image: "/blessing.png",
+    // image: "/blessing.png",
   },
   {
     name: "Joshua Asamoah",
     position: "Chief Research Scientist",
-    image: "/joshua.png",
+    // image: "/joshua.png",
   },
-  // {
-  //   name: "Eugene Denteh",
-  //   position: "TBD",
-  //   image: "/eugene-denteh.jpg",
-  // },
 
   {
     name: "Christian Shardey",
     position: "Chief Solutions Architect",
-    image: "/twitchell-addai.jpg",
+    // image: "/twitchell-addai.jpg",
   },
 ];
 

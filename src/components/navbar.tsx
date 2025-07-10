@@ -161,7 +161,7 @@ export default function Navbar() {
             target="_blank"
           >
             <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
-              Sign Up
+              Create Account
             </Button>
           </Link>
         </div>
