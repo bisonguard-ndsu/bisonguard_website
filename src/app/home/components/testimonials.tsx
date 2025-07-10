@@ -141,6 +141,7 @@ export default function Testimonials() {
                     src={currentTestimonial.image || "/user.jpg"}
                     alt={currentTestimonial.name}
                     className="w-32 h-32 object-cover rounded mx-auto md:mx-0 mb-6"
+                    loading="lazy"
                   />
 
                   {/* Name and Position */}

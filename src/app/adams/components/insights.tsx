@@ -90,6 +90,7 @@ export default function Insights() {
                       src={
                         insight.image || "/placeholder.svg?height=300&width=400"
                       }
+                      loading="lazy"
                       alt={insight.title}
                       className="w-full h-full  object-cover rounded-none"
                     />

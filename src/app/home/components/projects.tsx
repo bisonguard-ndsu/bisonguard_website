@@ -28,6 +28,7 @@ function ProjectCard({
           src={project.image}
           alt={project.title}
           className="w-full h-80 object-cover"
+          loading="lazy"
         />
       </div>
       {/* Content */}

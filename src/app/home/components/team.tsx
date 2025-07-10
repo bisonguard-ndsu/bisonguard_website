@@ -29,6 +29,7 @@ function TeamMemberCard({
         <img
           src={member.image ?? "/user.jpg"}
           alt={member.name}
+          loading="lazy"
           className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110 bg-gray-200"
         />
         {/* Overlay on hover */}

@@ -2,6 +2,8 @@
 import Hero from "@/components/hero";
 import VideioViewer from "@/components/video-viewer";
 import React from "react";
+import HowTMCWorks from "./components/how-tmc-works";
+import Cta from "@/components/cta";
 
 const TrafficManagementControl = () => {
   return (
@@ -29,6 +31,12 @@ const TrafficManagementControl = () => {
         posterUrl="/tmc.png"
         subtitles="/subtitles/adams.vtt"
         badgeText="FEATURED DEMO"
+      />
+      <HowTMCWorks />
+      <Cta
+        title="Ready to revolutionize your traffic management?"
+        highlightWords={["traffic"]}
+        description="Join thousands of organizations already using our AI-powered solutions to optimize their traffic management, reduce costs, and improve safety across their transportation networks."
       />
     </>
   );

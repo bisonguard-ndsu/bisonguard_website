@@ -63,6 +63,7 @@ function FeatureCardMotion({
         src={feature.image}
         alt={feature.id.toString()}
         className="w-full h-80 object-cover"
+        loading="lazy"
       />
     </motion.div>
   );

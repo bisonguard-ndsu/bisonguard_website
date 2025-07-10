@@ -95,7 +95,7 @@ export const team = [
   },
   {
     id: "Armstrong",
-    name: "Armstrong Aboah (Ph.D)",
+    name: "Armstrong Aboah, Ph.D",
     href: "/team#armstrong",
     position: "Co-Founder & President",
     image: "/aboah.png",
@@ -117,7 +117,7 @@ export const team = [
   },
   {
     id: "Kelvin",
-    name: "Kelvin Kwakye (Ph.D)",
+    name: "Kelvin Kwakye, Ph.D",
     href: "/team#kelvin",
     position: "Chief Operating Officer",
     image: "/kelvin.jpg",
@@ -142,6 +142,7 @@ export const team = [
     id: "Blessing",
     name: "Blessing Agyei Kyem",
     href: "/team#blessing",
+    image: "/blessing.jpeg",
     position: "Chief Technology Officer",
     bio: [
       "As Chief Technology Officer at InfiniCity Labs, Blessing Agyei Kyem leads the technical vision and architecture of our cutting-edge AI platforms. With deep expertise in software engineering and system design, he oversees the development of scalable solutions that power our traffic management and infrastructure monitoring systems.",
@@ -162,9 +163,10 @@ export const team = [
     id: "Joshua",
     name: "Joshua Asamoah",
     href: "/team#joshua",
+    image: "/joshua.jpeg",
     position: "Chief Research Scientist",
     bio: [
-      "Dr. Joshua Asamoah serves as Chief Research Scientist at InfiniCity Labs, where he leads breakthrough research in computer vision, machine learning, and intelligent transportation systems. His work focuses on developing novel algorithms that enable real-time analysis of traffic patterns, infrastructure conditions, and safety metrics.",
+      "Joshua Asamoah serves as Chief Research Scientist at InfiniCity Labs, where he leads breakthrough research in computer vision, machine learning, and intelligent transportation systems. His work focuses on developing novel algorithms that enable real-time analysis of traffic patterns, infrastructure conditions, and safety metrics.",
       "With a strong background in applied research and academic excellence, Joshua has published extensively in top-tier conferences and journals. His research contributions have directly influenced the development of InfiniCity's core AI technologies, particularly in the areas of predictive analytics and automated decision-making systems for smart cities.",
     ],
     education: [

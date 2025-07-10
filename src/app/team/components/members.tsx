@@ -39,61 +39,11 @@ const Members = () => {
                       <img
                         src={member.image || "/user.jpg"}
                         alt={member.name}
-                        className="w-full h-100 object-cover rounded-none"
+                        className="w-full h-full min-h-[600px] object-cover rounded-none"
+                        loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0b243a]/20 to-transparent rounded-none"></div>
                     </div>
-                  </div>
-
-                  {/* Education & Expertise - Side by side */}
-                  <div className="flex  gap-4">
-                    {/* Education */}
-                    <Card className="border-neon/20 hover:border-neon/40 transition-colors flex-1 shadow-none rounded-none">
-                      <CardContent className="p-4 py-0">
-                        <div className="flex items-center mb-3">
-                          <div className="w-8 h-8 bg-neon rounded-none flex items-center justify-center mr-2">
-                            <GraduationCap className="w-4 h-4 text-[#0b243a]" />
-                          </div>
-                          <h4 className="text-sm font-semibold text-[#0b243a]">
-                            Education
-                          </h4>
-                        </div>
-                        <div className="space-y-2">
-                          {member.education?.map((edu, idx) => (
-                            <div key={idx} className="flex items-start">
-                              <div className="w-1 h-1 bg-neon rounded-full mr-2 mt-2 flex-shrink-0"></div>
-                              <span className="text-xs text-gray-700 leading-relaxed">
-                                {edu}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
-
-                    {/* Expertise */}
-                    <Card className="border-neon/20 hover:border-neon/40 transition-colors flex-1 shadow-none rounded-none">
-                      <CardContent className="p-4 py-0">
-                        <div className="flex items-center mb-3">
-                          <div className="w-8 h-8 bg-[#0b243a] rounded-none flex items-center justify-center mr-2">
-                            <Award className="w-4 h-4 text-neon" />
-                          </div>
-                          <h4 className="text-sm font-semibold text-[#0b243a]">
-                            Expertise
-                          </h4>
-                        </div>
-                        <div className="space-y-2">
-                          {member.expertise?.map((skill, idx) => (
-                            <div key={idx} className="flex items-center">
-                              <div className="w-1 h-1 bg-[#0b243a] rounded-full mr-2 flex-shrink-0"></div>
-                              <span className="text-xs text-gray-700 font-medium">
-                                {skill}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </CardContent>
-                    </Card>
                   </div>
                 </div>
               </div>
@@ -126,6 +76,57 @@ const Members = () => {
                       {paragraph}
                     </p>
                   ))}
+                </div>
+
+                {/* Education & Expertise - Side by side */}
+                <div className="flex  gap-4">
+                  {/* Education */}
+                  <Card className="border-neon/20 hover:border-neon/40 transition-colors flex-1 shadow-none rounded-none">
+                    <CardContent className="p-4 py-0">
+                      <div className="flex items-center mb-3">
+                        <div className="w-8 h-8 bg-neon rounded-none flex items-center justify-center mr-2">
+                          <GraduationCap className="w-4 h-4 text-[#0b243a]" />
+                        </div>
+                        <h4 className="text-sm font-semibold text-[#0b243a]">
+                          Education
+                        </h4>
+                      </div>
+                      <div className="space-y-2">
+                        {member.education?.map((edu, idx) => (
+                          <div key={idx} className="flex items-start">
+                            <div className="w-1 h-1 bg-neon rounded-full mr-2 mt-2 flex-shrink-0"></div>
+                            <span className="text-xs text-gray-700 leading-relaxed">
+                              {edu}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  {/* Expertise */}
+                  <Card className="border-neon/20 hover:border-neon/40 transition-colors flex-1 shadow-none rounded-none">
+                    <CardContent className="p-4 py-0">
+                      <div className="flex items-center mb-3">
+                        <div className="w-8 h-8 bg-[#0b243a] rounded-none flex items-center justify-center mr-2">
+                          <Award className="w-4 h-4 text-neon" />
+                        </div>
+                        <h4 className="text-sm font-semibold text-[#0b243a]">
+                          Expertise
+                        </h4>
+                      </div>
+                      <div className="space-y-2">
+                        {member.expertise?.map((skill, idx) => (
+                          <div key={idx} className="flex items-center">
+                            <div className="w-1 h-1 bg-[#0b243a] rounded-full mr-2 flex-shrink-0"></div>
+                            <span className="text-xs text-gray-700 font-medium">
+                              {skill}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
 
                 {/* Social Links - Moved to content side */}

@@ -107,6 +107,7 @@ export default function Cta({
                   src="/farms.avif"
                   alt="ndsu"
                   className="w-full h-full rounded-full"
+                  loading="lazy"
                 />
               </div>
               <div className="w-8 h-8 rounded-full overflow-hidden bg-neon/30 border-2 border-neon">
@@ -114,6 +115,7 @@ export default function Cta({
                   src="/ndsu.png"
                   alt="ndsu"
                   className="w-full h-full rounded-full"
+                  loading="lazy"
                 />
               </div>
               <div className="w-8 h-8 rounded-full bg-neon/40 border-2 border-neon">
@@ -121,6 +123,7 @@ export default function Cta({
                   src="/usnsf.jpg"
                   alt="sustein"
                   className="w-full h-full rounded-full"
+                  loading="lazy"
                 />
               </div>
             </div>
