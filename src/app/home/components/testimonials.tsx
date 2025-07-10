@@ -35,7 +35,7 @@ const testimonials: Testimonial[] = [
     id: 3,
     name: "Elijah Kofi Osei",
     position: "The Greyspaces Ltd.",
-    image: "/user.jpg",
+    image: "/elijah.jpg",
     testimonial:
       "The quality of research and technological innovation from InfiniCity Labs consistently exceeds expectations. Their asset management solutions have set new standards for infrastructure monitoring and maintenance optimization.",
   },
