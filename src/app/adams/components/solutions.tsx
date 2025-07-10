@@ -149,7 +149,7 @@ function SolutionsCard({
           ))}
         </div>
 
-        <button className="group/btn flex items-center gap-2 text-[#27ea9c] font-medium text-sm hover:gap-3 transition-all duration-300 mt-6">
+        <button className="group/btn flex items-center gap-2 text-neon font-medium text-sm hover:gap-3 transition-all duration-300 mt-6">
           Explore Solution
           <ArrowUpRight className="w-4 h-4 transition-transform group-hover/btn:rotate-45" />
         </button>

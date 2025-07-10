@@ -3,6 +3,7 @@ import { team } from "@/lib/constants";
 import Link from "next/link";
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 function TeamMemberCard({
   member,
@@ -13,13 +14,15 @@ function TeamMemberCard({
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const cardInView = useInView(cardRef, { once: true, margin: "-100px" });
+  const router = useRouter();
   return (
     <motion.div
       ref={cardRef}
       initial={{ opacity: 0, y: 40 }}
       animate={cardInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: 0.1 * index, ease: "easeOut" }}
-      className="group relative bg-white rounded-none overflow-hidden  transition-all duration-300 transform hover:-translate-y-2"
+      className="group relative bg-white rounded-none overflow-hidden  transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+      onClick={() => router.push(member.href)}
     >
       {/* Image Container */}
       <div className="relative overflow-hidden bg-red-200">
