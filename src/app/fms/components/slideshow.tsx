@@ -4,10 +4,11 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface HerdCard {
   id: number;
@@ -68,18 +69,53 @@ function FeatureCardMotion({
 }
 
 export default function HerdSlideshow() {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [api, setApi] = useState<CarouselApi | null>(null);
+
+  const onSelect = useCallback(() => {
+    if (!api) return;
+    setSelectedIndex(api.selectedScrollSnap());
+  }, [api]);
+
+  const scrollTo = useCallback(
+    (index: number) => {
+      if (api) {
+        api.scrollTo(index);
+      }
+    },
+    [api]
+  );
+
+  useEffect(() => {
+    if (!api) return;
+
+    onSelect();
+    api.on("select", onSelect);
+    api.on("reInit", onSelect);
+
+    return () => {
+      api.off("select", onSelect);
+      api.off("reInit", onSelect);
+    };
+  }, [api, onSelect]);
+
   return (
     <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-white">
       <div className="max-w-6xl mx-auto container">
         <Carousel
+          setApi={setApi}
           plugins={[
             Autoplay({
               delay: 3000,
+              stopOnInteraction: false,
             }),
           ]}
           opts={{
             align: "start",
             loop: true,
+            skipSnaps: false,
+            slidesToScroll: 1,
+            containScroll: "trimSnaps",
           }}
           className="w-full"
         >
@@ -94,6 +130,21 @@ export default function HerdSlideshow() {
             ))}
           </CarouselContent>
         </Carousel>
+        {/* Dot indicators */}
+        <div className="flex justify-center gap-2 mt-10">
+          {features.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => scrollTo(idx)}
+              className={`h-2 w-2 rounded-none transition-all duration-300 focus:outline-none ${
+                selectedIndex === idx
+                  ? "bg-neon shadow-lg scale-110"
+                  : "bg-gray-300"
+              }`}
+              aria-label={`Go to slide ${idx + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
