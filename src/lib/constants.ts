@@ -75,6 +75,7 @@ export const team = [
     id: "Andrews",
     name: "Andrews Danyo",
     position: "Co-Founder & CEO",
+    image: "/andrews.png",
     href: "/team#andrews",
     socialLinks: [
       {
