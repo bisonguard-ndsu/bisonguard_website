@@ -80,18 +80,6 @@ export const team = [
       "As Co-Founder and CEO of InfiniCity Labs, Andrews Danyo shapes the company's vision for safer, smarter mobility. He directs strategy, investment, and product roadmaps while mentoring a cross-functional team of engineers and data scientists who convert cutting-edge research in computer vision and machine reasoning into deployable tools for cities and transport agencies. Under his guidance, InfiniCity's platforms deliver real-time insights on traffic flow, infrastructure health, and road-user behavior, thereby empowering clients to move from reactive traffic management to proactive, data-driven decision-making.",
       "Andrews earned a bachelor's degree in Civil Engineering and a master's degree in Construction Management, both from Kwame Nkrumah University of Science and Technology, as well as a master's degree in Artificial Intelligence and Data Science from the University of Hull in the UK.",
     ],
-    // image: "",
-    education: [
-      "M.S. Artificial Intelligence & Data Science - University of Hull, UK",
-      "M.S. Construction Management - KNUST",
-      "B.S. Civil Engineering - KNUST",
-    ],
-    expertise: [
-      "Strategic Leadership",
-      "Computer Vision",
-      "Traffic Management",
-      "AI Product Development",
-    ],
   },
   {
     id: "Armstrong",
@@ -103,16 +91,6 @@ export const team = [
       "As President of InfiniCity Labs, Armstrong oversees the company's strategic and financial performance, guiding research, product development, and market expansion across all InfiniCity entities.",
       "For more than eight years, Armstrong has driven innovation in intelligent transportation systems, delivering computer-vision- and machine-reasoning-based products that transform mobility analytics and traffic management. Widely regarded as a thought leader in transportation AI, he steers InfiniCity Labs' strategic direction and corporate growth with a deep understanding of industry trends.",
       "Armstrong holds a Ph.D. in Transportation Engineering and has led research programs in both academic and industrial settings throughout North America and West Africa. Before co-founding InfiniCity Labs, he served as a transportation data scientist, architecting AI solutions that enhance roadway safety and operational efficiency.",
-    ],
-    education: [
-      "Ph.D. Transportation Engineering",
-      "Research Programs - North America & West Africa",
-    ],
-    expertise: [
-      "Transportation AI",
-      "Strategic Planning",
-      "Research Leadership",
-      "Market Expansion",
     ],
   },
   {
@@ -142,21 +120,12 @@ export const team = [
     id: "Blessing",
     name: "Blessing Agyei Kyem",
     href: "/team#blessing",
-    image: "/blessing.jpeg",
+    image: "/blessing.png",
     position: "Chief Technology Officer",
     bio: [
-      "As Chief Technology Officer at InfiniCity Labs, Blessing Agyei Kyem leads the technical vision and architecture of our cutting-edge AI platforms. With deep expertise in software engineering and system design, he oversees the development of scalable solutions that power our traffic management and infrastructure monitoring systems.",
-      "Blessing brings extensive experience in building enterprise-grade technology solutions, with a focus on cloud architecture, machine learning infrastructure, and real-time data processing systems. His leadership ensures that InfiniCity's technology stack remains at the forefront of innovation while maintaining the reliability and performance our clients depend on.",
-    ],
-    education: [
-      "Advanced Software Engineering",
-      "Cloud Architecture & Systems Design",
-    ],
-    expertise: [
-      "Software Architecture",
-      "Cloud Systems",
-      "ML Infrastructure",
-      "Technical Leadership",
+      "Blessing Agyei Kyem is the Chief Technology Officer at InfiniCity Labs, where he leads the development of advanced AI systems for intelligent transportation and infrastructure management. He oversees the design and deployment of real-time computer vision and multi-modal analytics platforms used for traffic monitoring, pavement condition assessment, and urban mobility insights. His work ensures that InfiniCity’s products are both scalable and cutting-edge, with a focus on performance, interpretability, and deployment efficiency.",
+      "Blessing’s expertise spans large language models including vision-language models, computer vision, and self-supervised learning. His recent work explores multi-modal understanding, cross-modal retrieval, and LLM-driven reasoning for traffic safety and infrastructure assessment. He has led engineering teams on projects involving road defect segmentation and vehicle behavior analysis. In addition to his technical leadership, he collaborates with academic researchers and transportation agencies to align InfiniCity’s innovation pipeline with real-world impact.",
+      "Blessing earned a bachelor’s degree in Civil Engineering from Kwame Nkrumah University of Science and Technology and is currently pursuing a Ph.D. in Transportation Engineering at North Dakota State University, where his research focuses on multi-modal AI and its applications in Transportation and Pavement.",
     ],
   },
   {
@@ -166,18 +135,9 @@ export const team = [
     image: "/joshua.jpeg",
     position: "Chief Research Scientist",
     bio: [
-      "Joshua Asamoah serves as Chief Research Scientist at InfiniCity Labs, where he leads breakthrough research in computer vision, machine learning, and intelligent transportation systems. His work focuses on developing novel algorithms that enable real-time analysis of traffic patterns, infrastructure conditions, and safety metrics.",
-      "With a strong background in applied research and academic excellence, Joshua has published extensively in top-tier conferences and journals. His research contributions have directly influenced the development of InfiniCity's core AI technologies, particularly in the areas of predictive analytics and automated decision-making systems for smart cities.",
-    ],
-    education: [
-      "Ph.D. Computer Science & AI",
-      "Research Publications in Top-Tier Venues",
-    ],
-    expertise: [
-      "Computer Vision",
-      "Machine Learning Research",
-      "Predictive Analytics",
-      "Smart City Technologies",
+      "Joshua Kofi Asamoah serves as the Chief Research Scientist at InfiniCity Labs, where he leads cutting-edge research in computer vision and AI for smart mobility systems. His work focuses on designing scalable, real-time models for vehicle tracking, behavior understanding, and multi-modal traffic analytics that directly support the company’s mission of building intelligent transportation infrastructure.",
+      "Currently a Ph.D. candidate in Transportation Engineering at North Dakota State University, Joshua conducts research at the intersection of deep learning, mobility data, and urban systems. His recent efforts span multi-camera tracking, spatio-temporal graph modeling, and natural-language vehicle retrieval, with applications in automated traffic monitoring and public safety.",
+      "With a growing portfolio of academic and industry collaborations across United States of America and West Africa, Joshua brings a strong research foundation and a results-driven mindset to InfiniCity’s innovation pipeline. His contributions have been recognized in competitive peer-reviewed venues in transportation and computer vision.",
     ],
   },
   {
@@ -188,16 +148,6 @@ export const team = [
     bio: [
       "Christian Shardey serves as Chief Solutions Architect at InfiniCity Labs, where he designs and implements comprehensive technology solutions that bridge the gap between cutting-edge research and practical deployment. He specializes in creating scalable architectures that can handle the complex demands of modern traffic management and infrastructure monitoring.",
       "With extensive experience in enterprise solution design and system integration, Christian ensures that InfiniCity's products seamlessly integrate with existing city infrastructure and transportation systems. His expertise in both technical architecture and client engagement makes him instrumental in delivering solutions that meet real-world operational requirements.",
-    ],
-    education: [
-      "Enterprise Architecture & Systems Integration",
-      "Advanced Solution Design",
-    ],
-    expertise: [
-      "Solution Architecture",
-      "System Integration",
-      "Enterprise Design",
-      "Client Solutions",
     ],
   },
 ];
