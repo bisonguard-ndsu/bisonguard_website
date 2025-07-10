@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { team } from "@/lib/constants";
 import { Mail, Linkedin, ExternalLink } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const Members = () => {
@@ -73,24 +74,30 @@ const Members = () => {
 
                 {/* Social Links - Moved to content side */}
                 <div className="flex flex-wrap gap-3 pt-6">
-                  <Button className="bg-neon hover:bg-[#20d4a0] text-[#0b243a] font-semibold rounded-none">
-                    <Mail className="w-4 h-4 mr-2" />
-                    Mail
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-[#0b243a]/20 text-[#0b243a] hover:border-neon hover:text-neon bg-transparent rounded-none"
-                  >
-                    <Linkedin className="w-4 h-4 mr-2" />
-                    LinkedIn
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="text-[#0b243a] hover:text-neon hover:bg-neon/10 rounded-none"
-                  >
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Portfolio
-                  </Button>
+                  <Link href={member.socialLinks[1].href} target="_blank">
+                    <Button className="bg-neon hover:bg-[#20d4a0] text-[#0b243a] font-semibold rounded-none">
+                      <Mail className="w-4 h-4 mr-2" />
+                      Mail
+                    </Button>
+                  </Link>
+                  <Link href={member.socialLinks[0].href} target="_blank">
+                    <Button
+                      variant="outline"
+                      className="border-[#0b243a]/20 text-[#0b243a] hover:border-neon hover:text-neon bg-transparent rounded-none"
+                    >
+                      <Linkedin className="w-4 h-4 mr-2" />
+                      LinkedIn
+                    </Button>
+                  </Link>
+                  <Link href={member.socialLinks[2].href} target="_blank">
+                    <Button
+                      variant="ghost"
+                      className="text-[#0b243a] hover:text-neon hover:bg-neon/10 rounded-none"
+                    >
+                      <ExternalLink className="w-4 h-4 mr-2" />
+                      Portfolio
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
