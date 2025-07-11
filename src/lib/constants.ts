@@ -102,7 +102,7 @@ export const team = [
     name: "Armstrong Aboah, Ph.D",
     href: "/team#armstrong",
     position: "Co-Founder & President",
-    image: "/aboah.png",
+    image: "/aboah.jpg",
     socialLinks: [
       {
         name: "linkedin",
