@@ -128,7 +128,7 @@ export default function Cta({
               </div>
             </div>
             <span className="text-sm">
-              Trusted by 500+ organizations worldwide
+              Trusted by many organizations worldwide
             </span>
           </div>
         </div>
