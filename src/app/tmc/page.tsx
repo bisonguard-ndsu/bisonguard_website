@@ -16,7 +16,7 @@ const TrafficManagementControl = () => {
             description:
               "Our intelligent traffic control solution utilizes real-time data analysis and machine learning to optimize traffic flow, reduce congestion, and enhance road safety across urban networks.",
             buttonText: "SIGN UP TO TMC",
-            buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
+            buttonHref: "/#contact",
             target: "_blank",
             backgroundImage: "/adams.png",
             highlightWords: ["AI-powered", "control"],

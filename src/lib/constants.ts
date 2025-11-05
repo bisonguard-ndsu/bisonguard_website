@@ -9,10 +9,10 @@ export const navItems = [
     name: "About",
     href: "/about",
   },
-  {
-    name: "Team",
-    href: "/team",
-  },
+  // {
+  //   name: "Team",
+  //   href: "/team",
+  // },
   {
     name: "Services",
     href: "/#projects",

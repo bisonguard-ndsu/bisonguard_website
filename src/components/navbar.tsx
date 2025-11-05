@@ -201,19 +201,16 @@ export default function Navbar() {
         {/* Auth Buttons - Far Right (hidden on mobile) */}
         <div className="hidden md:flex items-center space-x-3 ml-auto">
           <Link
-            href="https://appinfinicitylabs.vercel.app/auth/signin"
+            href="https://infinicitylabs-5jwhs.ondigitalocean.app/"
             target="_blank"
           >
             <Button className="border border-neon text-neon bg-transparent px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 focus:outline-none">
               Sign In
             </Button>
           </Link>
-          <Link
-            href="https://appinfinicitylabs.vercel.app/auth/signup"
-            target="_blank"
-          >
+          <Link href="/#contact">
             <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
-              Create Account
+              Get Started
             </Button>
           </Link>
         </div>
@@ -290,7 +287,7 @@ export default function Navbar() {
                 <div className="p-4 border-t border-gray-700 space-y-3 flex flex-col gap-1">
                   <SheetClose asChild>
                     <Link
-                      href="https://appinfinicitylabs.vercel.app/auth/signin"
+                      href="https://infinicitylabs-5jwhs.ondigitalocean.app/"
                       target="_blank"
                     >
                       <Button className="border border-neon text-neon bg-transparent w-full py-2.5 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 focus:outline-none">
@@ -299,12 +296,9 @@ export default function Navbar() {
                     </Link>
                   </SheetClose>
                   <SheetClose asChild>
-                    <Link
-                      href="https://appinfinicitylabs.vercel.app/auth/signup"
-                      target="_blank"
-                    >
+                    <Link href="/#contact">
                       <Button className="bg-neon text-dark-blue w-full py-2.5 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
-                        Create Account
+                        Get Started
                       </Button>
                     </Link>
                   </SheetClose>

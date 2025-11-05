@@ -101,7 +101,7 @@ export default function Cta({
           </div>
 
           <div className="flex items-center space-x-4 text-gray-300">
-            <div className="flex -space-x-2">
+            {/* <div className="flex -space-x-2">
               <div className="w-8 h-8 rounded-full bg-neon/20 border-2 border-neon flex items-center justify-center">
                 <img
                   src="/farms.avif"
@@ -126,7 +126,7 @@ export default function Cta({
                   loading="lazy"
                 />
               </div>
-            </div>
+            </div> */}
             <span className="text-sm">
               Trusted by many organizations worldwide
             </span>
@@ -146,11 +146,7 @@ export default function Cta({
             </div>
 
             <div className="flex flex-col gap-1">
-              <Link
-                href="https://appinfinicitylabs.vercel.app/auth/signup"
-                target="_blank"
-                className="mb-4"
-              >
+              <Link href="/#contact" className="mb-4">
                 <Button className="w-full rounded-lg bg-neon hover:bg-[#22d18a] text-[#0b243a] shadow-lg shadow-neon/20 transition-all duration-300 py-7 font-semibold focus:outline-none">
                   Start Free Trial
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -163,14 +159,6 @@ export default function Cta({
                 >
                   Schedule Demo
                   <Sparkles className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              <Link href="/#contact">
-                <Button
-                  variant="ghost"
-                  className="w-full rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-all duration-300 py-7 font-medium"
-                >
-                  View Pricing Plans
                 </Button>
               </Link>
             </div>

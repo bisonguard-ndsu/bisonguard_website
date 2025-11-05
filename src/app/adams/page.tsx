@@ -18,7 +18,7 @@ const Adams = () => {
             description:
               "AdAMS helps asset managers work faster, smarter and more efficiently, delivering the visibility and data-driven insights to mitigate risk and ensure compliance.",
             buttonText: "SIGN UP TO AdAMS",
-            buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
+            buttonHref: "/#contact",
             target: "_blank",
             backgroundImage: "/tmc.png",
             highlightWords: ["asset", "team"],

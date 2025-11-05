@@ -164,11 +164,10 @@ export default function ContactSection() {
               </div>
               <div>
                 <div>
-                  <p>North Dakota State University, Fargo, ND 58108</p>
+                  <p>USA</p>
                 </div>
                 <div>
-                  <p>Ghana Kwetey Close, Golden Gate Estates,</p>
-                  <p>Regimanuel Estates, Spintex Accra-Ghana</p>
+                  <p>Ghana</p>
                 </div>
               </div>
             </div>

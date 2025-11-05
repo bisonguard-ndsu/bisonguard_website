@@ -7,7 +7,7 @@ import WhyChooseUs from "./home/components/why-choose-us";
 import Team from "./home/components/team";
 import Testimonials from "./home/components/testimonials";
 import Contact from "./home/components/contact";
-import Acreditations from "./home/components/acreditations";
+// import Acreditations from "./home/components/acreditations";
 import Cta from "@/components/cta";
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
             description:
               "InfiniCity Labs pioneers the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics, digital twins, and intelligent systems that transform how cities, communities, and industries move and operate.",
             buttonText: "GET STARTED",
-            buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
+            buttonHref: "/#contact",
             target: "_blank",
             backgroundImage: "/road.jpg",
             highlightWords: [
@@ -39,7 +39,7 @@ export default function Home() {
             description:
               "From pavement management to safety, mobility, and digital twins, we develop innovative solutions that optimize asset lifecycle, improve system performance, and create sustainable, intelligent environments.",
             buttonText: "GET STARTED",
-            buttonHref: "https://appinfinicitylabs.vercel.app/auth/signup",
+            buttonHref: "/#contact",
             target: "_blank",
             highlightWords: [
               "tomorrow's",
@@ -60,7 +60,7 @@ export default function Home() {
       <WhyChooseUs />
       <Testimonials />
       <Contact />
-      <Acreditations />
+      {/* <Acreditations /> */}
     </>
   );
 }

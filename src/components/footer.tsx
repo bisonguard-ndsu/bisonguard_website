@@ -124,16 +124,10 @@ export default function Footer() {
                   <MapPin className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
                   <div className="flex flex-col gap-2">
                     <div>
-                      <p className="text-gray-300">
-                        North Dakota State University
-                      </p>
-                      <p className="text-gray-300">Fargo, ND 58108</p>
+                      <p className="text-gray-300">USA</p>
                     </div>
                     <div>
                       <p className="text-gray-300">GHANA</p>
-                      <p className="text-gray-300">Kwetey Close, Golden Gate</p>
-                      <p className="text-gray-300">Regimanuel Estates,</p>
-                      <p className="text-gray-300">Spintex-Accra</p>
                     </div>
                   </div>
                 </div>
@@ -157,7 +151,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-4">
                 <Link
-                  href="https://appinfinicitylabs.vercel.app/auth/signin"
+                  href="https://infinicitylabs-5jwhs.ondigitalocean.app/"
                   target="_blank"
                 >
                   <Button
@@ -167,12 +161,9 @@ export default function Footer() {
                     Sign In
                   </Button>
                 </Link>
-                <Link
-                  href="https://appinfinicitylabs.vercel.app/auth/signup"
-                  target="_blank"
-                >
+                <Link href="/#contact">
                   <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/90 focus:outline-none">
-                    Create Account
+                    Get Started
                   </Button>
                 </Link>
               </div>
