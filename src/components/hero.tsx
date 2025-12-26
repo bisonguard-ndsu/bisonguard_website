@@ -92,6 +92,8 @@ export default function Hero({ items, interval = 5000 }: HeroCarouselProps) {
             backgroundImage: `url(${backgroundImage})`,
             backgroundColor: "#0a192f",
           }}
+          role="img"
+          aria-label={`Background image for ${title}`}
           // @ts-expect-error from framer motion
           variants={imageVariants}
           initial="initial"

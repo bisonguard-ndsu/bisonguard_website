@@ -27,7 +27,7 @@ function ProjectCard({
       <div className="mb-6">
         <img
           src={project.image}
-          alt={project.title}
+          alt={`${project.title} - ${project.description.substring(0, 50)}...`}
           className="w-full h-80 object-cover"
           loading="lazy"
         />

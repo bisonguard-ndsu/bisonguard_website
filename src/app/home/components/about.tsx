@@ -89,7 +89,7 @@ export default function About() {
                 <img
                   src="https://ik.imagekit.io/5kwcgtj3iv/detail-shot-modern-business-buildings%20(1).png?updatedAt=1751966723273"
                   loading="lazy"
-                  alt="Architecture team working"
+                  alt="InfiniCity Labs civil engineering and smart city technology team in a modern business building"
                   className="w-full h-full object-cover bg-dark-blue"
                 />
               </div>
