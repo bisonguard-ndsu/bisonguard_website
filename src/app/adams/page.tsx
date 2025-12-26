@@ -1,7 +1,6 @@
 "use client";
 
 import Hero from "@/components/hero";
-import VideioViewer from "@/components/video-viewer";
 import React from "react";
 import Solutions from "./components/solutions";
 import Insights from "./components/insights";
