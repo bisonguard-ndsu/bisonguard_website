@@ -84,7 +84,7 @@ export default function HowAdamsWork() {
                     Turn any smartphone into a powerful infrastructure monitoring system. Our AI automatically identifies assets, assesses conditions, generates inventory reports and delivers prioritized maintenance insights—all from a single drive.
                 </p>
             </div>
-            <div className="max-w-6xl mx-auto container">
+            <div className="max-w-7xl mx-auto container">
                 <Carousel
                     setApi={setApi}
                     plugins={[
@@ -152,7 +152,7 @@ function FeatureCardMotion({
             <img
                 src={feature.image}
                 alt={feature.id.toString()}
-                className="w-full h-80 object-contain"
+                className="w-full h-[400px] object-full"
                 loading="lazy"
             />
         </motion.div>
