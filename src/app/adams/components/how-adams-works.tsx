@@ -28,10 +28,6 @@ const steps = [
     {
         id: 5,
         image: "/adams-4.png"
-    },
-    {
-        id: 6,
-        image: "/adams-5.png"
     }
 ]
 
