@@ -14,6 +14,7 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -73,9 +74,8 @@ export default function Navbar() {
         >
           <span>Services</span>
           <ChevronDown
-            className={`w-4 h-4 transition-transform duration-200 ${
-              isMobileServicesOpen ? "rotate-180" : ""
-            }`}
+            className={`w-4 h-4 transition-transform duration-200 ${isMobileServicesOpen ? "rotate-180" : ""
+              }`}
           />
         </button>
 
@@ -91,11 +91,10 @@ export default function Navbar() {
               <SheetClose asChild key={project.title}>
                 <Link
                   href={project.href}
-                  className={`block px-3 py-2 text-sm rounded-none transition-all duration-200 ${
-                    pathname === project.href
-                      ? "text-neon bg-neon/10 border-l-2 border-neon"
-                      : "text-gray-300 hover:text-white hover:bg-gray-700/30"
-                  }`}
+                  className={`block px-3 py-2 text-sm rounded-none transition-all duration-200 ${pathname === project.href
+                    ? "text-neon bg-neon/10 border-l-2 border-neon"
+                    : "text-gray-300 hover:text-white hover:bg-gray-700/30"
+                    }`}
                   onClick={() => setIsMobileServicesOpen(false)}
                 >
                   {project.title}
@@ -110,13 +109,18 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`bg-dark-blue px-4 sm:px-6 md:px-8 lg:px-16 sticky top-0 w-full z-50 transition-all duration-300 ${
-        hasScrolled ? "shadow-md" : ""
-      }`}
+      className={`bg-dark-blue px-4 sm:px-6 md:px-8 lg:px-16 sticky top-0 w-full z-50 transition-all duration-300 ${hasScrolled ? "shadow-md" : ""
+        }`}
     >
       <div className="flex items-center justify-between max-w-6xl mx-auto container min-h-16">
         {/* Logo - Far Left */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/favicon.png"
+            alt="InfiniCity Labs Logo"
+            width={40}
+            height={40}
+          />
           <span className="text-white font-bold text-lg">InfiniCity Labs</span>
         </Link>
 
@@ -135,11 +139,10 @@ export default function Navbar() {
                     onMouseLeave={() => setIsProjectsOpen(false)}
                   >
                     <button
-                      className={`text-sm font-medium transition-colors duration-200 px-6 py-1 relative flex items-center gap-1 ${
-                        isActive
-                          ? "text-neon"
-                          : "text-gray-300 hover:text-white"
-                      }`}
+                      className={`text-sm font-medium transition-colors duration-200 px-6 py-1 relative flex items-center gap-1 ${isActive
+                        ? "text-neon"
+                        : "text-gray-300 hover:text-white"
+                        }`}
                     >
                       {isActive && (
                         <>
@@ -149,9 +152,8 @@ export default function Navbar() {
                       )}
                       {item.name}
                       <ChevronDown
-                        className={`w-4 h-4 transition-transform duration-200 ${
-                          isProjectsOpen ? "rotate-180" : ""
-                        }`}
+                        className={`w-4 h-4 transition-transform duration-200 ${isProjectsOpen ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
 
@@ -166,9 +168,8 @@ export default function Navbar() {
                             onClick={() => setIsProjectsOpen(false)}
                           >
                             <div
-                              className={`text-sm text-white ${
-                                pathname === project.href ? "text-neon" : ""
-                              }`}
+                              className={`text-sm text-white ${pathname === project.href ? "text-neon" : ""
+                                }`}
                             >
                               {project.title}
                             </div>
@@ -180,9 +181,8 @@ export default function Navbar() {
                 ) : (
                   <Link
                     href={item.href}
-                    className={`text-sm font-medium transition-colors duration-200 px-6 py-1 relative ${
-                      isActive ? "text-neon" : "text-gray-300 hover:text-white"
-                    }`}
+                    className={`text-sm font-medium transition-colors duration-200 px-6 py-1 relative ${isActive ? "text-neon" : "text-gray-300 hover:text-white"
+                      }`}
                   >
                     {isActive && (
                       <>
@@ -201,7 +201,7 @@ export default function Navbar() {
         {/* Auth Buttons - Far Right (hidden on mobile) */}
         <div className="hidden md:flex items-center space-x-3 ml-auto">
           <Link
-            href="https://infinicitylabs-5jwhs.ondigitalocean.app/"
+            href="https://app.infinicitylabs.org"
             target="_blank"
           >
             <Button className="border border-neon text-neon bg-transparent px-5 py-1 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 focus:outline-none">
@@ -267,11 +267,10 @@ export default function Navbar() {
                             <SheetClose asChild>
                               <Link
                                 href={item.href}
-                                className={`block px-3 py-2.5 text-sm font-medium rounded-none transition-all duration-200 ${
-                                  isActive
-                                    ? "text-neon bg-neon/10 border-l-2 border-neon"
-                                    : "text-gray-300 hover:text-white hover:bg-gray-700/50"
-                                }`}
+                                className={`block px-3 py-2.5 text-sm font-medium rounded-none transition-all duration-200 ${isActive
+                                  ? "text-neon bg-neon/10 border-l-2 border-neon"
+                                  : "text-gray-300 hover:text-white hover:bg-gray-700/50"
+                                  }`}
                               >
                                 {item.name}
                               </Link>
@@ -287,7 +286,7 @@ export default function Navbar() {
                 <div className="p-4 border-t border-gray-700 space-y-3 flex flex-col gap-1">
                   <SheetClose asChild>
                     <Link
-                      href="https://infinicitylabs-5jwhs.ondigitalocean.app/"
+                      href="https://app.infinicitylabs.org"
                       target="_blank"
                     >
                       <Button className="border border-neon text-neon bg-transparent w-full py-2.5 rounded-none font-medium transition-colors duration-200 hover:bg-neon/10 focus:outline-none">

@@ -1,7 +1,9 @@
 "use client";
 
+import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { CheckCircle, ArrowRight } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 const insights = [
   {
@@ -40,14 +42,23 @@ const insights = [
 ];
 
 export default function Insights() {
+  const headerRef = useRef(null);
+  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
+
   return (
     <section
-      id="team"
+      id="insights"
       className="py-20 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16"
     >
       <div className="max-w-6xl mx-auto container">
         {/* Header */}
-        <div className="text-center mx-auto container mb-16">
+        <motion.div
+          ref={headerRef}
+          initial={{ opacity: 0, y: 30 }}
+          animate={headerInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="text-center mx-auto container mb-16"
+        >
           <div className="inline-flex items-center justify-center mb-4">
             <div className="w-12 h-0.5 bg-neon mr-4" />
             <span className="text-neon text-sm font-medium uppercase tracking-wider">
@@ -63,92 +74,82 @@ export default function Insights() {
           <p className="text-gray-600 text-md lg:text-lg  max-w-3xl mx-auto leading-relaxed">
             We understand the hassle of replacing the tools you&apos;re used to
             in your process. That&apos;s why we integrate with the tools you use
-            in your day-to-day work..
+            in your day-to-day work.
           </p>
-        </div>
+        </motion.div>
 
         {/* Insights Grid Layout */}
-        <div className="space-y-16">
-          {insights.map((insight, index) => {
-            const isEven = index % 2 === 0;
-
-            return (
-              <div
-                key={index}
-                className={`grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center ${
-                  !isEven ? "lg:grid-flow-col-dense" : ""
-                }`}
-              >
-                {/* Image Column */}
-                <div
-                  className={`lg:col-span-2 h-full ${
-                    !isEven ? "lg:order-2" : ""
-                  }`}
-                >
-                  <div className="relative bg-gray-200 w-full h-full">
-                    <img
-                      src={
-                        insight.image || "/placeholder.svg?height=300&width=400"
-                      }
-                      loading="lazy"
-                      alt={insight.title}
-                      className="w-full h-full  object-cover rounded-none"
-                    />
-                  </div>
-                </div>
-
-                {/* Content Column */}
-                <div
-                  className={`lg:col-span-3 space-y-6 p-6 ${
-                    !isEven ? "lg:order-1 bg-dark-blue" : "bg-white"
-                  }`}
-                >
-                  <div>
-                    <h3
-                      className={`text-2xl font-bold  ${
-                        isEven ? "text-dark-blue" : "text-white"
-                      } mb-4 group-hover:text-neon transition-colors duration-300`}
-                    >
-                      {insight.title}
-                    </h3>
-                    <p
-                      className={`${
-                        isEven ? "text-gray-600" : "text-gray-300"
-                      }   leading-relaxed`}
-                    >
-                      {insight.description}
-                    </p>
-                  </div>
-
-                  <div className="space-y-3">
-                    {insight.list.map((item, idx) => (
-                      <div key={idx} className="flex items-start">
-                        <CheckCircle
-                          className="w-5 h-5 mr-3 mt-1 flex-shrink-0"
-                          style={{ color: "#27ea9c" }}
-                        />
-                        <span
-                          className={`${
-                            isEven ? "text-gray-700" : "text-gray-200"
-                          }`}
-                        >
-                          {item}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-2">
-                    <Button className="bg-neon text-dark-blue px-5 py-1 rounded-none font-medium transition-all duration-200 hover:bg-neon/90 focus:outline-none hover:scale-105">
-                      Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {insights.map((insight, index) => (
+            <InsightCard key={index} insight={insight} index={index} />
+          ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function InsightCard({
+  insight,
+  index,
+}: {
+  insight: (typeof insights)[number];
+  index: number;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const cardInView = useInView(cardRef, { once: true, margin: "-100px" });
+
+  return (
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 50 }}
+      animate={cardInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.15, ease: "easeOut" }}
+      className="group bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden"
+    >
+      {/* Image Container with Overlay Effect */}
+      <div className="relative h-64 overflow-hidden">
+        <div className="absolute inset-0 bg-dark-blue/0 group-hover:bg-dark-blue/10 transition-colors duration-300 z-10" />
+        <img
+          src={insight.image || "/placeholder.svg?height=300&width=400"}
+          alt={insight.title}
+          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+          loading="lazy"
+        />
+        {/* Decorative corner accent */}
+        <div className="absolute top-0 right-0 w-16 h-16 bg-neon/90 clip-path-polygon transform translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300 z-20"
+          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%)" }} />
+      </div>
+
+      {/* Content */}
+      <div className="p-8 flex flex-col flex-grow">
+        <h3 className="text-2xl font-bold text-dark-blue mb-4 group-hover:text-neon transition-colors duration-300">
+          {insight.title}
+        </h3>
+
+        <p className="text-gray-600 mb-6 leading-relaxed flex-grow">
+          {insight.description}
+        </p>
+
+        <div className="space-y-3 mb-8 border-t border-gray-100 pt-6">
+          {insight.list.map((item, idx) => (
+            <div key={idx} className="flex items-start">
+              <CheckCircle
+                className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0 text-neon"
+              />
+              <span className="text-sm text-gray-700 font-medium">
+                {item}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-auto">
+          <Button className="w-full bg-white text-dark-blue border-2 border-dark-blue hover:bg-dark-blue hover:text-white rounded-none font-bold tracking-wide transition-all duration-300 group-hover:shadow-md">
+            Learn More <ArrowRight className="ml-2 h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    </motion.div>
   );
 }

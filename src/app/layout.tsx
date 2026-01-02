@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "InfiniCity Labs",
     images: [
       {
-        url: "/INCL.png",
+        url: "/favicon.png",
         width: 1200,
         height: 630,
         alt: "InfiniCity Labs Logo",
@@ -50,16 +50,16 @@ export const metadata: Metadata = {
     title: "InfiniCity Labs | Engineering the Future of Smart Cities",
     description:
       "Transforming urban infrastructure with AI-driven analytics, digital twins, and intelligent mobility systems.",
-    images: ["/INCL.png"],
+    images: ["/favicon.png"],
     creator: "@InfiniCityLabs",
   },
   icons: {
     icon: [
-      { url: "/INCL.png", type: "image/png", sizes: "32x32" },
-      { url: "/INCL.png", type: "image/png", sizes: "16x16" },
+      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon.png", type: "image/png", sizes: "16x16" },
     ],
-    shortcut: "/INCL.png",
-    apple: [{ url: "/INCL.png", sizes: "180x180", type: "image/png" }],
+    shortcut: "/favicon.png",
+    apple: [{ url: "/favicon.png", sizes: "180x180", type: "image/png" }],
   },
   alternates: {
     canonical: "https://infinicitylabs.org",
@@ -75,7 +75,7 @@ const jsonLd = {
   "@type": "Organization",
   name: "InfiniCity Labs",
   url: "https://infinicitylabs.org",
-  logo: "https://infinicitylabs.org/INCL.png",
+  logo: "https://infinicitylabs.org/favicon.png",
   description:
     "Pioneering the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics and digital twins.",
   contactPoint: {

@@ -25,9 +25,9 @@ const Adams = () => {
           },
         ]}
       />
+      <Insights />
       <HowAdamsWork />
       <Solutions />
-      <Insights />
       <Cta />
     </>
   );

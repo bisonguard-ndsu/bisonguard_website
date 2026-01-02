@@ -259,3 +259,5 @@ export const sponsors = [
     link: "",
   },
 ];
+
+export const INFINICITY_WEB_APP_LINK = "https://app.infinicitylabs.org"

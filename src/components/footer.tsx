@@ -9,7 +9,7 @@ import {
   Github,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { navItems, projects } from "@/lib/constants";
+import { INFINICITY_WEB_APP_LINK, navItems, projects } from "@/lib/constants";
 
 export default function Footer() {
   return (
@@ -151,7 +151,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-4">
                 <Link
-                  href="https://infinicitylabs-5jwhs.ondigitalocean.app/"
+                  href={"https://app.infinicitylabs.org"}
                   target="_blank"
                 >
                   <Button

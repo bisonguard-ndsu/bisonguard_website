@@ -106,19 +106,11 @@ export default function Projects() {
         </div>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} index={index} />
           ))}
         </div>
-
-        {/* Pagination Dots */}
-        {/* <div className="flex justify-center gap-2">
-          <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-          <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-          <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-          <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-        </div> */}
       </div>
     </section>
   );
