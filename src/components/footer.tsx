@@ -9,7 +9,7 @@ import {
   Github,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { INFINICITY_WEB_APP_LINK, navItems, projects } from "@/lib/constants";
+import { navItems, projects } from "@/lib/constants";
 
 export default function Footer() {
   return (
