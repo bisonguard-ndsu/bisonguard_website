@@ -2,7 +2,7 @@
 
 import React, { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
 
 const insights = [

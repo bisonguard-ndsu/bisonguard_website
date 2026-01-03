@@ -33,9 +33,7 @@ export default function Hero({ items, interval = 20000 }: HeroCarouselProps) {
   }, [items.length, interval]);
 
   const {
-    badge = "Company Since 1996",
     title = "Work with the best shape makers for your home.",
-    description = "Compliment favourable connection and dispatched terminated esteem powerful excuse remove.",
     buttonText = "OUR SERVICES",
     buttonHref = "/services",
     onButtonClick,
