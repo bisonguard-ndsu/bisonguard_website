@@ -46,7 +46,7 @@ export default function Insights() {
   return (
     <section
       id="insights"
-      className="py-20 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16"
+      className="pt-5 pb-10 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16"
     >
       <div className="max-w-6xl mx-auto container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -78,7 +78,7 @@ function InsightCard({
       className="group bg-white border border-gray-100  hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden rounded-lg"
     >
       {/* Image Container with Overlay Effect */}
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-56 overflow-hidden">
         <div className="absolute inset-0 bg-dark-blue/0 group-hover:bg-dark-blue/10 transition-colors duration-300 z-10" />
         <img
           src={insight.image || "/placeholder.svg?height=300&width=400"}
@@ -92,12 +92,12 @@ function InsightCard({
       </div>
 
       {/* Content */}
-      <div className="p-8 flex flex-col flex-grow">
-        <h4 className="text-lg font-bold text-dark-blue mb-4 group-hover:text-neon transition-colors duration-300">
+      <div className="px-8 py-2 flex flex-col flex-grow">
+        <h4 className="text-lg font-bold text-dark-blue mb-1 group-hover:text-neon transition-colors duration-300">
           {insight.title}
         </h4>
 
-        <p className="text-gray-600 mb-6 text-sm leading-relaxed flex-grow">
+        <p className="text-gray-600 mb-2 text-sm leading-relaxed flex-grow">
           {insight.description}
         </p>
 
