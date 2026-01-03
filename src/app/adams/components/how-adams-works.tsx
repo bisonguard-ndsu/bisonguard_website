@@ -66,7 +66,7 @@ export default function HowAdamsWork() {
     return (
         <section
             id="team"
-            className="py-20 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16"
+            className="py-20 bg-white px-4 sm:px-6 md:px-8 lg:px-16"
         >
             <div className="text-center mx-auto container mb-16">
 

@@ -81,8 +81,7 @@ export default function Hero({ items, interval = 20000 }: HeroCarouselProps) {
   };
 
   return (
-    <section className="relative min-h-[60vh] lg:min-h-[70vh] flex items-center overflow-hidden">
-      {/* Always-on dark background behind the image */}
+    <section className="relative flex items-center overflow-hidden">
       <div className="absolute inset-0 bg-[#0a192f]" />
       <AnimatePresence mode="wait">
         <motion.div
@@ -101,42 +100,27 @@ export default function Hero({ items, interval = 20000 }: HeroCarouselProps) {
           exit="exit"
         />
       </AnimatePresence>
-
-      {/* Linear Gradient Overlay - Right to Left (darker to lighter) */}
       <div className="absolute inset-0 bg-gradient-to-l from-dark-blue/90 via-dark-blue/70 to-dark-blue/50" />
 
-      {/* Content Container */}
       <div className="relative z-10 px-4 sm:px-6 md:px-8 lg:px-16 py-12 lg:py-16 w-full">
         <div className="mx-auto container max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-5  items-center">
-            {/* Text Content - Left Side */}
+          <div className="w-full max-w-4xl container mx-auto items-center">
             <motion.div
               key={current}
               variants={containerVariants}
               initial="hidden"
               animate="show"
               exit="hidden"
-              className="space-y-4 text-white col-span-3"
+              className="space-y-4 text-white w-full"
             >
-              {/* Badge */}
-              <motion.div
-                //@ts-expect-error from variants
-                variants={fadeUp}
-              >
-                <span className="text-neon text-xs font-medium uppercase tracking-wider">
-                  {badge}
-                </span>
-              </motion.div>
 
-              {/* Main Title */}
+
               <motion.h1
-                className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+                className="text-3xl md:text-4xl lg:text-5xl text-center font-bold leading-tight"
                 //@ts-expect-error from variants
                 variants={fadeUp}
               >
                 {title.split(" ").map((word, index) => {
-                  // Highlight specific words with the neon color
-
                   const isHighlighted = highlightWords.some((hw) =>
                     word.toLowerCase().includes(hw.toLowerCase())
                   );
@@ -151,24 +135,15 @@ export default function Hero({ items, interval = 20000 }: HeroCarouselProps) {
                 })}
               </motion.h1>
 
-              {/* Description with Icon */}
-              <motion.div //@ts-expect-error from variants
-                variants={fadeUp}
-              >
-                <p className="text-gray-300 text-base leading-relaxed max-w-lg">
-                  {description}
-                </p>
-              </motion.div>
 
-              {/* CTA Button */}
               <motion.div //@ts-expect-error from variants
                 variants={fadeUp}
-                className="pt-2"
+                className="pt-2 flex items-center justify-center"
               >
                 {onButtonClick ? (
                   <Button
                     onClick={onButtonClick}
-                    className="bg-neon hover:bg-[#22d18a] text-dark-blue capitalize px-8 py-5 text-sm font-semibold tracking-wider transition-all duration-300 rounded-none"
+                    className="bg-neon hover:bg-[#22d18a] text-dark-blue capitalize px-8 py-5 text-sm tracking-wider transition-all duration-300 rounded-none font-bold"
                   >
                     {buttonText}
                   </Button>
@@ -184,11 +159,6 @@ export default function Hero({ items, interval = 20000 }: HeroCarouselProps) {
                 )}
               </motion.div>
             </motion.div>
-
-            {/* Right Side - Empty space for background image visibility */}
-            <div className="hidden lg:block">
-              {/* This space allows the background image to show through */}
-            </div>
           </div>
         </div>
       </div>
