@@ -46,7 +46,7 @@ export default function Insights() {
   return (
     <section
       id="insights"
-      className="pt-5 pb-10 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16"
+      className="pt-10 pb-10 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16"
     >
       <div className="max-w-6xl mx-auto container">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
