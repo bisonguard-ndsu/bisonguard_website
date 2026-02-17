@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { team } from "@/lib/constants";
 import { Mail, Linkedin, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 const Members = () => {
   return (

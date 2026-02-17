@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { team } from "@/lib/constants";
 import Link from "next/link";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRouter } from "next/navigation";
 

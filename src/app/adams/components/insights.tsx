@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion, useInView } from "framer-motion";
@@ -42,7 +42,6 @@ const insights = [
 ];
 
 export default function Insights() {
-
   return (
     <section
       id="insights"
@@ -87,8 +86,10 @@ function InsightCard({
           loading="lazy"
         />
         {/* Decorative corner accent */}
-        <div className="absolute top-0 right-0 w-16 h-16 bg-neon/90 clip-path-polygon transform translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300 z-20"
-          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%)" }} />
+        <div
+          className="absolute top-0 right-0 w-16 h-16 bg-neon/90 clip-path-polygon transform translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300 z-20"
+          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%)" }}
+        />
       </div>
 
       {/* Content */}

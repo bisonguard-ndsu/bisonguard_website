@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
@@ -111,8 +111,6 @@ export default function Hero({ items, interval = 20000 }: HeroCarouselProps) {
               exit="hidden"
               className="space-y-4 text-white w-full"
             >
-
-
               <motion.h1
                 className="text-3xl md:text-4xl lg:text-5xl text-center font-bold leading-tight"
                 //@ts-expect-error from variants
@@ -120,7 +118,7 @@ export default function Hero({ items, interval = 20000 }: HeroCarouselProps) {
               >
                 {title.split(" ").map((word, index) => {
                   const isHighlighted = highlightWords.some((hw) =>
-                    word.toLowerCase().includes(hw.toLowerCase())
+                    word.toLowerCase().includes(hw.toLowerCase()),
                   );
                   return (
                     <span
@@ -132,7 +130,6 @@ export default function Hero({ items, interval = 20000 }: HeroCarouselProps) {
                   );
                 })}
               </motion.h1>
-
 
               <motion.div //@ts-expect-error from variants
                 variants={fadeUp}

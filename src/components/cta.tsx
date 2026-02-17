@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Sparkles, CheckCircle } from "lucide-react";
 import Link from "next/link";
@@ -64,7 +64,7 @@ export default function Cta({
               // Highlight specific words with the neon color
 
               const isHighlighted = highlightWords.some((hw) =>
-                word.toLowerCase().includes(hw.toLowerCase())
+                word.toLowerCase().includes(hw.toLowerCase()),
               );
               return (
                 <span
