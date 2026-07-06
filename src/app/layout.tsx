@@ -13,9 +13,9 @@ const ibmPlex = Barlow({
 });
 
 export const metadata: Metadata = {
-  title: "InfiniCity Labs | Engineering the Future of Smart Cities",
+  title: "InfiniCity Labs | AI-Powered Smart Infrastructure",
   description:
-    "Leading innovation in civil engineering and AI. We pioneer the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics and digital twins.",
+    "InfiniCity Labs pioneers smart infrastructure and mobility solutions through advanced big data analytics, digital twins, and intelligent systems for civil engineering",
   keywords: [
     "civil engineering",
     "AI",

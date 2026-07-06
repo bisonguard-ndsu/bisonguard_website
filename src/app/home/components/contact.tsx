@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import {
   Mail,
-  Phone,
-  MapPin,
+  // Phone,
+  // MapPin,
   Clock,
   ArrowRight,
   Loader,
@@ -138,7 +138,7 @@ export default function ContactSection() {
           </p>
 
           <div className="space-y-6">
-            <div className="flex items-center space-x-4 text-gray-200">
+            {/* <div className="flex items-center space-x-4 text-gray-200">
               <div className="bg-neon/20 p-3 rounded-none">
                 <Phone className="w-5 h-5 text-neon" />
               </div>
@@ -147,7 +147,7 @@ export default function ContactSection() {
                 <p>+233 (208) 991-953</p>
                 <p>+233 (556) 673-060</p>
               </div>
-            </div>
+            </div> */}
             <div className="flex items-center space-x-4 text-gray-200">
               <div className="bg-neon/20 p-3 rounded-none">
                 <Mail className="w-5 h-5 text-neon" />
@@ -157,7 +157,7 @@ export default function ContactSection() {
                 <p>research@infinicitylabs.org</p>
               </div>
             </div>
-            <div className="flex items-center space-x-4 text-gray-200">
+            {/* <div className="flex items-center space-x-4 text-gray-200">
               <div className="bg-neon/20 p-3 rounded-none">
                 <MapPin className="w-5 h-5 text-neon" />
               </div>
@@ -169,7 +169,7 @@ export default function ContactSection() {
                   <p>Ghana</p>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="flex items-center space-x-4 text-gray-200">
               <div className="bg-neon/20 p-3 rounded-none">
                 <Clock className="w-5 h-5 text-neon" />
