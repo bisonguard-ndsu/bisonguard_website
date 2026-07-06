@@ -4,8 +4,8 @@ import {
   Twitter,
   Facebook,
   Mail,
-  Phone,
-  MapPin,
+  // Phone,
+  // MapPin,
   Github,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -112,15 +112,15 @@ export default function Footer() {
                     <p className="text-gray-300">research@infinicitylabs.org</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-3">
+                {/* <div className="flex items-start gap-3">
                   <Phone className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
                   <div>
                     <p className="text-gray-300">+1 (732) 322-8385</p>
                     <p className="text-gray-300">+233 (208) 991-953</p>
                     <p className="text-gray-300">+233 (556) 673-060</p>
                   </div>
-                </div>
-                <div className="flex items-start gap-3">
+                </div> */}
+                {/* <div className="flex items-start gap-3">
                   <MapPin className="w-5 h-5 text-neon mt-1 flex-shrink-0" />
                   <div className="flex flex-col gap-2">
                     <div>
@@ -130,7 +130,7 @@ export default function Footer() {
                       <p className="text-gray-300">GHANA</p>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
