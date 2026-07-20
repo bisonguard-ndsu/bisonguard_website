@@ -44,7 +44,29 @@
   --color-neon: var(--neon);
   --color-dark-blue: var(--dark-blue);
   --color-bluish-white: var(--bluish-white);
-  --font-ibm-plex: var(--font-ibm-plex);
+
+  /* Typography */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-grotesk);
+
+  /* Brand ramp — navy, for layering depth on dark sections */
+  --color-navy-950: var(--navy-950);
+  --color-navy-900: var(--navy-900);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-navy-600: var(--navy-600);
+
+  /* Neon ramp */
+  --color-neon-bright: var(--neon-bright);
+  --color-neon-deep: var(--neon-deep);
+
+  /* Ink ramp — warm-neutral text on light sections */
+  --color-ink-900: var(--ink-900);
+  --color-ink-700: var(--ink-700);
+  --color-ink-500: var(--ink-500);
+  --color-ink-300: var(--ink-300);
+  --color-ink-100: var(--ink-100);
+  --color-ink-50: var(--ink-50);
 }
 
 :root {
@@ -85,6 +107,25 @@
   --bluish-white: #c2d4e2;
   --text: #0b2439;
   --indigoblue: #4361d1;
+
+  /* Navy ramp — 950 is near-black for deep sections, 600 for hairline borders */
+  --navy-950: #050f1a;
+  --navy-900: #071a2b;
+  --navy-800: #0b243a;
+  --navy-700: #123049;
+  --navy-600: #1c405e;
+
+  /* Neon ramp */
+  --neon-bright: #4dffb8;
+  --neon-deep: #12b87a;
+
+  /* Ink ramp for light sections */
+  --ink-900: #0b2439;
+  --ink-700: #2f4256;
+  --ink-500: #5b6b7d;
+  --ink-300: #94a3b3;
+  --ink-100: #dbe3ea;
+  --ink-50: #f4f7fa;
 }
 
 .dark {
@@ -122,11 +163,117 @@
 }
 
 @layer base {
-  * {
-    @apply font-ibm-plex;
+  html {
     @apply scroll-smooth;
+    /* Sticky navbar is 4rem — keep hash targets clear of it */
+    scroll-padding-top: 5rem;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Headings carry the display face with optical tightening. Large type needs
+     negative tracking to avoid looking loose; body copy does not. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    @apply font-display;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* A single visible focus treatment across the site */
+  :focus-visible {
+    @apply outline-none ring-2 ring-neon ring-offset-2;
+    --tw-ring-offset-color: var(--dark-blue);
+  }
+
+  ::selection {
+    background: var(--neon);
+    color: var(--dark-blue);
+  }
+}
+
+@layer utilities {
+  /* Eyebrow labels — small, tracked-out, display face */
+  .eyebrow {
+    @apply font-display text-xs font-medium uppercase;
+    letter-spacing: 0.18em;
+  }
+
+  /* Fine film grain, layered over dark sections to kill gradient banding */
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Hairline grid, for dark section backdrops */
+  .grid-lines {
+    background-image: linear-gradient(
+        to right,
+        color-mix(in oklab, var(--neon) 8%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--neon) 8%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 72px 72px;
+  }
+
+  /* Radial neon bloom used behind focal elements */
+  .bloom {
+    background: radial-gradient(
+      circle at center,
+      color-mix(in oklab, var(--neon) 30%, transparent) 0%,
+      transparent 70%
+    );
+  }
+
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--neon-bright) 0%,
+      var(--neon) 45%,
+      var(--neon-deep) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Consistent vertical rhythm for full-width sections */
+  .section-y {
+    @apply py-20 md:py-28 lg:py-32;
+  }
+
+  .section-x {
+    @apply px-4 sm:px-6 md:px-8 lg:px-16;
+  }
+}
+
+/* Respect users who ask for less motion: neutralise transitions and any
+   framer-motion transforms rather than leaving elements stuck mid-animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
-import { Barlow } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsent from "@/components/cookie-consent";
 
-const ibmPlex = Barlow({
-  variable: "--font-ibm-plex",
+// Display face — engineered, slightly geometric; carries headings and the
+// numeric/label details. Body face — Inter, for legibility at small sizes.
+const display = Space_Grotesk({
+  variable: "--font-grotesk",
   subsets: ["latin"],
   display: "swap",
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700"],
+});
+
+const body = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -98,7 +106,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ibmPlex.variable} antialiased`}
+        className={`${display.variable} ${body.variable} antialiased`}
       >
         <script
           type="application/ld+json"
