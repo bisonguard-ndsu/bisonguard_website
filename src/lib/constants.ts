@@ -62,7 +62,7 @@ export const projects = [
       "AI-powered traffic control solution utilizing real-time data analysis and machine learning to optimize traffic flow, reduce congestion, and enhance road safety across urban networks.",
   },
   {
-    image: "/herd.JPG",
+    image: "/fms.webp",
     title: "Farm Management System",
     href: "/fms",
     description:

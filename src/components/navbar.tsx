@@ -114,14 +114,15 @@ export default function Navbar() {
     >
       <div className="flex items-center justify-between max-w-6xl mx-auto container min-h-16">
         {/* Logo - Far Left */}
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center" aria-label="InfiniCity Labs — home">
           <Image
-            src="/favicon.png"
-            alt="InfiniCity Labs Logo"
-            width={40}
-            height={40}
+            src="/logo-wordmark.png"
+            alt="InfiniCity Labs"
+            width={1108}
+            height={330}
+            priority
+            className="h-7 w-auto sm:h-8"
           />
-          <span className="text-white font-bold text-lg">InfiniCity Labs</span>
         </Link>
 
         {/* Navigation Links - Centered (hidden on mobile) */}

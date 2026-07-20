@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Instagram,
   Twitter,
@@ -21,10 +22,14 @@ export default function Footer() {
             {/* Company Info */}
             <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center">
-                <Link href="/" className="flex items-center">
-                  <span className="text-white font-bold text-lg">
-                    InfiniCity Labs
-                  </span>
+                <Link href="/" className="flex items-center" aria-label="InfiniCity Labs — home">
+                  <Image
+                    src="/logo-full.png"
+                    alt="InfiniCity Labs — Pioneering Intelligent Futures"
+                    width={1108}
+                    height={417}
+                    className="h-16 w-auto"
+                  />
                 </Link>
               </div>
               <p className="text-md text-gray-300 leading-relaxed">

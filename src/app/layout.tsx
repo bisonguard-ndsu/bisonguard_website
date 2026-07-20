@@ -13,6 +13,7 @@ const ibmPlex = Barlow({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://infinicitylabs.org"),
   title: "InfiniCity Labs | AI-Powered Smart Infrastructure",
   description:
     "InfiniCity Labs pioneers smart infrastructure and mobility solutions through advanced big data analytics, digital twins, and intelligent systems for civil engineering",
@@ -38,10 +39,10 @@ export const metadata: Metadata = {
     siteName: "InfiniCity Labs",
     images: [
       {
-        url: "/favicon.png",
+        url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "InfiniCity Labs Logo",
+        alt: "InfiniCity Labs — Pioneering Intelligent Futures",
       },
     ],
   },
@@ -50,16 +51,13 @@ export const metadata: Metadata = {
     title: "InfiniCity Labs | Engineering the Future of Smart Cities",
     description:
       "Transforming urban infrastructure with AI-driven analytics, digital twins, and intelligent mobility systems.",
-    images: ["/favicon.png"],
+    images: ["/og.png"],
     creator: "@InfiniCityLabs",
   },
   icons: {
-    icon: [
-      { url: "/favicon.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon.png", type: "image/png", sizes: "16x16" },
-    ],
-    shortcut: "/favicon.png",
-    apple: [{ url: "/favicon.png", sizes: "180x180", type: "image/png" }],
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "512x512" }],
+    shortcut: "/icon.png",
+    apple: [{ url: "/icon.png", sizes: "180x180", type: "image/png" }],
   },
   alternates: {
     canonical: "https://infinicitylabs.org",
@@ -75,7 +73,7 @@ const jsonLd = {
   "@type": "Organization",
   name: "InfiniCity Labs",
   url: "https://infinicitylabs.org",
-  logo: "https://infinicitylabs.org/favicon.png",
+  logo: "https://infinicitylabs.org/icon.png",
   description:
     "Pioneering the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics and digital twins.",
   contactPoint: {

@@ -47,10 +47,10 @@ const features: FeatureCard[] = [
     number: "04",
   },
   {
-    badge: "TRANSPORTATION SAFETY",
-    title: "Transportation Safety",
+    badge: "SMART FARMING",
+    title: "Smart Farming Solutions",
     description:
-      "Roadways accidents reduction using data analysis, simulation and safety interventions",
+      "AI-powered agricultural systems that integrate autonomous robotics, aerial monitoring, and predictive analytics to transform how crops and livestock are managed",
     number: "05",
   },
 ];

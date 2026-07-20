@@ -56,14 +56,14 @@ export default function About() {
               className="text-gray-300 text-md lg:text-lg leading-relaxed mb-12 max-w-lg"
             >
               At InfiniCity Labs, we are redefining the future of urban and
-              rural ecosystems. We&apos;ve combined engineering expertise with
-              smart technologies to solve complex challenges across
-              infrastructure, mobility, smart systems, and agriculture. Our
-              mission is to develop sustainable and data-driven systems that
-              make cities more livable and farming more productive. From
-              intelligent traffic flow to efficient asset management and smart
-              herd monitoring, we bring precision, innovation, and performance
-              to every project.
+              rural ecosystems. We combine engineering expertise, artificial
+              intelligence, and robotics with smart technologies to solve
+              complex challenges across infrastructure, mobility, smart systems,
+              and agriculture. Our mission is to develop sustainable and
+              data-driven systems that make cities more livable and farming more
+              productive. From intelligent traffic flow to efficient asset
+              management, autonomous field robotics, and smart herd monitoring,
+              we bring precision, innovation, and performance to every project.
             </motion.p>
 
             {/* Call to Action Box */}
@@ -75,26 +75,61 @@ export default function About() {
             </Link>
           </motion.div>
 
-          {/* Right Image */}
-          <motion.div
-            ref={imgRef}
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={imgInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className="flex justify-center lg:justify-end"
-          >
-            <div className="relative">
-              {/* Circular Image */}
-              <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white/20">
+          {/* Right Image Composition */}
+          <div ref={imgRef} className="flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[480px] aspect-[5/6]">
+              {/* Neon corner bracket (top-left) */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={imgInView ? { opacity: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
+                className="absolute top-0 left-0"
+                aria-hidden="true"
+              >
+                <div className="absolute top-0 left-0 h-[3px] w-16 bg-neon" />
+                <div className="absolute top-0 left-0 w-[3px] h-16 bg-neon" />
+              </motion.div>
+
+              {/* Primary image — large panel, top right */}
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={imgInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
+                className="absolute top-0 right-0 w-[80%] h-[66%] overflow-hidden ring-1 ring-white/15"
+              >
                 <img
                   src="https://ik.imagekit.io/5kwcgtj3iv/detail-shot-modern-business-buildings%20(1).png?updatedAt=1751966723273"
                   loading="lazy"
                   alt="InfiniCity Labs civil engineering and smart city technology team in a modern business building"
                   className="w-full h-full object-cover bg-dark-blue"
                 />
-              </div>
+              </motion.div>
+
+              {/* Secondary image — smaller panel overlapping the bottom-left corner */}
+              <motion.div
+                initial={{ opacity: 0, x: -24, y: 24 }}
+                animate={imgInView ? { opacity: 1, x: 0, y: 0 } : {}}
+                transition={{ duration: 0.7, delay: 0.4, ease: "easeOut" }}
+                className="absolute bottom-0 left-0 w-[62%] h-[44%] overflow-hidden border-[6px] sm:border-8 border-dark-blue"
+              >
+                <img
+                  src="/robotics.webp"
+                  loading="lazy"
+                  alt="Robotic arms used in InfiniCity Labs automation and robotics research"
+                  className="w-full h-full object-cover bg-dark-blue"
+                />
+              </motion.div>
+
+              {/* Neon accent square (bottom-right) */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.6 }}
+                animate={imgInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.7, ease: "easeOut" }}
+                className="absolute bottom-[7%] right-0 w-12 h-12 sm:w-14 sm:h-14 bg-neon"
+                aria-hidden="true"
+              />
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

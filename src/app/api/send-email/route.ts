@@ -37,8 +37,7 @@ export async function POST(request: Request) {
               <td style="background: #0b243a; padding: 32px 0; text-align: center;">
                 <img src="https://${
                   request.headers.get("host") || "infinicitylabs.org"
-                }/INCL.png" alt="InfiniCity Labs Logo" style="height: 60px; margin-bottom: 8px;" />
-                <h1 style="color: #27ea9c; font-size: 2rem; margin: 0; font-weight: 700; letter-spacing: 1px;">InfiniCity Labs</h1>
+                }/logo-full.png" alt="InfiniCity Labs" style="height: 64px; width: auto; display: block; margin: 0 auto;" />
               </td>
             </tr>
             <tr>

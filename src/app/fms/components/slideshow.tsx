@@ -101,8 +101,29 @@ export default function HerdSlideshow() {
   }, [api, onSelect]);
 
   return (
-    <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-white">
+    <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-gray-50">
       <div className="max-w-6xl mx-auto container">
+        {/* Section header */}
+        <div className="mb-16 text-center">
+          <div className="inline-flex items-center justify-center mb-6">
+            <div className="w-12 h-0.5 bg-neon mr-4" />
+            <span className="text-neon text-sm font-medium uppercase tracking-wider">
+              In The Field
+            </span>
+            <div className="w-12 h-0.5 bg-neon ml-4" />
+          </div>
+
+          <h2 className="mb-6 text-2xl font-bold leading-tight text-foreground md:text-3xl lg:text-4xl">
+            Built For <span className="text-neon">Open Range</span> Conditions
+          </h2>
+
+          <p className="mx-auto max-w-3xl text-md leading-relaxed text-gray-600 lg:text-lg">
+            Bison, cattle, and wildlife move across terrain that fences and
+            headcounts can&apos;t keep up with. Our herd monitoring platform is
+            designed for exactly this — wide, unpredictable, always-on ground.
+          </p>
+        </div>
+
         <Carousel
           setApi={setApi}
           plugins={[
