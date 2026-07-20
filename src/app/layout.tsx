@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
+import CookieConsent from "@/components/cookie-consent";
 
 const ibmPlex = Barlow({
   variable: "--font-ibm-plex",
@@ -78,7 +79,6 @@ const jsonLd = {
     "Pioneering the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics and digital twins.",
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+1-732-322-8385",
     contactType: "customer service",
     email: "info@infinicitylabs.org",
   },
@@ -108,6 +108,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <Toaster />
+        <CookieConsent />
       </body>
     </html>
   );
