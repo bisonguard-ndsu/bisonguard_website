@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { Quote } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import Reveal from "@/components/ui/reveal";
+import SectionHeading from "@/components/ui/section-heading";
 
 interface Testimonial {
   id: number;
@@ -50,140 +51,117 @@ const testimonials: Testimonial[] = [
   // },
 ];
 
+/** Dwell time on each quote. Long enough to actually finish reading one. */
+const ROTATION_MS = 8000;
+
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
 
-  const headerRef = useRef(null);
-  const boxRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
-  const boxInView = useInView(boxRef, { once: true, margin: "-100px" });
+  // With a single approved quote there is nothing to rotate — running the
+  // timer anyway would fade the section in and out for no reason.
+  const hasMultiple = testimonials.length > 1;
 
   useEffect(() => {
+    if (!hasMultiple) return;
+
     const interval = setInterval(() => {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-        setIsVisible(true);
-      }, 300);
-    }, 5000);
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, ROTATION_MS);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [hasMultiple]);
 
-  const handleDotClick = (index: number) => {
-    if (index !== currentIndex) {
-      setIsVisible(false);
-      setTimeout(() => {
-        setCurrentIndex(index);
-        setIsVisible(true);
-      }, 300);
-    }
-  };
+  const current = testimonials[currentIndex];
 
-  const currentTestimonial = testimonials[currentIndex];
+  if (!current) return null;
 
   return (
-    <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-gray-50 relative overflow-hidden">
-      {/* Background Pattern - Right Side */}
-      <div className="absolute top-0 right-0 w-1/2 h-full opacity-10">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `radial-gradient(circle, #27ea9c 2px, transparent 2px)`,
-            backgroundSize: "20px 20px",
-          }}
+    <section className="section-y section-x relative overflow-hidden bg-ink-50">
+      <div className="relative mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow="Testimonials"
+          title="Trusted by infrastructure and mobility leaders. What our clients and partners say."
+          tone="light"
+          className="max-w-4xl"
         />
-      </div>
 
-      <div className="max-w-6xl mx-auto container relative">
-        {/* Vertical Line - Full Height */}
-        <div className="absolute left-0 top-0 bottom-0 w-1 bg-neon" />
-
-        <div className="pl-16">
-          <motion.div
-            ref={headerRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="mb-16"
-          >
-            <div className="mb-4">
-              <span className="text-neon text-sm font-medium uppercase tracking-wider">
-                Testimonials
-              </span>
-            </div>
-            {/* Main Heading */}
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold max-w-4xl leading-tight mb-8">
-              Trusted by infrastructure and mobility leaders. What our{" "}
-              <span className="text-neon">clients and partners say.</span>
-            </h2>
-          </motion.div>
-          {/* Testimonial Box - Bottom */}
-          <motion.div
-            ref={boxRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={boxInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="bg-dark-blue min-h-[200px] p-12 relative max-w-5xl"
-          >
-            <div
-              className={`transition-opacity duration-300 ${
-                isVisible ? "opacity-100" : "opacity-0"
-              }`}
-              style={{ minHeight: "200px" }}
+        <Reveal delay={0.12} className="mt-14 md:mt-16 lg:mt-20">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="grid gap-10 lg:grid-cols-12 lg:gap-16"
             >
-              <div className="grid grid-cols-1 md:grid-cols-8 gap-2">
-                {/* Left Side - Image, Name, Position */}
-                <div className="col-span-2 text-center md:text-left">
-                  {/* Profile Image */}
-                  <img
-                    src={currentTestimonial.image || "/user.jpg"}
-                    alt={currentTestimonial.name}
-                    className="w-32 h-32 object-cover rounded mx-auto md:mx-0 mb-6"
-                    loading="lazy"
+              {/* Portrait + attribution */}
+              <div className="lg:col-span-4">
+                <div className="relative w-40 max-w-xs sm:w-48 lg:w-full">
+                  {/* Offset hairline frame — engineered, not decorative */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute -bottom-3 -right-3 hidden h-full w-full border border-neon-deep/40 lg:block"
                   />
-
-                  {/* Name and Position */}
-                  <div>
-                    <h4 className="text-white text-xl font-bold mb-2">
-                      {currentTestimonial.name}
-                    </h4>
-                    <p className="text-neon font-medium">
-                      {currentTestimonial.position}
-                    </p>
+                  <div className="relative aspect-[4/5] overflow-hidden bg-navy-900">
+                    <img
+                      src={current.image || "/user.jpg"}
+                      alt={current.name}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
 
-                {/* Right Side - Quote and Testimonial */}
-                <div className="col-span-6">
-                  {/* Quote Icon */}
-                  <Quote className="w-12 h-12 text-neon fill-current mb-6" />
-
-                  {/* Testimonial Text */}
-                  <p className="text-white text-lg leading-relaxed">
-                    {currentTestimonial.testimonial}
+                <div className="mt-6">
+                  <p className="text-lg font-semibold text-ink-900">
+                    {current.name}
                   </p>
-
-                  {/* Pagination Dots - Below testimonial text */}
-                  <div className="flex gap-2 mt-8">
-                    {testimonials.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handleDotClick(index)}
-                        className={`w-3 h-3 transition-colors duration-300 ${
-                          index === currentIndex
-                            ? "bg-neon"
-                            : "bg-gray-600 hover:bg-gray-500"
-                        }`}
-                      />
-                    ))}
-                  </div>
+                  <p className="mt-1 text-sm text-ink-500">
+                    {current.position}
+                  </p>
                 </div>
               </div>
-            </div>
-          </motion.div>
-        </div>
+
+              {/* Quote */}
+              <div className="lg:col-span-8">
+                <span
+                  aria-hidden="true"
+                  className="block select-none font-display text-7xl leading-[0.55] text-neon-deep/30 md:text-8xl"
+                >
+                  &ldquo;
+                </span>
+
+                <blockquote className="mt-6 text-xl font-medium leading-[1.45] text-ink-900 md:text-2xl lg:text-[1.75rem] lg:leading-[1.4]">
+                  {current.testimonial}
+                </blockquote>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </Reveal>
+
+        {hasMultiple && (
+          <div className="mt-12 flex items-center gap-4 lg:mt-14">
+            {testimonials.map((testimonial, index) => (
+              <button
+                key={testimonial.id}
+                type="button"
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`Show testimonial from ${testimonial.name}`}
+                aria-current={index === currentIndex}
+                className="group py-3"
+              >
+                <span
+                  className={`block h-[2px] w-10 transition-colors duration-300 ${
+                    index === currentIndex
+                      ? "bg-neon-deep"
+                      : "bg-ink-300 group-hover:bg-ink-500"
+                  }`}
+                />
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

@@ -7,67 +7,30 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { motion, useInView } from "framer-motion";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-interface HerdCard {
+import Reveal from "@/components/ui/reveal";
+import SectionHeading from "@/components/ui/section-heading";
+
+interface HerdSlide {
   id: number;
   image: string;
+  alt: string;
 }
 
-const features: HerdCard[] = [
-  {
-    id: 1,
-    image: "/herd.JPG",
-  },
-  {
-    id: 22,
-    image: "/herd2.JPEG",
-  },
-  {
-    id: 13,
-    image: "/herd.JPG",
-  },
-  {
-    id: 42,
-    image: "/herd2.JPEG",
-  },
-  {
-    id: 16,
-    image: "/herd.JPG",
-  },
-  {
-    id: 26,
-    image: "/herd2.JPEG",
-  },
+const RIDGE_ALT =
+  "A bison herd silhouetted along a ridgeline at sunset on open range.";
+const GRAZING_ALT =
+  "A bison herd with a young calf grazing across open prairie grassland.";
+
+const slides: HerdSlide[] = [
+  { id: 1, image: "/herd.JPG", alt: RIDGE_ALT },
+  { id: 2, image: "/herd2.JPEG", alt: GRAZING_ALT },
+  { id: 3, image: "/herd.JPG", alt: RIDGE_ALT },
+  { id: 4, image: "/herd2.JPEG", alt: GRAZING_ALT },
+  { id: 5, image: "/herd.JPG", alt: RIDGE_ALT },
+  { id: 6, image: "/herd2.JPEG", alt: GRAZING_ALT },
 ];
-
-function FeatureCardMotion({
-  feature,
-  index,
-}: Readonly<{
-  feature: HerdCard;
-  index: number;
-}>) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const cardInView = useInView(cardRef, { once: true, margin: "-100px" });
-  return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={cardInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: 0.1 * index, ease: "easeOut" }}
-      className={`relative h-full bg-bluish-white/10 `}
-    >
-      <img
-        src={feature.image}
-        alt={feature.id.toString()}
-        className="w-full h-80 object-cover"
-        loading="lazy"
-      />
-    </motion.div>
-  );
-}
 
 export default function HerdSlideshow() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -101,72 +64,81 @@ export default function HerdSlideshow() {
   }, [api, onSelect]);
 
   return (
-    <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-gray-50">
-      <div className="max-w-6xl mx-auto container">
-        {/* Section header */}
-        <div className="mb-16 text-center">
-          <div className="inline-flex items-center justify-center mb-6">
-            <div className="w-12 h-0.5 bg-neon mr-4" />
-            <span className="text-neon text-sm font-medium uppercase tracking-wider">
-              In The Field
-            </span>
-            <div className="w-12 h-0.5 bg-neon ml-4" />
-          </div>
+    <section className="section-y section-x bg-ink-50">
+      <div className="mx-auto w-full max-w-6xl">
+        <SectionHeading
+          eyebrow="In The Field"
+          title="Built For Open Range Conditions"
+          lede="Bison, cattle, and wildlife move across terrain that fences and headcounts can't keep up with. Our herd monitoring platform is designed for exactly this — wide, unpredictable, always-on ground."
+          tone="light"
+          align="left"
+        />
 
-          <h2 className="mb-6 text-2xl font-bold leading-tight text-foreground md:text-3xl lg:text-4xl">
-            Built For <span className="text-neon">Open Range</span> Conditions
-          </h2>
+        <Reveal delay={0.1} className="mt-14 lg:mt-20">
+          <Carousel
+            setApi={setApi}
+            plugins={[
+              Autoplay({
+                delay: 4500,
+                stopOnInteraction: false,
+                stopOnMouseEnter: true,
+              }),
+            ]}
+            opts={{
+              align: "start",
+              loop: true,
+              skipSnaps: false,
+              slidesToScroll: 1,
+              containScroll: "trimSnaps",
+            }}
+            className="w-full"
+            aria-label="Photographs of herds on open range"
+          >
+            <CarouselContent className="-ml-4 lg:-ml-6">
+              {slides.map((slide) => (
+                <CarouselItem
+                  key={slide.id}
+                  className="pl-4 md:basis-1/2 lg:basis-1/3 lg:pl-6"
+                >
+                  <figure className="group relative overflow-hidden border border-ink-100 bg-navy-900">
+                    <img
+                      src={slide.image}
+                      alt={slide.alt}
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                      loading="lazy"
+                    />
+                    <div
+                      className="pointer-events-none absolute inset-0 bg-navy-950/15 transition-colors duration-500 group-hover:bg-navy-950/0"
+                      aria-hidden="true"
+                    />
+                  </figure>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
 
-          <p className="mx-auto max-w-3xl text-md leading-relaxed text-gray-600 lg:text-lg">
-            Bison, cattle, and wildlife move across terrain that fences and
-            headcounts can&apos;t keep up with. Our herd monitoring platform is
-            designed for exactly this — wide, unpredictable, always-on ground.
-          </p>
-        </div>
-
-        <Carousel
-          setApi={setApi}
-          plugins={[
-            Autoplay({
-              delay: 3000,
-              stopOnInteraction: false,
-            }),
-          ]}
-          opts={{
-            align: "start",
-            loop: true,
-            skipSnaps: false,
-            slidesToScroll: 1,
-            containScroll: "trimSnaps",
-          }}
-          className="w-full"
-        >
-          <CarouselContent className="-ml-4">
-            {features.map((feature, index) => (
-              <CarouselItem
-                key={index}
-                className="pl-4 md:basis-1/2 lg:basis-1/3"
+          {/* Position markers — hairline bars rather than dots, to match the brand */}
+          <div className="mt-10 flex justify-center gap-2 lg:justify-start">
+            {slides.map((slide, idx) => (
+              <button
+                key={slide.id}
+                type="button"
+                onClick={() => scrollTo(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                aria-current={selectedIndex === idx}
+                className="group/marker py-3"
               >
-                <FeatureCardMotion feature={feature} index={index} />
-              </CarouselItem>
+                <span
+                  className={`block h-0.5 w-10 transition-colors duration-300 ${
+                    selectedIndex === idx
+                      ? "bg-neon"
+                      : "bg-ink-100 group-hover/marker:bg-ink-300"
+                  }`}
+                />
+              </button>
             ))}
-          </CarouselContent>
-        </Carousel>
-        {/* Dot indicators */}
-        <div className="flex justify-center gap-2 mt-10">
-          {features.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => scrollTo(idx)}
-              className={`h-2 w-2 rounded-none transition-all duration-300 focus:outline-none ${
-                selectedIndex === idx
-                  ? "bg-neon shadow-lg scale-110"
-                  : "bg-gray-300"
-              }`}
-              aria-label={`Go to slide ${idx + 1}`}
-            />
-          ))}
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

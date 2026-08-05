@@ -22,15 +22,18 @@ const TrafficManagementControl = () => {
           },
         ]}
       />
-      <VideioViewer
-        title="How Our TMC System Works"
-        highlightedWords={["TMC System"]}
-        description="Watch a comprehensive demonstration of our Advanced Infrastructure Asset Management System in action. See how our platform monitors, analyzes, and optimizes transportation infrastructure using big data analytics and predictive maintenance algorithms."
-        videoUrl="https://ik.imagekit.io/5kwcgtj3iv/background.mp4?updatedAt=1751943423718"
-        posterUrl="/tmc.png"
-        subtitles="/subtitles/adams.vtt"
-        badgeText="FEATURED DEMO"
-      />
+      {/* Light band between the navy hero and the navy timeline below */}
+      <div className="bg-ink-50">
+        <VideioViewer
+          title="How Our TMC System Works"
+          highlightedWords={["TMC System"]}
+          description="Watch a comprehensive demonstration of our Advanced Infrastructure Asset Management System in action. See how our platform monitors, analyzes, and optimizes transportation infrastructure using big data analytics and predictive maintenance algorithms."
+          videoUrl="https://ik.imagekit.io/5kwcgtj3iv/background.mp4?updatedAt=1751943423718"
+          posterUrl="/tmc.png"
+          subtitles="/subtitles/adams.vtt"
+          badgeText="FEATURED DEMO"
+        />
+      </div>
       <HowTMCWorks />
       <Cta
         title="Ready to revolutionize your traffic management?"

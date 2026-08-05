@@ -20,10 +20,15 @@ const FarmManagementSystem = () => {
             buttonHref: "/#contact",
             target: "_self",
             backgroundImage: "/fms.webp",
-            highlightWords: ["precision", "intelligent", "agriculture"],
+            // One accent word only — highlighting three of five flattens the
+            // hierarchy the neon is supposed to create.
+            highlightWords: ["intelligent"],
           },
         ]}
       />
+
+      {/* Vertical flow alternates tone so the page reads in movements:
+          hero (navy) → solutions (white) → impact (deep navy) → field (ink-50) */}
       <Solutions />
       <Impact />
       <HerdSlideshow />

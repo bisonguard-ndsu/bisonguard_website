@@ -1,22 +1,15 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsent from "@/components/cookie-consent";
 
-// Display face — engineered, slightly geometric; carries headings and the
-// numeric/label details. Body face — Inter, for legibility at small sizes.
-const display = Space_Grotesk({
-  variable: "--font-grotesk",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700"],
-});
-
-const body = Inter({
-  variable: "--font-inter",
+// One family across the site. Headings lean on weight and tight optical
+// tracking for hierarchy rather than a second face.
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
 });
@@ -106,7 +99,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${display.variable} ${body.variable} antialiased`}
+        className={`${jakarta.variable} antialiased`}
       >
         <script
           type="application/ld+json"

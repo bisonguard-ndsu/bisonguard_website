@@ -2,10 +2,17 @@
 
 import type React from "react";
 
-import { useRef } from "react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
-import { ArrowRight, Radar, ScanSearch, Sprout, LucideProps } from "lucide-react";
+import {
+  ArrowRight,
+  Radar,
+  ScanSearch,
+  Sprout,
+  type LucideProps,
+} from "lucide-react";
+
+import Reveal from "@/components/ui/reveal";
+import SectionHeading from "@/components/ui/section-heading";
 
 interface Solution {
   icon: React.ForwardRefExoticComponent<
@@ -14,6 +21,8 @@ interface Solution {
   title: string;
   description: string;
   image: string;
+  /** Describes the photograph itself — the title is already read out as the heading. */
+  imageAlt: string;
   href: string;
   linkText: string;
 }
@@ -25,6 +34,8 @@ const solutions: Solution[] = [
     description:
       "AI-powered hexapod robot that identifies and removes weeds without chemicals. Perfect for organic farms and small crop farms. Reduces herbicide use by 100% while cutting labor costs by 70%.",
     image: "/weeding-robot.webp",
+    imageAlt:
+      "Robotic arms mounted on wheeled rovers working between rows of crops on a field.",
     href: "/#contact",
     linkText: "Talk To Us",
   },
@@ -34,6 +45,8 @@ const solutions: Solution[] = [
     description:
       "Aerial systems that scan entire fields for disease, pest damage, and growth patterns. Delivers actionable solutions to your smartphone daily.",
     image: "/fms.webp",
+    imageAlt:
+      "A survey drone flying above rows of vines at sunset, scanning the field below.",
     href: "/#contact",
     linkText: "Talk To Us",
   },
@@ -43,6 +56,8 @@ const solutions: Solution[] = [
     description:
       "AI-driven monitoring platform that watches over your herd 24/7 — tracking location, detecting health issues, identifying predators, and alerting you the moment something's wrong. Purpose-built for bison, cattle, and wildlife on open ranges.",
     image: "/herd2.JPEG",
+    imageAlt:
+      "A bison herd with a young calf grazing across open prairie grassland.",
     href: "/#contact",
     linkText: "Talk To Us",
   },
@@ -52,97 +67,97 @@ function SolutionCard({
   item,
   index,
 }: Readonly<{ item: Solution; index: number }>) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const cardInView = useInView(cardRef, { once: true, margin: "-100px" });
+  const Icon = item.icon;
 
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={cardInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
-      className="group relative flex h-full flex-col overflow-hidden rounded-none border border-gray-200 bg-white transition-all duration-500 hover:-translate-y-2 hover:border-neon hover:shadow-2xl"
-    >
-      {/* Image */}
-      <div className="relative h-56 overflow-hidden">
-        <div className="absolute inset-0 z-10 bg-dark-blue/10 transition-colors duration-500 group-hover:bg-dark-blue/0" />
+    <article className="group flex h-full flex-col border border-ink-100 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-neon hover:shadow-[0_20px_44px_-28px_rgba(11,36,58,0.5)]">
+      {/* Image — one ratio across all three cards so the row reads as a set */}
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-navy-900">
         <img
           src={item.image}
-          alt={item.title}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          alt={item.imageAlt}
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           loading="lazy"
         />
-        {/* Icon badge sitting on the image edge */}
-        <div className="absolute bottom-0 left-0 z-20 flex h-14 w-14 items-center justify-center bg-neon text-dark-blue transition-colors duration-300 group-hover:bg-dark-blue group-hover:text-neon">
-          <item.icon className="h-7 w-7" />
-        </div>
+        {/* Anchors the icon plate and keeps the photo from fighting the type below */}
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-navy-950/40 via-transparent to-transparent"
+          aria-hidden="true"
+        />
+        <span
+          className="absolute bottom-0 left-0 flex h-12 w-12 items-center justify-center bg-neon text-navy-900 transition-colors duration-300 group-hover:bg-navy-900 group-hover:text-neon"
+          aria-hidden="true"
+        >
+          <Icon className="h-5 w-5" strokeWidth={1.75} />
+        </span>
       </div>
 
       {/* Content */}
-      <div className="flex flex-grow flex-col p-8">
-        <h3 className="mb-4 text-xl font-bold leading-snug text-dark-blue transition-colors duration-300 group-hover:text-neon">
+      <div className="flex flex-1 flex-col p-6 md:p-7 lg:p-8">
+        <div className="mb-5 flex items-center gap-4" aria-hidden="true">
+          <span className="eyebrow text-ink-300">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span className="h-px flex-1 bg-ink-100 transition-colors duration-300 group-hover:bg-neon/60" />
+        </div>
+
+        <h3 className="text-xl font-bold leading-snug text-ink-900">
           {item.title}
         </h3>
 
-        <div className="mb-5 h-0.5 w-12 bg-neon transition-all duration-500 group-hover:w-20" />
-
-        <p className="mb-8 flex-grow text-sm leading-relaxed text-gray-600">
+        <p className="mt-4 flex-1 text-base leading-relaxed text-ink-500">
           {item.description}
         </p>
 
         <Link
           href={item.href}
-          className="group/link mt-auto inline-flex items-center gap-2 self-start border-b-2 border-transparent pb-1 text-sm font-semibold uppercase tracking-wider text-dark-blue transition-all duration-300 hover:border-neon hover:text-neon"
+          className="group/link mt-8 inline-flex w-fit items-center gap-2 border-b border-ink-100 pb-2 text-sm font-semibold uppercase tracking-[0.14em] text-ink-900 transition-colors duration-300 hover:border-neon"
         >
           {item.linkText}
-          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+          <ArrowRight
+            className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1"
+            aria-hidden="true"
+          />
         </Link>
       </div>
-    </motion.div>
+    </article>
   );
 }
 
 export default function Solutions() {
-  const headerRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
-
   return (
-    <section
-      id="solutions"
-      className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-white"
-    >
-      <div className="max-w-6xl mx-auto container">
-        {/* Section header */}
-        <motion.div
-          ref={headerRef}
-          initial={{ opacity: 0, y: 40 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="mb-16 text-center"
-        >
-          <div className="inline-flex items-center justify-center mb-6">
-            <div className="w-12 h-0.5 bg-neon mr-4" />
-            <span className="text-neon text-sm font-medium uppercase tracking-wider">
-              What We Build
-            </span>
-            <div className="w-12 h-0.5 bg-neon ml-4" />
-          </div>
+    <section id="solutions" className="section-y section-x bg-white">
+      <div className="mx-auto w-full max-w-6xl">
+        {/* Split header — title left, lede right, so the row below gets the width */}
+        <div className="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-12">
+          <SectionHeading
+            eyebrow="What We Build"
+            title="Our Smart Farming Solutions"
+            tone="light"
+            align="left"
+            className="lg:col-span-7"
+          />
 
-          <h2 className="mb-6 text-2xl font-bold leading-tight text-foreground md:text-3xl lg:text-4xl">
-            Our <span className="text-neon">Smart Farming</span> Solutions
-          </h2>
-
-          <p className="mx-auto max-w-3xl text-md leading-relaxed text-gray-600 lg:text-lg">
-            Three intelligent systems built for the realities of the field —
-            working the ground, watching from above, and standing guard over
-            your herd.
-          </p>
-        </motion.div>
+          <Reveal delay={0.16} className="lg:col-span-5">
+            <p className="text-base leading-relaxed text-ink-500 md:text-lg lg:border-l lg:border-ink-100 lg:pl-8">
+              Three intelligent systems built for the realities of the field —
+              working the ground, watching from above, and standing guard over
+              your herd.
+            </p>
+          </Reveal>
+        </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-20 lg:grid-cols-3 lg:gap-8">
           {solutions.map((item, index) => (
-            <SolutionCard key={item.title} item={item} index={index} />
+            <Reveal
+              key={item.title}
+              delay={index * 0.1}
+              y={24}
+              className="h-full"
+            >
+              <SolutionCard item={item} index={index} />
+            </Reveal>
           ))}
         </div>
       </div>

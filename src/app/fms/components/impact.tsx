@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import Reveal from "@/components/ui/reveal";
+import SectionHeading from "@/components/ui/section-heading";
 
 const stats = [
   {
@@ -22,73 +22,49 @@ const stats = [
 ];
 
 export default function Impact() {
-  const containerRef = useRef(null);
-  const containerInView = useInView(containerRef, {
-    once: true,
-    margin: "-100px",
-  });
-
   return (
-    <section className="relative overflow-hidden bg-dark-blue py-20 px-4 sm:px-6 md:px-8 lg:px-16">
-      {/* Background pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 25% 25%, #27ea9c 2px, transparent 2px)`,
-            backgroundSize: "60px 60px",
-          }}
+    <section className="grain section-y section-x relative overflow-hidden bg-navy-950">
+      {/* Backdrop: hairline grid + a single bloom behind the heading */}
+      <div
+        className="grid-lines pointer-events-none absolute inset-0 opacity-70"
+        aria-hidden="true"
+      />
+      <div
+        className="bloom pointer-events-none absolute -top-56 -left-40 h-[34rem] w-[34rem] opacity-25"
+        aria-hidden="true"
+      />
+
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
+        <SectionHeading
+          eyebrow="The Impact"
+          title="Grow More With Less"
+          tone="dark"
+          align="left"
         />
-      </div>
 
-      <motion.div
-        ref={containerRef}
-        initial={{ opacity: 0, y: 40 }}
-        animate={containerInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative z-10 max-w-6xl mx-auto container"
-      >
-        <div className="mb-14 text-center">
-          <div className="inline-flex items-center justify-center mb-6">
-            <div className="w-12 h-0.5 bg-neon mr-4" />
-            <span className="text-neon text-sm font-medium uppercase tracking-wider">
-              The Impact
-            </span>
-            <div className="w-12 h-0.5 bg-neon ml-4" />
-          </div>
-
-          <h2 className="text-2xl font-bold leading-tight text-white md:text-3xl lg:text-4xl">
-            Grow More With <span className="text-neon">Less</span>
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 divide-y divide-white/10 border border-white/10 md:grid-cols-3 md:divide-x md:divide-y-0">
+        <div className="mt-14 grid grid-cols-1 border-y border-navy-600 md:mt-20 md:grid-cols-3">
           {stats.map((stat, index) => (
-            <motion.div
+            <Reveal
               key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              animate={containerInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.6,
-                delay: 0.15 * index,
-                ease: "easeOut",
-              }}
-              className="group px-8 py-12 text-center transition-colors duration-500 hover:bg-white/5"
+              delay={index * 0.1}
+              y={24}
+              className="border-b border-navy-600 py-10 last:border-b-0 md:border-b-0 md:border-r md:px-6 md:py-14 md:first:pl-0 md:last:border-r-0 md:last:pr-0 lg:px-10"
             >
-              <p className="text-5xl font-bold tracking-tight text-neon lg:text-6xl">
+              <p className="text-6xl font-bold leading-[0.9] tracking-[-0.04em] text-neon lg:text-7xl">
                 {stat.value}
               </p>
-              <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-white">
+
+              <p className="mt-6 text-sm font-semibold uppercase tracking-[0.16em] text-white">
                 {stat.label}
               </p>
-              <div className="mx-auto my-5 h-0.5 w-10 bg-neon/40 transition-all duration-500 group-hover:w-16 group-hover:bg-neon" />
-              <p className="text-sm leading-relaxed text-gray-300">
+
+              <p className="mt-4 max-w-xs text-sm leading-relaxed text-bluish-white/70 md:text-base">
                 {stat.detail}
               </p>
-            </motion.div>
+            </Reveal>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

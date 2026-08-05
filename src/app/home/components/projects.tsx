@@ -1,114 +1,105 @@
 "use client";
-import { useRef } from "react";
-import { Button } from "@/components/ui/button";
+
+import Reveal from "@/components/ui/reveal";
+import SectionHeading from "@/components/ui/section-heading";
 import { projects } from "@/lib/constants";
-import { Plus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { motion, useInView } from "framer-motion";
 
 function ProjectCard({
   project,
   index,
-}: {
+}: Readonly<{
   project: (typeof projects)[number];
   index: number;
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const cardInView = useInView(cardRef, { once: true, margin: "-100px" });
+}>) {
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={cardInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: 0.1 * index, ease: "easeOut" }}
-      className="bg-white border border-bluish-white/30 hover:shadow hover:scale-105 transition-all duration-300"
-    >
-      {/* Image */}
-      <div className="mb-6">
-        <img
-          src={project.image}
-          alt={`${project.title} - ${project.description.substring(0, 50)}...`}
-          className="w-full h-80 object-cover"
-          loading="lazy"
-        />
-      </div>
-      {/* Content */}
-      <div className="space-y-4 p-6">
-        {/* Icon and Title */}
-        <div className="flex items-center gap-3">
-          <h3 className="text-2xl font-bold text-foreground">
-            {project.title}
-          </h3>
-        </div>
-        {/* Description */}
-        <p className="text-sm lg:text-md text-gray-600 leading-relaxed">
-          {project.description}
-        </p>
-        {/* Button */}
-        <Link href={project.href}>
-          <Button
-            className={`text-dark-blue bg-neon capitalize px-6 py-3 text-xs font-semibold tracking-wider transition-all duration-300 rounded-none border border-bluish-white/30 hover:bg-neon cursor-pointer`}
-          >
-            READ MORE
-            <Plus className="w-2 h-2 ml-1" />
-          </Button>
+    <Reveal delay={0.08 * index} className="h-full">
+      <article className="group h-full border border-ink-100 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-neon hover:shadow-[0_28px_70px_-36px_rgba(11,36,57,0.5)]">
+        <Link
+          href={project.href}
+          className="flex h-full flex-col focus-visible:ring-offset-0"
+        >
+          {/* Image */}
+          <div className="relative aspect-[4/3] w-full overflow-hidden bg-navy-900">
+            <img
+              src={project.image}
+              alt={project.title}
+              className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+              loading="lazy"
+            />
+            {/* Scrim — unifies three very different photographs and keeps any
+                overlaid type legible */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 bg-gradient-to-t from-navy-950/65 via-navy-950/10 to-transparent"
+            />
+            <span
+              aria-hidden="true"
+              className="absolute bottom-0 left-0 h-[3px] w-0 bg-neon transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:w-full"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="flex flex-1 flex-col p-7 md:p-8">
+            <h3 className="text-xl font-bold leading-snug text-ink-900 md:text-[1.375rem]">
+              {project.title}
+            </h3>
+
+            <p className="mt-4 text-sm leading-relaxed text-ink-500 md:text-base">
+              {project.description}
+            </p>
+
+            <span className="mt-auto inline-flex items-center gap-2 pt-8 text-sm font-semibold text-ink-900">
+              <span className="relative">
+                Learn more
+                <span
+                  aria-hidden="true"
+                  className="absolute -bottom-1 left-0 h-px w-0 bg-neon-deep transition-all duration-300 group-hover:w-full"
+                />
+              </span>
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1"
+                aria-hidden="true"
+              />
+            </span>
+          </div>
         </Link>
-      </div>
-    </motion.div>
+      </article>
+    </Reveal>
   );
 }
 
 export default function Projects() {
-  const headerRef = useRef(null);
-  const descRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true, margin: "-100px" });
-  const descInView = useInView(descRef, { once: true, margin: "-100px" });
-
   return (
-    <section
-      id="projects"
-      className="py-20 px-4 sm:px-6 md:px-8 lg:px-16 bg-white"
-    >
-      <div className="max-w-6xl mx-auto container">
-        {/* Header */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-          {/* Left - Heading */}
-          <motion.div
-            ref={headerRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <h2 className="text-2xl md:text-3xl lg:text-4xl  font-bold text-foreground leading-tight">
-              Our <span className="text-neon">Smart</span> Solutions and
-              Services
-            </h2>
-          </motion.div>
+    <section id="projects" className="section-y section-x bg-white">
+      <div className="mx-auto w-full max-w-6xl">
+        {/* Header — title left, supporting copy right */}
+        <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-12 lg:gap-16">
+          <SectionHeading
+            className="lg:col-span-7"
+            eyebrow="What We Build"
+            title="Our Smart Solutions and Services"
+            tone="light"
+          />
 
-          {/* Right - Description */}
-          <motion.div
-            ref={descRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={descInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-            className="flex items-center justify-self-end-safe max-w-md"
-          >
-            <p className="text-gray-600 leading-relaxed text-sm lg:text-md">
+          <Reveal delay={0.2} className="lg:col-span-5">
+            <p className="text-base leading-relaxed text-ink-500 md:text-lg">
               We provide specialized infrastructure, mobility, and smart systems
               technology services based on{" "}
-              <span className="underline font-bold">
+              <span className="font-semibold text-ink-900 underline decoration-neon decoration-2 underline-offset-4">
                 our research expertise
               </span>{" "}
               in big data analytics, intelligent systems, and infrastructure
               management.
             </p>
-          </motion.div>
+          </Reveal>
         </div>
 
         {/* Service Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-8">
           {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
+            <ProjectCard key={project.href} project={project} index={index} />
           ))}
         </div>
       </div>

@@ -1,9 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import Reveal from "@/components/ui/reveal";
+import SectionHeading from "@/components/ui/section-heading";
 
 const insights = [
   {
@@ -43,14 +41,23 @@ const insights = [
 
 export default function Insights() {
   return (
-    <section
-      id="insights"
-      className="pt-10 pb-10 bg-gray-50 px-4 sm:px-6 md:px-8 lg:px-16"
-    >
-      <div className="max-w-6xl mx-auto container">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section id="insights" className="section-y section-x bg-white">
+      <div className="container mx-auto max-w-6xl">
+        <SectionHeading
+          eyebrow="Insights"
+          title="What AdAMS measures"
+          tone="light"
+        />
+
+        <div className="mt-14 grid grid-cols-1 gap-6 md:mt-20 md:grid-cols-3 md:gap-8">
           {insights.map((insight, index) => (
-            <InsightCard key={index} insight={insight} index={index} />
+            <Reveal
+              key={insight.title}
+              delay={index * 0.1}
+              className="h-full"
+            >
+              <InsightCard insight={insight} />
+            </Reveal>
           ))}
         </div>
       </div>
@@ -58,56 +65,47 @@ export default function Insights() {
   );
 }
 
-function InsightCard({
-  insight,
-  index,
-}: {
-  insight: (typeof insights)[number];
-  index: number;
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const cardInView = useInView(cardRef, { once: true, margin: "-100px" });
-
+function InsightCard({ insight }: { insight: (typeof insights)[number] }) {
   return (
-    <motion.div
-      ref={cardRef}
-      initial={{ opacity: 0, y: 50 }}
-      animate={cardInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: index * 0.15, ease: "easeOut" }}
-      className="group bg-white border border-gray-100  hover:-translate-y-2 transition-all duration-300 flex flex-col h-full overflow-hidden rounded-lg"
-    >
-      {/* Image Container with Overlay Effect */}
-      <div className="relative h-56 overflow-hidden">
-        <div className="absolute inset-0 bg-dark-blue/0 group-hover:bg-dark-blue/10 transition-colors duration-300 z-10" />
+    <article className="group flex h-full flex-col border border-ink-100 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-neon-deep hover:shadow-[0_18px_40px_-24px_rgba(11,36,57,0.45)]">
+      {/* Product still — matted on navy so the crop reads as deliberate */}
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-navy-950">
         <img
-          src={insight.image || "/placeholder.svg?height=300&width=400"}
+          src={insight.image}
           alt={insight.title}
-          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
         />
-        {/* Decorative corner accent */}
-        <div
-          className="absolute top-0 right-0 w-16 h-16 bg-neon/90 clip-path-polygon transform translate-x-full -translate-y-full group-hover:translate-x-0 group-hover:translate-y-0 transition-transform duration-300 z-20"
-          style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%)" }}
+        <span
+          aria-hidden
+          className="absolute inset-0 bg-navy-950/15 transition-opacity duration-300 group-hover:opacity-0"
         />
       </div>
 
-      {/* Content */}
-      <div className="px-8 py-2 flex flex-col flex-grow">
-        <h4 className="text-lg font-bold text-dark-blue mb-1 group-hover:text-neon transition-colors duration-300">
+      <div className="flex flex-1 flex-col p-6 md:p-7">
+        <h3 className="text-lg font-bold text-ink-900 md:text-xl">
           {insight.title}
-        </h4>
+        </h3>
 
-        <p className="text-gray-600 mb-2 text-sm leading-relaxed flex-grow">
+        <p className="mt-3 text-sm leading-relaxed text-ink-500 md:text-base">
           {insight.description}
         </p>
 
-        <div className="mt-auto">
-          <Button className="w-full rounded-lg h-10 bg-white text-dark-blue border-2 border-dark-blue hover:bg-dark-blue hover:text-white font-bold tracking-wide transition-all duration-300 group-hover:shadow-md">
-            Learn More <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-        </div>
+        <ul className="mt-auto space-y-2.5 border-t border-ink-100 pt-6">
+          {insight.list.map((item) => (
+            <li
+              key={item}
+              className="flex items-start gap-3 text-sm leading-relaxed text-ink-700"
+            >
+              <span
+                aria-hidden
+                className="mt-[0.55em] h-1.5 w-1.5 shrink-0 bg-neon-deep"
+              />
+              <span className="break-words">{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
-    </motion.div>
+    </article>
   );
 }

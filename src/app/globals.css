@@ -45,9 +45,11 @@
   --color-dark-blue: var(--dark-blue);
   --color-bluish-white: var(--bluish-white);
 
-  /* Typography */
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-grotesk);
+  /* Typography — one family; hierarchy comes from weight and tracking.
+     `font-display` stays a distinct token so headings can be retargeted to a
+     second face later without touching every component. */
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-jakarta);
 
   /* Brand ramp — navy, for layering depth on dark sections */
   --color-navy-950: var(--navy-950);
