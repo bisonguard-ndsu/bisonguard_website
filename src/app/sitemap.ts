@@ -1,44 +1,14 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { site } from "@/content/site";
+
+/** Built pages only. Pending pages (src/content/pending.ts) join when they ship. */
+const built = ["", "/products/adams", "/contact", "/privacy", "/cookies"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://infinicitylabs.org'
-
-    return [
-        {
-            url: baseUrl,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/about`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/adams`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/tmc`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/fms`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/privacy`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-    ]
+  return built.map((path) => ({
+    url: `${site.url}${path}`,
+    lastModified: new Date(),
+    changeFrequency: path === "" ? "weekly" : "monthly",
+    priority: path === "" ? 1 : path.startsWith("/products") ? 0.9 : 0.4,
+  }));
 }

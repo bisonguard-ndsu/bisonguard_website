@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 8080
+    },
+    {
+      "name": "redesign-preview",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["next", "dev", "--turbopack", "-p", "8090"],
+      "port": 8090
     }
   ]
 }
