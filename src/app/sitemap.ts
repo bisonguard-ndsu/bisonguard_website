@@ -1,44 +1,29 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from "next";
+import { products } from "@/content/products";
+import { siteUrl } from "@/lib/metadata";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://infinicitylabs.org'
-
-    return [
-        {
-            url: baseUrl,
-            lastModified: new Date(),
-            changeFrequency: 'weekly',
-            priority: 1,
-        },
-        {
-            url: `${baseUrl}/about`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/adams`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/tmc`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/fms`,
-            lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
-        },
-        {
-            url: `${baseUrl}/privacy`,
-            lastModified: new Date(),
-            changeFrequency: 'yearly',
-            priority: 0.3,
-        },
-    ]
+  const paths = [
+    "",
+    "/products",
+    "/services",
+    "/research",
+    "/company",
+    "/team",
+    "/contact",
+    "/platforms",
+    "/privacy",
+  ];
+  return [
+    ...paths.map((path) => ({
+      url: siteUrl + path,
+      changeFrequency: "monthly" as const,
+      priority: path === "" ? 1 : 0.7,
+    })),
+    ...products.map((product) => ({
+      url: siteUrl + "/products/" + product.slug,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+  ];
 }

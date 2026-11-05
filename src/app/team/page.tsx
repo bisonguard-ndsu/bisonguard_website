@@ -1,28 +1,75 @@
-"use client";
-import Hero from "@/components/hero";
-import Members from "./components/members";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import { teamMembers } from "@/content/products";
+import { ContactBand } from "@/components/site/contact-band";
+import { pageMetadata } from "@/lib/metadata";
 
-const Team = () => {
+export const metadata = pageMetadata(
+  "Our people",
+  "Engineering, research, and collaboration at InfiniCity Labs.",
+  "/team",
+);
+
+export default function TeamPage() {
   return (
     <>
-      <Hero
-        items={[
-          {
-            badge: "Meet the Team",
-            title: "Dedicated Experts Driving Innovation",
-            description:
-              "Our team is composed of passionate professionals with diverse backgrounds in AI, engineering, and urban planning. Together, we are committed to delivering cutting-edge solutions and making a positive impact in smart city development.",
-            buttonText: "MEET OUR TEAM",
-            buttonHref: "/team#members",
-            target: "_self",
-            backgroundImage: "/team.jpg",
-            highlightWords: ["experts", "innovation"],
-          },
-        ]}
+      <section className="wrap page-intro">
+        <p className="eyebrow">Our people</p>
+        <h1>
+          Different perspectives.
+          <br />
+          <em>Shared possibilities.</em>
+        </h1>
+        <p>
+          Our work brings engineering, research, and software development into
+          the same conversation.
+        </p>
+      </section>
+      {teamMembers.length > 0 ? (
+        <section className="wrap team-grid" aria-label="Team members">
+          {teamMembers.map((member) => (
+            <article key={member.name}>
+              <div className="team-photo">
+                <Image
+                  src={member.image}
+                  alt={member.name}
+                  fill
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                />
+              </div>
+              <h2>{member.name}</h2>
+              <p className="team-role">{member.role}</p>
+              <p>{member.biography}</p>
+            </article>
+          ))}
+        </section>
+      ) : (
+        <section className="wrap team-empty">
+          <div>
+            <h2>
+              Meet the people
+              <br />
+              <em>behind the work.</em>
+            </h2>
+            <p>
+              Our team profiles are coming soon. In the meantime, we’d be glad
+              to connect you with the right person.
+            </p>
+          </div>
+          <div className="team-empty-aside">
+            <h3>Start a conversation.</h3>
+            <p>For collaborations, opportunities, and introductions.</p>
+            <a href="mailto:info@infinicitylabs.org" className="text-link">
+              Email the team
+              <ArrowUpRight size={17} aria-hidden="true" />
+            </a>
+          </div>
+        </section>
+      )}
+      <ContactBand
+        title="Bring your perspective."
+        description="If our work connects with something you care about, we’d like to hear from you."
       />
-      <Members />
     </>
   );
-};
-
-export default Team;
+}

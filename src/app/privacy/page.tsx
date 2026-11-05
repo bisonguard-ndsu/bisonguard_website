@@ -1,160 +1,110 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import { CookieSettingsButton } from "@/components/site/consent";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
-  title: "Privacy & Cookie Policy | InfiniCity Labs",
-  description:
-    "How InfiniCity Labs uses cookies and handles information collected through our website.",
-  alternates: {
-    canonical: "https://infinicitylabs.org/privacy",
-  },
-};
-
-const cookieCategories = [
-  {
-    name: "Necessary",
-    body: "Required for the site to function — remembering your cookie choice, keeping forms working, and maintaining basic security. These cannot be switched off.",
-  },
-  {
-    name: "Analytics",
-    body: "Helps us understand how visitors move through the site, which pages are useful, and where people get stuck, so we can improve it. Off unless you opt in.",
-  },
-  {
-    name: "Marketing",
-    body: "Used to measure the performance of our campaigns and how visitors arrive at the site. Off unless you opt in.",
-  },
-];
+export const metadata = pageMetadata(
+  "Privacy & cookies",
+  "How the InfiniCity Labs website handles inquiries, optional analytics, and cookie preferences.",
+  "/privacy",
+);
 
 export default function PrivacyPage() {
   return (
-    <main className="bg-white">
-      {/* Header */}
-      <section className="bg-dark-blue px-4 sm:px-6 md:px-8 lg:px-16 py-20">
-        <div className="max-w-6xl mx-auto container">
-          <div className="inline-flex items-center mb-6">
-            <div className="w-12 h-0.5 bg-neon mr-4" />
-            <span className="text-neon text-sm font-medium uppercase tracking-wider">
-              Legal
-            </span>
-          </div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight">
-            Privacy &amp; Cookie Policy
-          </h1>
-          <p className="mt-6 max-w-2xl text-gray-300 leading-relaxed">
-            This page explains what information the InfiniCity Labs website
-            collects, the cookies we set, and how you can change your choice at
-            any time.
-          </p>
-        </div>
+    <>
+      <section className="wrap page-intro">
+        <p className="eyebrow">Privacy & cookies</p>
+        <h1>
+          Your information.
+          <br />
+          <em>Your choices.</em>
+        </h1>
+        <p>
+          This page explains how information is handled when you use this
+          website. Updated November 5, 2026.
+        </p>
       </section>
-
-      {/* Body */}
-      <section className="px-4 sm:px-6 md:px-8 lg:px-16 py-20">
-        <div className="max-w-3xl mx-auto container space-y-14">
-          <div>
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              What we collect
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              We collect two kinds of information. The first is what you give us
-              directly — if you fill in the contact form, we receive the name,
-              email address, and message you submit, and we use them solely to
-              reply to your enquiry. The second is technical information your
-              browser sends automatically, such as your approximate location,
-              device type, and the pages you visit, which we use in aggregate to
-              understand how the site is performing.
+      <div className="wrap privacy-layout">
+        <nav className="privacy-contents" aria-label="Privacy sections">
+          <a href="#inquiries">When you contact us</a>
+          <a href="#analytics">Website analytics</a>
+          <a href="#preferences">Your preferences</a>
+          <a href="#third-parties">External services</a>
+          <a href="#privacy-contact">Questions and requests</a>
+        </nav>
+        <div className="privacy-content">
+          <section id="inquiries">
+            <h2>When you contact us</h2>
+            <p>
+              The contact form asks for your name, email address, inquiry type,
+              and message. You can also provide your organization. These details
+              are sent to info@infinicitylabs.org so our team can respond and
+              continue the conversation.
             </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              Cookies we use
-            </h2>
-            <p className="text-gray-600 leading-relaxed mb-8">
-              A cookie is a small file stored by your browser. We group the
-              cookies on this site into three categories:
+            <p>
+              Our email service processes the message as part of delivery.
+              Contact information is used to handle the inquiry and any
+              resulting project or relationship. Please avoid including
+              confidential project material in an initial inquiry.
             </p>
-            <div className="space-y-6">
-              {cookieCategories.map((category) => (
-                <div
-                  key={category.name}
-                  className="border-l-2 border-neon bg-bluish-white/10 p-6"
-                >
-                  <h3 className="text-lg font-semibold text-foreground mb-2">
-                    {category.name}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    {category.body}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              Your choice, and how to change it
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              When you first visit, a banner lets you accept all cookies, reject
-              everything optional, or choose category by category. Your decision
-              is stored in your browser&apos;s local storage under the key{" "}
-              <code className="bg-bluish-white/30 px-1.5 py-0.5 text-sm text-foreground">
-                icl-cookie-consent
-              </code>
-              . Nothing optional is loaded before you choose.
+          </section>
+          <section id="analytics">
+            <h2>Website analytics</h2>
+            <p>
+              With your permission, this website can use Google Analytics to
+              understand page visits and how visitors move through the site.
+              Analytics activates when the service is configured and you accept
+              it in your cookie preferences.
             </p>
-            <p className="text-gray-600 leading-relaxed mt-4">
-              To change your decision later, clear your browser&apos;s site data
-              for this domain — the banner will appear again on your next visit.
-              You can also block or delete cookies entirely in your browser
-              settings, though parts of the site may not behave as expected.
+            <p>
+              Analytics may process browser and device information, visited page
+              addresses, and technical connection information. We send page
+              paths without query strings and do not send contact-form content
+              to analytics. Advertising features are disabled in our
+              configuration.
             </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              Sharing and retention
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              We do not sell your personal information. Contact form submissions
-              are kept only as long as needed to handle your enquiry and any
-              follow-up. Where we rely on third-party providers to host the site
-              or deliver email, those providers process data on our behalf and
-              under our instructions.
+          </section>
+          <section id="preferences">
+            <h2>Your preferences</h2>
+            <p>
+              Your choice is saved in your browser so the website can remember
+              it. You can accept analytics, reject it, or change your choice at
+              any time. Rejecting optional analytics allows you to continue
+              using the website and contact form.
             </p>
-          </div>
-
-          <div>
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              Contact us
-            </h2>
-            <p className="text-gray-600 leading-relaxed">
-              If you have questions about this policy, or you would like us to
-              delete information you have sent us, get in touch at{" "}
-              <a
-                href="mailto:info@infinicitylabs.org"
-                className="text-foreground font-medium underline underline-offset-4 decoration-neon hover:text-neon transition-colors duration-200"
-              >
+            <p>
+              Withdrawing consent stops our analytics tracking and clears the
+              Google Analytics cookies accessible to this site. Information
+              already transmitted is handled by the analytics provider.
+            </p>
+            <CookieSettingsButton />
+          </section>
+          <section id="third-parties">
+            <h2>External services and links</h2>
+            <p>
+              Platform access, publication links, and social links take you to
+              separate websites. Those services have their own privacy
+              practices. The company website’s cookie preferences apply to this
+              website.
+            </p>
+            <p>
+              Our hosting provider may process technical request information to
+              deliver pages and operate the service. Fonts and website imagery
+              are served with the website.
+            </p>
+          </section>
+          <section id="privacy-contact">
+            <h2>Questions and requests</h2>
+            <p>
+              For questions about information you have shared, corrections, or
+              deletion requests, email{" "}
+              <a href="mailto:info@infinicitylabs.org">
                 info@infinicitylabs.org
-              </a>{" "}
-              or through our{" "}
-              <Link
-                href="/#contact"
-                className="text-foreground font-medium underline underline-offset-4 decoration-neon hover:text-neon transition-colors duration-200"
-              >
-                contact form
-              </Link>
-              .
+              </a>
+              . We will review the request in the context of the information and
+              any ongoing relationship.
             </p>
-          </div>
-
-          <p className="text-sm text-gray-500 border-t border-gray-200 pt-8">
-            This policy describes how the website currently operates. If our
-            practices change, we will update this page.
-          </p>
+          </section>
         </div>
-      </section>
-    </main>
+      </div>
+    </>
   );
 }

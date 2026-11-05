@@ -1,114 +1,96 @@
-import type { Metadata } from "next";
-import { Barlow } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import { Toaster } from "@/components/ui/sonner";
-import CookieConsent from "@/components/cookie-consent";
+import { Navbar } from "@/components/site/navbar";
+import { Footer } from "@/components/site/footer";
+import { ConsentManager } from "@/components/site/consent";
+import { siteUrl } from "@/lib/metadata";
 
-const ibmPlex = Barlow({
-  variable: "--font-ibm-plex",
-  subsets: ["latin"],
+const sans = localFont({
+  src: [
+    {
+      path: "./fonts/instrument-sans-regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/instrument-sans-medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/instrument-sans-semibold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
+  variable: "--font-instrument-sans",
   display: "swap",
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
+});
+
+const serif = localFont({
+  src: "./fonts/instrument-serif-italic.ttf",
+  variable: "--font-instrument-serif",
+  display: "swap",
+  weight: "400",
+  style: "italic",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://infinicitylabs.org"),
-  title: "InfiniCity Labs | AI-Powered Smart Infrastructure",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "InfiniCity Labs — Intelligence for a world in motion",
+    template: "%s | InfiniCity Labs",
+  },
   description:
-    "InfiniCity Labs pioneers smart infrastructure and mobility solutions through advanced big data analytics, digital twins, and intelligent systems for civil engineering",
-  keywords: [
-    "civil engineering",
-    "AI",
-    "smart cities",
-    "infrastructure management",
-    "mobility",
-    "digital twins",
-    "transportation technology",
-    "pavement management",
-    "intelligent systems",
-  ],
-  authors: [{ name: "InfiniCity Labs" }],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://infinicitylabs.org",
-    title: "InfiniCity Labs | Engineering the Future of Smart Cities",
-    description:
-      "Transforming urban infrastructure with AI-driven analytics, digital twins, and intelligent mobility systems.",
-    siteName: "InfiniCity Labs",
-    images: [
-      {
-        url: "/og.png",
-        width: 1200,
-        height: 630,
-        alt: "InfiniCity Labs — Pioneering Intelligent Futures",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "InfiniCity Labs | Engineering the Future of Smart Cities",
-    description:
-      "Transforming urban infrastructure with AI-driven analytics, digital twins, and intelligent mobility systems.",
-    images: ["/og.png"],
-    creator: "@InfiniCityLabs",
-  },
-  icons: {
-    icon: [{ url: "/icon.png", type: "image/png", sizes: "512x512" }],
-    shortcut: "/icon.png",
-    apple: [{ url: "/icon.png", sizes: "180x180", type: "image/png" }],
-  },
-  alternates: {
-    canonical: "https://infinicitylabs.org",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
+    "Applied AI, infrastructure intelligence, and mobility technology. Explore AdAMS, Turnflow, RoadLogger, and the work behind InfiniCity Labs.",
+  openGraph: { type: "website", locale: "en_US", siteName: "InfiniCity Labs" },
+  twitter: { card: "summary_large_image" },
 };
 
-const jsonLd = {
+export const viewport: Viewport = {
+  themeColor: "#12171b",
+  colorScheme: "dark",
+};
+
+const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "InfiniCity Labs",
-  url: "https://infinicitylabs.org",
-  logo: "https://infinicitylabs.org/icon.png",
+  url: siteUrl,
+  logo: siteUrl + "/icon.svg",
+  email: "info@infinicitylabs.org",
   description:
-    "Pioneering the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics and digital twins.",
-  contactPoint: {
-    "@type": "ContactPoint",
-    contactType: "customer service",
-    email: "info@infinicitylabs.org",
-  },
+    "Applied AI, infrastructure intelligence, and mobility technology.",
   sameAs: [
-    "https://twitter.com/InfiniCityLabs",
-    "https://github.com/InfiniCityLabs",
-    "https://www.instagram.com/infinicitylabs/",
     "https://www.linkedin.com/company/infinicity-labs/",
+    "https://github.com/InfiniCityLabs",
   ],
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${ibmPlex.variable} antialiased`}
-      >
+    <html
+      lang="en"
+      className={sans.variable + " " + serif.variable}
+      data-scroll-behavior="smooth"
+    >
+      <body>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }}
         />
         <Navbar />
-        {children}
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <Footer />
-        <Toaster />
-        <CookieConsent />
+        <ConsentManager />
       </body>
     </html>
   );
