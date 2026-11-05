@@ -1,162 +1,125 @@
 /**
- * Header navigation. Items with `panel` open a full-width mega panel;
- * items with only `href` are ordinary links.
+ * Header navigation (nav-mega). A word with `cols` opens a full-width panel on hover
+ * and goes to its page on click. Each link line stays under 30 characters.
  */
-export type NavLink = { label: string; href: string; description?: string; status?: string };
-export type NavGroup = { heading?: string; links: NavLink[] };
-export type NavFeature = {
-  eyebrow: string;
-  title: string;
-  href: string;
-  image?: { src: string; alt: string; width: number; height: number };
-};
-export type NavPanel = {
-  intro: string;
-  all: { label: string; href: string };
-  groups: NavGroup[];
-  feature: NavFeature;
-};
-export type NavItem = { id: string; label: string; href: string; panel?: NavPanel };
+export type NavLink = { label: string; href: string; line: string };
+export type NavCol = { heading: string; links: NavLink[] };
+export type NavCard = { href: string; img: string; alt: string; title: string; line: string };
+export type NavItem = { label: string; href: string; cols?: NavCol[]; card?: NavCard };
 
 export const nav: NavItem[] = [
   {
-    id: "products",
     label: "Products",
     href: "/products",
-    panel: {
-      intro: "Software that reads road and traffic video and writes the record.",
-      all: { label: "All products", href: "/products" },
-      groups: [
-        {
-          links: [
-            {
-              label: "AdAMS",
-              href: "/products/adams",
-              description: "Phone video → sign inventory, pavement condition",
-              status: "In service",
-            },
-            {
-              label: "Traffic Management System",
-              href: "/products/traffic-management",
-              description: "Intersection cameras → anomaly alerts, recordings",
-              status: "In service",
-            },
-            {
-              label: "Turnflow",
-              href: "/products/turnflow",
-              description: "Intersection video → turning-movement counts",
-              status: "In service",
-            },
-            {
-              label: "RoadLogger",
-              href: "/products/roadlogger",
-              description: "Phone in the field → inspections and cases",
-              status: "In service",
-            },
-          ],
-        },
-      ],
-      feature: {
-        eyebrow: "AdAMS · Fargo – West Fargo",
-        title: "118 traffic signs mapped from one survey",
-        href: "/work/fargo-west-fargo-survey",
-        image: {
-          src: "/media/asset-map-fargo.webp",
-          alt: "AdAMS asset map of Fargo and West Fargo with detected traffic signs and rated road segments.",
-          width: 1140,
-          height: 818,
-        },
+    cols: [
+      {
+        heading: "Roads and assets",
+        links: [
+          { label: "AdAMS", href: "/products/adams", line: "Signs and defects from video" },
+          { label: "RoadLogger", href: "/products/roadlogger", line: "Field cases tracked to repair" },
+        ],
       },
+      {
+        heading: "Traffic",
+        links: [
+          { label: "TMC", href: "/products/traffic-management", line: "Live cameras and recordings" },
+          { label: "Turnflow", href: "/products/turnflow", line: "Turning counts from video" },
+        ],
+      },
+    ],
+    card: {
+      href: "/products/adams",
+      img: "/media/site/adams-sign.webp",
+      alt: "An R7-1 no-parking sign record in AdAMS with its video frame and position",
+      title: "Sign records in AdAMS",
+      line: "Every sign with its frame and GPS",
     },
   },
   {
-    id: "solutions",
     label: "Solutions",
     href: "/solutions",
-    panel: {
-      intro: "Start from the problem. Each solution shows the method and a project where we've done it.",
-      all: { label: "All solutions", href: "/solutions" },
-      groups: [
-        {
-          heading: "Roads and assets",
-          links: [
-            { label: "Road asset inventory", href: "/solutions/road-asset-inventory", description: "Signs, markings, guardrails" },
-            { label: "Pavement condition", href: "/solutions/pavement-condition", description: "Roughness, distress, PCI" },
-            { label: "Field inspection", href: "/solutions/field-inspection", description: "Issues and cases from the field" },
-          ],
-        },
-        {
-          heading: "Traffic",
-          links: [
-            { label: "Traffic studies", href: "/solutions/traffic-studies", description: "Counts, headways, occupancy" },
-            { label: "Traffic operations", href: "/solutions/traffic-operations", description: "Live cameras and incidents" },
-          ],
-        },
-        {
-          heading: "Beyond the road",
-          links: [{ label: "Herd monitoring", href: "/solutions/herd-monitoring", description: "Livestock on open range" }],
-        },
-      ],
-      feature: {
-        eyebrow: "Pavement condition",
-        title: "Roughness for every segment, from a phone",
-        href: "/solutions/pavement-condition",
-        image: {
-          src: "/media/iri-map-fargo.webp",
-          alt: "AdAMS map with road segments coloured by International Roughness Index, one segment showing IRI 30.0 in/mi, Excellent.",
-          width: 1140,
-          height: 820,
-        },
+    cols: [
+      {
+        heading: "Roads and assets",
+        links: [
+          { label: "Road asset inventory", href: "/solutions/road-asset-inventory", line: "Signs, markings, guardrails" },
+          { label: "Pavement condition", href: "/solutions/pavement-condition", line: "Roughness and distress" },
+          { label: "Field inspection", href: "/solutions/field-inspection", line: "Cases from the field" },
+        ],
       },
+      {
+        heading: "Traffic",
+        links: [
+          { label: "Traffic studies", href: "/solutions/traffic-studies", line: "Counts, headways, occupancy" },
+          { label: "Traffic operations", href: "/solutions/traffic-operations", line: "Live cameras and incidents" },
+          { label: "Herd monitoring", href: "/solutions/herd-monitoring", line: "Livestock on open range" },
+        ],
+      },
+    ],
+    card: {
+      href: "/work/fargo-west-fargo-survey",
+      img: "/media/site/adams-iri.webp",
+      alt: "AdAMS map of Fargo and West Fargo with road segments coloured by roughness",
+      title: "Fargo and West Fargo",
+      line: "2,267 road segments rated",
     },
   },
+  { label: "Work", href: "/work" },
+  { label: "Research", href: "/research" },
   {
-    id: "research",
-    label: "Research",
-    href: "/research",
-    panel: {
-      intro: "The products rest on published work by our team in pavement analysis, traffic safety and multimodal AI.",
-      all: { label: "Research overview", href: "/research" },
-      groups: [
-        {
-          links: [
-            { label: "Publications", href: "/research/publications", description: "Papers by our team" },
-            { label: "Pavement analysis", href: "/research#pavement", description: "Distress, roughness, condition indices" },
-            { label: "Traffic safety", href: "/research#traffic-safety", description: "Anomalies, violations, driver behaviour" },
-            { label: "Multimodal AI", href: "/research#multimodal", description: "Vision-language models for roads" },
-          ],
-        },
-      ],
-      feature: {
-        eyebrow: "CVPR 2024 workshop",
-        title: "Parallel dense video captioning for traffic safety event analysis",
-        href: "/research/publications",
-      },
-    },
-  },
-  {
-    id: "company",
     label: "Company",
     href: "/company",
-    panel: {
-      intro: "Engineers and researchers who would rather see a model run on a live network than sit in a paper.",
-      all: { label: "About InfiniCity Labs", href: "/company" },
-      groups: [
-        {
-          links: [
-            { label: "About", href: "/company", description: "What we do and how we work" },
-            { label: "Team", href: "/company/team", description: "The people behind the products" },
-            { label: "Careers", href: "/company/careers", description: "Engineering and research roles" },
-            { label: "Contact", href: "/contact", description: "Write to us" },
-          ],
-        },
-      ],
-      feature: {
-        eyebrow: "Careers",
-        title: "We hire engineers who like their work on real roads",
-        href: "/company/careers",
+    cols: [
+      {
+        heading: "Company",
+        links: [
+          { label: "About", href: "/company", line: "What we build and why" },
+          { label: "Team", href: "/company/team", line: "The people behind it" },
+          { label: "Careers", href: "/company/careers", line: "Engineering and research" },
+        ],
       },
-    },
+      {
+        heading: "Get in touch",
+        links: [{ label: "Contact", href: "/contact", line: "Write to the team" }],
+      },
+    ],
   },
-  { id: "work", label: "Work", href: "/work" },
+];
+
+/** Footer link columns. */
+export const footerCols: { heading: string; links: { label: string; href: string }[] }[] = [
+  {
+    heading: "Products",
+    links: [
+      { label: "AdAMS", href: "/products/adams" },
+      { label: "TMC", href: "/products/traffic-management" },
+      { label: "Turnflow", href: "/products/turnflow" },
+      { label: "RoadLogger", href: "/products/roadlogger" },
+    ],
+  },
+  {
+    heading: "Solutions",
+    links: [
+      { label: "Asset inventory", href: "/solutions/road-asset-inventory" },
+      { label: "Pavement condition", href: "/solutions/pavement-condition" },
+      { label: "Traffic studies", href: "/solutions/traffic-studies" },
+      { label: "All solutions", href: "/solutions" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "About", href: "/company" },
+      { label: "Team", href: "/company/team" },
+      { label: "Careers", href: "/company/careers" },
+      { label: "Research", href: "/research" },
+    ],
+  },
+  {
+    heading: "Work",
+    links: [
+      { label: "Case studies", href: "/work" },
+      { label: "Contact", href: "/contact" },
+    ],
+  },
 ];

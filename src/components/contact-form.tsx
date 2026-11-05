@@ -1,10 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useId, useRef, useState } from "react";
 import { contactSchema } from "@/lib/contact";
 import { contactTopics, site } from "@/content/site";
-import { cn } from "@/lib/utils";
 
 type Field = "name" | "email" | "organization" | "topic" | "message";
 type Errors = Partial<Record<Field, string>>;
@@ -12,7 +10,7 @@ type State = { kind: "idle" } | { kind: "sending" } | { kind: "sent"; name: stri
 
 const order: Field[] = ["name", "email", "organization", "topic", "message"];
 
-export default function ContactForm({ defaultTopic, tone = "light" }: { defaultTopic?: (typeof contactTopics)[number]; tone?: "light" | "stone" }) {
+export default function ContactForm({ defaultTopic }: { defaultTopic?: (typeof contactTopics)[number] }) {
   const uid = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const [errors, setErrors] = useState<Errors>({});
@@ -77,24 +75,15 @@ export default function ContactForm({ defaultTopic, tone = "light" }: { defaultT
 
   if (state.kind === "sent") {
     return (
-      <div ref={statusRef} tabIndex={-1} role="status" className="border-l-2 border-guide py-2 pl-6 outline-none">
+      <div ref={statusRef} tabIndex={-1} role="status" className="form-done">
         <p className="t-h3">Thanks, {state.name}. Your message is with us.</p>
-        <p className="mt-3 max-w-[48ch] text-ink-2">
-          We reply from {site.email}, usually within two working days. If it&apos;s urgent, write to that address directly.
-        </p>
-        <button type="button" onClick={() => setState({ kind: "idle" })} className="btn btn-secondary mt-6 min-h-11">
+        <p>We reply by email, usually within two working days.</p>
+        <button type="button" onClick={() => setState({ kind: "idle" })} className="btn btn--secondary">
           Send another message
         </button>
       </div>
     );
   }
-
-  const input = cn(
-    "block w-full rounded-[2px] border border-ink-3/60 px-4 py-3 text-[1rem] text-ink placeholder:text-ink-3 transition-colors",
-    "hover:border-ink focus:border-guide focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-0 focus-visible:outline-guide",
-    "aria-[invalid=true]:border-danger",
-    tone === "stone" ? "bg-paper" : "bg-paper",
-  );
 
   const aria = (f: Field, hint = false) => ({
     id: fieldId(f),
@@ -109,74 +98,65 @@ export default function ContactForm({ defaultTopic, tone = "light" }: { defaultT
   const errorCount = Object.values(errors).filter(Boolean).length;
 
   return (
-    <form ref={formRef} onSubmit={onSubmit} noValidate className="space-y-6">
-      <div ref={statusRef} tabIndex={-1} aria-live="polite" className="outline-none">
+    <form ref={formRef} onSubmit={onSubmit} noValidate method="post" className="form">
+      <div ref={statusRef} tabIndex={-1} aria-live="polite" className="form-status">
         {state.kind === "failed" && (
-          <div role="alert" className="border-l-2 border-danger bg-paper py-3 pl-4">
-            <p className="font-semibold text-ink">{state.message}</p>
-            <p className="mt-1 text-sm text-ink-2">
-              Your message is still in the form. Try again, or email{" "}
-              <a href={`mailto:${site.email}`} className="font-semibold underline underline-offset-2">
-                {site.email}
-              </a>
-              .
-            </p>
-          </div>
+          <p role="alert" className="form-error">
+            {state.message} Your message is still in the form. Try again, or{" "}
+            <a className="link" href={`mailto:${site.email}`}>
+              email our team
+            </a>
+            .
+          </p>
         )}
-        {errorCount > 1 && state.kind !== "failed" && (
-          <p className="text-sm font-semibold text-danger">{errorCount} fields need attention.</p>
-        )}
+        {errorCount > 1 && state.kind !== "failed" && <p className="form-error">{errorCount} fields need attention.</p>}
       </div>
 
-      <div className="grid gap-6 sm:grid-cols-2">
-        <F id={fieldId("name")} error={errors.name} label="Name">
-          <input type="text" autoComplete="name" className={input} {...aria("name")} />
-        </F>
-        <F id={fieldId("email")} error={errors.email} label="Work email">
-          <input type="email" autoComplete="email" inputMode="email" className={input} {...aria("email")} />
-        </F>
-      </div>
-      <div className="grid gap-6 sm:grid-cols-2">
-        <F id={fieldId("organization")} error={errors.organization} label="Organisation" optional>
-          <input type="text" autoComplete="organization" className={input} {...aria("organization")} />
-        </F>
-        <F id={fieldId("topic")} error={errors.topic} label="What is it about?">
-          <select defaultValue={defaultTopic ?? ""} className={cn(input, "appearance-none bg-[length:12px] bg-[right_1rem_center] bg-no-repeat pr-10")} style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5' fill='none' stroke='%23111311' stroke-width='1.6'/%3E%3C/svg%3E\")" }} {...aria("topic")}>
-            <option value="" disabled>
-              Choose one
+      <F id={fieldId("name")} error={errors.name} label="Name">
+        <input type="text" autoComplete="name" {...aria("name")} />
+      </F>
+      <F id={fieldId("email")} error={errors.email} label="Work email">
+        <input type="email" autoComplete="email" inputMode="email" {...aria("email")} />
+      </F>
+      <F id={fieldId("organization")} error={errors.organization} label="Organisation (optional)">
+        <input type="text" autoComplete="organization" {...aria("organization")} />
+      </F>
+      <F id={fieldId("topic")} error={errors.topic} label="What is it about?">
+        <select defaultValue={defaultTopic ?? ""} {...aria("topic")}>
+          <option value="" disabled>
+            Choose one
+          </option>
+          {contactTopics.map((t) => (
+            <option key={t} value={t}>
+              {t}
             </option>
-            {contactTopics.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
-          </select>
-        </F>
-      </div>
-      <F id={fieldId("message")} error={errors.message} label="Message" hint="The network, the problem, and any timing that matters.">
-        <textarea rows={6} className={cn(input, "min-h-40 resize-y")} {...aria("message", true)} />
+          ))}
+        </select>
+      </F>
+      <F id={fieldId("message")} error={errors.message} label="Message" hint="The network, the problem and any timing that matters." full>
+        <textarea rows={5} {...aria("message", true)} />
       </F>
 
       {/* Honeypot */}
-      <div aria-hidden className="absolute -left-[10000px] h-px w-px overflow-hidden">
+      <div aria-hidden className="sr-only">
         <label>
           Leave this empty
           <input type="text" name="website" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
 
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <button type="submit" disabled={state.kind === "sending"} className="btn btn-primary w-full disabled:cursor-wait disabled:opacity-70 sm:w-auto">
-          {state.kind === "sending" ? "Sending…" : "Send message"}
+      <div className="btn-row">
+        <button type="submit" disabled={state.kind === "sending"} className="btn btn--primary">
+          {state.kind === "sending" ? "Sending" : "Send your message"}
         </button>
-        <p className="text-sm text-ink-2">
-          Goes to {site.email}. See our{" "}
-          <Link href="/privacy" className="underline underline-offset-2">
-            privacy policy
-          </Link>
-          .
-        </p>
       </div>
+      <p className="t-small muted">
+        A person on the team replies within two working days. See our{" "}
+        <a className="link" href="/privacy">
+          privacy policy
+        </a>
+        .
+      </p>
     </form>
   );
 }
@@ -186,33 +166,29 @@ function F({
   error,
   label,
   hint,
-  optional,
+  full,
   children,
 }: {
   id: string;
   error?: string;
   label: string;
   hint?: string;
-  optional?: boolean;
+  full?: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <label htmlFor={id} className="block text-[0.9375rem] font-semibold text-ink">
-        {label}
-        {optional && <span className="ml-2 font-normal text-ink-3">optional</span>}
-      </label>
+    <div className={full ? "field field--full" : "field"}>
+      <label htmlFor={id}>{label}</label>
       {hint && (
-        <p id={`${id}-hint`} className="mt-1 text-sm text-ink-2">
+        <span id={`${id}-hint`} className="t-small muted">
           {hint}
-        </p>
+        </span>
       )}
-      <div className="mt-2">{children}</div>
+      {children}
       {error && (
-        <p id={`${id}-err`} className="mt-2 flex gap-2 text-sm font-semibold text-danger">
-          <span aria-hidden>!</span>
+        <span id={`${id}-err`} className="form-error">
           {error}
-        </p>
+        </span>
       )}
     </div>
   );

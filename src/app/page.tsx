@@ -1,407 +1,494 @@
-import Image from "next/image";
-import Link from "next/link";
-import FrameRecord from "@/components/frame-record";
-import ContactForm from "@/components/contact-form";
-import { ArrowLink, Figure, PublicationList, SectionHead, Status } from "@/components/primitives";
-import { products, platformExtras } from "@/content/products";
-import { metrics, partners, rec74, testimonial } from "@/content/evidence";
-import { featuredPublicationTitles, pick } from "@/content/publications";
-import { site } from "@/content/site";
+/* eslint-disable @next/next/no-img-element */
+import { MainButton, Muted, Section, vars } from "@/components/kit";
+import { adamsNotify, assetWindow, roadloggerChecks, turnflowStat } from "@/components/home/fragments";
+import { metrics, testimonial } from "@/content/evidence";
 
-export default function Home() {
-  return (
-    <>
-      <Hero />
-      <ProofLine />
-      <ProductRegister />
-      <EvidenceBand />
-      <Method />
-      <Research />
-      <Routes />
-      <Testimonial />
-      <Contact />
-    </>
-  );
-}
+/*
+  type: software
+  deal: hero triptych, nav nav-mega, close close-type, footer footer-statement, rhythm dark-band,
+        buttons solid, mark the client's logo, type host, palette brand, ground sky,
+        grounds none, effect none, moments none (the client asked for no glows or gradients)
+*/
 
-/* 1 ─ Hero ─────────────────────────────────────────────────────────────── */
+const pos = (l: number, t: number, w: number, h?: number) => vars({ left: `${l}%`, top: `${t}%`, width: `${w}%`, ...(h ? { height: `${h}%` } : {}) });
 
 function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="pt-12 pb-16 sm:pt-16 lg:pt-24 lg:pb-24">
+    <section className="hero hero--triptych" aria-labelledby="hero-h">
       <div className="wrap">
-        <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-8">
-            <p className="label text-guide">Computer vision for road agencies and engineers</p>
-            <h1 id="hero-title" className="t-display mt-6 max-w-[16ch]">
-              Every sign, crack and turning movement, on the record.
-            </h1>
-          </div>
-          <div className="lg:col-span-4 lg:pb-2">
-            <p className="t-lead max-w-[42ch] text-ink-2">
-              We build software that reads road and traffic video — from a phone on the dashboard or a camera at the
-              intersection — and writes the asset inventories, pavement scores and traffic counts engineers act on.
+        <div className="hero-text grid hero__grid">
+          <div className="span-3">
+            <h1 id="hero-h">Video analytics for road agencies</h1>
+            <p className="hero__lead">
+              Drive your roads once with a phone and get every sign, marking and defect on a map. 4 products, in service in the United States and West Africa.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
-              <Link href="/contact" className="btn btn-primary">
-                Contact us
-              </Link>
-              <ArrowLink href="/products">See the products</ArrowLink>
-            </div>
           </div>
-        </div>
 
-        <FrameRecord
-          className="mt-12 lg:mt-16"
-          priority
-          image={{
-            src: "/media/rec74-frame.webp",
-            alt: "Dash-camera frame from an AdAMS survey drive past a retail car park; a stop sign at right is boxed by the detector.",
-            width: 1099,
-            height: 501,
-          }}
-          boxes={[{ x: 0.746, y: 0.4, w: 0.072, h: 0.152, label: "Stop · R1-1" }]}
-          meta={[`AdAMS · ${rec74.recording}`, `${rec74.frameTime} / ${rec74.duration}`, `${rec74.frames} frames`]}
-          recordTitle="Record written from this drive"
-          record={[
-            { k: "Recording", v: "74" },
-            { k: "Frames analysed", v: rec74.frames },
-            { k: "Duration", v: rec74.duration },
-            { k: "Signs detected", v: String(rec74.signs), emphasis: true },
-          ]}
-          list={rec74.classes.slice(0, 6)}
-          link={{ label: "How AdAMS works", href: "/products/adams" }}
-        />
-      </div>
-    </section>
-  );
-}
-
-/* 2 ─ Proof line ───────────────────────────────────────────────────────── */
-
-function ProofLine() {
-  return (
-    <section aria-label="Organisations we work with" className="border-y border-rule">
-      <div className="wrap flex flex-col gap-4 py-6 md:flex-row md:items-center md:gap-10">
-        <p className="label shrink-0 text-ink-3">Worked with</p>
-        <ul className="flex flex-wrap items-center gap-x-8 gap-y-3">
-          {partners.map((p) => (
-            <li key={p.name} title={p.full} className="flex items-baseline gap-2">
-              <span className="text-[1.0625rem] font-extrabold tracking-[-0.01em] text-ink">{p.name}</span>
-              {p.full !== p.name && <span className="hidden text-sm text-ink-3 xl:inline">{p.full}</span>}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/* 3 ─ Product register ─────────────────────────────────────────────────── */
-
-function ProductRegister() {
-  return (
-    <section aria-labelledby="products-title" className="section bg-stone">
-      <div className="wrap">
-        <SectionHead
-          id="products-title"
-          label="Products"
-          title="Four products. One kind of output: records you can maintain."
-          lead="Each one takes video or field data in and gives an engineer something to file, map or act on."
-        />
-
-        <div className="mt-12 lg:mt-16">
-          <div className="hidden grid-cols-12 gap-6 border-b border-ink pb-3 lg:grid" aria-hidden>
-            <span className="label col-span-4 text-ink-3">Product</span>
-            <span className="label col-span-3 text-ink-3">Takes in</span>
-            <span className="label col-span-4 text-ink-3">Gives back</span>
-          </div>
-          <ul>
-            {products.map((p, i) => (
-              <li key={p.slug} className="border-b border-rule">
-                <Link href={p.href} className="group grid gap-x-6 gap-y-3 py-7 transition-colors hover:bg-paper/60 lg:grid-cols-12 lg:items-baseline lg:py-8">
-                  <span className="flex items-baseline gap-4 lg:col-span-4">
-                    <span className="label w-6 shrink-0 text-ink-3" aria-hidden>
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span>
-                      <span className="block text-[1.5rem] leading-tight font-extrabold tracking-[-0.01em] group-hover:text-guide lg:text-[1.75rem]">
-                        {p.name}
-                      </span>
-                      <Status status={p.status} className="mt-2" />
-                    </span>
-                  </span>
-                  <span className="pl-10 text-ink-2 lg:col-span-3 lg:pl-0">
-                    <span className="label mr-2 text-ink-3 lg:hidden">In</span>
-                    {p.input}
-                  </span>
-                  <span className="pl-10 font-semibold text-ink lg:col-span-4 lg:pl-0">
-                    <span className="label mr-2 font-medium text-ink-3 lg:hidden">Out</span>
-                    {p.output}
-                  </span>
-                  <span className="arrow hidden text-right text-xl text-guide lg:col-span-1 lg:block" aria-hidden>
-                    →
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-6 max-w-[80ch] text-[0.9375rem] text-ink-2">
-            Also part of the platform:{" "}
-            {platformExtras.map((x, i) => (
-              <span key={x.name}>
-                <strong className="text-ink">{x.name}</strong> ({x.status === "in-development" ? "in development" : "our labelling platform"})
-                {i < platformExtras.length - 1 ? " and " : "."}
-              </span>
-            ))}
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* 4 ─ Evidence band ────────────────────────────────────────────────────── */
-
-function EvidenceBand() {
-  return (
-    <section aria-labelledby="evidence-title" className="on-ink section bg-ink text-white">
-      <div className="wrap">
-        <p className="label text-survey">Project · Fargo – West Fargo, North Dakota</p>
-        <h2 id="evidence-title" className="t-h2 mt-5 max-w-[22ch]">
-          One network, surveyed by phone. Every sign placed, every segment rated.
-        </h2>
-
-        <div className="mt-12 grid gap-px bg-rule-dark lg:mt-16 lg:grid-cols-12">
-          <div className="relative bg-ink lg:col-span-8">
-            <div className="relative aspect-[1140/820]">
-              <Image
-                src="/media/iri-map-fargo.webp"
-                alt="AdAMS map of Fargo and West Fargo. Road segments are coloured by roughness; traffic-sign icons mark each detected sign. A tooltip reads IRI 30.0 in/mi, condition Excellent."
-                fill
-                sizes="(min-width: 1280px) 820px, (min-width: 1024px) 66vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-          </div>
-          <dl className="grid bg-ink sm:grid-cols-3 lg:col-span-4 lg:grid-cols-1">
-            {[metrics.fargoSigns, metrics.fargoSegments, metrics.rec74Signs].map((m) => (
-              <div key={m.id} className="border-b border-rule-dark p-6 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0 lg:border-r-0 lg:border-b lg:p-8">
-                <dt className="sr-only">{m.label}</dt>
-                <dd>
-                  <Figure metric={m} className="block font-mono text-[2.75rem] leading-none font-medium tracking-[-0.03em] text-white tabular-nums lg:text-[3.5rem]" />
-                  <span className="mt-3 block text-[0.9375rem] leading-snug text-white/70">{m.label}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
-          <Link href="/work/fargo-west-fargo-survey" className="btn btn-secondary">
-            Read the project
-          </Link>
-          <p className="text-[0.9375rem] text-white/60">
-            Roughness bands: Excellent 0–95 · Good 95–121 · Fair 121–170 · Bad 170–220 · Poor 220+ in/mi
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* 5 ─ Method ───────────────────────────────────────────────────────────── */
-
-const steps = [
-  {
-    n: "01",
-    title: "Survey",
-    body: "Mount a phone on the dashboard and drive. No survey van, no special hardware.",
-    img: { src: "/media/rec74-frame.webp", w: 1099, h: 501, pos: "object-[70%_50%]", alt: "Road frame captured by a phone during a survey drive." },
-  },
-  {
-    n: "02",
-    title: "Detect",
-    body: "Models find and classify each sign and pavement feature, frame by frame.",
-    img: { src: "/media/rec74-summary.webp", w: 746, h: 1007, pos: "object-top", alt: "Sign detection summary for one recording: counts of No Parking, Do Not Enter, Stop and other sign types." },
-  },
-  {
-    n: "03",
-    title: "Map",
-    body: "Every detection is placed on the network once, with its coordinates and the frame it came from.",
-    img: { src: "/media/sign-card-r7-1.webp", w: 480, h: 374, pos: "object-center", alt: "Sign record R7-1, track 23, with its source frame and GPS position." },
-  },
-  {
-    n: "04",
-    title: "Act",
-    body: "Filter by condition, raise work orders and export reports for the maintenance plan.",
-    img: { src: "/media/map-layers.webp", w: 275, h: 510, pos: "object-top", alt: "AdAMS map layers panel: traffic signs 118, road conditions 2,267, work orders and other asset layers." },
-  },
-];
-
-function Method() {
-  return (
-    <section aria-labelledby="method-title" className="section">
-      <div className="wrap">
-        <SectionHead
-          id="method-title"
-          label="How it works"
-          title="From a drive to a work order."
-          lead="The same four steps run under AdAMS. Our traffic products follow the same idea with fixed cameras."
-        />
-        <ol className="mt-12 grid gap-px bg-rule sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-          {steps.map((s) => (
-            <li key={s.n} className="flex flex-col bg-paper">
-              <div className="relative aspect-[4/3] overflow-hidden bg-ink">
-                <Image src={s.img.src} alt={s.img.alt} fill sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" className={`object-cover ${s.img.pos}`} />
-              </div>
-              <div className="pt-6 pr-6 pb-2">
-                <p className="label text-guide">{s.n}</p>
-                <h3 className="t-h3 mt-2">{s.title}</h3>
-                <p className="mt-2 text-ink-2">{s.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
-/* 6 ─ Research ─────────────────────────────────────────────────────────── */
-
-function Research() {
-  return (
-    <section aria-labelledby="research-title" className="section bg-stone">
-      <div className="wrap">
-        <SectionHead
-          id="research-title"
-          label="Research"
-          title="Our methods are published."
-          lead="Our team publishes at CVPR workshops, the Transportation Research Board and in transportation journals. The products are built on that work."
-        />
-        <div className="mt-12 lg:mt-16">
-          <PublicationList items={pick(featuredPublicationTitles)} />
-          <ArrowLink href="/research/publications" className="mt-8">
-            All publications
-          </ArrowLink>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* 7 ─ Routes ───────────────────────────────────────────────────────────── */
-
-const routes = [
-  {
-    who: "Agencies and cities",
-    line: "Inventories, condition scores and live monitoring for the network you maintain.",
-    href: "/solutions",
-    cta: "Find your problem",
-  },
-  {
-    who: "Engineering firms",
-    line: "Counts and studies from video, ready to drop into a report.",
-    href: "/products/turnflow",
-    cta: "See Turnflow",
-  },
-  {
-    who: "Researchers and funders",
-    line: "Datasets, methods and published results to build on together.",
-    href: "/research",
-    cta: "Our research",
-  },
-  {
-    who: "Engineers and researchers",
-    line: "Work on models that run on real roads, not just benchmarks.",
-    href: "/company/careers",
-    cta: "Careers",
-  },
-];
-
-function Routes() {
-  return (
-    <section aria-labelledby="routes-title" className="section">
-      <div className="wrap">
-        <h2 id="routes-title" className="t-h2 max-w-[20ch]">
-          Where to go from here.
-        </h2>
-        <ul className="mt-12 grid border-t border-ink sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
-          {routes.map((r) => (
-            <li key={r.who} className="border-b border-rule sm:odd:border-r lg:border-r lg:border-b-0 lg:last:border-r-0">
-              <Link href={r.href} className="group flex h-full flex-col gap-3 py-8 sm:px-6 sm:first:pl-0 lg:min-h-64 lg:first:pl-0">
-                <span className="label text-ink-3">For</span>
-                <span className="t-h3">{r.who}</span>
-                <span className="text-ink-2">{r.line}</span>
-                <span className="mt-auto inline-flex items-center gap-2 pt-4 font-semibold text-guide">
-                  <span className="link">{r.cta}</span>
-                  <span className="arrow" aria-hidden>
-                    →
-                  </span>
+          <div
+            className="ly-collage span-6 start-4"
+            role="img"
+            aria-label="A highway sign detected in AdAMS, an intersection count in Turnflow and a pothole case in RoadLogger"
+          >
+            {/* AdAMS: the road frame, the sign it found, the phone that filmed it */}
+            <div className="ly-collage__set is-on">
+              <div className="ly-piece" style={pos(4, 6, 66, 50)}>
+                <img src="/media/site/highway-sign.webp" alt="" />
+                <span className="det" style={pos(34.6, 32.8, 32.5, 24)}>
+                  <span>Guide sign 0.98</span>
                 </span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
+                <span className="det det--r" style={pos(47.6, 60.8, 13.4, 8)}>
+                  <span>Lane signals 0.93</span>
+                </span>
+              </div>
+              <div className="ly-piece pc-card" style={pos(56, 20, 40)}>
+                <span className="lbl">AdAMS · Sign record</span>
+                <b>Guide sign D1-2</b>
+                <div className="ln">
+                  <span>Condition</span>
+                  <em className="ok">Good</em>
+                </div>
+                <div className="ln">
+                  <span>Retroreflectivity</span>
+                  <em>Pass</em>
+                </div>
+                <div className="ln">
+                  <span>Seen in</span>
+                  <em>9 frames</em>
+                </div>
+              </div>
+              <div className="ly-piece" style={pos(46, 62, 50, 34)}>
+                <img src="/media/site/phone-dashboard.webp" alt="" style={{ objectPosition: "50% 60%" }} />
+              </div>
+            </div>
 
-/* 8 ─ Testimonial ──────────────────────────────────────────────────────── */
+            {/* Turnflow: the intersection and its counts */}
+            <div className="ly-collage__set" aria-hidden="true">
+              <div className="ly-piece" style={pos(4, 6, 56, 58)}>
+                <img src="/media/hero/turnflow.webp" alt="" style={{ objectPosition: "50% 40%" }} />
+              </div>
+              <div className="ly-piece pc-card pc-counts" style={pos(44, 40, 52)}>
+                <span className="lbl">Turnflow · Main St and 13th Ave, 7:00 to 9:00</span>
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Approach</th>
+                      <th>Left</th>
+                      <th>Thru</th>
+                      <th>Right</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>Northbound</td><td>142</td><td>611</td><td>88</td></tr>
+                    <tr><td>Southbound</td><td>97</td><td>574</td><td>121</td></tr>
+                    <tr><td>Eastbound</td><td>66</td><td>203</td><td>49</td></tr>
+                    <tr><td>Westbound</td><td>58</td><td>131</td><td>44</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div className="ly-piece pc-card" style={pos(4, 70, 34)}>
+                <span className="lbl">Report</span>
+                <b>Turning movement count</b>
+                <span className="chip">Ready to submit</span>
+              </div>
+            </div>
 
-function Testimonial() {
-  return (
-    <section aria-label="What a client says" className="border-t border-rule">
-      <div className="wrap grid gap-10 py-16 md:grid-cols-12 md:items-center lg:py-24">
-        <div className="relative aspect-[4/5] w-40 overflow-hidden bg-stone md:col-span-3 md:w-full lg:col-span-3">
-          <Image
-            src={testimonial.image.src}
-            alt={`Portrait of ${testimonial.name}`}
-            fill
-            sizes="(min-width: 768px) 25vw, 160px"
-            className="object-cover object-[50%_30%]"
-          />
+            {/* RoadLogger: the defect, the case, the repair */}
+            <div className="ly-collage__set" aria-hidden="true">
+              <div className="ly-piece" style={pos(36, 6, 60, 46)}>
+                <img src="/media/hero/roadlogger.webp" alt="" />
+              </div>
+              <div className="ly-piece pc-card" style={pos(4, 22, 44)}>
+                <span className="lbl">RoadLogger · Case 2318</span>
+                <b>Pothole, 0.6 m wide</b>
+                <div className="ln">
+                  <span>Reported</span>
+                  <em>Mar 4, 7:42</em>
+                </div>
+                <div className="ln">
+                  <span>Crew</span>
+                  <em>District 3</em>
+                </div>
+                <div className="ln">
+                  <span>Status</span>
+                  <em className="ok">Repaired</em>
+                </div>
+              </div>
+              <div className="ly-piece" style={pos(36, 58, 60, 38)}>
+                <img src="/media/site/roller.webp" alt="" style={{ objectPosition: "50% 55%" }} />
+              </div>
+            </div>
+          </div>
+
+          <div className="span-3 start-10 hero__cta">
+            <MainButton />
+          </div>
         </div>
-        <figure className="md:col-span-9 lg:col-span-8 lg:col-start-5">
-          <blockquote className="text-[1.5rem] leading-[1.35] font-semibold tracking-[-0.01em] text-ink lg:text-[2rem]">
-            <span aria-hidden className="text-guide">“</span>
-            {testimonial.quote}
-            <span aria-hidden className="text-guide">”</span>
-          </blockquote>
-          <figcaption className="mt-6">
-            <span className="block font-bold">{testimonial.name}</span>
-            <span className="block text-ink-2">{testimonial.org}</span>
-          </figcaption>
-        </figure>
       </div>
     </section>
   );
 }
 
-/* 9 ─ Contact ──────────────────────────────────────────────────────────── */
-
-function Contact() {
+function Register() {
   return (
-    <section id="contact" aria-labelledby="contact-title" className="section bg-stone">
-      <div className="wrap grid gap-12 lg:grid-cols-12">
-        <div className="lg:col-span-5">
-          <p className="label text-ink-3">Contact</p>
-          <h2 id="contact-title" className="t-h2 mt-5 max-w-[14ch]">
-            Tell us about your network.
+    <Section id="register">
+      <div className="grid">
+        <h2 className="span-5" id="register-h">
+          Every road asset in one register
+        </h2>
+        <p className="span-6 start-7 muted t-lead">
+          AdAMS finds each sign, marking and light in your drive video, grades it and puts it on the map. Open any asset to see the frame it came from.{" "}
+          <a className="link" href="/products/adams">
+            See AdAMS
+          </a>
+        </p>
+      </div>
+      <div className="ui app fill" role="img" aria-label="The AdAMS sign register beside an open stop sign record with its video frame" data-ui-pause-host="">
+        <div className="app__pane app__pane--list" data-ui-loop="" dangerouslySetInnerHTML={{ __html: assetWindow }} />
+        <div className="app__pane app__pane--open">
+          <div className="asset">
+            <div className="asset__bar">
+              <b>Guide sign D1-2</b>
+              <span className="mono">I-190 N · track 23 · frame 1,482</span>
+              <span className="chip">Good</span>
+            </div>
+            <div className="asset__body">
+              <div className="asset__shot">
+                <img src="/media/site/highway-sign.webp" alt="" />
+                <span className="det" style={pos(34.6, 32.8, 32.5, 24)}>
+                  <span>Guide sign 0.98</span>
+                </span>
+              </div>
+              <dl className="asset__attrs">
+                <div>
+                  <dt>Type</dt>
+                  <dd>Guide, overhead</dd>
+                </div>
+                <div>
+                  <dt>Condition</dt>
+                  <dd>Good</dd>
+                </div>
+                <div>
+                  <dt>Retroreflectivity</dt>
+                  <dd>Pass</dd>
+                </div>
+                <div>
+                  <dt>Seen in</dt>
+                  <dd>9 frames</dd>
+                </div>
+                <div>
+                  <dt>Recording</dt>
+                  <dd>74, at 0:53</dd>
+                </div>
+                <div>
+                  <dt>Last inspected</dt>
+                  <dd>Mar 4</dd>
+                </div>
+                <div>
+                  <dt>Work order</dt>
+                  <dd>None open</dd>
+                </div>
+              </dl>
+            </div>
+            <table className="asset__log">
+              <thead>
+                <tr>
+                  <th>Inspection</th>
+                  <th>Source</th>
+                  <th>Condition</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Mar 4", "Recording 74", "Good"],
+                  ["Nov 18", "Recording 61", "Good"],
+                  ["Jul 9", "Recording 48", "Fair, faded legend"],
+                  ["Apr 2", "Recording 33", "Fair"],
+                  ["Oct 27", "Recording 20", "Good"],
+                  ["Jun 14", "Recording 9", "Good"],
+                ].map(([d, r, c]) => (
+                  <tr key={d}>
+                    <td>{d}</td>
+                    <td>{r}</td>
+                    <td>{c}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+function Products() {
+  return (
+    <Section id="products" h={2}>
+      <div className="group">
+        <div className="section-head">
+          <h2 id="products-h">
+            Four products, one road network. <Muted>From the survey to the repair.</Muted>
           </h2>
-          <p className="t-lead mt-6 max-w-[38ch] text-ink-2">
-            A survey you&apos;re planning, a corridor you need counted, a research question. A person reads every message.
-          </p>
-          <a href={`mailto:${site.email}`} className="link mt-8 inline-block text-[1.25rem] font-bold text-ink">
-            {site.email}
+        </div>
+        <div className="grid">
+          <a className="card card--row span-6" href="/products/adams">
+            <h3>Maps signs and pavement defects</h3>
+            <p>A phone on the dashboard films the drive. AdAMS places every sign and defect on the map with its frame.</p>
+            <div className="panel">
+              <div className="stage stage--fade-b">
+                <div
+                  className="at-rise fit"
+                  style={vars({ "--fit-max": "400px", "--ax": "32px", "--ay": "40px", "--ay-sm": "32px" })}
+                  data-ui-loop=""
+                  dangerouslySetInnerHTML={{ __html: adamsNotify }}
+                />
+              </div>
+            </div>
+          </a>
+          <a className="card card--row span-6" href="/products/traffic-management">
+            <h3>Watches every traffic camera live</h3>
+            <p>TMC puts your intersection and corridor cameras on one wall and records them on a schedule.</p>
+            <div className="panel">
+              <div className="stage stage--fade-b">
+                <div className="at-rise fit to-edge" style={vars({ "--fit-max": "460px", "--ax": "32px", "--ay": "40px", "--ay-sm": "32px" })}>
+                  <div className="ui cams">
+                    <div className="cam">
+                      <img src="/media/site/signal-traffic.webp" alt="" />
+                      <span className="cam__name">
+                        <i />
+                        Main St and 13th Ave
+                      </span>
+                    </div>
+                    <div className="cam">
+                      <img src="/media/site/night-intersection.webp" alt="" />
+                      <span className="cam__name">
+                        <i />
+                        University Dr
+                      </span>
+                    </div>
+                    <div className="cam">
+                      <img src="/media/site/interchange.webp" alt="" />
+                      <span className="cam__name">
+                        <i />
+                        I-94 interchange
+                      </span>
+                    </div>
+                    <div className="cam">
+                      <img src="/media/hero/turnflow.webp" alt="" />
+                      <span className="cam__name">
+                        <i />
+                        25th St S
+                      </span>
+                    </div>
+                    <div className="cam">
+                      <img src="/media/hero/company.webp" alt="" />
+                      <span className="cam__name">
+                        <i />
+                        Broadway N
+                      </span>
+                    </div>
+                    <div className="cam">
+                      <img src="/media/site/markings.webp" alt="" />
+                      <span className="cam__name">
+                        <i />
+                        45th St S
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </a>
         </div>
-        <div className="lg:col-span-7">
-          <ContactForm tone="stone" />
+      </div>
+      <div className="grid">
+        <a className="card card--row span-6" href="/products/turnflow">
+          <h3>Counts every turning movement</h3>
+          <p>Turnflow counts vehicles by approach and movement from intersection video, with the clip behind each count.</p>
+          <div className="panel">
+            <div className="stage stage--fade-b">
+              <div className="at-rise fit to-edge" style={vars({ "--fit-max": "440px", "--ax": "32px", "--ay": "40px", "--ay-sm": "32px" })} dangerouslySetInnerHTML={{ __html: turnflowStat }} />
+            </div>
+          </div>
+        </a>
+        <a className="card card--row span-6" href="/products/roadlogger">
+          <h3>Tracks each repair to the end</h3>
+          <p>RoadLogger runs inspections on the phones crews carry, even offline, and follows each case to a verified fix.</p>
+          <div className="panel">
+            <div className="stage stage--fade-b">
+              <div className="at-rise fit" style={vars({ "--fit-max": "340px", "--ax": "32px", "--ay": "40px", "--ay-sm": "32px" })} dangerouslySetInnerHTML={{ __html: roadloggerChecks }} />
+            </div>
+          </div>
+        </a>
+      </div>
+    </Section>
+  );
+}
+
+function Fargo() {
+  return (
+    <Section id="fargo" className="ground-inverse">
+      <div className="grid fill">
+        <div className="span-5 stack-5">
+          <h2 id="fargo-h">Fargo and West Fargo, surveyed from one car</h2>
+          <p className="t-lead">
+            A phone on the dashboard filmed both cities. AdAMS rated every road segment for roughness and placed each traffic sign with the frame it was seen in.
+          </p>
+          <p>
+            {metrics.fargoSigns.value} traffic signs geolocated
+            <br />
+            {metrics.fargoSegments.value} road segments rated for roughness
+            <br />
+            {metrics.rec74Frames.value} frames read in one 1 min 42 s recording
+          </p>
+          <p>
+            <a className="link" href="/work/fargo-west-fargo-survey">
+              Read the Fargo case study
+            </a>
+          </p>
+        </div>
+        <div className="frame frame--split frame--fill span-6 start-7">
+          <div className="stage stage--fade-br">
+            <div className="at-corner to-edge" style={vars({ "--ax": "56px", "--ay": "56px", "--w": "880px" })}>
+              <img className="shot" src="/media/site/adams-iri.webp" alt="AdAMS map of Fargo and West Fargo with each road segment coloured by roughness" />
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </Section>
+  );
+}
+
+const solutionTiles = [
+  { href: "/solutions/road-asset-inventory", img: "/media/site/guardrail.webp", alt: "A divided highway with a guardrail and overhead sign", title: "Road asset inventory", fact: "Signs, markings, guardrails" },
+  { href: "/solutions/pavement-condition", img: "/media/site/road-crew.webp", alt: "A paver laying fresh asphalt on a road", title: "Pavement condition", fact: "Roughness and distress" },
+  { href: "/solutions/traffic-studies", img: "/media/site/interchange.webp", alt: "An interchange from above with traffic on every ramp", title: "Traffic studies", fact: "Counts and headways" },
+];
+
+function Solutions() {
+  return (
+    <Section id="solutions">
+      <div className="section-head section-head--row">
+        <div>
+          <h2 id="solutions-h">
+            Work we take on. <Muted>Each starts from a problem agencies already have.</Muted>
+          </h2>
+        </div>
+        <a className="link" href="/solutions">
+          See all six solutions
+        </a>
+      </div>
+      <div className="grid tiles3">
+        {solutionTiles.map((t) => (
+          <a className="tile span-4" href={t.href} key={t.href}>
+            <div className="tile__media">
+              <img src={t.img} alt={t.alt} loading="lazy" />
+            </div>
+            <div className="tile__head">
+              <h3>{t.title}</h3>
+              <span className="tile__price">{t.fact}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+function Clients() {
+  return (
+    <Section id="clients" className="ground-surface">
+      <div className="section-head">
+        <h2 id="clients-h">Clients and partners</h2>
+      </div>
+      <div className="grid fill">
+        <figure className="quote span-8">
+          <blockquote>“{testimonial.quote}”</blockquote>
+          <div className="person">
+            <img src="/media/site/elijah.webp" alt={testimonial.name} width={40} height={40} />
+            <span>
+              <span className="person__name">{testimonial.name}</span>
+              <span className="person__role">{testimonial.org}</span>
+            </span>
+          </div>
+        </figure>
+        <div className="stat-aside span-3 start-10">
+          <p className="t-stat">4</p>
+          <p className="t-small muted">products in service with agencies and engineering firms</p>
+        </div>
+      </div>
+      <div className="partners">
+        <p className="t-small muted">Projects with</p>
+        <div className="logos">
+          <img src="/nddot.jpg" alt="North Dakota Department of Transportation" />
+          <img src="/ndsu.png" alt="North Dakota State University" />
+          <img src="/usnsf.jpg" alt="U.S. National Science Foundation" />
+          <img src="/sustein.png" alt="Sustein" />
+        </div>
+      </div>
+    </Section>
+  );
+}
+
+const faqs = [
+  {
+    q: "What do we need to get started?",
+    a: "For AdAMS and RoadLogger, a phone on the dashboard or in a crew's pocket. For TMC and Turnflow, access to the cameras or video you already have.",
+  },
+  {
+    q: "Do our crews need training?",
+    a: "Recording is one tap in the AdAMS app. RoadLogger works like any phone form, and inspections queue offline until the phone reconnects.",
+  },
+  {
+    q: "How do we see the results?",
+    a: "Everything lands on one map in your browser at app.infinicitylabs.org, with the frame or photo behind each record.",
+  },
+  {
+    q: "Can we check the counts ourselves?",
+    a: "Yes. Every Turnflow count links to the clip of the vehicle it counted, so an engineer can review any number before the report goes out.",
+  },
+  {
+    q: "Where do you work?",
+    a: "With agencies, cities and engineering firms in the United States and West Africa.",
+  },
+  {
+    q: "Can we try it on our own roads?",
+    a: "Yes. Send us a stretch of your network and we will run it through AdAMS and walk you through the results.",
+  },
+];
+
+function Faq() {
+  return (
+    <Section id="faq">
+      <div className="section-head">
+        <h2 id="faq-h">Questions agencies ask</h2>
+      </div>
+      <div className="grid grid--top">
+        {[faqs.slice(0, 3), faqs.slice(3)].map((col, i) => (
+          <div className="faq span-6" key={i}>
+            {col.map((f) => (
+              <details open key={f.q}>
+                <summary>{f.q}</summary>
+                <p>{f.a}</p>
+              </details>
+            ))}
+          </div>
+        ))}
+      </div>
+    </Section>
+  );
+}
+
+export default function HomePage() {
+  return (
+    <>
+      <Hero />
+      <Register />
+      <Products />
+      <Fargo />
+      <Solutions />
+      <Clients />
+      <Faq />
+    </>
   );
 }

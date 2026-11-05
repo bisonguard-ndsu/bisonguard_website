@@ -1,41 +1,50 @@
 @import "tailwindcss";
 
 /*
- * InfiniCity Labs — "Field Record" tokens.
- * White, black and one colour (guide-sign green). Survey yellow is a data
- * colour: it only appears where software has drawn on a road frame.
+ * InfiniCity Labs — dark theme, shared with the platform (infinicitylabs_webapp).
+ * Deep slate surfaces, teal primary, violet secondary, amber reserved for
+ * what the models detect.
  */
 @theme {
-  --color-paper: #ffffff;
-  --color-stone: #f4f3ef;
-  --color-ink: #111311;
-  --color-ink-2: #4a4d48;
-  --color-ink-3: #6b6e68;
-  --color-rule: #dcdad3;
-  --color-rule-dark: #2c2f2b;
-  --color-guide: #00704a;
-  --color-guide-ink: #00553a;
-  --color-guide-tint: #e6f1ec;
-  --color-survey: #ffc700;
-  --color-danger: #b42318;
+  --color-deep: oklch(0.12 0.016 265);
+  --color-bg: oklch(0.155 0.016 265);
+  --color-surface: oklch(0.195 0.018 265);
+  --color-surface-2: oklch(0.235 0.02 265);
+  --color-line: oklch(0.3 0.02 265);
+  --color-edge: oklch(1 0 0 / 0.09);
+  --color-edge-strong: oklch(1 0 0 / 0.18);
+  --color-fg: oklch(0.97 0.004 265);
+  --color-fg-2: oklch(0.82 0.01 265);
+  --color-fg-3: oklch(0.68 0.012 265);
 
-  --font-sans: var(--font-overpass), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-overpass-mono), ui-monospace, monospace;
+  --color-primary: oklch(0.74 0.125 185);
+  --color-primary-strong: oklch(0.82 0.12 185);
+  --color-primary-ink: oklch(0.16 0.03 200);
+  --color-violet: oklch(0.7 0.16 285);
+  --color-accent: oklch(0.82 0.15 78);
+  --color-danger: oklch(0.7 0.19 25);
 
-  --text-display: clamp(2.75rem, 1.6rem + 4.6vw, 5.5rem);
+  --font-display: var(--font-lexend), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --text-display: clamp(2.625rem, 1.2rem + 4.4vw, 5.25rem);
   --text-h1: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);
-  --text-h2: clamp(1.875rem, 1.4rem + 1.9vw, 3rem);
+  --text-h2: clamp(2rem, 1.4rem + 2.2vw, 3.25rem);
   --text-h3: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
-  --text-lead: clamp(1.125rem, 1.07rem + 0.25vw, 1.3125rem);
+  --text-lead: clamp(1.0625rem, 1rem + 0.35vw, 1.3125rem);
   --text-label: 0.75rem;
 
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     scroll-padding-top: 5.5rem;
+    color-scheme: dark;
+    background: var(--color-bg);
   }
   @media (prefers-reduced-motion: no-preference) {
     html {
@@ -43,8 +52,8 @@
     }
   }
   body {
-    background: var(--color-paper);
-    color: var(--color-ink);
+    background: var(--color-bg);
+    color: var(--color-fg);
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.6;
@@ -53,47 +62,44 @@
   }
   h1,
   h2,
-  h3 {
+  h3,
+  h4 {
+    font-family: var(--font-display);
     text-wrap: balance;
-    font-feature-settings: "kern";
   }
   p {
     text-wrap: pretty;
   }
   ::selection {
-    background: var(--color-guide);
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-primary-ink);
   }
   :focus-visible {
-    outline: 2px solid var(--color-guide);
+    outline: 2px solid var(--color-primary);
     outline-offset: 3px;
-  }
-  .on-ink :focus-visible {
-    outline-color: var(--color-survey);
   }
 }
 
 @layer components {
-  /* Page width + equal side gutters, used by every section */
   .wrap {
     width: 100%;
-    max-width: 80rem;
+    max-width: 84rem;
     margin-inline: auto;
-    padding-inline: 1rem;
+    padding-inline: 1.25rem;
   }
   @media (min-width: 640px) {
     .wrap {
-      padding-inline: 1.5rem;
+      padding-inline: 2rem;
     }
   }
   @media (min-width: 1024px) {
     .wrap {
-      padding-inline: 2.5rem;
+      padding-inline: 3rem;
     }
   }
 
   .section {
-    padding-block: 4.5rem;
+    padding-block: 5rem;
   }
   @media (min-width: 1024px) {
     .section {
@@ -101,114 +107,165 @@
     }
   }
 
-  /* Mono label — coordinates, statuses, eyebrows */
   .label {
     font-family: var(--font-mono);
     font-size: var(--text-label);
     font-weight: 500;
     line-height: 1.3;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
   .t-display {
+    font-family: var(--font-display);
     font-size: var(--text-display);
-    font-weight: 800;
-    line-height: 0.98;
-    letter-spacing: -0.025em;
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
   }
   .t-h1 {
+    font-family: var(--font-display);
     font-size: var(--text-h1);
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
   }
   .t-h2 {
+    font-family: var(--font-display);
     font-size: var(--text-h2);
-    font-weight: 700;
-    line-height: 1.08;
-    letter-spacing: -0.015em;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
   }
   .t-h3 {
+    font-family: var(--font-display);
     font-size: var(--text-h3);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.25;
-    letter-spacing: -0.005em;
+    letter-spacing: -0.01em;
   }
   .t-lead {
     font-size: var(--text-lead);
-    line-height: 1.5;
+    line-height: 1.6;
   }
 
-  /* Buttons: one primary, one secondary. Step on hover, press on click. */
+  /* Light sections. Re-point the tokens so every component flips with them. */
+  .tone-light,
+  .tone-muted {
+    --color-bg: oklch(1 0 0);
+    --color-surface: oklch(0.975 0.003 265);
+    --color-surface-2: oklch(0.955 0.005 265);
+    --color-fg: oklch(0.19 0.02 265);
+    --color-fg-2: oklch(0.4 0.018 265);
+    --color-fg-3: oklch(0.52 0.015 265);
+    --color-edge: oklch(0.19 0.02 265 / 0.1);
+    --color-edge-strong: oklch(0.19 0.02 265 / 0.2);
+    --color-line: oklch(0.88 0.006 265);
+    --color-primary-strong: oklch(0.48 0.09 195);
+    color-scheme: light;
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+  .tone-muted {
+    --color-bg: oklch(0.965 0.004 265);
+    --color-surface: oklch(1 0 0);
+    --color-surface-2: oklch(0.985 0.003 265);
+  }
+
+  /* Buttons */
   .btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 3rem;
-    padding: 0.75rem 1.375rem 0.625rem;
-    font-weight: 700;
+    min-height: 2.875rem;
+    padding: 0 1.375rem;
+    border-radius: 999px;
     font-size: 0.9375rem;
+    font-weight: 600;
     line-height: 1;
-    border-radius: 2px;
-    transition:
-      background-color 160ms ease,
-      color 160ms ease,
-      border-color 160ms ease,
-      transform 120ms ease;
+    white-space: nowrap;
     cursor: pointer;
+    transition:
+      transform 220ms var(--ease-out-quart),
+      background-color 220ms,
+      border-color 220ms,
+      box-shadow 300ms,
+      color 220ms;
   }
   .btn:active {
-    transform: translateY(1px);
+    transform: translateY(1px) scale(0.98);
   }
   .btn-primary {
-    background: var(--color-guide);
-    color: #fff;
+    background: var(--color-primary);
+    color: var(--color-primary-ink);
+    box-shadow: 0 0 0 0 oklch(0.74 0.125 185 / 0);
   }
   .btn-primary:hover {
-    background: var(--color-guide-ink);
+    background: var(--color-primary-strong);
+    transform: translateY(-1px);
   }
-  .btn-secondary {
-    border: 1px solid var(--color-ink);
-    color: var(--color-ink);
+  .btn-secondary,
+  .btn-ghost {
+    background: oklch(1 0 0 / 0.06);
+    color: var(--color-fg);
+    border: 1px solid oklch(1 0 0 / 0.16);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
-  .btn-secondary:hover {
-    background: var(--color-ink);
-    color: #fff;
+  .btn-secondary:hover,
+  .btn-ghost:hover {
+    background: oklch(1 0 0 / 0.12);
+    border-color: oklch(1 0 0 / 0.3);
+    transform: translateY(-1px);
   }
-  .on-ink .btn-secondary {
-    border-color: #fff;
-    color: #fff;
+
+  .tone-light .btn-ghost,
+  .tone-muted .btn-ghost {
+    background: transparent;
+    border-color: var(--color-edge-strong);
+    backdrop-filter: none;
   }
-  .on-ink .btn-secondary:hover {
+  .tone-light .btn-ghost:hover,
+  .tone-muted .btn-ghost:hover {
+    background: var(--color-surface-2);
+    border-color: var(--color-fg-3);
+  }
+
+  .btn-light {
     background: #fff;
-    color: var(--color-ink);
+    color: var(--color-deep);
+  }
+  .btn-light:hover {
+    background: oklch(0.93 0.01 265);
+    transform: translateY(-1px);
   }
 
-  /* Text link with drawn underline */
-  .link {
-    background-image: linear-gradient(currentColor, currentColor);
-    background-size: 0% 1px;
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    transition: background-size 240ms var(--ease-out-quart);
-  }
-  .link:hover,
-  .link:focus-visible {
-    background-size: 100% 1px;
-  }
-
+  /* Arrow that nudges on hover of its .group */
   .arrow {
     display: inline-block;
-    transition: transform 200ms var(--ease-out-quart);
+    transition: transform 260ms var(--ease-out-quart);
   }
   .group:hover .arrow,
   .group:focus-visible .arrow {
     transform: translateX(4px);
   }
 
-  /* Status tag */
+  /* Underline that draws in */
+  .link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 300ms var(--ease-out-quart);
+  }
+  .group:hover .link,
+  .link:hover,
+  .group:focus-visible .link {
+    background-size: 100% 1px;
+  }
+
   .status {
     display: inline-flex;
     align-items: center;
@@ -216,66 +273,77 @@
     font-family: var(--font-mono);
     font-size: 0.6875rem;
     font-weight: 500;
-    letter-spacing: 0.06em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    white-space: nowrap;
   }
   .status::before {
     content: "";
-    width: 0.4375rem;
-    height: 0.4375rem;
+    width: 0.375rem;
+    height: 0.375rem;
     border-radius: 999px;
     background: currentColor;
   }
 
-  /* Image frame: photo zooms gently inside a fixed frame */
   .frame-zoom img {
-    transition: transform 400ms var(--ease-out-quart);
+    transition: transform 700ms var(--ease-out-quart);
   }
   .group:hover .frame-zoom img {
-    transform: scale(1.02);
+    transform: scale(1.04);
   }
 }
 
-/* Detection boxes draw in once (hero frame) */
-@keyframes box-draw {
-  from {
-    clip-path: inset(0 100% 100% 0);
-    opacity: 0.2;
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-    opacity: 1;
-  }
-}
-@keyframes row-in {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
+/* Motion */
 @keyframes panel-in {
   from {
     opacity: 0;
-    transform: translateY(-4px);
+    transform: translateY(-6px);
   }
   to {
     opacity: 1;
     transform: none;
   }
 }
-.anim-box {
-  animation: box-draw 500ms var(--ease-out-quart) both;
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
 }
-.anim-row {
-  animation: row-in 360ms var(--ease-out-quart) both;
+@keyframes scroll-cue {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+@keyframes hero-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 50s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
 }
 .anim-panel {
-  animation: panel-in 180ms var(--ease-out-quart) both;
+  animation: panel-in 220ms var(--ease-out-quart) both;
+}
+.anim-pulse {
+  animation: pulse-dot 1.6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -283,6 +351,7 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
   }

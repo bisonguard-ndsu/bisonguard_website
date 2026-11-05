@@ -20,10 +20,10 @@ export default function CookiesPage() {
       <PageIntro label="Legal" title="Cookie policy" lead="What we set in your browser, and how to change your mind." />
       <Prose>
         <h2>Categories</h2>
-        <dl className="border-t border-rule">
+        <dl className="border-t border-line">
           {categories.map((c) => (
-            <div key={c.name} className="grid gap-1 border-b border-rule py-5 sm:grid-cols-[10rem_1fr]">
-              <dt className="font-bold text-ink">{c.name}</dt>
+            <div key={c.name} className="grid gap-1 border-b border-line py-5 sm:grid-cols-[10rem_1fr]">
+              <dt className="font-bold text-fg">{c.name}</dt>
               <dd>{c.body}</dd>
             </div>
           ))}
@@ -31,7 +31,7 @@ export default function CookiesPage() {
         <h2>Changing your choice</h2>
         <p>
           Your choice is kept for 12 months. You can change it at any time:{" "}
-          <CookieSettingsLink className="cursor-pointer font-semibold text-guide underline underline-offset-2" />.
+          <CookieSettingsLink className="cursor-pointer font-semibold text-primary underline underline-offset-2" />.
         </p>
       </Prose>
     </>

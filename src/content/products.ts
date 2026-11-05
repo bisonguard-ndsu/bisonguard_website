@@ -34,10 +34,10 @@ export const products: Product[] = [
     fullName: "Advanced Asset Management System",
     href: "/products/adams",
     status: "in-service",
-    input: "Phone video from a survey drive",
-    output: "Sign inventory, pavement roughness and condition, mapped",
+    input: "Drive video from a phone",
+    output: "Mapped assets, graded defects, ride quality",
     summary:
-      "Mount a phone, drive the network, and get back every sign, its position and condition, and a roughness score for each segment.",
+      "Drive the network once with a phone and get every sign, marking, light and pavement defect geolocated, graded and ready for a work order.",
     image: {
       src: "/media/sign-card-r7-1.webp",
       alt: "AdAMS sign record for an R7-1 no-parking sign, track 23, with the road frame it was detected in and its GPS position.",
@@ -48,13 +48,13 @@ export const products: Product[] = [
   },
   {
     slug: "traffic-management",
-    name: "Traffic Management System",
+    name: "TMC",
     href: "/products/traffic-management",
     status: "in-service",
-    input: "Live intersection and corridor cameras",
-    output: "Anomaly alerts, scheduled recordings, traffic analysis",
+    input: "Your intersection and corridor cameras",
+    output: "Live wall, recordings, traffic measures",
     summary:
-      "Connect the cameras you already run. The system watches them continuously, flags anomalies as they happen, and records on a schedule.",
+      "Watch every camera live, record on a schedule and turn footage into volume, speed, occupancy and density figures.",
     appKey: "tmc",
   },
   {
@@ -63,9 +63,9 @@ export const products: Product[] = [
     href: "/products/turnflow",
     status: "in-service",
     input: "Recorded or live intersection video",
-    output: "Turning-movement counts, headways, occupancy, engineering reports",
+    output: "Movement counts and engineering reports",
     summary:
-      "Turning-movement counts from video, each one traceable to the vehicle path that produced it, delivered as an engineering report.",
+      "Turning-movement counts, headways and occupancy from video, with evidence for every vehicle and a report you can submit.",
     appKey: "turnflow",
   },
   {
@@ -74,9 +74,9 @@ export const products: Product[] = [
     href: "/products/roadlogger",
     status: "in-service",
     input: "A phone in the field",
-    output: "Inspections, issues and cases on a shared map",
+    output: "Cases tracked from triage to repair",
     summary:
-      "Field inspection on a phone. Log what you find, pin it to the map, and open a case your office can track to closure.",
+      "Inspections on the phones crews already carry, even offline, with every case followed to verified repair on a shared map.",
     appKey: "roadlogger",
   },
 ];
