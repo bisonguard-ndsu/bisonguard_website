@@ -56,7 +56,7 @@ export default async function SolutionPage({
         <span>
           {slug === "visual-ai"
             ? "Bison herd in open grassland"
-            : "Illustrative scene"}
+            : "Contextual infrastructure photography"}
         </span>
       </div>
       <section className="wrap chapter-section solution-challenge">

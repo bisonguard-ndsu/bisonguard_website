@@ -3,112 +3,86 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
-import { ArrowDown, ArrowUpRight, Maximize2, X } from "lucide-react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 
 export function HomeHero() {
-  const imageDialog = useRef<HTMLDialogElement>(null);
+  const hero = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: hero,
+    offset: ["start start", "end start"],
+  });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   return (
-    <section className="company-hero" aria-labelledby="home-title">
-      <div className="wrap company-hero-grid">
-        <div className="company-hero-copy">
-          <p className="eyebrow">InfiniCity Labs / Engineering & applied AI</p>
+    <section className="corporate-hero" ref={hero} aria-labelledby="home-title">
+      <motion.div
+        className="corporate-hero-image"
+        style={{ y: reduced ? 0 : imageY }}
+      >
+        <Image
+          src="/images/highway-interchange.jpg"
+          alt="Aerial photograph of a highway interchange and the infrastructure around it"
+          fill
+          priority
+          sizes="100vw"
+        />
+      </motion.div>
+      <div className="corporate-hero-shade" />
+      <div className="wrap corporate-hero-content">
+        <div className="corporate-introduction">
+          <p className="eyebrow">InfiniCity Labs</p>
           <h1 id="home-title">
-            Software for
+            Advancing
             <br />
             infrastructure
-            <br />
-            <span>& mobility.</span>
+            <br />& mobility.
           </h1>
-          <p className="company-hero-description">
-            Inspect road networks. Understand traffic. Manage field operations.
-            We build the software that brings your data and your engineering
-            work together.
+          <p>
+            We bring research, engineering, and applied AI to the roads,
+            traffic, and physical systems people depend on.
           </p>
-          <div className="company-hero-actions">
-            <Link href="/products" className="link-button link-button-solid">
+          <div className="corporate-hero-actions">
+            <Link href="/products" className="link-button">
               Explore our products <ArrowUpRight size={18} />
             </Link>
-            <Link href="/book-a-demo" className="link-button company-demo">
+            <Link href="/book-a-demo" className="text-link">
               Book a demo <ArrowUpRight size={18} />
             </Link>
           </div>
         </div>
-        <figure className="hero-product">
-          <div className="hero-product-topline">
-            <span>Inside AdAMS</span>
-            <span>Asset inspection</span>
-          </div>
-          <button
-            type="button"
-            className="hero-product-image"
-            aria-label="Enlarge the AdAMS inspection interface"
-            onClick={() => imageDialog.current?.showModal()}
-          >
-            <Image
-              src="/images/adams-inspection.webp"
-              alt="AdAMS interface showing survey video, detected traffic signs, and inspection records"
-              width={1918}
-              height={1021}
-              sizes="(max-width: 900px) 100vw, 55vw"
-              priority
-            />
-            <span className="image-expand">
-              <Maximize2 size={16} />
-              <span>View interface</span>
-            </span>
-          </button>
-          <figcaption>
-            <div>
-              <strong>Every finding, with its evidence.</strong>
-              <p>
-                Review survey footage and detected assets in the same workspace.
-              </p>
-            </div>
-            <Link href="/products/adams" aria-label="Explore AdAMS">
-              <ArrowUpRight size={23} />
-            </Link>
-          </figcaption>
-        </figure>
       </div>
-      <div className="wrap company-hero-bottom">
-        <a href="#products">
-          <ArrowDown size={16} /> Discover the portfolio
-        </a>
-        <p>
-          Infrastructure management <span>/</span> Traffic analysis{" "}
-          <span>/</span> Applied AI
-        </p>
-      </div>
-      <dialog
-        className="interface-dialog"
-        ref={imageDialog}
-        aria-labelledby="interface-title"
-        onClick={(event) => {
-          if (event.target === event.currentTarget)
-            imageDialog.current?.close();
-        }}
+      <nav
+        className="wrap corporate-hero-topics"
+        aria-label="Explore our areas of work"
       >
-        <div className="interface-dialog-heading">
-          <h2 id="interface-title">AdAMS · Inspection workspace</h2>
-          <button
-            type="button"
-            aria-label="Close interface preview"
-            onClick={() => imageDialog.current?.close()}
-          >
-            <X size={23} />
-          </button>
-        </div>
-        <Image
-          src="/images/adams-inspection.webp"
-          alt="Full AdAMS inspection interface with survey video and traffic sign analysis"
-          width={1918}
-          height={1021}
-          sizes="95vw"
-        />
-        <p>
-          Product interface shown for illustration. Project data is an example.
-        </p>
-      </dialog>
+        <Link href="/solutions/infrastructure-management">
+          <span>
+            <small>Roads, assets & inspection</small>
+            <strong>Infrastructure</strong>
+          </span>
+          <ArrowUpRight size={23} />
+        </Link>
+        <Link href="/solutions/traffic-engineering">
+          <span>
+            <small>Traffic, movement & analysis</small>
+            <strong>Mobility</strong>
+          </span>
+          <ArrowUpRight size={23} />
+        </Link>
+        <Link href="/solutions/visual-ai">
+          <span>
+            <small>Vision, data & understanding</small>
+            <strong>Applied AI</strong>
+          </span>
+          <ArrowUpRight size={23} />
+        </Link>
+      </nav>
     </section>
   );
 }

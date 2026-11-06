@@ -33,7 +33,7 @@ export default function OpenGraphImage() {
           lineHeight: 1.08,
         }}
       >
-        <span>Software for infrastructure</span>
+        <span>Advancing infrastructure</span>
         <span style={{ color: "#9bcac4" }}>& mobility.</span>
       </div>
       <div

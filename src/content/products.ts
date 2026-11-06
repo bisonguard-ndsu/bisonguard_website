@@ -116,9 +116,9 @@ export const products: Product[] = [
       "An agentic workspace that brings pavement questions, specialist analysis, and engineering review together.",
     description:
       "PaveXpert organizes infrastructure intelligence around the work an engineer needs to do. Bring a project question into a conversation, follow the specialist steps behind an assessment, and keep your judgment connected to the resulting evidence and report.",
-    image: "/images/field-inspection.webp",
-    imageAlt: "Illustrative road inspection with an engineer and tablet",
-    imageCaption: "Illustrative field inspection scene",
+    image: "/images/highway-interchange.jpg",
+    imageAlt: "Highway infrastructure photographed from above",
+    imageCaption: "Contextual infrastructure photography",
     audience:
       "Pavement engineers, infrastructure analysts, and teams working with AdAMS.",
     outputs: [
@@ -206,9 +206,9 @@ export const products: Product[] = [
       "Bring traffic cameras, recordings, and vehicle observations into a dedicated monitoring workspace.",
     description:
       "TMC gives traffic teams a place to work with the scenes that matter to their network. Organize camera sources, plan recordings, explore the archive, and move selected footage through vehicle analysis and reporting.",
-    image: "/images/intersection.webp",
-    imageAlt: "Illustrative view of a signalized city intersection",
-    imageCaption: "Illustrative traffic monitoring scene",
+    image: "/images/urban-intersection.jpg",
+    imageAlt: "Road intersection and vehicles photographed from above",
+    imageCaption: "Contextual traffic photography",
     audience:
       "Traffic operations teams, transportation agencies, and engineering consultants.",
     outputs: [
@@ -296,9 +296,9 @@ export const products: Product[] = [
       "Define movements, count traffic, review the evidence, and build an engineering report from one study workflow.",
     description:
       "A useful traffic study keeps its results connected to what happened on the road. Turnflow takes a recording through movement setup, analysis, review, and reporting, with tools to investigate the details behind the totals.",
-    image: "/images/intersection.webp",
-    imageAlt: "Illustrative aerial view of an urban junction",
-    imageCaption: "Illustrative traffic study scene",
+    image: "/images/urban-intersection.jpg",
+    imageAlt: "An overhead view of a signalized road intersection",
+    imageCaption: "Contextual traffic study photography",
     audience:
       "Traffic engineers, transport planners, consultants, and research teams.",
     outputs: [
@@ -386,9 +386,9 @@ export const products: Product[] = [
       "Capture field conditions, track inspections over time, and connect asset issues with the work to resolve them.",
     description:
       "RoadLogger keeps the story of an asset together. Create a geolocated case, record its condition and evidence, return for a follow-up inspection, and track how the issue progresses through review, monitoring, and repair.",
-    image: "/images/field-inspection.webp",
-    imageAlt: "Illustrative engineer reviewing road conditions from a tablet",
-    imageCaption: "Illustrative field inspection scene",
+    image: "/images/urban-infrastructure.jpg",
+    imageAlt: "An urban road leading toward a city skyline",
+    imageCaption: "Contextual road photography",
     audience:
       "Field inspectors, maintenance crews, asset managers, and engineering teams.",
     outputs: [

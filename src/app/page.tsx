@@ -1,74 +1,46 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, ArrowRight } from "lucide-react";
 import { HomeHero } from "@/components/site/home-hero";
 import { Reveal } from "@/components/site/reveal";
 import { ContactBand } from "@/components/site/contact-band";
+import { products } from "@/content/products";
 import { publications } from "@/content/publications";
 import { pageMetadata } from "@/lib/metadata";
 
 export const metadata = pageMetadata(
   "Infrastructure, mobility & applied AI",
-  "Software and engineering for road networks, traffic analysis, and field operations. Discover AdAMS, PaveXpert, TMC, Turnflow, RoadLogger, AdAMS Annotate, and BisonGuard.",
+  "InfiniCity Labs brings research, engineering, and applied AI to infrastructure, mobility, and field operations. Explore our products, expertise, and research.",
   "/",
 );
 
-const portfolio = [
+const areas = [
   {
-    name: "Infrastructure",
+    title: "Infrastructure",
+    label: "Roads & asset management",
+    image: "/images/urban-infrastructure.jpg",
+    alt: "A road leading toward a city skyline at sunset",
     description:
-      "Inspect assets, assess pavement, and organize work across a road network.",
-    products: [
-      {
-        name: "AdAMS",
-        slug: "adams",
-        description: "Network condition & asset management",
-      },
-      {
-        name: "PaveXpert",
-        slug: "pavexpert",
-        description: "Agentic pavement intelligence",
-      },
-      {
-        name: "RoadLogger",
-        slug: "roadlogger",
-        description: "Field inspections & issue reporting",
-      },
-    ],
+      "Survey the network, understand asset condition, and connect inspection evidence with maintenance decisions.",
+    href: "/solutions/infrastructure-management",
   },
   {
-    name: "Mobility",
+    title: "Mobility",
+    label: "Traffic & movement",
+    image: "/images/urban-intersection.jpg",
+    alt: "An overhead photograph of vehicles moving through a road intersection",
     description:
-      "Turn camera footage into traffic studies and movement data you can review.",
-    products: [
-      {
-        name: "TMC",
-        slug: "tmc",
-        description: "Traffic monitoring & video analysis",
-      },
-      {
-        name: "Turnflow",
-        slug: "turnflow",
-        description: "Turning movements & traffic counts",
-      },
-    ],
+      "Observe traffic, investigate movements, and bring reviewable video evidence into engineering studies.",
+    href: "/solutions/traffic-engineering",
   },
   {
-    name: "Applied AI",
+    title: "Applied AI",
+    label: "Computer vision & field intelligence",
+    image: "/images/bisonguard-herd.webp",
+    alt: "Bison and calves in open grassland",
     description:
-      "Prepare visual data and apply computer vision to specialist monitoring tasks.",
-    products: [
-      {
-        name: "AdAMS Annotate",
-        slug: "annotate",
-        description: "Image & video annotation",
-      },
-      {
-        name: "BisonGuard",
-        slug: "bisonguard",
-        description: "Herd detection & monitoring",
-      },
-    ],
+      "Apply visual intelligence to specialist environments, from preparing training data to monitoring herds.",
+    href: "/solutions/visual-ai",
   },
 ];
 
@@ -77,209 +49,327 @@ export default function HomePage() {
     <>
       <HomeHero />
       <section
-        className="home-portfolio light-surface"
-        id="products"
-        aria-labelledby="portfolio-heading"
+        className="corporate-welcome light-surface"
+        aria-labelledby="welcome-title"
       >
         <div className="wrap">
-          <Reveal className="home-section-heading">
-            <div>
-              <p className="eyebrow">Our products</p>
-              <h2 id="portfolio-heading">The product portfolio.</h2>
-            </div>
-            <Link href="/products" className="text-link">
-              Compare the portfolio <ArrowUpRight size={17} />
-            </Link>
-          </Reveal>
-          <div className="portfolio-families">
-            {portfolio.map((family, index) => (
-              <Reveal
-                key={family.name}
-                className="portfolio-family"
-                delay={index * 60}
-              >
-                <h3>{family.name}</h3>
-                <p>{family.description}</p>
-                <ul>
-                  {family.products.map((product) => (
-                    <li key={product.slug}>
-                      <Link href={"/products/" + product.slug}>
-                        <div>
-                          <h4>{product.name}</h4>
-                          <span>{product.description}</span>
-                        </div>
-                        <ArrowUpRight size={20} />
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-            ))}
+          <div className="welcome-grid">
+            <Reveal>
+              <p className="eyebrow">
+                Research. Engineering. Real-world application.
+              </p>
+              <h2 id="welcome-title">
+                Welcome to
+                <br />
+                InfiniCity Labs.
+              </h2>
+            </Reveal>
+            <Reveal delay={70} className="welcome-copy">
+              <p className="welcome-lead">
+                We develop the technology behind a clearer understanding of our
+                physical world.
+              </p>
+              <p>
+                Our company brings together infrastructure engineering, computer
+                vision, and software development. We build products and
+                practical workflows for the teams inspecting roads, studying
+                traffic, managing assets, and working with visual data.
+              </p>
+              <div className="welcome-links">
+                <Link href="/company" className="text-link">
+                  Discover our company <ArrowUpRight size={18} />
+                </Link>
+                <Link href="/services" className="text-link">
+                  Explore our expertise <ArrowUpRight size={18} />
+                </Link>
+              </div>
+            </Reveal>
           </div>
-          <div className="portfolio-help">
-            <p>Working across more than one workflow?</p>
-            <Link href="/solutions" className="text-link">
-              Find a solution for your team <ArrowUpRight size={17} />
+          <div className="company-disciplines">
+            <span>Infrastructure engineering</span>
+            <span>Computer vision & AI</span>
+            <span>Software & data systems</span>
+            <Link href="/technology">
+              Our technical approach <ArrowRight size={17} />
             </Link>
           </div>
         </div>
       </section>
+
       <section
-        className="home-engineering"
-        aria-labelledby="engineering-heading"
+        className="corporate-areas light-surface"
+        id="areas"
+        aria-labelledby="areas-title"
       >
-        <div className="wrap engineering-grid">
-          <Reveal className="engineering-intro">
-            <p className="eyebrow">The company behind the software</p>
-            <h2 id="engineering-heading">
-              Research.
-              <br />
-              Engineering.
-              <br />
-              Implementation.
-            </h2>
-            <p>
-              InfiniCity Labs develops software for the people responsible for
-              physical infrastructure. Our work combines computer vision, domain
-              expertise, and the practical details of collecting and using data.
-            </p>
-            <Link href="/company" className="text-link">
-              About InfiniCity Labs <ArrowUpRight size={17} />
+        <div className="wrap">
+          <Reveal className="corporate-section-heading">
+            <div>
+              <p className="eyebrow">Our areas of work</p>
+              <h2 id="areas-title">
+                Understanding the systems
+                <br />
+                that connect our world.
+              </h2>
+            </div>
+            <Link href="/solutions" className="text-link">
+              Explore solutions <ArrowUpRight size={18} />
             </Link>
           </Reveal>
-          <div className="engineering-services">
-            {[
-              {
-                label: "Infrastructure management",
-                title: "Build a usable picture of your network.",
-                text: "Connect inspection imagery, asset locations, and condition assessments. Give engineering teams the context to investigate a finding and plan maintenance.",
-                href: "/solutions/infrastructure-management",
-              },
-              {
-                label: "Traffic engineering",
-                title: "Make your traffic study reviewable.",
-                text: "Define the camera view, movements, and study period. Work with counts and reports that stay connected to the original video.",
-                href: "/solutions/traffic-engineering",
-              },
-              {
-                label: "Technical services",
-                title: "Develop the workflow your project needs.",
-                text: "From data preparation and model evaluation to software integration, we work through the engineering behind a useful system.",
-                href: "/services",
-              },
-            ].map((item) => (
-              <Reveal key={item.href}>
-                <Link href={item.href} className="engineering-service">
-                  <p className="eyebrow">{item.label}</p>
-                  <h3>{item.title}</h3>
-                  <p>{item.text}</p>
-                  <ArrowUpRight size={24} />
+          <div className="area-features">
+            {areas.map((area, index) => (
+              <Reveal key={area.title} delay={index * 60}>
+                <Link href={area.href} className="area-feature">
+                  <div className="area-photo">
+                    <Image
+                      src={area.image}
+                      alt={area.alt}
+                      fill
+                      sizes="(max-width: 700px) 100vw, 33vw"
+                    />
+                    <span>
+                      <ArrowUpRight size={24} />
+                    </span>
+                  </div>
+                  <div className="area-copy">
+                    <p className="eyebrow">{area.label}</p>
+                    <h3>{area.title}</h3>
+                    <p>{area.description}</p>
+                  </div>
                 </Link>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
+
       <section
-        className="home-field light-surface"
-        aria-labelledby="field-heading"
-      >
-        <div className="wrap field-grid">
-          <Reveal className="field-photo">
-            <Image
-              src="/images/bisonguard-herd.webp"
-              alt="Bison and calves in open grassland"
-              width={1600}
-              height={1067}
-              sizes="(max-width: 800px) 100vw, 55vw"
-            />
-            <span>BisonGuard / Herd monitoring</span>
-          </Reveal>
-          <Reveal className="field-copy" delay={70}>
-            <p className="eyebrow">Computer vision beyond the road</p>
-            <h2 id="field-heading">
-              A different field.
-              <br />
-              The same attention to detail.
-            </h2>
-            <p>
-              Monitoring a herd is a different problem from inspecting a road.
-              BisonGuard brings visual detection to herd monitoring, extending
-              our work into environments that need their own tools and
-              expertise.
-            </p>
-            <Link href="/products/bisonguard" className="text-link">
-              Meet BisonGuard <ArrowUpRight size={18} />
-            </Link>
-            <Link href="/technology" className="field-technology-link">
-              How we approach applied AI <ArrowUpRight size={16} />
-            </Link>
-          </Reveal>
-        </div>
-      </section>
-      <section
-        className="home-reading light-surface"
-        aria-labelledby="reading-heading"
+        className="corporate-work"
+        id="products"
+        aria-labelledby="work-title"
       >
         <div className="wrap">
-          <Reveal className="home-section-heading">
+          <Reveal className="corporate-section-heading">
             <div>
-              <p className="eyebrow">Research & resources</p>
-              <h2 id="reading-heading">Explore the work in more detail.</h2>
+              <p className="eyebrow">Technology in practice</p>
+              <h2 id="work-title">A closer look at our work.</h2>
             </div>
-            <Link href="/resources" className="text-link">
-              All resources <ArrowUpRight size={17} />
+            <Link href="/products" className="text-link">
+              The complete portfolio <ArrowUpRight size={18} />
             </Link>
           </Reveal>
-          <div className="reading-grid">
-            <Reveal className="reading-feature">
-              <p className="eyebrow">
-                Selected research / {publications[0].year}
-              </p>
+          <div className="featured-work">
+            <Reveal className="featured-work-image">
+              <Link
+                href="/products/adams"
+                aria-label="Explore the AdAMS inspection workspace"
+              >
+                <Image
+                  src="/images/adams-inspection.webp"
+                  alt="Actual AdAMS interface showing survey footage and detected traffic signs"
+                  width={1918}
+                  height={1021}
+                  sizes="(max-width: 900px) 100vw, 60vw"
+                />
+              </Link>
+              <p>AdAMS / Inspection workspace</p>
+            </Reveal>
+            <Reveal delay={70} className="featured-work-copy">
+              <p className="eyebrow">Infrastructure intelligence</p>
               <h3>
-                <a
-                  href={publications[0].url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {publications[0].title} <ArrowUpRight size={22} />
-                </a>
+                From survey footage
+                <br />
+                to asset intelligence.
               </h3>
-              <p>{publications[0].summary}</p>
-              <span className="reading-publication-note">
-                {publications[0].venue}
-              </span>
-              <Link href="/research" className="text-link">
-                Visit the research library <ArrowUpRight size={17} />
+              <p>
+                AdAMS connects road condition, roadside assets, and inspection
+                evidence. Engineers can investigate a finding in its original
+                context and carry the assessment into reporting and maintenance
+                planning.
+              </p>
+              <Link href="/products/adams" className="text-link">
+                Explore AdAMS <ArrowUpRight size={18} />
               </Link>
             </Reveal>
-            <div className="reading-guides">
-              {[
-                {
-                  title: "From road surveys to maintenance decisions",
-                  type: "Infrastructure guide",
-                  slug: "from-road-surveys-to-maintenance-decisions",
-                },
-                {
-                  title: "Building a useful turning-movement study",
-                  type: "Traffic engineering guide",
-                  slug: "building-a-useful-turning-movement-study",
-                },
-                {
-                  title: "Human review in computer vision workflows",
-                  type: "Applied AI guide",
-                  slug: "human-review-in-computer-vision-workflows",
-                },
-              ].map((item) => (
-                <Reveal key={item.slug}>
-                  <Link href={"/resources/" + item.slug}>
-                    <p className="eyebrow">{item.type}</p>
-                    <h3>{item.title}</h3>
-                    <ArrowUpRight size={21} />
-                  </Link>
-                </Reveal>
+          </div>
+          <div className="corporate-product-index">
+            <div>
+              <h3>Our products</h3>
+              <p>Specialist tools for different parts of the work.</p>
+              <Link href="/products" className="text-link">
+                Compare products <ArrowUpRight size={16} />
+              </Link>
+            </div>
+            <div className="corporate-product-links">
+              {products.map((product) => (
+                <Link key={product.slug} href={"/products/" + product.slug}>
+                  <span>
+                    <strong>{product.name}</strong>
+                    <small>{product.category}</small>
+                  </span>
+                  <ArrowUpRight size={18} />
+                </Link>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="corporate-research light-surface"
+        aria-labelledby="research-title"
+      >
+        <div className="wrap">
+          <Reveal className="corporate-section-heading">
+            <div>
+              <p className="eyebrow">Ideas, evidence & exploration</p>
+              <h2 id="research-title">
+                Research informs
+                <br />
+                what we build.
+              </h2>
+            </div>
+            <p className="research-intro">
+              Explore selected publications and practical perspectives on
+              infrastructure, mobility, and visual intelligence.
+            </p>
+          </Reveal>
+          <div className="research-editorial-grid">
+            <Reveal className="research-feature">
+              <a
+                href={publications[0].url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="research-feature-image">
+                  <Image
+                    src="/images/highway-interchange.jpg"
+                    alt="A road network illustrating the context of pavement condition research"
+                    fill
+                    sizes="(max-width: 800px) 100vw, 50vw"
+                  />
+                  <span>
+                    Selected publication <ArrowUpRight size={20} />
+                  </span>
+                </div>
+                <div className="research-feature-copy">
+                  <p className="eyebrow">
+                    {publications[0].venue} / {publications[0].year}
+                  </p>
+                  <h3>{publications[0].title}</h3>
+                  <p>{publications[0].summary}</p>
+                  <span className="text-link">
+                    Read the publication <ArrowUpRight size={17} />
+                  </span>
+                </div>
+              </a>
+            </Reveal>
+            <div className="research-paper-list">
+              {publications.slice(1, 4).map((paper) => (
+                <Reveal key={paper.url}>
+                  <a href={paper.url} target="_blank" rel="noopener noreferrer">
+                    <p className="eyebrow">
+                      {paper.topic} / {paper.year}
+                    </p>
+                    <h3>{paper.title}</h3>
+                    <p>{paper.venue}</p>
+                    <ArrowUpRight size={20} />
+                  </a>
+                </Reveal>
+              ))}
+              <Link href="/research" className="text-link">
+                Visit the research library <ArrowUpRight size={18} />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className="corporate-perspectives light-surface"
+        aria-labelledby="perspectives-title"
+      >
+        <div className="wrap">
+          <Reveal className="corporate-section-heading">
+            <div>
+              <p className="eyebrow">Practical perspectives</p>
+              <h2 id="perspectives-title">
+                From the field to the next decision.
+              </h2>
+            </div>
+            <Link href="/resources" className="text-link">
+              All resources <ArrowUpRight size={18} />
+            </Link>
+          </Reveal>
+          <div className="perspective-features">
+            <Reveal>
+              <Link href="/resources/from-road-surveys-to-maintenance-decisions">
+                <div className="perspective-image">
+                  <Image
+                    src="/images/urban-infrastructure.jpg"
+                    alt="Road infrastructure in an urban landscape"
+                    fill
+                    sizes="(max-width:700px) 100vw, 50vw"
+                  />
+                </div>
+                <div>
+                  <p className="eyebrow">Infrastructure guide</p>
+                  <h3>From road surveys to maintenance decisions</h3>
+                  <span className="text-link">
+                    Read the guide <ArrowUpRight size={17} />
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+            <Reveal delay={70}>
+              <Link href="/resources/building-a-useful-turning-movement-study">
+                <div className="perspective-image">
+                  <Image
+                    src="/images/urban-intersection.jpg"
+                    alt="Road intersection viewed from above"
+                    fill
+                    sizes="(max-width:700px) 100vw, 50vw"
+                  />
+                </div>
+                <div>
+                  <p className="eyebrow">Traffic engineering guide</p>
+                  <h3>Building a useful turning-movement study</h3>
+                  <span className="text-link">
+                    Read the guide <ArrowUpRight size={17} />
+                  </span>
+                </div>
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <section className="corporate-collaboration">
+        <div className="wrap">
+          <Reveal>
+            <p className="eyebrow">Work with InfiniCity Labs</p>
+            <h2>Bring us the engineering challenge.</h2>
+            <p>
+              Start with a product demonstration, discuss a technical project,
+              or explore a research collaboration. We’ll help identify the
+              people and tools relevant to your work.
+            </p>
+            <Link href="/services" className="text-link">
+              How we work with you <ArrowUpRight size={18} />
+            </Link>
+          </Reveal>
+          <div className="collaboration-links">
+            <Link href="/services">
+              <span>Engineering & technical services</span>
+              <ArrowUpRight size={24} />
+            </Link>
+            <Link href="/research">
+              <span>Research & collaboration</span>
+              <ArrowUpRight size={24} />
+            </Link>
+            <Link href="/careers">
+              <span>Careers & opportunities</span>
+              <ArrowUpRight size={24} />
+            </Link>
           </div>
         </div>
       </section>

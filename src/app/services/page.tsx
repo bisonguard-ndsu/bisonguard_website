@@ -13,13 +13,13 @@ export const metadata = pageMetadata(
 );
 
 const images = [
-  "/images/infrastructure-aerial.webp",
-  "/images/intersection.webp",
+  "/images/highway-interchange.jpg",
+  "/images/urban-intersection.jpg",
   "/images/adams-inspection.webp",
 ];
 const captions = [
-  "Illustrative road network",
-  "Illustrative traffic observation scene",
+  "Road network photographed from above",
+  "Traffic intersection photographed from above",
   "AdAMS inspection example",
 ];
 

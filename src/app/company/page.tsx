@@ -14,7 +14,7 @@ export default function CompanyPage() {
     <>
       <section className="wrap page-intro company-intro">
         <p className="eyebrow">We are InfiniCity Labs</p>
-        <h1>Engineering software for the physical world.</h1>
+        <h1>Research and engineering for infrastructure and mobility.</h1>
         <p>
           InfiniCity Labs builds software for infrastructure management, traffic
           analysis, and applied computer vision. We bring research and
@@ -22,6 +22,16 @@ export default function CompanyPage() {
           operations.
         </p>
       </section>
+      <div className="company-landscape">
+        <Image
+          src="/images/highway-interchange.jpg"
+          alt="Highway infrastructure viewed from above"
+          fill
+          sizes="100vw"
+          loading="eager"
+        />
+        <span>Infrastructure / Contextual photography</span>
+      </div>
       <section className="wrap chapter-section company-purpose">
         <Reveal>
           <p className="eyebrow">Why we do it</p>

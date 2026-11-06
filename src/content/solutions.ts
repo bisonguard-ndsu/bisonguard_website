@@ -23,8 +23,8 @@ export const solutions: Solution[] = [
       "Connect road condition, asset inventories, and maintenance evidence.",
     description:
       "A useful view of infrastructure connects the big picture with the details that matter on the ground. We bring survey collection, condition assessment, mapped assets, and field follow-up into workflows an engineering team can use.",
-    image: "/images/infrastructure-aerial.webp",
-    imageAlt: "Illustrative aerial road and bridge network",
+    image: "/images/highway-interchange.jpg",
+    imageAlt: "Highway infrastructure photographed from above",
     challenge:
       "Different surveys, scattered photographs, and disconnected records make it hard to answer a simple question: what needs attention next? Start by connecting each observation to its location, its evidence, and the decision it supports.",
     outcomes: [
@@ -77,8 +77,8 @@ export const solutions: Solution[] = [
       "Bring cameras, movement studies, review, and reporting into focus.",
     description:
       "Traffic data becomes useful when the source, counting rules, and interpretation stay connected. Our mobility products support distinct parts of that work, from camera observation and recording to movement analysis and engineering reports.",
-    image: "/images/intersection.webp",
-    imageAlt: "Illustrative signalized junction viewed from above",
+    image: "/images/urban-intersection.jpg",
+    imageAlt: "Signalized road intersection photographed from above",
     challenge:
       "A final count rarely tells the whole story. The observation period, camera view, movement definitions, and review decisions shape what the results mean. A useful workflow makes that context easy to investigate.",
     outcomes: [
@@ -131,8 +131,8 @@ export const solutions: Solution[] = [
       "Capture assets, record inspections, and follow the work through repair.",
     description:
       "Field work happens across sites, devices, and changing connectivity. We build workflows that keep location, condition, and media together, then carry that information into review, follow-up, and maintenance coordination.",
-    image: "/images/field-inspection.webp",
-    imageAlt: "Illustrative engineer inspecting a rural road",
+    image: "/images/urban-infrastructure.jpg",
+    imageAlt: "An urban road leading toward a city skyline",
     challenge:
       "A photograph on one device and a note in another system can leave the next inspector without the full story. Give each case a location, a history, and a clear next step, even when the field connection is unreliable.",
     outcomes: [

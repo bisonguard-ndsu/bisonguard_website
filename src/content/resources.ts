@@ -17,7 +17,7 @@ export const resources: Resource[] = [
       "Keep observations, locations, and inspection history connected to the next action.",
     category: "Infrastructure",
     readTime: "3 min read",
-    image: "/images/field-inspection.webp",
+    image: "/images/highway-interchange.jpg",
     intro:
       "A road survey produces photographs, recordings, measurements, and observations. The practical challenge is keeping those pieces connected. An engineer should be able to move from a network overview to an individual finding, understand the evidence behind it, and identify the next action without rebuilding the story from scattered files.",
     sections: [
@@ -66,7 +66,7 @@ export const resources: Resource[] = [
       "Define movements, preserve the video evidence, and make the counting rules explicit.",
     category: "Mobility",
     readTime: "3 min read",
-    image: "/images/intersection.webp",
+    image: "/images/urban-intersection.jpg",
     intro:
       "A turning-movement study explains how traffic passes through a junction during a defined period. Its usefulness depends on more than a final total. The camera view, movement definitions, vehicle categories, analysis intervals, and review decisions all shape what the results mean and how another person can assess them.",
     sections: [

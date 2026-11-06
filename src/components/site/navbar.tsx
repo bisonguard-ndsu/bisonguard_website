@@ -245,7 +245,7 @@ export function Navbar() {
           <Brand />
           <nav className="desktop-nav" aria-label="Main navigation">
             {(
-              ["Products", "Solutions", "Resources", "Company"] as MenuName[]
+              ["Company", "Solutions", "Products", "Resources"] as MenuName[]
             ).map((name) => (
               <button
                 key={name}
@@ -261,7 +261,7 @@ export function Navbar() {
                   if (e.pointerType === "mouse") openOnHover(name);
                 }}
               >
-                {name}
+                {name === "Resources" ? "Research & insights" : name}
                 <ChevronDown size={12} />
               </button>
             ))}
@@ -325,7 +325,7 @@ export function Navbar() {
                         src={
                           openMenu === "Products"
                             ? "/images/adams-inspection.webp"
-                            : "/images/bisonguard-herd.webp"
+                            : "/images/urban-intersection.jpg"
                         }
                         fill
                         sizes="320px"
@@ -381,11 +381,11 @@ export function Navbar() {
             <ArrowUpRight size={19} />
           </Link>
           {(
-            ["Products", "Solutions", "Resources", "Company"] as MenuName[]
+            ["Company", "Solutions", "Products", "Resources"] as MenuName[]
           ).map((name) => (
             <details key={name}>
               <summary>
-                {name}
+                {name === "Resources" ? "Research & insights" : name}
                 <ChevronDown size={20} />
               </summary>
               <Link href={intros[name].href}>{intros[name].link}</Link>

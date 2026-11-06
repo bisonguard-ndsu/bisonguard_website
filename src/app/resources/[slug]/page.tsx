@@ -50,7 +50,7 @@ export default async function ResourcePage({
           alt={
             resource.category === "Applied AI"
               ? "Infrastructure inspection interface"
-              : "Illustrative scene accompanying the guide"
+              : "Road infrastructure photographed from above"
           }
           fill
           sizes="100vw"
