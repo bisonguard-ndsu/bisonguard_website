@@ -75,6 +75,7 @@ export async function POST(request: Request) {
         "Email: " + submission.email,
         "Organization: " + (submission.organization || "Not provided"),
         "Reason: " + submission.reason,
+        "Product: " + (submission.product || "Not specified"),
         "",
         submission.message,
       ].join("\n"),

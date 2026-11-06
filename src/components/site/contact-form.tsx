@@ -5,7 +5,13 @@ import Link from "next/link";
 import { ArrowUpRight, Check, LoaderCircle } from "lucide-react";
 import { contactSchema, inquiryReasons } from "@/lib/contact";
 
-export function ContactForm() {
+export function ContactForm({
+  mode = "contact",
+  defaultProduct = "",
+}: {
+  mode?: "contact" | "demo";
+  defaultProduct?: string;
+}) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "failed">(
     "idle",
@@ -66,10 +72,15 @@ export function ContactForm() {
         <span className="success-icon">
           <Check size={29} />
         </span>
-        <h2>Your message is with us.</h2>
+        <h2>
+          {mode === "demo"
+            ? "Your demo request is with us."
+            : "Your message is with us."}
+        </h2>
         <p>
-          Thank you for getting in touch. We’ll reply to the email address you
-          provided.
+          {mode === "demo"
+            ? "We’ll email you to discuss your requirements and arrange a time for your walkthrough."
+            : "Thank you for getting in touch. We’ll reply to the email address you provided."}
         </p>
         <button
           type="button"
@@ -157,17 +168,54 @@ export function ContactForm() {
           )}
         </div>
         <div className="form-field">
-          <label htmlFor="contact-reason">What brings you here?</label>
-          <select id="contact-reason" name="reason">
-            {inquiryReasons.map((reason) => (
-              <option key={reason}>{reason}</option>
-            ))}
-          </select>
+          <label htmlFor="contact-reason">
+            {mode === "demo" ? "Product of interest" : "What brings you here?"}
+          </label>
+          {mode === "demo" ? (
+            <>
+              <input
+                type="hidden"
+                name="reason"
+                value="Product demonstration"
+              />
+              <select
+                id="contact-reason"
+                name="product"
+                defaultValue={defaultProduct || "Not sure yet"}
+              >
+                {[
+                  "Not sure yet",
+                  "AdAMS",
+                  "PaveXpert",
+                  "TMC",
+                  "Turnflow",
+                  "RoadLogger",
+                  "AdAMS Annotate",
+                  "BisonGuard",
+                ].map((product) => (
+                  <option key={product}>{product}</option>
+                ))}
+              </select>
+            </>
+          ) : (
+            <select
+              id="contact-reason"
+              name="reason"
+              defaultValue="Product inquiry"
+            >
+              {inquiryReasons.map((reason) => (
+                <option key={reason}>{reason}</option>
+              ))}
+            </select>
+          )}
         </div>
       </div>
       <div className="form-field">
         <label htmlFor="contact-message">
-          Tell us what you have in mind <span aria-hidden="true">*</span>
+          {mode === "demo"
+            ? "What would you like to explore?"
+            : "Tell us what you have in mind"}{" "}
+          <span aria-hidden="true">*</span>
         </label>
         <textarea
           id="contact-message"
@@ -217,7 +265,7 @@ export function ContactForm() {
             </>
           ) : (
             <>
-              Send message
+              {mode === "demo" ? "Request a demo" : "Send message"}
               <ArrowUpRight size={18} aria-hidden="true" />
             </>
           )}

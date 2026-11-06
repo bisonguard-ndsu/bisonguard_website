@@ -22,7 +22,7 @@ export function Brand({ footer = false }: { footer?: boolean }) {
     >
       <BrandMark />
       <span>
-        InfiniCity<span className="brand-labs">Labs</span>
+        InfiniCity <span className="brand-labs">Labs</span>
       </span>
     </Link>
   );

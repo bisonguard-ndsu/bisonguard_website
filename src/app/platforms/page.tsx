@@ -28,8 +28,8 @@ export default function PlatformsPage() {
         <article className="platform-row">
           <h2>InfiniCity Workspace</h2>
           <p>
-            Access AdAMS, Traffic Management, and RoadLogger through the current
-            shared application.
+            Access AdAMS, TMC, and RoadLogger through the current shared
+            application.
           </p>
           <a
             className="text-link"
@@ -66,11 +66,22 @@ export default function PlatformsPage() {
         <article className="platform-row">
           <h2>PaveXpert</h2>
           <p>
-            Our agentic platform for AdAMS is in development. Explore the
-            direction of the work.
+            Our agentic pavement intelligence product. Explore the workbench and
+            the assessment workflow.
           </p>
           <Link className="text-link" href="/products/pavexpert">
             Explore PaveXpert
+            <ArrowUpRight size={18} aria-hidden="true" />
+          </Link>
+        </article>
+        <article className="platform-row">
+          <h2>BisonGuard</h2>
+          <p>
+            Explore herd detection and monitoring, and discuss the observations
+            and environment your team works with.
+          </p>
+          <Link className="text-link" href="/book-a-demo?product=bisonguard">
+            Request a walkthrough
             <ArrowUpRight size={18} aria-hidden="true" />
           </Link>
         </article>

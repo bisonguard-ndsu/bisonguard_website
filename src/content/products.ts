@@ -8,443 +8,697 @@ export type Product = {
   image: string;
   imageAlt: string;
   imageCaption: string;
-  inDevelopment?: boolean;
   features: { title: string; description: string }[];
   workflow: { title: string; description: string }[];
   related: string[];
+  audience: string;
+  outputs: string[];
+  useCases: { title: string; description: string }[];
+  faqs: { question: string; answer: string }[];
 };
-
 export const products: Product[] = [
   {
     slug: "adams",
     name: "AdAMS",
-    category: "Infrastructure intelligence",
-    headline: "Know the road. Plan what comes next.",
+    category: "Advanced Asset Management System",
+    headline: "Your network. In full view.",
     summary:
-      "The Advanced Asset Management System brings road conditions, asset inventories, and inspection evidence into one place.",
+      "Connect road condition, roadside assets, and inspection evidence in one intelligence platform.",
     description:
-      "A road network holds more information than a spreadsheet can explain. AdAMS connects what your team sees in the field with where it belongs on the map, helping engineers investigate conditions, review assets, and plan maintenance with the evidence in view.",
+      "A road network is more than a collection of points on a map. AdAMS connects survey footage, condition assessments, and asset records so engineers can understand what is happening, investigate the evidence, and decide where to focus next.",
     image: "/images/adams-inspection.webp",
-    imageAlt:
-      "AdAMS inspection interface showing a detected stop sign and a reviewable sign inventory",
-    imageCaption: "Inside AdAMS · Traffic sign detection and inspection review",
+    imageAlt: "AdAMS traffic sign inspection and asset review interface",
+    imageCaption: "Actual AdAMS inspection interface",
+    audience:
+      "Asset owners, transportation agencies, engineering consultants, and inspection teams.",
+    outputs: [
+      "Mapped asset inventories",
+      "Condition assessments",
+      "Inspection evidence",
+      "Maintenance reports",
+    ],
     features: [
       {
-        title: "Pavement assessment",
+        title: "Pavement intelligence",
         description:
-          "Review pavement distress, Pavement Condition Index, and International Roughness Index alongside the underlying survey evidence.",
+          "Review distress, Pavement Condition Index, and International Roughness Index alongside the imagery and survey records that give each finding context.",
       },
       {
-        title: "Asset inventories",
+        title: "Roadside asset inventory",
         description:
-          "Detect and geolocate traffic signs, inspect guardrails, and organize roadside assets in their network context.",
+          "Detect and geolocate traffic signs, organize asset attributes, and investigate findings from a network map down to an individual observation.",
       },
       {
-        title: "Markings and structures",
+        title: "Structures and markings",
         description:
-          "Work with road-marking retroreflectivity assessments and drone-based bridge inspection evidence.",
+          "Bring guardrail inspections, road-marking retroreflectivity assessments, and drone-based bridge inspection evidence into the engineering conversation.",
       },
       {
-        title: "Maps, records, and reports",
+        title: "Evidence to action",
         description:
-          "Move between the network overview and individual findings, then bring relevant information into maintenance planning and reports.",
+          "Review recommended actions, connect findings with work orders, and carry inspection evidence into reports and maintenance planning.",
       },
     ],
     workflow: [
       {
-        title: "Collect",
+        title: "Capture the network",
         description:
-          "Bring in survey footage, imagery, and field observations from your road network.",
+          "Collect video, imagery, location, and field observations around a clearly defined survey.",
       },
       {
-        title: "Understand",
+        title: "Analyze and review",
         description:
-          "Locate assets and assess their condition with AI-supported analysis and engineering review.",
+          "Locate assets, investigate conditions, and check the original evidence behind a finding.",
       },
       {
-        title: "Act",
+        title: "Plan the next action",
         description:
-          "Use the mapped findings to investigate priorities and plan the next intervention.",
+          "Organize priorities, connect work orders, and share an engineering report.",
       },
     ],
-    related: ["roadlogger", "pavexpert", "annotate"],
-  },
-  {
-    slug: "turnflow",
-    name: "Turnflow",
-    category: "Traffic video analysis",
-    headline: "Every movement tells a story.",
-    summary:
-      "Turn traffic video into movement counts, reviewable evidence, and engineering reports.",
-    description:
-      "Traffic studies begin with what actually happens on the road. Turnflow takes recorded video and live-camera sources through counting, review, and analysis, giving engineers a clear path from observations to a usable study.",
-    image: "/images/intersection.webp",
-    imageAlt: "Overhead view of vehicles moving through an urban intersection",
-    imageCaption: "Illustrative traffic observation scene",
-    features: [
+    related: ["pavexpert", "roadlogger", "annotate"],
+    useCases: [
       {
-        title: "Flexible video sources",
+        title: "Network condition reviews",
         description:
-          "Work with saved traffic videos or live-camera recordings, including scheduled capture.",
+          "Build a consistent view of pavement and asset conditions across a survey.",
       },
       {
-        title: "Movement counts",
+        title: "Asset inventory programs",
         description:
-          "Define movements and inspect counts over selected intervals to understand how traffic uses a junction.",
+          "Connect an asset's identity, location, attributes, and visual evidence.",
       },
       {
-        title: "Reviewable results",
+        title: "Maintenance planning",
         description:
-          "Return to the video evidence, compare results, and inspect headways and occupancy in the analysis workflow.",
-      },
-      {
-        title: "Engineering reports",
-        description:
-          "Bring study outputs into PDF and Word reports for project teams and decision-makers.",
+          "Investigate priorities with the evidence behind each recommendation.",
       },
     ],
-    workflow: [
+    faqs: [
       {
-        title: "Set up a study",
-        description:
-          "Choose the camera or footage and define the traffic movements you need to understand.",
+        question: "How does AdAMS relate to RoadLogger?",
+        answer:
+          "AdAMS focuses on network intelligence and assessment. RoadLogger supports field cases, individual asset inspections, and follow-up work. We can help shape the handoff around your survey and maintenance process.",
       },
       {
-        title: "Count and review",
-        description:
-          "Analyze the video and inspect the supporting evidence for your study.",
-      },
-      {
-        title: "Share the findings",
-        description:
-          "Explore interval results and prepare an engineering report.",
+        question: "Can we review the evidence behind an assessment?",
+        answer:
+          "Evidence review is central to the workflow. Survey footage, mapped findings, and inspection records help engineers investigate an assessment before acting on it.",
       },
     ],
-    related: ["traffic-management", "adams", "annotate"],
-  },
-  {
-    slug: "roadlogger",
-    name: "RoadLogger",
-    category: "Field data collection",
-    headline: "The road is your starting point.",
-    summary:
-      "A field companion for collecting road observations and connecting surveys with infrastructure analysis.",
-    description:
-      "Useful infrastructure intelligence starts with useful field data. RoadLogger supports road-survey collection and logging, helping teams bring observations from a journey into a workflow they can revisit and analyze.",
-    image: "/images/road-survey.webp",
-    imageAlt: "Phone mounted inside a vehicle recording the road ahead",
-    imageCaption: "Road survey collection · Illustrative capture setup",
-    features: [
-      {
-        title: "Field capture",
-        description: "Collect road observations while a survey is underway.",
-      },
-      {
-        title: "Location context",
-        description:
-          "Connect field records with the route and places being surveyed.",
-      },
-      {
-        title: "Survey organization",
-        description:
-          "Keep collection activity organized for later review and analysis.",
-      },
-      {
-        title: "Connected workflows",
-        description:
-          "Bring collected information into the wider InfiniCity infrastructure workflow.",
-      },
-    ],
-    workflow: [
-      {
-        title: "Prepare",
-        description:
-          "Set up the collection device and identify the road survey.",
-      },
-      {
-        title: "Record",
-        description:
-          "Capture observations from the road with location context.",
-      },
-      {
-        title: "Review",
-        description:
-          "Return to the collected records and continue the assessment workflow.",
-      },
-    ],
-    related: ["adams", "pavexpert"],
-  },
-  {
-    slug: "traffic-management",
-    name: "Traffic Management",
-    category: "Mobility systems",
-    headline: "Understand how your network moves.",
-    summary:
-      "A dedicated traffic management system for observing road activity and understanding network conditions.",
-    description:
-      "Transportation networks change throughout the day. Our traffic management work brings observation and analysis together so that teams can investigate road activity and understand the conditions behind operational decisions.",
-    image: "/images/intersection.webp",
-    imageAlt: "Aerial illustration of a signalized urban junction",
-    imageCaption: "Illustrative mobility scene",
-    features: [
-      {
-        title: "Traffic observation",
-        description:
-          "Bring traffic imagery and observations into a dedicated management workflow.",
-      },
-      {
-        title: "Movement analysis",
-        description:
-          "Investigate patterns in road activity and how they change across a study.",
-      },
-      {
-        title: "Operational context",
-        description:
-          "Give traffic teams the information they need to interpret observed conditions.",
-      },
-      {
-        title: "Project collaboration",
-        description:
-          "Work with our engineering team to shape a system around your network and use case.",
-      },
-    ],
-    workflow: [
-      {
-        title: "Observe",
-        description:
-          "Establish what is happening on the network and what data is available.",
-      },
-      {
-        title: "Interpret",
-        description:
-          "Examine movement patterns and investigate the questions behind them.",
-      },
-      {
-        title: "Inform",
-        description:
-          "Bring the findings into traffic management and project discussions.",
-      },
-    ],
-    related: ["turnflow", "adams"],
   },
   {
     slug: "pavexpert",
     name: "PaveXpert",
-    category: "Agentic infrastructure intelligence",
-    headline: "A new way to work with infrastructure intelligence.",
-    summary: "An agentic platform being developed for the AdAMS ecosystem.",
+    category: "Agentic pavement intelligence",
+    headline: "Ask better questions. Find the next move.",
+    summary:
+      "An agentic workspace that brings pavement questions, specialist analysis, and engineering review together.",
     description:
-      "We are developing PaveXpert to bring conversational and agentic workflows to infrastructure assessment. The work explores how engineers can ask questions, work with project context, and move through pavement-analysis tasks with a more direct interface.",
-    image: "/images/infrastructure-aerial.webp",
-    imageAlt: "Illustrative aerial view of a road network at dusk",
-    imageCaption:
-      "Illustrative infrastructure scene · PaveXpert is in development",
-    inDevelopment: true,
+      "PaveXpert organizes infrastructure intelligence around the work an engineer needs to do. Bring a project question into a conversation, follow the specialist steps behind an assessment, and keep your judgment connected to the resulting evidence and report.",
+    image: "/images/field-inspection.webp",
+    imageAlt: "Illustrative road inspection with an engineer and tablet",
+    imageCaption: "Illustrative field inspection scene",
+    audience:
+      "Pavement engineers, infrastructure analysts, and teams working with AdAMS.",
+    outputs: [
+      "Project conversations",
+      "Specialist workflows",
+      "Reviewable findings",
+      "Assessment narratives",
+    ],
     features: [
       {
-        title: "Conversation with context",
+        title: "Project-aware conversations",
         description:
-          "A development focus on working with engineering questions and the project information behind them.",
+          "Frame engineering questions in the context of the project, its evidence, and the decision you need to make.",
       },
       {
-        title: "Agentic workflows",
+        title: "Specialist workbench",
         description:
-          "Exploring how connected analysis steps can be coordinated within an infrastructure workflow.",
+          "Explore connected severity, condition, repair, annotation, and reporting workflows within a shared workbench.",
       },
       {
-        title: "AdAMS integration",
+        title: "Visible reasoning steps",
         description:
-          "Designed around the asset and pavement assessment context of AdAMS.",
+          "Follow the progression from a question to specialist tasks and review, with room for an engineer to examine the outcome.",
       },
       {
-        title: "Research into practice",
+        title: "A clearer assessment story",
         description:
-          "Building on work in visual understanding, pavement assessment, and language-based interfaces.",
+          "Bring condition findings and supporting context together into a narrative that can be discussed and refined.",
       },
     ],
     workflow: [
       {
         title: "Frame the question",
         description:
-          "Define the engineering task and relevant project context.",
+          "Start with the road, the project, and the engineering decision in front of you.",
       },
       {
-        title: "Explore the evidence",
+        title: "Follow the work",
         description:
-          "Develop ways to connect questions with visual and structured information.",
+          "Move through specialist tasks with the relevant evidence in view.",
       },
       {
-        title: "Review the outcome",
+        title: "Review and communicate",
         description:
-          "Keep engineering judgment central as the platform develops.",
+          "Examine the findings and prepare the assessment for the next conversation.",
       },
     ],
-    related: ["adams", "roadlogger"],
+    related: ["adams", "roadlogger", "annotate"],
+    useCases: [
+      {
+        title: "Pavement assessment",
+        description:
+          "Explore condition questions through a focused engineering workspace.",
+      },
+      {
+        title: "Repair planning conversations",
+        description:
+          "Organize the evidence and options behind a proposed intervention.",
+      },
+      {
+        title: "Technical reporting",
+        description:
+          "Connect specialist findings into a clear assessment narrative.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Is PaveXpert a separate product?",
+        answer:
+          "Yes. PaveXpert is our agentic pavement intelligence product, designed around the assessment context of AdAMS. A demo can explore where each product fits your team's work.",
+      },
+      {
+        question: "Where does engineering review fit?",
+        answer:
+          "Human review remains part of the workflow. The workbench brings specialist steps and supporting context into view so an engineer can investigate and interpret the result.",
+      },
+    ],
+  },
+  {
+    slug: "tmc",
+    name: "TMC",
+    category: "Traffic monitoring & operations",
+    headline: "A clearer picture of the road ahead.",
+    summary:
+      "Bring traffic cameras, recordings, and vehicle observations into a dedicated monitoring workspace.",
+    description:
+      "TMC gives traffic teams a place to work with the scenes that matter to their network. Organize camera sources, plan recordings, explore the archive, and move selected footage through vehicle analysis and reporting.",
+    image: "/images/intersection.webp",
+    imageAlt: "Illustrative view of a signalized city intersection",
+    imageCaption: "Illustrative traffic monitoring scene",
+    audience:
+      "Traffic operations teams, transportation agencies, and engineering consultants.",
+    outputs: [
+      "Camera workspaces",
+      "Scheduled recordings",
+      "Vehicle observations",
+      "Analysis reports",
+    ],
+    features: [
+      {
+        title: "Camera directory and maps",
+        description:
+          "Organize traffic camera sources and explore the observation points across a network.",
+      },
+      {
+        title: "Live and recorded views",
+        description:
+          "View camera feeds, start recordings, and schedule capture around the periods your team needs to understand.",
+      },
+      {
+        title: "Vehicle analysis",
+        description:
+          "Run vehicle detection and classification from uploaded footage, archived recordings, or supported camera sources.",
+      },
+      {
+        title: "A reviewable archive",
+        description:
+          "Track analysis jobs, return to saved results, and prepare PDF reports to share with your team.",
+      },
+    ],
+    workflow: [
+      {
+        title: "Connect the viewpoint",
+        description:
+          "Select the camera or recording that covers your operational question.",
+      },
+      {
+        title: "Capture and analyze",
+        description:
+          "Schedule the observation period and run the selected vehicle analysis.",
+      },
+      {
+        title: "Review and share",
+        description:
+          "Investigate saved outputs and prepare a report with its source context.",
+      },
+    ],
+    related: ["turnflow", "adams"],
+    useCases: [
+      {
+        title: "Camera-based observation",
+        description:
+          "Keep a network's traffic viewpoints organized and accessible.",
+      },
+      {
+        title: "Scheduled data collection",
+        description:
+          "Capture a selected period without losing the source and timing context.",
+      },
+      {
+        title: "Vehicle composition studies",
+        description:
+          "Review detected vehicles and classes in a defined observation.",
+      },
+    ],
+    faqs: [
+      {
+        question: "How is TMC different from Turnflow?",
+        answer:
+          "TMC centers on cameras, monitoring, recordings, and vehicle observations. Turnflow centers on movement definitions, traffic counting, study analysis, and detailed engineering reports. They are separate products.",
+      },
+      {
+        question: "Can we work with existing recordings?",
+        answer:
+          "Yes. The analysis workflow supports uploaded footage and saved recordings as well as supported camera sources. We can review your media and camera setup during a demo.",
+      },
+    ],
+  },
+  {
+    slug: "turnflow",
+    name: "Turnflow",
+    category: "Traffic studies & movement analysis",
+    headline: "From traffic video to a better-informed decision.",
+    summary:
+      "Define movements, count traffic, review the evidence, and build an engineering report from one study workflow.",
+    description:
+      "A useful traffic study keeps its results connected to what happened on the road. Turnflow takes a recording through movement setup, analysis, review, and reporting, with tools to investigate the details behind the totals.",
+    image: "/images/intersection.webp",
+    imageAlt: "Illustrative aerial view of an urban junction",
+    imageCaption: "Illustrative traffic study scene",
+    audience:
+      "Traffic engineers, transport planners, consultants, and research teams.",
+    outputs: [
+      "Movement counts",
+      "Interval summaries",
+      "Reviewable studies",
+      "PDF, Word & CSV outputs",
+    ],
+    features: [
+      {
+        title: "Define the movements",
+        description:
+          "Use zones or trajectory paths to describe how vehicles pass through the observation area, with clear movement names and mappings.",
+      },
+      {
+        title: "Count and classify",
+        description:
+          "Analyze recorded video or camera captures and inspect counts by movement, vehicle class, and reporting interval.",
+      },
+      {
+        title: "Investigate the detail",
+        description:
+          "Review and compare analysis runs, examine headways and occupancy, and return to the supporting video when a result needs attention.",
+      },
+      {
+        title: "Make the study usable",
+        description:
+          "Save study sessions and produce PDF reports, editable Word documents, and CSV outputs for project teams.",
+      },
+    ],
+    workflow: [
+      {
+        title: "Set up the study",
+        description:
+          "Choose footage, define the observation period, and map the movements.",
+      },
+      {
+        title: "Analyze and inspect",
+        description:
+          "Run counting and review the results against the source video.",
+      },
+      {
+        title: "Report the findings",
+        description:
+          "Explore intervals and prepare outputs for the next engineering decision.",
+      },
+    ],
+    related: ["tmc", "annotate"],
+    useCases: [
+      {
+        title: "Turning-movement studies",
+        description:
+          "Understand how different approaches and movements use a junction.",
+      },
+      {
+        title: "Recorded traffic review",
+        description:
+          "Return to observations and compare analysis runs with traceable context.",
+      },
+      {
+        title: "Engineering reporting",
+        description:
+          "Carry counts, intervals, and study definitions into a readable deliverable.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can results be reviewed against the video?",
+        answer:
+          "Yes. Review is a core part of the study workflow, including saved analysis sessions and comparisons between runs.",
+      },
+      {
+        question: "What reporting formats are available?",
+        answer:
+          "Turnflow includes PDF, editable Word, and CSV outputs. The appropriate report depends on the study configuration and the information your team needs to communicate.",
+      },
+    ],
+  },
+  {
+    slug: "roadlogger",
+    name: "RoadLogger",
+    category: "Field inspection & asset lifecycle",
+    headline: "Every observation has a next chapter.",
+    summary:
+      "Capture field conditions, track inspections over time, and connect asset issues with the work to resolve them.",
+    description:
+      "RoadLogger keeps the story of an asset together. Create a geolocated case, record its condition and evidence, return for a follow-up inspection, and track how the issue progresses through review, monitoring, and repair.",
+    image: "/images/field-inspection.webp",
+    imageAlt: "Illustrative engineer reviewing road conditions from a tablet",
+    imageCaption: "Illustrative field inspection scene",
+    audience:
+      "Field inspectors, maintenance crews, asset managers, and engineering teams.",
+    outputs: [
+      "Geolocated cases",
+      "Asset inventories",
+      "Inspection histories",
+      "Repair coordination",
+    ],
+    features: [
+      {
+        title: "Capture a complete case",
+        description:
+          "Record category, severity, priority, notes, measurements, photos, and video with the location of the observation.",
+      },
+      {
+        title: "Work beyond connectivity",
+        description:
+          "Keep case and asset work in persistent offline queues with staged media, then synchronize when a connection is available.",
+      },
+      {
+        title: "Follow condition over time",
+        description:
+          "Add repeat inspections, compare measurements and evidence across visits, and keep the history attached to the original case.",
+      },
+      {
+        title: "Coordinate the response",
+        description:
+          "Move cases through review, monitoring, scheduled repair, and resolution. Share access with the colleagues involved in the work.",
+      },
+    ],
+    workflow: [
+      {
+        title: "Capture and locate",
+        description:
+          "Create the field record with its media, measurements, and location.",
+      },
+      {
+        title: "Inspect and compare",
+        description:
+          "Return to the same case and record how its condition changes.",
+      },
+      {
+        title: "Coordinate and resolve",
+        description:
+          "Track the next action and attach the evidence that closes the loop.",
+      },
+    ],
+    related: ["adams", "pavexpert"],
+    useCases: [
+      {
+        title: "Routine inspections",
+        description:
+          "Build consistent records for defects and roadside assets.",
+      },
+      {
+        title: "Remote field work",
+        description:
+          "Continue collecting useful evidence when connectivity is limited.",
+      },
+      {
+        title: "Follow-up and repair",
+        description:
+          "Keep the before, the intervention, and the later inspection in one history.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can inspectors work offline?",
+        answer:
+          "RoadLogger includes local queues for cases, assets, and staged media. Synchronization resumes when connected, with visible retry and failure states.",
+      },
+      {
+        question: "Can an asset have more than one inspection?",
+        answer:
+          "Yes. Follow-up inspections attach new observations and evidence to an existing case so changes can be reviewed over time.",
+      },
+    ],
   },
   {
     slug: "annotate",
     name: "AdAMS Annotate",
-    category: "Computer vision tooling",
-    headline: "Better models begin with better annotations.",
+    category: "Visual data & annotation",
+    headline: "Put better evidence behind your models.",
     summary:
-      "A dedicated annotation workflow for the images and videos behind infrastructure AI.",
+      "Prepare images and video with model-assisted labels, structured review, and practical dataset exports.",
     description:
-      "Built on CVAT Community, AdAMS Annotate connects a customized workflow portal with media uploads, model-assisted annotation, and a reviewable editing environment. It gives project teams a practical place to prepare visual datasets.",
+      "AdAMS Annotate brings the people, media, and review steps behind visual AI into one workflow. Built on CVAT Community, it combines model-assisted prelabels with an editing environment and project roles that keep human review central.",
     image: "/images/adams-inspection.webp",
-    imageAlt:
-      "An example of the visual infrastructure inspection data used in computer vision workflows",
-    imageCaption:
-      "Example infrastructure imagery from AdAMS · Annotation interface preview forthcoming",
+    imageAlt: "Roadside scene used to illustrate infrastructure annotation",
+    imageCaption: "Example infrastructure imagery from AdAMS",
+    audience:
+      "Annotation teams, computer vision engineers, researchers, and project reviewers.",
+    outputs: [
+      "Reviewed labels",
+      "Assigned review jobs",
+      "Project datasets",
+      "YOLO, COCO, VOC & CVAT exports",
+    ],
     features: [
       {
-        title: "Image and video workflows",
+        title: "Bring in your media",
         description:
-          "Prepare visual material for annotation and work through project-specific labeling tasks.",
+          "Work with images, video, folders, and ZIP collections, including resumable uploads for larger tasks.",
       },
       {
-        title: "Model-assisted annotation",
+        title: "Start with assistance",
         description:
-          "Use automatic annotation with local model serving as a starting point for review.",
+          "Use model workflows for traffic signs, pavement distress, road assets, and vehicle classes as a starting point for manual annotation.",
       },
       {
-        title: "Team access",
+        title: "Organize review",
         description:
-          "Manage approved users and roles through the workflow portal.",
+          "Assign jobs and use annotator, reviewer, project manager, and administrator roles to make responsibilities clear.",
       },
       {
-        title: "Workstation deployment",
+        title: "Export for the next stage",
         description:
-          "Support local deployment and resumable media uploads for project teams.",
+          "Prepare reviewed labels in familiar dataset formats, including YOLO, COCO, PASCAL VOC, and CVAT.",
       },
     ],
     workflow: [
       {
-        title: "Prepare media",
+        title: "Prepare the collection",
         description:
-          "Organize images and videos around a defined annotation task.",
+          "Create a project, define its labels, and upload the source media.",
       },
       {
         title: "Annotate and review",
         description:
-          "Combine model assistance with the annotation editor and human review.",
+          "Generate prelabels, make corrections, and complete assigned reviews.",
       },
       {
-        title: "Develop the dataset",
+        title: "Export the dataset",
         description:
-          "Bring reviewed visual labels into the next stage of model development.",
+          "Choose the format and inspect the handoff to model development.",
       },
     ],
     related: ["adams", "turnflow"],
+    useCases: [
+      {
+        title: "Infrastructure datasets",
+        description:
+          "Prepare labels around road assets and pavement condition.",
+      },
+      {
+        title: "Model-assisted review",
+        description:
+          "Give reviewers editable proposals and clear labeling rules.",
+      },
+      {
+        title: "Team annotation programs",
+        description:
+          "Coordinate task ownership, permissions, and review states.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can we define our own labels?",
+        answer:
+          "Yes. General annotation and custom labels are supported alongside the specialized model workflows.",
+      },
+      {
+        question: "Is the platform based on CVAT?",
+        answer:
+          "Yes. AdAMS Annotate builds on CVAT Community with a tailored workflow portal, model assistance, and project administration. Deployment can be discussed around your team's requirements.",
+      },
+    ],
   },
   {
-    slug: "herd-monitoring",
-    name: "Herd Monitoring",
-    category: "Selected applied AI work",
-    headline: "Intelligence beyond the road.",
-    summary: "A system developed for herd detection and monitoring.",
+    slug: "bisonguard",
+    name: "BisonGuard",
+    category: "Herd detection & monitoring",
+    headline: "A closer view of life in the field.",
+    summary:
+      "Apply visual intelligence to herd detection and monitoring in the environments where animals live.",
     description:
-      "Our work in visual understanding also reaches beyond infrastructure. This herd-monitoring system applies detection and observation to animals in the field, extending our engineering practice to a different real-world environment.",
-    image: "/images/herd-monitoring.webp",
-    imageAlt: "A herd silhouetted along a ridge in warm evening light",
-    imageCaption: "Herd monitoring · Image from the project asset collection",
+      "BisonGuard brings our computer vision practice into a different landscape. The product focuses on detecting herds and making observations available in a dedicated monitoring workflow, so teams can look more closely at activity in the field.",
+    image: "/images/bisonguard-herd.webp",
+    imageAlt: "Bison herd with a calf in open grassland",
+    imageCaption: "Bison herd in open grassland",
+    audience: "Herd managers, field operators, and monitoring project teams.",
+    outputs: [
+      "Visual observations",
+      "Herd detections",
+      "Monitoring views",
+      "Reviewable field imagery",
+    ],
     features: [
       {
-        title: "Herd detection",
+        title: "Visual herd detection",
         description:
-          "Apply visual detection to identify animals in the observation area.",
+          "Identify animals within the observed scene using a focused computer vision workflow.",
       },
       {
-        title: "Monitoring",
+        title: "A monitoring workspace",
         description:
-          "Support the observation of herd activity through a dedicated system.",
+          "Bring visual observations together so the people responsible for monitoring can review the scene.",
       },
       {
-        title: "Field context",
+        title: "Context from the field",
         description:
-          "Consider the changing conditions and practical constraints of an outdoor environment.",
+          "Keep the surrounding environment in view when interpreting activity and observations.",
       },
       {
-        title: "Applied engineering",
+        title: "Applied to your setting",
         description:
-          "Connect a focused computer vision task with a usable monitoring workflow.",
+          "Discuss the observation area, available imagery, and monitoring questions with our team.",
       },
     ],
     workflow: [
       {
-        title: "Observe",
+        title: "Observe the environment",
         description:
-          "Gather visual information from the monitoring environment.",
+          "Establish the area and the visual information available for monitoring.",
       },
       {
-        title: "Detect",
-        description: "Identify the herd within the observed scene.",
+        title: "Detect the herd",
+        description: "Identify animals within the observed scene.",
       },
       {
-        title: "Monitor",
-        description: "Make the observations accessible through the system.",
+        title: "Review the activity",
+        description:
+          "Make the imagery and detections accessible for field monitoring.",
       },
     ],
-    related: ["adams", "annotate"],
+    related: ["annotate", "adams"],
+    useCases: [
+      {
+        title: "Herd observation",
+        description: "Bring a closer view of the animals in a monitoring area.",
+      },
+      {
+        title: "Visual monitoring projects",
+        description:
+          "Connect field imagery with a dedicated detection workflow.",
+      },
+      {
+        title: "Applied vision beyond roads",
+        description:
+          "Adapt the engineering practice to a different physical environment.",
+      },
+    ],
+    faqs: [
+      {
+        question: "What does BisonGuard focus on?",
+        answer:
+          "BisonGuard focuses on herd detection and monitoring. Tell us about the animals, environment, and imagery available so we can discuss the right workflow.",
+      },
+      {
+        question: "Can we see a demonstration?",
+        answer:
+          "Yes. Request a BisonGuard demo and describe the monitoring scenario you would like to explore.",
+      },
+    ],
   },
 ];
-
 export function getProduct(slug: string) {
-  return products.find((product) => product.slug === slug);
+  return products.find((p) => p.slug === slug);
 }
-
 export const expertise = [
   {
     id: "infrastructure",
     title: "Infrastructure intelligence",
     summary:
-      "Know what you have. Understand its condition. Give every maintenance decision a clearer starting point.",
+      "Connect conditions, assets, and evidence to the decisions that shape a network.",
     description:
-      "From survey collection to pavement assessment and roadside inventories, we build connected tools for the people responsible for physical infrastructure.",
+      "From survey collection to inspection and maintenance, we build tools for the people responsible for physical infrastructure.",
     capabilities: [
       "Pavement condition assessment",
-      "Roadside asset detection and geolocation",
-      "Survey and inspection workflows",
+      "Asset detection and geolocation",
+      "Inspection histories and field workflows",
       "Engineering maps and reports",
     ],
-    products: ["adams", "roadlogger", "pavexpert"],
+    products: ["adams", "pavexpert", "roadlogger"],
   },
   {
     id: "mobility",
     title: "Mobility analytics",
     summary:
-      "Make sense of how people and vehicles move, from a single intersection to a wider road network.",
+      "Understand the movement, the observation, and the evidence behind a traffic study.",
     description:
-      "We combine traffic engineering and visual analysis to turn observations into studies that can be investigated, reviewed, and shared.",
+      "We combine traffic engineering and visual analysis with tools for monitoring, counting, review, and reporting.",
     capabilities: [
-      "Traffic video counting",
-      "Movement and interval analysis",
-      "Video review and study reporting",
-      "Traffic management workflows",
+      "Camera monitoring and recording",
+      "Vehicle and movement analysis",
+      "Study review and interval summaries",
+      "Traffic engineering reports",
     ],
-    products: ["turnflow", "traffic-management"],
+    products: ["tmc", "turnflow"],
   },
   {
     id: "applied-ai",
     title: "Applied AI engineering",
     summary:
-      "Bring a real-world problem. We connect the data, models, and software needed to work on it.",
+      "Turn a domain problem into a practical workflow for data, models, and people.",
     description:
-      "Our engineering practice spans computer vision, visual-language research, annotation tooling, and software development. We work from the problem and available evidence toward a practical system.",
+      "Our work connects computer vision, visual-language interfaces, annotation, and software engineering.",
     capabilities: [
-      "Computer vision and visual understanding",
-      "Dataset and annotation workflows",
-      "Research collaboration",
-      "Custom software and system development",
+      "Computer vision systems",
+      "Agentic engineering interfaces",
+      "Data annotation and review",
+      "Custom software and integration",
     ],
-    products: ["annotate", "pavexpert", "herd-monitoring"],
+    products: ["annotate", "pavexpert", "bisonguard"],
   },
 ];
-
 export type TeamMember = {
   name: string;
   role: string;
   image: string;
   biography: string;
 };
-
 export const teamMembers: TeamMember[] = [];

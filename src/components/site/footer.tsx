@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Brand } from "./brand";
 import { CookieSettingsButton } from "./consent";
-
+import { products } from "@/content/products";
 export function Footer() {
   return (
     <footer className="site-footer">
@@ -10,44 +10,45 @@ export function Footer() {
         <div className="footer-brand-column">
           <Brand footer />
           <p>
-            Applied intelligence.
-            <br />
-            Real-world possibilities.
+            Intelligence for
+            <br />a world in motion.
           </p>
           <a href="mailto:info@infinicitylabs.org" className="footer-email">
             info@infinicitylabs.org
-            <ArrowUpRight size={16} aria-hidden="true" />
+            <ArrowUpRight size={16} />
           </a>
         </div>
         <div>
-          <h2>Our products</h2>
-          <Link href="/products/adams">AdAMS</Link>
-          <Link href="/products/turnflow">Turnflow</Link>
-          <Link href="/products/roadlogger">RoadLogger</Link>
-          <Link href="/products/pavexpert">PaveXpert</Link>
-          <Link href="/products">
-            Explore all products
-            <ArrowUpRight size={13} aria-hidden="true" />
-          </Link>
+          <h2>Products</h2>
+          {products.map((p) => (
+            <Link key={p.slug} href={"/products/" + p.slug}>
+              {p.name}
+            </Link>
+          ))}
         </div>
         <div>
           <h2>Explore</h2>
+          <Link href="/solutions">Solutions</Link>
+          <Link href="/technology">Technology</Link>
           <Link href="/services">Our expertise</Link>
+          <Link href="/resources">Resources</Link>
           <Link href="/research">Research</Link>
-          <Link href="/company">Company</Link>
-          <Link href="/team">Our people</Link>
           <Link href="/platforms">Platform access</Link>
         </div>
         <div>
-          <h2>Connect</h2>
-          <Link href="/contact">Start a conversation</Link>
+          <h2>Company</h2>
+          <Link href="/company">About InfiniCity</Link>
+          <Link href="/team">Our people</Link>
+          <Link href="/careers">Careers</Link>
+          <Link href="/contact">Contact</Link>
+          <Link href="/book-a-demo">Book a demo</Link>
           <a
             href="https://www.linkedin.com/company/infinicity-labs/"
             target="_blank"
             rel="noopener noreferrer"
           >
             LinkedIn
-            <ArrowUpRight size={13} aria-hidden="true" />
+            <ArrowUpRight size={12} />
           </a>
           <a
             href="https://github.com/InfiniCityLabs"
@@ -55,9 +56,12 @@ export function Footer() {
             rel="noopener noreferrer"
           >
             GitHub
-            <ArrowUpRight size={13} aria-hidden="true" />
+            <ArrowUpRight size={12} />
           </a>
         </div>
+      </div>
+      <div className="wrap footer-wordmark" aria-hidden="true">
+        InfiniCity Labs<span>↗</span>
       </div>
       <div className="wrap footer-bottom">
         <p>© {new Date().getFullYear()} InfiniCity Labs</p>
@@ -65,7 +69,7 @@ export function Footer() {
           <Link href="/privacy">Privacy</Link>
           <CookieSettingsButton />
         </div>
-        <span>Built around what matters.</span>
+        <span>Observe. Understand. Move forward.</span>
       </div>
     </footer>
   );

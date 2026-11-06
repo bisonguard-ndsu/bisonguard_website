@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# InfiniCity Labs company website
 
-## Getting Started
+The public company website, built with Next.js App Router, TypeScript, locally hosted Instrument Sans and Instrument Serif, and Motion. This repository is separate from the product applications.
 
-First, run the development server:
+## Development
 
-```bash
+```sh
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:8080. Source checks: `npm run lint` and `npx tsc --noEmit`. Production: `npm run build`, then `npm run start` (port 3000 by default).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Design and content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The current brief, source boundaries, asset provenance, and verification notes are in [the second design plan](docs/website-redesign-v2.md). The [original plan](docs/website-redesign-plan.md) describes the first version, saved at commit `34c94b3` on `codex/company-website-redesign`.
 
-## Learn More
+- Products: `src/content/products.ts`
+- Solutions: `src/content/solutions.ts`
+- Field guides: `src/content/resources.ts`
+- Publications: `src/content/publications.ts`
+- Shared navigation, forms, and interactive illustrations: `src/components/site/`
+- Images: `public/images/`
 
-To learn more about Next.js, take a look at the following resources:
+Team data is intentionally empty. The product illustrations contain sample content and are labeled accordingly. Generated editorial scenes do not depict actual customer deployments.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Email and analytics
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Use `.env.example` as the configuration reference. Store SMTP credentials in the hosting provider's secret settings or an ignored local environment file. Contact and demo requests go to `info@infinicitylabs.org`. Demo requests include the selected product; they do not reserve a calendar time.
 
-## Deploy on Vercel
+Analytics requires a real `NEXT_PUBLIC_GA_MEASUREMENT_ID` at build time and visitor consent. The implementation sends route page views itself; disable automatic page-view/history and form-interaction collection in the GA4 stream to avoid duplicate events and unwanted form measurement. Deployment verification details are in the design plans.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Before public launch, review the generated editorial copy, provide approved product media and any team members, confirm product access URLs, and verify production email and analytics delivery.

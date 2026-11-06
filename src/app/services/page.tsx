@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { expertise, getProduct } from "@/content/products";
 import { ContactBand } from "@/components/site/contact-band";
 import { pageMetadata } from "@/lib/metadata";
+import { Reveal } from "@/components/site/reveal";
 
 export const metadata = pageMetadata(
   "Our expertise",
@@ -40,7 +41,7 @@ export default function ServicesPage() {
       <div className="wrap">
         {expertise.map((item, index) => (
           <section key={item.id} id={item.id} className="service-block">
-            <div>
+            <Reveal>
               <p className="eyebrow">What we do</p>
               <h2>{item.title}</h2>
               <figure className="service-image">
@@ -51,8 +52,8 @@ export default function ServicesPage() {
                   sizes="(max-width: 640px) 100vw, 45vw"
                 />
               </figure>
-            </div>
-            <div>
+            </Reveal>
+            <Reveal delay={80}>
               <p className="service-description">{item.description}</p>
               <ul className="service-capabilities">
                 {item.capabilities.map((capability) => (
@@ -67,10 +68,49 @@ export default function ServicesPage() {
                   </Link>
                 ))}
               </div>
-            </div>
+            </Reveal>
           </section>
         ))}
       </div>
+      <section className="wrap chapter-section">
+        <Reveal className="v2-section-heading">
+          <div>
+            <p className="eyebrow">Working together</p>
+            <h2>
+              A clear question.
+              <br />
+              <em>A practical path.</em>
+            </h2>
+          </div>
+          <p>
+            Some projects start with a product. Others need a study, a tailored
+            workflow, or a new integration. We begin by understanding the
+            decision you need to make.
+          </p>
+        </Reveal>
+        <div className="use-case-grid">
+          {[
+            {
+              title: "Frame the work",
+              text: "Agree on the problem, the available evidence, and what a useful outcome looks like. Identify the people who will use the result.",
+            },
+            {
+              title: "Build and review",
+              text: "Connect domain knowledge with the right collection, analysis, and software workflow. Review the evidence and assumptions together.",
+            },
+            {
+              title: "Put it to use",
+              text: "Shape the outputs around the next step: an inspection, a study, a report, an operational tool, or a longer-term product workflow.",
+            },
+          ].map((step, index) => (
+            <Reveal key={step.title} delay={index * 70}>
+              <p className="eyebrow">0{index + 1}</p>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </Reveal>
+          ))}
+        </div>
+      </section>
       <ContactBand
         title="Bring us the question."
         description="Whether you’re exploring a product, shaping a study, or developing a new system, a conversation is a good place to start."

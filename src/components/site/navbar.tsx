@@ -1,135 +1,135 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { Brand } from "./brand";
-import { expertise, products } from "@/content/products";
-
-type MenuName = "Products" | "Expertise" | "Company";
-
-const menuIntros = {
+import { products } from "@/content/products";
+import { solutions } from "@/content/solutions";
+type MenuName = "Products" | "Solutions" | "Resources" | "Company";
+const intros = {
   Products: {
-    title: "Built for the real world.",
-    text: "Explore the tools that connect observation, understanding, and action.",
+    title: "Intelligence for the work ahead.",
+    text: "Explore the products that connect field observations with practical decisions.",
     href: "/products",
     link: "All products",
   },
-  Expertise: {
-    title: "A problem worth solving.",
-    text: "Bring your domain knowledge. We bring applied AI and engineering.",
-    href: "/services",
-    link: "Explore our expertise",
+  Solutions: {
+    title: "Start with your challenge.",
+    text: "Find the workflows and expertise behind a useful answer.",
+    href: "/solutions",
+    link: "Explore solutions",
+  },
+  Resources: {
+    title: "A closer look at the work.",
+    text: "Practical guides, published research, and ideas worth exploring.",
+    href: "/resources",
+    link: "Resource library",
   },
   Company: {
-    title: "Curiosity. Put to work.",
-    text: "Meet the thinking behind InfiniCity Labs and the work we take on.",
+    title: "Curiosity, put to work.",
+    text: "Meet the company connecting research, engineering, and the real world.",
     href: "/company",
     link: "About InfiniCity",
   },
 };
-
+const resourceLinks = [
+  {
+    title: "Research library",
+    description: "Selected publications and ideas",
+    href: "/research",
+  },
+  {
+    title: "Infrastructure field guide",
+    description: "From surveys to maintenance decisions",
+    href: "/resources/from-road-surveys-to-maintenance-decisions",
+  },
+  {
+    title: "Traffic study guide",
+    description: "Building a useful turning-movement study",
+    href: "/resources/building-a-useful-turning-movement-study",
+  },
+  {
+    title: "Human review in AI",
+    description: "The people behind better visual data",
+    href: "/resources/human-review-in-computer-vision-workflows",
+  },
+];
+const companyLinks = [
+  {
+    title: "Our company",
+    description: "What we do and how we think",
+    href: "/company",
+  },
+  {
+    title: "Our people",
+    description: "Engineering, research, and collaboration",
+    href: "/team",
+  },
+  { title: "Careers", description: "Bring your perspective", href: "/careers" },
+  { title: "Contact", description: "Start a conversation", href: "/contact" },
+];
 function MenuLinks({ name }: { name: MenuName }) {
-  if (name === "Products") {
+  if (name === "Products")
     return (
       <div className="mega-product-columns">
-        <div>
-          <p className="menu-group-label">Infrastructure</p>
-          {products
-            .filter((p) =>
-              ["adams", "roadlogger", "pavexpert"].includes(p.slug),
-            )
-            .map((p) => (
-              <Link
-                key={p.slug}
-                href={`/products/${p.slug}`}
-                className="mega-link"
-              >
-                <span>
-                  {p.name}
-                  {p.inDevelopment && <small>In development</small>}
-                </span>
-                <ArrowUpRight size={15} aria-hidden="true" />
-              </Link>
-            ))}
-        </div>
-        <div>
-          <p className="menu-group-label">Mobility & tools</p>
-          {products
-            .filter((p) =>
-              ["turnflow", "traffic-management", "annotate"].includes(p.slug),
-            )
-            .map((p) => (
-              <Link
-                key={p.slug}
-                href={`/products/${p.slug}`}
-                className="mega-link"
-              >
-                <span>{p.name}</span>
-                <ArrowUpRight size={15} aria-hidden="true" />
-              </Link>
-            ))}
-          <Link className="menu-small-link" href="/products/herd-monitoring">
-            Selected work · Herd monitoring
-          </Link>
-        </div>
-      </div>
-    );
-  }
-  if (name === "Expertise") {
-    return (
-      <div className="mega-service-links">
-        {expertise.map((item) => (
-          <Link
-            key={item.id}
-            href={`/services#${item.id}`}
-            className="mega-link"
-          >
-            <span>
-              {item.title}
-              <small>{item.summary}</small>
-            </span>
-            <ArrowUpRight size={17} aria-hidden="true" />
-          </Link>
+        {[
+          ["adams", "pavexpert", "roadlogger"],
+          ["tmc", "turnflow", "annotate", "bisonguard"],
+        ].map((slugs, i) => (
+          <div key={i}>
+            <p className="menu-group-label">
+              {i === 0 ? "Infrastructure & field" : "Mobility & applied AI"}
+            </p>
+            {slugs.map((slug) => {
+              const p = products.find((p) => p.slug === slug)!;
+              return (
+                <Link
+                  key={slug}
+                  href={"/products/" + slug}
+                  className="mega-link"
+                >
+                  <span>
+                    {p.name}
+                    <small>{p.category}</small>
+                  </span>
+                  <ArrowUpRight size={15} />
+                </Link>
+              );
+            })}
+          </div>
         ))}
       </div>
     );
-  }
+  const links =
+    name === "Solutions"
+      ? solutions.map((s) => ({
+          title: s.shortTitle,
+          description: s.summary,
+          href: "/solutions/" + s.slug,
+        }))
+      : name === "Resources"
+        ? resourceLinks
+        : companyLinks;
   return (
     <div className="mega-service-links">
-      {[
-        {
-          title: "Our company",
-          text: "What we do and how we work",
-          href: "/company",
-        },
-        {
-          title: "Our people",
-          text: "Engineering, research, and collaboration",
-          href: "/team",
-        },
-        {
-          title: "Get in touch",
-          text: "Start a conversation about your project",
-          href: "/contact",
-        },
-      ].map((item) => (
+      {links.map((item) => (
         <Link key={item.href} href={item.href} className="mega-link">
           <span>
             {item.title}
-            <small>{item.text}</small>
+            <small>{item.description}</small>
           </span>
-          <ArrowUpRight size={17} aria-hidden="true" />
+          <ArrowUpRight size={17} />
         </Link>
       ))}
     </div>
   );
 }
-
 export function Navbar() {
   const [openMenu, setOpenMenu] = useState<MenuName | null>(null);
+  const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRefs = useRef<
@@ -138,17 +138,15 @@ export function Navbar() {
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const openedByHover = useRef(false);
   const pathname = usePathname();
-
+  const reduced = useReducedMotion();
   function cancelClose() {
     if (closeTimer.current) clearTimeout(closeTimer.current);
   }
-
   function closeMenu() {
     cancelClose();
     openedByHover.current = false;
     setOpenMenu(null);
   }
-
   function openOnHover(name: MenuName) {
     cancelClose();
     if (openMenu !== name) {
@@ -156,10 +154,8 @@ export function Navbar() {
       setOpenMenu(name);
     }
   }
-
   function toggleMenu(name: MenuName) {
     cancelClose();
-    // Clicking a trigger that just opened on hover should keep it expanded.
     if (openMenu === name && openedByHover.current) {
       openedByHover.current = false;
       return;
@@ -167,12 +163,13 @@ export function Navbar() {
     openedByHover.current = false;
     setOpenMenu(openMenu === name ? null : name);
   }
-
   function scheduleClose() {
     cancelClose();
-    closeTimer.current = setTimeout(() => setOpenMenu(null), 180);
+    closeTimer.current = setTimeout(() => {
+      openedByHover.current = false;
+      setOpenMenu(null);
+    }, 180);
   }
-
   useEffect(() => {
     setOpenMenu(null);
     dialogRef.current?.close();
@@ -180,7 +177,29 @@ export function Navbar() {
       if (closeTimer.current) clearTimeout(closeTimer.current);
     };
   }, [pathname]);
-
+  useEffect(() => {
+    let frame = 0;
+    function update() {
+      setScrolled(window.scrollY > 24);
+      const range = document.documentElement.scrollHeight - window.innerHeight;
+      headerRef.current?.style.setProperty(
+        "--page-progress",
+        String(range > 0 ? Math.min(window.scrollY / range, 1) : 0),
+      );
+      frame = 0;
+    }
+    function scroll() {
+      if (!frame) frame = requestAnimationFrame(update);
+    }
+    update();
+    window.addEventListener("scroll", scroll, { passive: true });
+    window.addEventListener("resize", scroll);
+    return () => {
+      window.removeEventListener("scroll", scroll);
+      window.removeEventListener("resize", scroll);
+      cancelAnimationFrame(frame);
+    };
+  }, [pathname]);
   useEffect(() => {
     if (!openMenu) return;
     function dismiss(event: PointerEvent) {
@@ -189,94 +208,72 @@ export function Navbar() {
     document.addEventListener("pointerdown", dismiss);
     return () => document.removeEventListener("pointerdown", dismiss);
   }, [openMenu]);
-
   function isActive(name: MenuName) {
-    if (name === "Products") return pathname.startsWith("/products");
-    if (name === "Expertise") return pathname === "/services";
-    return ["/company", "/team"].includes(pathname);
+    return name === "Products"
+      ? pathname.startsWith("/products")
+      : name === "Solutions"
+        ? pathname.startsWith("/solutions") || pathname === "/services"
+        : name === "Resources"
+          ? pathname.startsWith("/resources") || pathname === "/research"
+          : ["/company", "/team", "/careers"].includes(pathname);
   }
-
   return (
     <>
       <header
         ref={headerRef}
-        className={`site-header${openMenu ? " has-open-menu" : ""}`}
-        onPointerLeave={(event) => {
-          if (event.pointerType === "mouse") scheduleClose();
+        className={"site-header" + (openMenu ? " has-open-menu" : "")}
+        data-home={pathname === "/"}
+        data-scrolled={scrolled}
+        onPointerLeave={(e) => {
+          if (e.pointerType === "mouse") scheduleClose();
         }}
         onPointerEnter={cancelClose}
-        onBlur={(event) => {
-          if (!event.currentTarget.contains(event.relatedTarget)) closeMenu();
+        onBlur={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget)) closeMenu();
         }}
-        onKeyDown={(event) => {
-          if (event.key === "Escape" && openMenu) {
+        onKeyDown={(e) => {
+          if (e.key === "Escape" && openMenu) {
             triggerRefs.current[openMenu]?.focus();
             closeMenu();
           }
         }}
-        onClick={(event) => {
-          if ((event.target as HTMLElement).closest("a")) closeMenu();
+        onClick={(e) => {
+          if ((e.target as HTMLElement).closest("a")) closeMenu();
         }}
       >
         <div className="header-inner wrap">
           <Brand />
           <nav className="desktop-nav" aria-label="Main navigation">
-            {(["Products", "Expertise"] as MenuName[]).map((name) => (
+            {(
+              ["Products", "Solutions", "Resources", "Company"] as MenuName[]
+            ).map((name) => (
               <button
                 key={name}
+                type="button"
                 ref={(node) => {
                   triggerRefs.current[name] = node;
                 }}
-                type="button"
-                className={`nav-trigger${isActive(name) ? " active" : ""}`}
+                className={"nav-trigger" + (isActive(name) ? " active" : "")}
                 aria-expanded={openMenu === name}
-                aria-controls={`menu-${name.toLowerCase()}`}
+                aria-controls={"menu-" + name.toLowerCase()}
                 onClick={() => toggleMenu(name)}
-                onPointerEnter={(event) => {
-                  if (event.pointerType === "mouse") {
-                    openOnHover(name);
-                  }
+                onPointerEnter={(e) => {
+                  if (e.pointerType === "mouse") openOnHover(name);
                 }}
               >
                 {name}
-                <ChevronDown size={13} aria-hidden="true" />
+                <ChevronDown size={12} />
               </button>
             ))}
-            <Link
-              href="/research"
-              className={pathname === "/research" ? "active" : ""}
-              aria-current={pathname === "/research" ? "page" : undefined}
-              onPointerEnter={() => closeMenu()}
-            >
-              Research
-            </Link>
-            <button
-              ref={(node) => {
-                triggerRefs.current.Company = node;
-              }}
-              type="button"
-              className={`nav-trigger${isActive("Company") ? " active" : ""}`}
-              aria-expanded={openMenu === "Company"}
-              aria-controls="menu-company"
-              onClick={() => toggleMenu("Company")}
-              onPointerEnter={(event) => {
-                if (event.pointerType === "mouse") {
-                  openOnHover("Company");
-                }
-              }}
-            >
-              Company
-              <ChevronDown size={13} aria-hidden="true" />
-            </button>
           </nav>
           <div className="header-actions">
             <Link href="/platforms" className="platform-link">
               Platforms
-              <ArrowUpRight size={14} aria-hidden="true" />
+              <ArrowUpRight size={14} />
             </Link>
-            <Link href="/contact" className="header-contact">
-              Let’s talk
-              <ArrowUpRight size={16} aria-hidden="true" />
+            <Link href="/book-a-demo" className="header-contact">
+              Book a demo
+              <ArrowUpRight size={16} />
             </Link>
           </div>
           <button
@@ -291,41 +288,70 @@ export function Navbar() {
             <Menu size={25} />
           </button>
         </div>
-        {openMenu && (
-          <div className="mega-menu" id={`menu-${openMenu.toLowerCase()}`}>
-            <div className="wrap mega-layout">
-              <div className="mega-intro">
-                <p className="eyebrow">{openMenu}</p>
-                <h2>{menuIntros[openMenu].title}</h2>
-                <p>{menuIntros[openMenu].text}</p>
-                <Link href={menuIntros[openMenu].href} className="text-link">
-                  {menuIntros[openMenu].link}
-                  <ArrowUpRight size={17} aria-hidden="true" />
-                </Link>
-              </div>
-              <MenuLinks name={openMenu} />
-              <Link
-                href={openMenu === "Products" ? "/products/adams" : "/research"}
-                className="mega-feature"
-              >
-                <div className="mega-feature-image">
-                  <Image
-                    src="/images/infrastructure-aerial.webp"
-                    fill
-                    sizes="300px"
-                    alt=""
-                  />
+        <span className="header-progress" aria-hidden="true" />
+        <AnimatePresence>
+          {openMenu && (
+            <motion.div
+              key={openMenu}
+              className="mega-menu"
+              id={"menu-" + openMenu.toLowerCase()}
+              initial={{ opacity: 0, y: reduced ? 0 : -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: reduced ? 0 : -5 }}
+              transition={{ duration: reduced ? 0 : 0.2 }}
+            >
+              <div className="wrap mega-layout">
+                <div className="mega-intro">
+                  <p className="eyebrow">{openMenu}</p>
+                  <h2>{intros[openMenu].title}</h2>
+                  <p>{intros[openMenu].text}</p>
+                  <Link href={intros[openMenu].href} className="text-link">
+                    {intros[openMenu].link}
+                    <ArrowUpRight size={17} />
+                  </Link>
                 </div>
-                <span>
-                  {openMenu === "Products"
-                    ? "A closer look at AdAMS"
-                    : "Research that asks better questions"}
-                  <ArrowUpRight size={18} aria-hidden="true" />
-                </span>
-              </Link>
-            </div>
-          </div>
-        )}
+                <MenuLinks name={openMenu} />
+                <div className="mega-feature-column">
+                  <Link
+                    href={
+                      openMenu === "Products"
+                        ? "/products/adams"
+                        : "/technology"
+                    }
+                    className="mega-feature"
+                  >
+                    <div className="mega-feature-image">
+                      <Image
+                        src={
+                          openMenu === "Products"
+                            ? "/images/adams-inspection.webp"
+                            : "/images/field-inspection.webp"
+                        }
+                        fill
+                        sizes="320px"
+                        alt=""
+                      />
+                    </div>
+                    <span>
+                      {openMenu === "Products"
+                        ? "A closer look at AdAMS"
+                        : "The technology behind the work"}
+                      <ArrowUpRight size={18} />
+                    </span>
+                  </Link>
+                  <Link href="/services" className="mega-secondary-link">
+                    Our expertise
+                    <ArrowUpRight size={14} />
+                  </Link>
+                  <Link href="/book-a-demo" className="mega-secondary-link">
+                    See it in a demo
+                    <ArrowUpRight size={14} />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
       {openMenu && <div className="nav-scrim" aria-hidden="true" />}
       <dialog
@@ -334,7 +360,7 @@ export function Navbar() {
         aria-labelledby="mobile-nav-title"
       >
         <div className="mobile-menu-top">
-          <span id="mobile-nav-title">Explore InfiniCity</span>
+          <span id="mobile-nav-title">Explore InfiniCity Labs</span>
           <button
             type="button"
             aria-label="Close navigation"
@@ -345,8 +371,8 @@ export function Navbar() {
         </div>
         <nav
           aria-label="Mobile navigation"
-          onClick={(event) => {
-            if ((event.target as HTMLElement).closest("a"))
+          onClick={(e) => {
+            if ((e.target as HTMLElement).closest("a"))
               dialogRef.current?.close();
           }}
         >
@@ -354,50 +380,46 @@ export function Navbar() {
             Home
             <ArrowUpRight size={19} />
           </Link>
-          <details>
-            <summary>
-              Products
-              <ChevronDown size={20} />
-            </summary>
-            <Link href="/products">All products</Link>
-            {products.map((p) => (
-              <Link key={p.slug} href={`/products/${p.slug}`}>
-                {p.name}
-                {p.inDevelopment && <small>In development</small>}
-              </Link>
-            ))}
-          </details>
-          <details>
-            <summary>
-              Expertise
-              <ChevronDown size={20} />
-            </summary>
-            <Link href="/services">Our expertise</Link>
-            {expertise.map((e) => (
-              <Link key={e.id} href={`/services#${e.id}`}>
-                {e.title}
-              </Link>
-            ))}
-          </details>
-          <Link href="/research" className="mobile-main-link">
-            Research
+          {(
+            ["Products", "Solutions", "Resources", "Company"] as MenuName[]
+          ).map((name) => (
+            <details key={name}>
+              <summary>
+                {name}
+                <ChevronDown size={20} />
+              </summary>
+              <Link href={intros[name].href}>{intros[name].link}</Link>
+              {name === "Products"
+                ? products.map((p) => (
+                    <Link key={p.slug} href={"/products/" + p.slug}>
+                      {p.name}
+                    </Link>
+                  ))
+                : name === "Solutions"
+                  ? solutions.map((s) => (
+                      <Link key={s.slug} href={"/solutions/" + s.slug}>
+                        {s.shortTitle}
+                      </Link>
+                    ))
+                  : (name === "Resources" ? resourceLinks : companyLinks).map(
+                      (l) => (
+                        <Link key={l.href} href={l.href}>
+                          {l.title}
+                        </Link>
+                      ),
+                    )}
+            </details>
+          ))}
+          <Link href="/technology" className="mobile-main-link">
+            Technology
             <ArrowUpRight size={19} />
           </Link>
-          <details>
-            <summary>
-              Company
-              <ChevronDown size={20} />
-            </summary>
-            <Link href="/company">About InfiniCity</Link>
-            <Link href="/team">Our people</Link>
-            <Link href="/contact">Contact</Link>
-          </details>
           <Link href="/platforms" className="mobile-main-link">
             Platform access
             <ArrowUpRight size={19} />
           </Link>
-          <Link href="/contact" className="link-button link-button-solid">
-            Let’s talk
+          <Link href="/book-a-demo" className="link-button link-button-solid">
+            Book a demo
             <ArrowUpRight size={18} />
           </Link>
         </nav>

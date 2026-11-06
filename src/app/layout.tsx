@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import "./experience.css";
+import "./destinations.css";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { ConsentManager } from "@/components/site/consent";
 import { siteUrl } from "@/lib/metadata";
+import { MotionRuntime } from "@/components/site/motion";
 
 const sans = localFont({
   src: [
@@ -91,6 +94,7 @@ export default function RootLayout({
         </main>
         <Footer />
         <ConsentManager />
+        <MotionRuntime />
       </body>
     </html>
   );

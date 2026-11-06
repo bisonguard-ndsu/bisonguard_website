@@ -1,5 +1,7 @@
 # InfiniCity Labs website redesign
 
+This document records the first implementation, preserved in commit `34c94b3`. The current direction and product corrections are in [website-redesign-v2.md](website-redesign-v2.md). In particular, the previous PaveXpert development label and descriptive TMC/herd-monitoring names below are superseded.
+
 ## Agreed brief
 
 Created on 2026-11-05. Branch `codex/company-website-redesign` starts at local `main` commit `e5e6cfe`. The user explicitly authorized planning and implementation in this turn. Work is local to the company website repository.
@@ -25,24 +27,24 @@ Mobile composition follows the same reading order. Headlines scale with viewport
 
 ## Information architecture
 
-| Destination | Purpose |
-| --- | --- |
-| `/` | Explain the company, reveal the product portfolio, offer research and contact paths |
-| `/products` | Product directory, including clear development labels |
-| `/products/adams` | Advanced Asset Management System and its confirmed capabilities |
-| `/products/pavexpert` | Agentic platform for AdAMS, explicitly in development |
-| `/products/traffic-management` | Traffic management system, distinct from Turnflow |
-| `/products/turnflow` | Traffic video counting, review, and reporting |
-| `/products/roadlogger` | Road survey collection and field logging |
-| `/products/annotate` | Annotation tools for visual datasets |
-| `/products/herd-monitoring` | A secondary selected system for herd detection and monitoring |
-| `/services` | Infrastructure, mobility, and applied AI engineering capabilities |
-| `/research` | Selected verified publications co-authored by Armstrong Aboah and collaborators |
-| `/company` | Company approach and the work it takes on |
-| `/team` | Designed team destination backed by an initially empty member collection |
-| `/contact` | One inquiry form delivered to info@infinicitylabs.org |
-| `/platforms` | Product access directory with confirmed destinations and inquiry paths |
-| `/privacy` | Plain-language description of actual contact and analytics behavior |
+| Destination                    | Purpose                                                                             |
+| ------------------------------ | ----------------------------------------------------------------------------------- |
+| `/`                            | Explain the company, reveal the product portfolio, offer research and contact paths |
+| `/products`                    | Product directory, including clear development labels                               |
+| `/products/adams`              | Advanced Asset Management System and its confirmed capabilities                     |
+| `/products/pavexpert`          | Agentic platform for AdAMS, explicitly in development                               |
+| `/products/traffic-management` | Traffic management system, distinct from Turnflow                                   |
+| `/products/turnflow`           | Traffic video counting, review, and reporting                                       |
+| `/products/roadlogger`         | Road survey collection and field logging                                            |
+| `/products/annotate`           | Annotation tools for visual datasets                                                |
+| `/products/herd-monitoring`    | A secondary selected system for herd detection and monitoring                       |
+| `/services`                    | Infrastructure, mobility, and applied AI engineering capabilities                   |
+| `/research`                    | Selected verified publications co-authored by Armstrong Aboah and collaborators     |
+| `/company`                     | Company approach and the work it takes on                                           |
+| `/team`                        | Designed team destination backed by an initially empty member collection            |
+| `/contact`                     | One inquiry form delivered to info@infinicitylabs.org                               |
+| `/platforms`                   | Product access directory with confirmed destinations and inquiry paths              |
+| `/privacy`                     | Plain-language description of actual contact and analytics behavior                 |
 
 Redirect `/adams`, `/tmc`, `/fms`, and `/about` to their corresponding new destinations. Retain homepage contact/project anchors where useful for old incoming links.
 
@@ -88,13 +90,13 @@ Implementation is complete for the page structure above. The original promotiona
 
 ### Image provenance and generation briefs
 
-| Repository asset | Source | Use |
-| --- | --- | --- |
-| `public/images/infrastructure-aerial.webp` | Original ImageGen output | Homepage hero, company imagery, selected navigation and product illustrations |
-| `public/images/intersection.webp` | Original ImageGen output | Turnflow and traffic illustrations |
-| `public/images/adams-inspection.webp` | Existing approved `public/traffic-sign-geolocation_2.png` | Actual AdAMS inspection interface |
-| `public/images/road-survey.webp` | Existing approved `public/adams-1.png` | Field collection illustration |
-| `public/images/herd-monitoring.webp` | Existing approved `public/herd.JPG` | Herd monitoring system |
+| Repository asset                           | Source                                                    | Use                                                                           |
+| ------------------------------------------ | --------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `public/images/infrastructure-aerial.webp` | Original ImageGen output                                  | Homepage hero, company imagery, selected navigation and product illustrations |
+| `public/images/intersection.webp`          | Original ImageGen output                                  | Turnflow and traffic illustrations                                            |
+| `public/images/adams-inspection.webp`      | Existing approved `public/traffic-sign-geolocation_2.png` | Actual AdAMS inspection interface                                             |
+| `public/images/road-survey.webp`           | Existing approved `public/adams-1.png`                    | Field collection illustration                                                 |
+| `public/images/herd-monitoring.webp`       | Existing approved `public/herd.JPG`                       | Herd monitoring system                                                        |
 
 Generation brief for the infrastructure image: photorealistic editorial aerial photography of a highway interchange and cable-stayed bridge beside a city, late-afternoon light, charcoal shadows, muted teal colors, roads strongest in the middle and right, darker wooded space on the left for headline copy, panoramic composition. No labels, UI, bounding boxes, holograms, or neon. An illustrative scene, with no claim that it depicts an InfiniCity deployment.
 

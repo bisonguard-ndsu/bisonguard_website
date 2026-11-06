@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const inquiryReasons = [
+  "Product demonstration",
   "Product inquiry",
   "Project or partnership",
   "Research collaboration",
@@ -27,6 +28,7 @@ export const contactSchema = z.object({
     .optional()
     .default(""),
   reason: z.enum(inquiryReasons).optional().default("Product inquiry"),
+  product: z.string().trim().max(80).optional().default(""),
   message: z
     .string()
     .trim()
