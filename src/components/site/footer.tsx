@@ -10,8 +10,8 @@ export function Footer() {
         <div className="footer-brand-column">
           <Brand footer />
           <p>
-            Intelligence for
-            <br />a world in motion.
+            Software and engineering for infrastructure, mobility, and applied
+            AI.
           </p>
           <a href="mailto:info@infinicitylabs.org" className="footer-email">
             info@infinicitylabs.org
@@ -60,16 +60,12 @@ export function Footer() {
           </a>
         </div>
       </div>
-      <div className="wrap footer-wordmark" aria-hidden="true">
-        InfiniCity Labs<span>↗</span>
-      </div>
       <div className="wrap footer-bottom">
         <p>© {new Date().getFullYear()} InfiniCity Labs</p>
         <div>
           <Link href="/privacy">Privacy</Link>
           <CookieSettingsButton />
         </div>
-        <span>Observe. Understand. Move forward.</span>
       </div>
     </footer>
   );

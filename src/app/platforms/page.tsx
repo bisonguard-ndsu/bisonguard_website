@@ -14,9 +14,7 @@ export default function PlatformsPage() {
     <>
       <section className="wrap page-intro">
         <p className="eyebrow">Platform access</p>
-        <h1>
-          Back to <em>your work.</em>
-        </h1>
+        <h1>Access your workspace.</h1>
         <p>
           Find your workspace or get in touch to explore access to a product.
         </p>

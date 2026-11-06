@@ -15,11 +15,7 @@ export default function SolutionsPage() {
     <>
       <section className="wrap page-intro">
         <p className="eyebrow">Start with your challenge</p>
-        <h1>
-          The right intelligence.
-          <br />
-          <em>In the right context.</em>
-        </h1>
+        <h1>Solutions for your engineering workflow.</h1>
         <p>
           Different environments ask different questions. We connect the
           products, engineering, and domain knowledge needed to explore them.

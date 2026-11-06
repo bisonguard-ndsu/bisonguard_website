@@ -13,11 +13,7 @@ export default function ContactPage() {
     <section className="wrap contact-page">
       <div className="contact-page-heading">
         <p className="eyebrow">Start a conversation</p>
-        <h1>
-          What do you have
-          <br />
-          <em>in mind?</em>
-        </h1>
+        <h1>Talk to our team.</h1>
       </div>
       <div className="contact-layout">
         <div className="contact-intro">

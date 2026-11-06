@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
 import { products } from "@/content/products";
-import { ProductCard } from "./product-card";
 const groups = [
   "All products",
   "Infrastructure",
@@ -34,9 +35,31 @@ export function ProductDirectory() {
         ))}
         <span aria-live="polite">{visible.length} products</span>
       </div>
-      <div className="product-grid catalog-grid" key={filter}>
+      <div className="catalog-rows" key={filter}>
         {visible.map((p) => (
-          <ProductCard key={p.slug} product={p} />
+          <article className="catalog-row" key={p.slug}>
+            <div>
+              <p className="eyebrow">{p.category}</p>
+              <h2>
+                <Link href={"/products/" + p.slug}>{p.name}</Link>
+              </h2>
+            </div>
+            <div>
+              <p>{p.summary}</p>
+              <ul>
+                {p.outputs.slice(0, 3).map((output) => (
+                  <li key={output}>{output}</li>
+                ))}
+              </ul>
+            </div>
+            <Link
+              href={"/products/" + p.slug}
+              className="catalog-row-link"
+              aria-label={"Explore " + p.name}
+            >
+              Explore <ArrowUpRight size={20} />
+            </Link>
+          </article>
         ))}
       </div>
     </>

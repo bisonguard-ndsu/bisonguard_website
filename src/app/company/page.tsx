@@ -14,39 +14,23 @@ export default function CompanyPage() {
     <>
       <section className="wrap page-intro company-intro">
         <p className="eyebrow">We are InfiniCity Labs</p>
-        <h1>
-          Curious about the world.
-          <br />
-          <em>Serious about the work.</em>
-        </h1>
+        <h1>Engineering software for the physical world.</h1>
         <p>
-          We build technology for the places, systems, and movements that shape
-          everyday life. Our work connects research and engineering with the
-          people facing the next practical question.
+          InfiniCity Labs builds software for infrastructure management, traffic
+          analysis, and applied computer vision. We bring research and
+          engineering into tools that support inspections, studies, and field
+          operations.
         </p>
       </section>
-      <div className="company-panorama">
-        <Image
-          src="/images/infrastructure-aerial.webp"
-          alt="Illustrative connected road and city landscape"
-          fill
-          sizes="100vw"
-        />
-        <div />
-        <span>Illustrative infrastructure scene</span>
-      </div>
       <section className="wrap chapter-section company-purpose">
         <Reveal>
           <p className="eyebrow">Why we do it</p>
-          <h2>
-            Seeing more is
-            <br />
-            just the <em>beginning.</em>
-          </h2>
+          <h2>Make field data useful to the people responsible for it.</h2>
         </Reveal>
         <Reveal>
           <p className="company-lead">
-            The interesting question is what understanding makes possible.
+            Data collection is one part of the job. The next part is making it
+            usable.
           </p>
           <p>
             A clearer view of road condition. A traffic study that keeps its
@@ -63,11 +47,7 @@ export default function CompanyPage() {
       <section className="chapter-section company-practice">
         <div className="wrap">
           <Reveal className="v2-section-heading">
-            <h2>
-              Different disciplines.
-              <br />
-              <em>One connected practice.</em>
-            </h2>
+            <h2>How we build.</h2>
             <Link href="/technology" className="text-link">
               Explore our technology
               <ArrowUpRight size={17} />
@@ -103,19 +83,15 @@ export default function CompanyPage() {
       <section className="wrap chapter-section company-perspective">
         <Reveal className="company-perspective-image">
           <Image
-            src="/images/field-inspection.webp"
-            alt="Illustrative engineering inspection in the field"
+            src="/images/bisonguard-herd.webp"
+            alt="Herd monitoring is one of the environments our products support"
             fill
             sizes="(max-width:800px) 100vw, 50vw"
           />
         </Reveal>
         <Reveal>
           <p className="eyebrow">A practical perspective</p>
-          <h2>
-            The environment
-            <br />
-            <em>comes first.</em>
-          </h2>
+          <h2>Different environments need different tools.</h2>
           <p>
             Infrastructure, traffic, and field monitoring each bring their own
             constraints. We start there: the available data, the person using
@@ -135,11 +111,7 @@ export default function CompanyPage() {
       <section className="wrap company-invitations">
         <Reveal>
           <p className="eyebrow">The people behind the work</p>
-          <h2>
-            Different perspectives.
-            <br />
-            <em>Shared possibilities.</em>
-          </h2>
+          <h2>Our team.</h2>
           <Link href="/team" className="text-link">
             Our people
             <ArrowUpRight size={17} />
@@ -147,18 +119,14 @@ export default function CompanyPage() {
         </Reveal>
         <Reveal>
           <p className="eyebrow">Bring your perspective</p>
-          <h2>
-            Good questions
-            <br />
-            <em>travel further together.</em>
-          </h2>
+          <h2>Work with us.</h2>
           <Link href="/careers" className="text-link">
             Careers & collaboration
             <ArrowUpRight size={17} />
           </Link>
         </Reveal>
       </section>
-      <ContactBand title="Let’s find something worth working on." />
+      <ContactBand />
     </>
   );
 }

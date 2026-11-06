@@ -11,26 +11,26 @@ import { solutions } from "@/content/solutions";
 type MenuName = "Products" | "Solutions" | "Resources" | "Company";
 const intros = {
   Products: {
-    title: "Intelligence for the work ahead.",
-    text: "Explore the products that connect field observations with practical decisions.",
+    title: "The product portfolio.",
+    text: "Software for asset management, traffic analysis, field inspections, and visual AI.",
     href: "/products",
     link: "All products",
   },
   Solutions: {
-    title: "Start with your challenge.",
-    text: "Find the workflows and expertise behind a useful answer.",
+    title: "Your engineering workflow.",
+    text: "Explore applications in road networks, traffic studies, and field operations.",
     href: "/solutions",
     link: "Explore solutions",
   },
   Resources: {
-    title: "A closer look at the work.",
-    text: "Practical guides, published research, and ideas worth exploring.",
+    title: "Research & practical guides.",
+    text: "Read about pavement assessment, traffic studies, and computer vision.",
     href: "/resources",
     link: "Resource library",
   },
   Company: {
-    title: "Curiosity, put to work.",
-    text: "Meet the company connecting research, engineering, and the real world.",
+    title: "About InfiniCity Labs.",
+    text: "The company behind the products, our engineering approach, and ways to work with us.",
     href: "/company",
     link: "About InfiniCity",
   },
@@ -325,7 +325,7 @@ export function Navbar() {
                         src={
                           openMenu === "Products"
                             ? "/images/adams-inspection.webp"
-                            : "/images/field-inspection.webp"
+                            : "/images/bisonguard-herd.webp"
                         }
                         fill
                         sizes="320px"

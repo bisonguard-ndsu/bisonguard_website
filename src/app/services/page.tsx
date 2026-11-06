@@ -28,11 +28,7 @@ export default function ServicesPage() {
     <>
       <section className="wrap page-intro">
         <p className="eyebrow">Our expertise</p>
-        <h1>
-          Start with the challenge.
-          <br />
-          <em>Build from there.</em>
-        </h1>
+        <h1>Infrastructure, mobility, and AI expertise.</h1>
         <p>
           Engineering, research, and software work best together. We connect
           them around the questions that matter to your project.
@@ -76,11 +72,7 @@ export default function ServicesPage() {
         <Reveal className="v2-section-heading">
           <div>
             <p className="eyebrow">Working together</p>
-            <h2>
-              A clear question.
-              <br />
-              <em>A practical path.</em>
-            </h2>
+            <h2>Our project approach.</h2>
           </div>
           <p>
             Some projects start with a product. Others need a study, a tailored

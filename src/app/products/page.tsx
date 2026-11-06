@@ -12,15 +12,12 @@ export default function ProductsPage() {
       <section className="wrap page-intro page-intro-split">
         <div>
           <p className="eyebrow">The InfiniCity portfolio</p>
-          <h1>
-            Built for the work.
-            <br />
-            <em>Ready for the question.</em>
-          </h1>
+          <h1>Our products.</h1>
         </div>
         <p>
-          Seven products. Different perspectives on the physical world. Explore
-          the tools that connect observations with a useful next step.
+          Explore software for road networks, traffic studies, field operations,
+          and visual AI. Compare each product’s focus and the outputs it
+          supports.
         </p>
       </section>
       <section className="wrap product-index" aria-label="Product portfolio">

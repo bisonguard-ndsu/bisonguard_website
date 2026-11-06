@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import "./experience.css";
 import "./destinations.css";
+import "./home.css";
 import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { ConsentManager } from "@/components/site/consent";
@@ -31,18 +32,10 @@ const sans = localFont({
   display: "swap",
 });
 
-const serif = localFont({
-  src: "./fonts/instrument-serif-italic.ttf",
-  variable: "--font-instrument-serif",
-  display: "swap",
-  weight: "400",
-  style: "italic",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "InfiniCity Labs — Intelligence for a world in motion",
+    default: "InfiniCity Labs — Infrastructure, mobility & applied AI",
     template: "%s | InfiniCity Labs",
   },
   description:
@@ -75,11 +68,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={sans.variable + " " + serif.variable}
-      data-scroll-behavior="smooth"
-    >
+    <html lang="en" className={sans.variable} data-scroll-behavior="smooth">
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content

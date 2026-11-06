@@ -92,12 +92,8 @@ export default async function ProductPage({
         id="overview"
       >
         <Reveal>
-          <p className="eyebrow">The bigger picture</p>
-          <h2>
-            Built around
-            <br />
-            <em>the way you work.</em>
-          </h2>
+          <p className="eyebrow">Product overview</p>
+          <h2>Where {product.name} fits.</h2>
         </Reveal>
         <Reveal delay={70}>
           <p>{product.description}</p>
@@ -113,11 +109,7 @@ export default async function ProductPage({
       >
         <div className="wrap">
           <Reveal className="v2-section-heading">
-            <h2>
-              The detail that
-              <br />
-              <em>makes a difference.</em>
-            </h2>
+            <h2>Capabilities.</h2>
             <p>Explore the capabilities at the heart of {product.name}.</p>
           </Reveal>
           <div className="capability-editorial-grid">
@@ -135,11 +127,7 @@ export default async function ProductPage({
       </section>
       <section className="wrap chapter-section" id="workflow">
         <Reveal className="v2-section-heading">
-          <h2>
-            A connected
-            <br />
-            <em>way forward.</em>
-          </h2>
+          <h2>How {product.name} works.</h2>
           <p>From the first input to the next useful action.</p>
         </Reveal>
         <div className="workflow-editorial">
@@ -158,11 +146,7 @@ export default async function ProductPage({
       <section className="use-case-section chapter-section" id="use-cases">
         <div className="wrap">
           <Reveal className="v2-section-heading">
-            <h2>
-              Where it becomes
-              <br />
-              <em>useful.</em>
-            </h2>
+            <h2>Applications.</h2>
             <p>Start with the work your team needs to do.</p>
           </Reveal>
           <div className="use-case-grid">
@@ -181,12 +165,8 @@ export default async function ProductPage({
         id="questions"
       >
         <Reveal>
-          <p className="eyebrow">A little more context</p>
-          <h2>
-            Good questions.
-            <br />
-            <em>Clearer answers.</em>
-          </h2>
+          <p className="eyebrow">Frequently asked questions</p>
+          <h2>Questions about {product.name}.</h2>
           <Link href="/contact" className="text-link">
             Ask us something else
             <ArrowUpRight size={17} />

@@ -15,11 +15,7 @@ export default function ResourcesPage() {
     <>
       <section className="wrap page-intro">
         <p className="eyebrow">Field notes & practical perspectives</p>
-        <h1>
-          More context.
-          <br />
-          <em>Better questions.</em>
-        </h1>
+        <h1>Practical guides.</h1>
         <p>
           Explore the thinking behind connected infrastructure, useful traffic
           studies, and visual AI workflows.
@@ -63,11 +59,7 @@ export default function ResourcesPage() {
       <section className="wrap research-callout">
         <div>
           <p className="eyebrow">Go a little deeper</p>
-          <h2>
-            Research behind
-            <br />
-            <em>the questions.</em>
-          </h2>
+          <h2>Selected research.</h2>
         </div>
         <div>
           <p>

@@ -19,11 +19,7 @@ export default async function DemoPage({
     <section className="wrap demo-page">
       <div className="demo-intro">
         <p className="eyebrow">See the work in context</p>
-        <h1>
-          Let’s make it
-          <br />
-          <em>more concrete.</em>
-        </h1>
+        <h1>Book a product demo.</h1>
         <p>
           Tell us what you’re working on. We’ll arrange a product walkthrough
           around your team, your questions, and your workflow.

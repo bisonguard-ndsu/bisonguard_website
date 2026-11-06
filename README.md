@@ -1,6 +1,6 @@
 # InfiniCity Labs company website
 
-The public company website, built with Next.js App Router, TypeScript, locally hosted Instrument Sans and Instrument Serif, and Motion. This repository is separate from the product applications.
+The public company website, built with Next.js App Router, TypeScript, locally hosted Instrument Sans, and Motion. This repository is separate from the product applications.
 
 ## Development
 
@@ -13,7 +13,7 @@ Open http://localhost:8080. Source checks: `npm run lint` and `npx tsc --noEmit`
 
 ## Design and content
 
-The current brief, source boundaries, asset provenance, and verification notes are in [the second design plan](docs/website-redesign-v2.md). The [original plan](docs/website-redesign-plan.md) describes the first version, saved at commit `34c94b3` on `codex/company-website-redesign`.
+The current visual direction is documented in [the third design plan](docs/website-redesign-v3.md). Product source boundaries, asset provenance, and the earlier functional verification are in [the second design plan](docs/website-redesign-v2.md), preserved at commit `08b3eae`. The [original plan](docs/website-redesign-plan.md) describes the first version, saved at commit `34c94b3` on `codex/company-website-redesign`.
 
 - Products: `src/content/products.ts`
 - Solutions: `src/content/solutions.ts`

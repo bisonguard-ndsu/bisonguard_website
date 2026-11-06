@@ -13,11 +13,7 @@ export default function ResearchPage() {
     <>
       <section className="wrap page-intro">
         <p className="eyebrow">Research & ideas</p>
-        <h1>
-          Keep asking
-          <br />
-          <em>better questions.</em>
-        </h1>
+        <h1>Research & publications.</h1>
         <p>
           Work in pavement assessment, visual understanding, and mobility
           informs the questions we explore. Discover selected publications

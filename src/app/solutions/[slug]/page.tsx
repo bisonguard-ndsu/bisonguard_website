@@ -62,11 +62,7 @@ export default async function SolutionPage({
       <section className="wrap chapter-section solution-challenge">
         <Reveal>
           <p className="eyebrow">The challenge</p>
-          <h2>
-            Start with
-            <br />
-            <em>what matters.</em>
-          </h2>
+          <h2>The operational challenge.</h2>
         </Reveal>
         <Reveal>
           <p>{solution.challenge}</p>
@@ -75,11 +71,7 @@ export default async function SolutionPage({
       <section className="use-case-section chapter-section">
         <div className="wrap">
           <Reveal className="v2-section-heading">
-            <h2>
-              A more connected
-              <br />
-              <em>way to work.</em>
-            </h2>
+            <h2>What this workflow supports.</h2>
           </Reveal>
           <div className="use-case-grid">
             {solution.outcomes.map((item, i) => (
@@ -94,11 +86,7 @@ export default async function SolutionPage({
       </section>
       <section className="wrap chapter-section">
         <Reveal className="v2-section-heading">
-          <h2>
-            From the question
-            <br />
-            <em>to the workflow.</em>
-          </h2>
+          <h2>From collection to review.</h2>
         </Reveal>
         <div className="workflow-editorial">
           {solution.workflow.map((step, i) => (
@@ -115,11 +103,7 @@ export default async function SolutionPage({
       </section>
       <section className="wrap chapter-section solution-products">
         <Reveal className="v2-section-heading">
-          <h2>
-            The products
-            <br />
-            <em>behind the work.</em>
-          </h2>
+          <h2>Relevant products.</h2>
           <p>Explore the tools relevant to this workflow.</p>
         </Reveal>
         <div className="product-grid">

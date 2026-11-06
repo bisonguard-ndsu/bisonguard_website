@@ -56,11 +56,7 @@ export default function TechnologyPage() {
     <>
       <section className="wrap page-intro technology-intro">
         <p className="eyebrow">The technology behind the work</p>
-        <h1>
-          Intelligence is
-          <br />
-          <em>what we connect.</em>
-        </h1>
+        <h1>Computer vision with engineering context.</h1>
         <p>
           Data from the world. Context from the domain. Judgment from the people
           using it. Our technology brings those pieces into the same workflow.
@@ -99,11 +95,7 @@ export default function TechnologyPage() {
         </div>
         <div>
           <p className="eyebrow">From inputs to understanding</p>
-          <h2>
-            A system around
-            <br />
-            <em>the decision.</em>
-          </h2>
+          <h2>From source data to engineering review.</h2>
           <p>
             The model is part of the picture. The collection process, project
             context, review interface, and final handoff determine whether an
@@ -134,11 +126,7 @@ export default function TechnologyPage() {
       <section className="technology-agentic chapter-section">
         <div className="wrap">
           <Reveal className="v2-section-heading">
-            <h2>
-              Make the process
-              <br />
-              <em>part of the interface.</em>
-            </h2>
+            <h2>Inside the PaveXpert workflow.</h2>
             <p>
               Explore an illustrative PaveXpert workflow. Change the question to
               see a different path through the workbench.

@@ -2,8 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "./reveal";
 export function ContactBand({
-  title = "Let’s look at what’s next.",
-  description = "Bring the challenge, the question, or the project. We’ll bring a perspective worth exploring.",
+  title = "Talk through your project.",
+  description = "Tell us about your network, data, or workflow. We’ll help you evaluate the relevant products and plan a demonstration.",
   demoHref = "/book-a-demo",
 }: {
   title?: string;
@@ -15,7 +15,7 @@ export function ContactBand({
       <div className="wrap">
         <Reveal className="v2-contact-inner">
           <div>
-            <p className="eyebrow">A conversation is a good place to start</p>
+            <p className="eyebrow">Contact InfiniCity Labs</p>
             <h2>{title}</h2>
             <p>{description}</p>
           </div>
@@ -30,11 +30,6 @@ export function ContactBand({
             </Link>
           </div>
         </Reveal>
-      </div>
-      <div className="contact-bars" aria-hidden="true">
-        <i />
-        <i />
-        <i />
       </div>
     </section>
   );

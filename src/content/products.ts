@@ -21,7 +21,7 @@ export const products: Product[] = [
     slug: "adams",
     name: "AdAMS",
     category: "Advanced Asset Management System",
-    headline: "Your network. In full view.",
+    headline: "Network condition and asset management.",
     summary:
       "Connect road condition, roadside assets, and inspection evidence in one intelligence platform.",
     description:
@@ -111,7 +111,7 @@ export const products: Product[] = [
     slug: "pavexpert",
     name: "PaveXpert",
     category: "Agentic pavement intelligence",
-    headline: "Ask better questions. Find the next move.",
+    headline: "Agentic intelligence for pavement engineering.",
     summary:
       "An agentic workspace that brings pavement questions, specialist analysis, and engineering review together.",
     description:
@@ -201,7 +201,7 @@ export const products: Product[] = [
     slug: "tmc",
     name: "TMC",
     category: "Traffic monitoring & operations",
-    headline: "A clearer picture of the road ahead.",
+    headline: "Traffic monitoring and video analysis.",
     summary:
       "Bring traffic cameras, recordings, and vehicle observations into a dedicated monitoring workspace.",
     description:
@@ -291,7 +291,7 @@ export const products: Product[] = [
     slug: "turnflow",
     name: "Turnflow",
     category: "Traffic studies & movement analysis",
-    headline: "From traffic video to a better-informed decision.",
+    headline: "Turning-movement studies, from video to report.",
     summary:
       "Define movements, count traffic, review the evidence, and build an engineering report from one study workflow.",
     description:
@@ -381,7 +381,7 @@ export const products: Product[] = [
     slug: "roadlogger",
     name: "RoadLogger",
     category: "Field inspection & asset lifecycle",
-    headline: "Every observation has a next chapter.",
+    headline: "Field inspections, documented and organized.",
     summary:
       "Capture field conditions, track inspections over time, and connect asset issues with the work to resolve them.",
     description:
@@ -471,7 +471,7 @@ export const products: Product[] = [
     slug: "annotate",
     name: "AdAMS Annotate",
     category: "Visual data & annotation",
-    headline: "Put better evidence behind your models.",
+    headline: "Image and video annotation with human review.",
     summary:
       "Prepare images and video with model-assisted labels, structured review, and practical dataset exports.",
     description:
@@ -561,7 +561,7 @@ export const products: Product[] = [
     slug: "bisonguard",
     name: "BisonGuard",
     category: "Herd detection & monitoring",
-    headline: "A closer view of life in the field.",
+    headline: "Visual detection for herd monitoring.",
     summary:
       "Apply visual intelligence to herd detection and monitoring in the environments where animals live.",
     description:

@@ -15,11 +15,7 @@ export default function TeamPage() {
     <>
       <section className="wrap page-intro">
         <p className="eyebrow">Our people</p>
-        <h1>
-          Different perspectives.
-          <br />
-          <em>Shared possibilities.</em>
-        </h1>
+        <h1>The people behind InfiniCity Labs.</h1>
         <p>
           Our work brings engineering, research, and software development into
           the same conversation.

@@ -13,11 +13,7 @@ export default function CareersPage() {
     <>
       <section className="wrap page-intro">
         <p className="eyebrow">Careers & collaboration</p>
-        <h1>
-          Bring a different
-          <br />
-          <em>way of seeing.</em>
-        </h1>
+        <h1>Work with InfiniCity Labs.</h1>
         <p>
           Interesting work starts where disciplines meet. We’re interested in
           people who ask useful questions, investigate the details, and care
@@ -35,11 +31,7 @@ export default function CareersPage() {
       </div>
       <section className="wrap chapter-section">
         <Reveal className="v2-section-heading">
-          <h2>
-            Many perspectives.
-            <br />
-            <em>A shared curiosity.</em>
-          </h2>
+          <h2>Areas of work.</h2>
         </Reveal>
         <div className="use-case-grid">
           {[

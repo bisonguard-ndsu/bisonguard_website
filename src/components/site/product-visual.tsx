@@ -20,122 +20,27 @@ import {
 } from "lucide-react";
 
 function MapPreview() {
-  const [selected, setSelected] = useState(0);
-  const places = ["North corridor", "River approach", "East connector"];
   return (
-    <div className="map-preview">
+    <figure className="adams-real-preview">
       <div className="preview-toolbar">
         <span>
-          <Layers size={14} /> Network overview
+          <Layers size={14} /> AdAMS inspection workspace
         </span>
-        <small>Example project</small>
+        <small>Product interface</small>
       </div>
-      <div className="map-scene">
-        <svg
-          viewBox="0 0 800 470"
-          preserveAspectRatio="xMidYMid slice"
-          aria-hidden="true"
-        >
-          <defs>
-            <pattern
-              id="map-grid"
-              width="64"
-              height="64"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 64 0 L 0 0 0 64"
-                fill="none"
-                stroke="#c7dfd2"
-                strokeOpacity=".08"
-              />
-            </pattern>
-          </defs>
-          <rect width="800" height="470" fill="#1a292c" />
-          <rect width="800" height="470" fill="url(#map-grid)" />
-          <path
-            d="M720-50C490 20 670 150 500 230S350 330 450 520"
-            fill="none"
-            stroke="#315054"
-            strokeWidth="74"
-          />
-          <g stroke="#354644" strokeWidth="22" fill="none">
-            <path d="M-30 160L800 410" />
-            <path d="M120-30L345 500" />
-            <path d="M400-30L230 470" />
-            <path d="M-20 370L790 80" />
-          </g>
-          <g stroke="#93b1a5" strokeOpacity=".4" strokeWidth="1" fill="none">
-            <path d="M-30 160L800 410" />
-            <path d="M120-30L345 500" />
-            <path d="M400-30L230 470" />
-            <path d="M-20 370L790 80" />
-          </g>
-          <path
-            className="map-route"
-            d={
-              ["M120-30L345 500", "M-30 160L800 410", "M-20 370L790 80"][
-                selected
-              ]
-            }
-            fill="none"
-            stroke="#a8d6cc"
-            strokeWidth="5"
-          />
-          <g fill="#a8d6cc" stroke="#152225" strokeWidth="6">
-            <circle cx="220" cy="210" r="10" />
-            <circle cx="475" cy="310" r="10" />
-            <circle cx="590" cy="150" r="10" />
-          </g>
-          <g fill="#7a9592" fontSize="12" letterSpacing="2">
-            <text x="70" y="75">
-              NORTH DISTRICT
-            </text>
-            <text x="555" y="390">
-              RIVER APPROACH
-            </text>
-            <text x="490" y="65">
-              NETWORK 01
-            </text>
-          </g>
-        </svg>
-        <div className="map-pin-group">
-          {places.map((place, i) => (
-            <button
-              key={place}
-              type="button"
-              aria-label={"Inspect " + place}
-              aria-pressed={selected === i}
-              onClick={() => setSelected(i)}
-              className={"map-pin map-pin-" + i}
-            >
-              <MapPin size={16} />
-            </button>
-          ))}
-        </div>
-        <div className="map-evidence">
-          <div>
-            <span className="tiny-label">Selected segment</span>
-            <strong>{places[selected]}</strong>
-          </div>
-          <span className="mini-status">Review needed</span>
-          <Image
-            src="/images/adams-inspection.webp"
-            width={260}
-            height={138}
-            alt="AdAMS inspection evidence"
-          />
-          <div className="evidence-links">
-            <span>Condition & assets</span>
-            <ArrowUpRight size={14} />
-          </div>
-        </div>
-        <div className="map-legend">
-          <i /> Survey route <span />
-          <i /> Inspection point
-        </div>
-      </div>
-    </div>
+      <Image
+        src="/images/adams-inspection.webp"
+        alt="AdAMS survey video and traffic sign inspection records"
+        width={1918}
+        height={1021}
+        sizes="(max-width: 900px) 100vw, 1100px"
+        loading="eager"
+      />
+      <figcaption>
+        Survey footage and detected assets, reviewed together. Example project
+        data.
+      </figcaption>
+    </figure>
   );
 }
 const questions = [

@@ -79,9 +79,9 @@
   letter-spacing: -0.06em;
 }
 .product-title-grid h2 {
-  font-size: clamp(29px, 2.7vw, 42px);
+  font-size: clamp(25px, 2.3vw, 34px);
   font-family: var(--font-editorial);
-  font-style: italic;
+  font-style: normal;
   line-height: 1.15;
   max-width: 650px;
   letter-spacing: -0.025em;
@@ -108,8 +108,7 @@
   font-size: 12px;
 }
 .product-showcase {
-  background:
-    radial-gradient(ellipse at center, #37504460, transparent 68%), #172126;
+  background: #202d30;
   border-block: 1px solid var(--border);
   padding: 55px 0 0;
 }
@@ -1873,5 +1872,105 @@
   }
   .system-orbit {
     height: 320px;
+  }
+}
+
+/* Product directory: comparable information without repeated decorative cards. */
+.catalog-rows {
+  animation: preview-fade 250ms;
+}
+.catalog-row {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr auto;
+  align-items: start;
+  gap: 64px;
+  padding-block: 42px;
+  border-bottom: 1px solid var(--border);
+}
+.catalog-row:first-child {
+  padding-top: 0;
+}
+.catalog-row .eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.07em;
+}
+.catalog-row h2 {
+  font-size: 43px;
+  margin-top: 18px;
+}
+.catalog-row h2 a:hover {
+  color: var(--accent);
+}
+.catalog-row > div:nth-child(2) > p {
+  color: #c4ceca;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.catalog-row ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  padding: 0;
+  margin: 22px 0 0;
+}
+.catalog-row li {
+  font-size: 11px;
+  color: #9eb5ac;
+}
+.catalog-row-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  padding-block: 12px;
+  color: #bad6ca;
+}
+.adams-real-preview > img {
+  width: 100%;
+  height: auto;
+}
+.adams-real-preview figcaption {
+  padding: 15px 20px;
+  color: #b7c9c2;
+  font-size: 11px;
+  background: #1c2a2b;
+}
+@media (max-width: 900px) {
+  .catalog-row {
+    gap: 30px;
+    grid-template-columns: 0.8fr 1fr;
+  }
+  .catalog-row-link {
+    grid-column: 2;
+    padding-top: 0;
+    margin-top: -12px;
+  }
+  .catalog-row h2 {
+    font-size: 35px;
+  }
+}
+@media (max-width: 650px) {
+  .catalog-row {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-block: 32px;
+  }
+  .catalog-row-link {
+    grid-column: 1;
+    margin: 0;
+  }
+  .catalog-row h2 {
+    font-size: 37px;
+    margin-top: 12px;
+  }
+  .catalog-row ul {
+    gap: 8px 14px;
+    margin-top: 16px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .catalog-rows {
+    animation: none;
   }
 }

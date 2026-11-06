@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "InfiniCity Labs — Intelligence for a world in motion";
+export const alt = "InfiniCity Labs — Infrastructure, mobility & applied AI";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -33,8 +33,8 @@ export default function OpenGraphImage() {
           lineHeight: 1.08,
         }}
       >
-        <span>Intelligence for</span>
-        <span style={{ color: "#9bcac4" }}>a world in motion.</span>
+        <span>Software for infrastructure</span>
+        <span style={{ color: "#9bcac4" }}>& mobility.</span>
       </div>
       <div
         style={{
