@@ -4,7 +4,6 @@ import { cardCls, StatStrip } from "@/components/blocks";
 import { Reveal, WordRise } from "@/components/motion";
 import { CtaBand, Eyebrow, PageHero, Photo, SectionHeading } from "@/components/sections";
 import { partners } from "@/content/evidence";
-import { publications } from "@/content/publications";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -60,7 +59,6 @@ export default function CompanyPage() {
           <StatStrip
             stats={[
               { value: "4", label: "products in service" },
-              { value: String(publications.length), label: "peer-reviewed papers by our team" },
               { value: "2", label: "regions we work in: the United States and West Africa" },
               { value: String(partners.length), label: "partners and collaborators" },
             ]}
@@ -69,13 +67,12 @@ export default function CompanyPage() {
       </section>
 
       <section className="section relative overflow-clip bg-deep">
-        <div aria-hidden className="pointer-events-none absolute top-0 -right-40 h-[30rem] w-[30rem] rounded-full bg-violet/10 blur-3xl" />
         <div className="wrap">
           <SectionHeading eyebrow="How we work" title="What we hold ourselves to" accent="hold ourselves to" />
           <ul className="mt-14 grid gap-5 md:grid-cols-2 lg:mt-20">
             {values.map((v, i) => (
               <Reveal as="li" key={v.title} delay={(i % 2) * 0.1} className="rounded-2xl border border-white/[0.08] bg-surface p-8 sm:p-10">
-                <span className="font-mono text-xs text-primary-strong">{String(i + 1).padStart(2, "0")}</span>
+                
                 <h3 className="mt-4 font-display text-2xl font-semibold text-fg">{v.title}</h3>
                 <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg-2">{v.text}</p>
               </Reveal>
@@ -107,7 +104,7 @@ export default function CompanyPage() {
             <Reveal key={c.href} delay={i * 0.1}>
               <Link href={c.href} className={cn(cardCls, "relative flex h-[22rem] flex-col justify-end overflow-clip p-8 sm:p-10")}>
                 <Photo image={c.image} className="absolute inset-0 -z-10" sizes="(min-width: 768px) 50vw, 100vw" />
-                <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-deep via-deep/60 to-transparent" />
+                <div aria-hidden className="absolute inset-0 -z-10 bg-black/45" />
                 <h2 className="font-display text-3xl font-semibold text-white">{c.title}</h2>
                 <p className="mt-2 text-white/80">{c.text}</p>
                 <span className="mt-5 inline-flex items-center gap-2 font-semibold text-primary-strong">

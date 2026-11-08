@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { FeatureGrid, PaperGrid, ProductCards, Showcase, SolutionCards, StatStrip, Steps } from "@/components/blocks";
+import { FeatureGrid, ProductCards, Showcase, SolutionCards, StatStrip, Steps } from "@/components/blocks";
 import { Reveal } from "@/components/motion";
 import { ButtonLink, CtaBand, PageHero, SectionHeading } from "@/components/sections";
 import { getApp } from "@/content/apps";
 import { getProductPage, productPages } from "@/content/product-pages";
 import { getProduct } from "@/content/products";
-import { pick } from "@/content/publications";
 
 export const dynamicParams = false;
 export const generateStaticParams = () => productPages.map((p) => ({ slug: p.slug }));
@@ -78,7 +77,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       </section>
 
       <SolutionCards slugs={p.solutions} title="Solutions built on it" />
-      {p.research && <PaperGrid papers={pick(p.research)} />}
       <ProductCards slugs={productPages.filter((x) => x.slug !== p.slug).map((x) => x.slug)} eyebrow="More products" title="Works alongside" />
       <CtaBand title={`See ${p.name} on your own network`} accent="your own network" image={p.hero} />
     </>

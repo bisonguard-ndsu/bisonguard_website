@@ -86,12 +86,11 @@ export const nav: NavItem[] = [
     label: "Research",
     href: "/research",
     panel: {
-      intro: "The products rest on published work by our team in pavement analysis, traffic safety and multimodal AI.",
+      intro: "Applied research by our team in pavement analysis, traffic safety and multimodal AI.",
       all: { label: "Research overview", href: "/research" },
       groups: [
         {
           links: [
-            { label: "Publications", href: "/research/publications", description: "Papers by our team" },
             { label: "Pavement analysis", href: "/research#pavement", description: "Distress, roughness, condition indices" },
             { label: "Traffic safety", href: "/research#traffic-safety", description: "Anomalies, violations, driver behaviour" },
             { label: "Multimodal AI", href: "/research#multimodal", description: "Vision-language models for roads" },

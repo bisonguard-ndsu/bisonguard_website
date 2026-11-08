@@ -75,7 +75,7 @@ export default function TeamPage() {
           <ul className="mt-12 grid gap-5 md:grid-cols-3">
             {disciplines.map((d, i) => (
               <Reveal as="li" key={d.title} delay={i * 0.08} className="rounded-2xl border border-white/[0.08] bg-surface p-8">
-                <span className="font-mono text-xs text-primary-strong">{String(i + 1).padStart(2, "0")}</span>
+                
                 <h3 className="mt-4 font-display text-2xl font-semibold text-fg">{d.title}</h3>
                 <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg-2">{d.text}</p>
               </Reveal>

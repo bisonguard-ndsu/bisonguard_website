@@ -1,18 +1,18 @@
 "use client";
 
-import { animate, motion, useInView, useReducedMotion } from "motion/react";
-import { Fragment, useEffect, useRef, useState } from "react";
+import { animate, motion, useInView, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export const EXPO = [0.16, 1, 0.3, 1] as const;
-export const WIPE_EASE = [0.77, 0, 0.175, 1] as const;
+export const EASE = [0.22, 1, 0.36, 1] as const;
 
-/** Fades and lifts its content in once, the first time it scrolls into view. */
+/** Fades its content in with a short rise, the first time it scrolls into view. */
 export function Reveal({
   children,
   className,
   delay = 0,
-  y = 28,
+  y = 24,
   as = "div",
 }: {
   children: React.ReactNode;
@@ -26,21 +26,23 @@ export function Reveal({
   return (
     <M
       className={className}
-      initial={reduce ? false : { opacity: 0, y, filter: "blur(6px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.9, delay, ease: EXPO }}
+      initial={reduce ? false : { opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.8, delay, ease: EASE }}
     >
       {children}
     </M>
   );
 }
 
-/** Headline whose words rise out of a mask one after another; the accent phrase gets the brand gradient. */
+/**
+ * A heading that fades up as one block when it enters the viewport.
+ * (`accent` is accepted for older call sites and ignored: headlines are one colour.)
+ */
 export function WordRise({
   as = "h2",
   text,
-  accent,
   className,
   delay = 0,
   inView = false,
@@ -50,37 +52,65 @@ export function WordRise({
   accent?: string;
   className?: string;
   delay?: number;
-  /** Wait until scrolled into view instead of animating on mount */
   inView?: boolean;
 }) {
   const reduce = useReducedMotion();
-  const ref = useRef<HTMLHeadingElement>(null);
-  const seen = useInView(ref, { once: true, amount: 0.4 });
-  const go = !inView || seen;
+  const M = motion[as];
+  const from = reduce ? false : { opacity: 0, y: 20 };
+  const to = { opacity: 1, y: 0 };
+  const t = { duration: 0.85, delay, ease: EASE };
+  return inView ? (
+    <M className={className} initial={from} whileInView={to} viewport={{ once: true, amount: 0.5 }} transition={t}>
+      {text}
+    </M>
+  ) : (
+    <M className={className} initial={from} animate={to} transition={t}>
+      {text}
+    </M>
+  );
+}
+
+/** A statement whose words go from faint to full ink as the reader scrolls through it. */
+export function ScrollText({ text, className, as = "p" }: { text: string; className?: string; as?: "p" | "h2" }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.85", "end 0.45"] });
+  const words = text.split(" ");
   const Tag = as;
-  const cut = accent && text.endsWith(accent) ? text.length - accent.length : text.length;
-  const words = [
-    ...text.slice(0, cut).split(" ").filter(Boolean).map((w) => ({ w, a: false })),
-    ...text.slice(cut).split(" ").filter(Boolean).map((w) => ({ w, a: true })),
-  ];
+  if (reduce) return <Tag className={className}>{text}</Tag>;
   return (
-    <Tag ref={ref} aria-label={text} className={className}>
-      {words.map(({ w, a }, i) => (
-        <Fragment key={i}>
-          <span aria-hidden className="-mb-[0.12em] inline-block overflow-clip pb-[0.12em] align-top">
-            <motion.span
-              className={cn("inline-block", a && "text-gradient")}
-              initial={reduce ? false : { y: "110%", rotate: 4 }}
-              animate={go ? { y: "0%", rotate: 0 } : undefined}
-              transition={{ duration: 0.9, delay: delay + i * 0.055, ease: EXPO }}
-            >
-              {w}
-            </motion.span>
-          </span>
-          {i < words.length - 1 && " "}
-        </Fragment>
+    <Tag ref={ref} className={className} aria-label={text}>
+      {words.map((w, i) => (
+        <Word key={i} progress={scrollYProgress} range={[i / words.length, (i + 1) / words.length]}>
+          {w}
+          {i < words.length - 1 ? " " : ""}
+        </Word>
       ))}
     </Tag>
+  );
+}
+
+function Word({ children, progress, range }: { children: React.ReactNode; progress: MotionValue<number>; range: [number, number] }) {
+  const opacity = useTransform(progress, range, [0.18, 1]);
+  return (
+    <motion.span aria-hidden style={{ opacity }}>
+      {children}
+    </motion.span>
+  );
+}
+
+/** Moves its child slower than the page, for depth. The child should be larger than the frame. */
+export function Parallax({ children, className, amount = 12 }: { children: React.ReactNode; className?: string; amount?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [`-${amount}%`, `${amount}%`]);
+  return (
+    <div ref={ref} className={cn("relative overflow-clip", className)}>
+      <motion.div className="absolute -inset-y-[15%] inset-x-0" style={reduce ? undefined : { y }}>
+        {children}
+      </motion.div>
+    </div>
   );
 }
 
@@ -112,49 +142,27 @@ export function CountUp({ value, className }: { value: string; className?: strin
 }
 
 /**
- * A photo uncovered by a sideways wipe with a teal scan line on its edge — the
- * site's signature reveal. Runs on mount, or when scrolled into view.
+ * A full-bleed photo for page openings: fades in and settles from a slight zoom,
+ * then drifts with the scroll while the page moves over it.
  */
-export function ScanReveal({
-  children,
-  className,
-  inView = true,
-  delay = 0,
-}: {
-  children: React.ReactNode;
-  className?: string;
-  inView?: boolean;
-  delay?: number;
-}) {
+export function ScanReveal({ children, className }: { children: React.ReactNode; className?: string; inView?: boolean; delay?: number }) {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLDivElement>(null);
-  const seen = useInView(ref, { once: true, amount: 0.25 });
-  const go = !inView || seen;
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   if (reduce) return <div className={className}>{children}</div>;
   return (
-    <div ref={ref} className={cn("relative", className)}>
-      <motion.div
-        className="absolute inset-0"
-        initial={{ clipPath: "inset(0% 0% 0% 100%)" }}
-        animate={go ? { clipPath: "inset(0% 0% 0% 0%)" } : undefined}
-        transition={{ duration: 1.2, delay, ease: WIPE_EASE }}
-      >
+    <div ref={ref} className={cn("overflow-clip", className)}>
+      <motion.div className="absolute inset-0" style={{ y }}>
         <motion.div
           className="absolute inset-0"
-          initial={{ scale: 1.15 }}
-          animate={go ? { scale: 1 } : undefined}
-          transition={{ duration: 2.2, delay, ease: EXPO }}
+          initial={{ opacity: 0, scale: 1.08 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ opacity: { duration: 0.9 }, scale: { duration: 2.4, ease: EXPO } }}
         >
           {children}
         </motion.div>
       </motion.div>
-      <motion.span
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 z-[1] w-px bg-primary-strong shadow-[0_0_18px_3px_var(--color-primary)]"
-        initial={{ left: "100%", opacity: 0 }}
-        animate={go ? { left: "0%", opacity: [0, 1, 1, 0] } : undefined}
-        transition={{ left: { duration: 1.2, delay, ease: WIPE_EASE }, opacity: { duration: 1.45, delay, times: [0, 0.05, 0.8, 1] } }}
-      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import Hero from "@/components/home/hero";
 import HomeWorkflow from "@/components/home/workflow";
-import { HomeIntro, HomePartners, HomeProducts, HomeProject, HomeResearch, HomeSolutions, HomeTestimonial } from "@/components/home/sections";
+import { HomeIntro, HomePartners, HomeProducts, HomeProject, HomeSolutions } from "@/components/home/sections";
 import { CtaBand } from "@/components/sections";
 
 export default function HomePage() {
@@ -12,9 +12,7 @@ export default function HomePage() {
       <HomeWorkflow />
       <HomeSolutions />
       <HomeProject />
-      <HomeResearch />
       <HomePartners />
-      <HomeTestimonial />
       <CtaBand />
     </>
   );

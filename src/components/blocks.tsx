@@ -1,9 +1,8 @@
 import Link from "next/link";
-import { CountUp, Reveal, WordRise } from "@/components/motion";
+import { CountUp, Parallax, Reveal, WordRise } from "@/components/motion";
 import { AppFrame, Eyebrow, Photo, SectionHeading, Tag, type Img } from "@/components/sections";
 import { productPages } from "@/content/product-pages";
 import { getProduct, statusLabel } from "@/content/products";
-import { venueShort, type Publication } from "@/content/publications";
 import { solutions as allSolutions } from "@/content/solutions";
 import { cn } from "@/lib/utils";
 
@@ -35,21 +34,14 @@ export function StatStrip({ stats, className }: { stats: { value: string; label:
 
 export function Steps({ steps, eyebrow = "How it works", title, accent, lead }: { steps: { title: string; text: string }[]; eyebrow?: string; title: string; accent?: string; lead?: string }) {
   return (
-    <section className="section bg-bg">
+    <section className="section theme-light">
       <div className="wrap">
         <SectionHeading eyebrow={eyebrow} title={title} accent={accent} lead={lead} />
         <ol className={cn("relative mt-14 grid gap-5 lg:mt-20", steps.length === 4 ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-3")}>
           {steps.map((s, i) => (
-            <Reveal as="li" key={s.title} delay={i * 0.12} className="relative rounded-2xl border border-white/[0.08] bg-surface p-7 sm:p-8">
-              <div className="flex items-center gap-4">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-primary/40 bg-primary/10 font-mono text-sm text-primary-strong shadow-[0_0_24px_-6px_var(--color-primary)]">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                {i < steps.length - 1 && (
-                  <span aria-hidden className="hidden h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent md:block" />
-                )}
-              </div>
-              <h3 className="mt-6 font-display text-2xl font-semibold tracking-tight text-fg">{s.title}</h3>
+            <Reveal as="li" key={s.title} delay={i * 0.1} className="relative border-t-2 border-fg pt-6">
+              <span className="font-display text-sm font-semibold text-fg-3">Step {i + 1}</span>
+              <h3 className="mt-3 font-display text-2xl font-semibold tracking-tight text-fg">{s.title}</h3>
               <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg-2">{s.text}</p>
             </Reveal>
           ))}
@@ -61,16 +53,14 @@ export function Steps({ steps, eyebrow = "How it works", title, accent, lead }: 
 
 export function FeatureGrid({ features, eyebrow = "Capabilities", title, accent, lead }: { features: { title: string; text: string }[]; eyebrow?: string; title: string; accent?: string; lead?: string }) {
   return (
-    <section className="section relative overflow-clip bg-deep">
-      <div aria-hidden className="pointer-events-none absolute -top-40 right-0 h-[28rem] w-[28rem] rounded-full bg-violet/10 blur-3xl" />
+    <section className="section bg-deep">
       <div className="wrap">
         <SectionHeading eyebrow={eyebrow} title={title} accent={accent} lead={lead} />
         <ul className="mt-14 grid gap-px overflow-clip rounded-2xl border border-white/[0.08] bg-white/[0.08] sm:grid-cols-2 lg:mt-20 lg:grid-cols-3">
           {features.map((f, i) => (
             <Reveal as="li" key={f.title} delay={(i % 3) * 0.08} className="group relative bg-surface p-7 transition-colors duration-500 hover:bg-surface-2 sm:p-8">
-              <span aria-hidden className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gradient-to-r from-primary to-violet transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
-              <span className="font-mono text-xs text-primary-strong">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-4 font-display text-xl font-semibold text-fg">{f.title}</h3>
+              <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-primary transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
+              <h3 className="font-display text-xl font-semibold text-fg">{f.title}</h3>
               <p className="mt-3 text-[0.9875rem] leading-relaxed text-fg-2">{f.text}</p>
             </Reveal>
           ))}
@@ -98,14 +88,14 @@ export function Showcase({ items, eyebrow }: { items: ShowcaseItem[]; eyebrow: s
               <Reveal y={12}>
                 <Eyebrow>{eyebrow}</Eyebrow>
               </Reveal>
-              <WordRise inView text={s.title} accent={s.accent} className="t-h2 mt-5 text-fg" />
+              <WordRise inView text={s.title} className="t-h2 mt-4 text-fg" />
               <Reveal delay={0.2} className="mt-6 text-[1.0625rem] leading-relaxed text-fg-2">
                 <p>{s.text}</p>
               </Reveal>
               <ul className="mt-8 space-y-3">
                 {s.points.map((p, j) => (
                   <Reveal as="li" key={p} delay={0.25 + j * 0.06} className="flex items-start gap-3 text-fg">
-                    <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary-strong shadow-[0_0_10px_var(--color-primary)]" />
+                    <svg viewBox="0 0 16 16" className="mt-1 h-4 w-4 shrink-0 text-primary-strong" aria-hidden><path d="m3 8.5 3 3 7-7" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     {p}
                   </Reveal>
                 ))}
@@ -116,7 +106,9 @@ export function Showcase({ items, eyebrow }: { items: ShowcaseItem[]; eyebrow: s
                 <AppFrame image={s.visual.shot} label={s.visual.shot.label} />
               ) : (
                 <div className="group">
-                  <Photo image={s.visual.image} className="aspect-[4/3] rounded-2xl border border-white/10" sizes="(min-width: 1024px) 58vw, 100vw" />
+                  <Parallax className="aspect-[4/3] rounded-2xl" amount={6}>
+                    <Photo image={s.visual.image} className="absolute inset-0" sizes="(min-width: 1024px) 58vw, 100vw" />
+                  </Parallax>
                 </div>
               )}
             </Reveal>
@@ -177,49 +169,11 @@ export function SolutionCards({ slugs, title = "Where it helps", eyebrow = "Solu
               <Link href={`/solutions/${s.slug}`} className={cn(cardCls, "flex h-full flex-col overflow-clip")}>
                 <Photo image={s.image} className="aspect-[16/9]" sizes="(min-width: 1024px) 30vw, 100vw" />
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="font-mono text-[0.6875rem] tracking-wide text-fg-3 uppercase">{s.group}</p>
+                  <p className="text-[0.8125rem] text-fg-3">{s.group}</p>
                   <h3 className="mt-2 font-display text-xl font-semibold text-fg group-hover:text-primary-strong">{s.title}</h3>
                   <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-fg-2">{s.short}</p>
                 </div>
               </Link>
-            </Reveal>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-export function PaperCard({ p }: { p: Publication }) {
-  return (
-    <a href={p.url ?? undefined} target="_blank" rel="noopener noreferrer" className={cn(cardCls, "flex h-full flex-col p-6")}>
-      <span className="flex items-center justify-between gap-3">
-        <Tag tone="primary">
-          {venueShort(p.venue)}
-          {p.year ? ` · ${p.year}` : ""}
-        </Tag>
-        <span className="text-fg-3 transition-colors group-hover:text-primary-strong" aria-hidden>
-          ↗
-        </span>
-      </span>
-      <span className="mt-5 block font-display text-[1.125rem] leading-snug font-medium text-fg">{p.title}</span>
-      <span className="mt-3 block text-sm text-fg-3">{p.authors}</span>
-      <span className="mt-1 block text-sm text-fg-3 italic">{p.venue}</span>
-      <span className="sr-only">(opens in a new tab)</span>
-    </a>
-  );
-}
-
-export function PaperGrid({ papers, title = "The research behind it", eyebrow = "Research" }: { papers: Publication[]; title?: string; eyebrow?: string }) {
-  if (!papers.length) return null;
-  return (
-    <section className="section bg-bg">
-      <div className="wrap">
-        <SectionHeading eyebrow={eyebrow} title={title} />
-        <ul className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {papers.map((p, i) => (
-            <Reveal as="li" key={p.title} delay={i * 0.08}>
-              <PaperCard p={p} />
             </Reveal>
           ))}
         </ul>

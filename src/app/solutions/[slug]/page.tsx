@@ -70,7 +70,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
               <Link href={`/work/${project.slug}`} className={cn(cardCls, "grid overflow-clip lg:grid-cols-12")}>
                 <Photo image={project.hero} className="aspect-[16/9] lg:col-span-7 lg:aspect-auto lg:min-h-[22rem]" />
                 <div className="flex flex-col justify-center p-8 sm:p-10 lg:col-span-5">
-                  <p className="font-mono text-xs tracking-wide text-fg-3 uppercase">{project.place}</p>
+                  <p className="text-[0.875rem] text-fg-3">{project.place}</p>
                   <h3 className="mt-3 font-display text-2xl font-semibold text-fg sm:text-3xl">{project.title}</h3>
                   <p className="mt-4 text-fg-2">{project.summary}</p>
                   <span className="mt-6 inline-flex items-center gap-2 font-semibold text-primary">

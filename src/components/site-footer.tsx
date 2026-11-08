@@ -8,9 +8,7 @@ import { CookieSettingsLink } from "@/components/cookie-consent";
 export default function SiteFooter() {
   const columns = nav.filter((n) => n.panel);
   return (
-    <footer className="relative isolate overflow-clip bg-deep text-white">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
-      <div aria-hidden className="pointer-events-none absolute -top-48 left-1/2 -z-10 h-96 w-[60rem] -translate-x-1/2 rounded-full bg-primary/[0.07] blur-3xl" />
+    <footer className="border-t border-white/10 bg-deep text-white">
 
       <div className="wrap pt-16 lg:pt-24">
         <div className="grid gap-14 lg:grid-cols-12">
@@ -19,7 +17,7 @@ export default function SiteFooter() {
             <p className="mt-6 max-w-[34ch] text-[0.9375rem] leading-relaxed text-white/65">
               Computer-vision software that turns road and traffic video into the records engineers maintain.
             </p>
-            <p className="mt-10 font-mono text-xs tracking-[0.1em] text-white/45 uppercase">Write to us</p>
+            <p className="mt-10 text-sm font-semibold text-white">Write to us</p>
             <a
               href={`mailto:${site.email}`}
               className="group mt-3 inline-flex items-center gap-2 font-display text-[1.375rem] font-semibold text-white transition-colors hover:text-primary-strong sm:text-2xl"
@@ -49,7 +47,7 @@ export default function SiteFooter() {
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-5">
             {columns.map((col) => (
               <div key={col.id}>
-                <h2 className="font-mono text-xs tracking-[0.1em] text-white/45 uppercase">
+                <h2 className="text-sm font-semibold text-white">
                   <Link href={col.href} className="transition-colors hover:text-white">
                     {col.label}
                   </Link>
@@ -68,7 +66,7 @@ export default function SiteFooter() {
               </div>
             ))}
             <div>
-              <h2 className="font-mono text-xs tracking-[0.1em] text-white/45 uppercase">Sign in</h2>
+              <h2 className="text-sm font-semibold text-white">Sign in</h2>
               <ul className="mt-5 space-y-3">
                 {apps
                   .filter((a) => a.url)
@@ -86,7 +84,7 @@ export default function SiteFooter() {
                     </li>
                   ))}
               </ul>
-              <h2 className="mt-10 font-mono text-xs tracking-[0.1em] text-white/45 uppercase">
+              <h2 className="mt-10 text-sm font-semibold text-white">
                 <Link href="/work" className="transition-colors hover:text-white">
                   Work
                 </Link>
@@ -112,12 +110,6 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      {/* Oversized wordmark that fades into the page edge */}
-      <div aria-hidden className="pointer-events-none -mt-4 overflow-clip select-none">
-        <p className="wrap translate-y-[18%] bg-gradient-to-b from-white/[0.09] to-transparent bg-clip-text font-display text-[18vw] leading-[0.8] font-semibold tracking-[-0.05em] whitespace-nowrap text-transparent lg:text-[14.5rem]">
-          InfiniCity
-        </p>
-      </div>
     </footer>
   );
 }

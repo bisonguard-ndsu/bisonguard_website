@@ -1,6 +1,5 @@
 import Link from "next/link";
 import type { Metric } from "@/content/evidence";
-import type { Publication } from "@/content/publications";
 import { statusLabel, type ProductStatus } from "@/content/products";
 import { cn } from "@/lib/utils";
 
@@ -57,37 +56,5 @@ export function ArrowLink({ href, children, className }: { href: string; childre
         →
       </span>
     </Link>
-  );
-}
-
-export function PublicationList({ items }: { items: Publication[] }) {
-  return (
-    <ol className="border-t border-line">
-      {items.map((p) => (
-        <li key={p.title} className="border-b border-line">
-          <a
-            href={p.url ?? undefined}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group grid gap-x-8 gap-y-2 py-6 md:grid-cols-12 md:items-baseline"
-          >
-            <span className="label text-fg-3 md:col-span-2">
-              {p.venue.match(/CVPR|TRB|Transportation Research Board|HFES|IEEE|Journal/)?.[0]?.replace("Transportation Research Board", "TRB") ?? "Paper"}
-              {p.year ? ` · ${p.year}` : ""}
-            </span>
-            <span className="md:col-span-9">
-              <span className="block text-[1.125rem] leading-snug font-bold text-fg group-hover:text-primary">{p.title}</span>
-              <span className="mt-1.5 block text-sm text-fg-2">
-                {p.authors} — {p.venue}
-              </span>
-            </span>
-            <span className="hidden text-right text-fg-3 group-hover:text-primary md:col-span-1 md:block" aria-hidden>
-              ↗
-            </span>
-            <span className="sr-only">(opens in a new tab)</span>
-          </a>
-        </li>
-      ))}
-    </ol>
   );
 }

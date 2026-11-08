@@ -44,15 +44,15 @@ export const metrics = {
   },
 } satisfies Record<string, Metric>;
 
-export type Partner = { name: string; full: string; verified: boolean };
+export type Partner = { name: string; full: string; logo: string; verified: boolean };
 
 /** Cleared for use. Role (client / funder / collaborator) still to confirm — plan §5.3. */
 export const partners: Partner[] = [
-  { name: "NDDOT", full: "North Dakota Department of Transportation", verified: true },
-  { name: "NDSU", full: "North Dakota State University", verified: true },
-  { name: "NSF", full: "U.S. National Science Foundation", verified: true },
-  { name: "Sustein", full: "Sustein", verified: true },
-  { name: "Farms", full: "Farms", verified: true },
+  { name: "NDDOT", full: "North Dakota Department of Transportation", logo: "/nddot.jpg", verified: true },
+  { name: "NDSU", full: "North Dakota State University", logo: "/ndsu.png", verified: true },
+  { name: "NSF", full: "U.S. National Science Foundation", logo: "/usnsf.jpg", verified: true },
+  { name: "Sustein", full: "Sustein", logo: "/sustein.png", verified: true },
+  { name: "Farms", full: "Farms", logo: "/farms.avif", verified: true },
 ];
 
 export const testimonial = {

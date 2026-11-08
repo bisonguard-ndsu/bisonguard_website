@@ -134,7 +134,7 @@ export default function SiteHeader() {
         className={cn(
           "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300",
           scrolled || open || mobileOpen
-            ? "border-white/[0.08] bg-bg/80 backdrop-blur-xl backdrop-saturate-150"
+            ? "border-white/[0.08] bg-deep"
             : "border-transparent bg-transparent",
         )}
         onPointerLeave={hoverLeave}
@@ -190,7 +190,7 @@ export default function SiteHeader() {
                         <span
                           aria-hidden
                           className={cn(
-                            "absolute inset-x-3.5 bottom-0 h-[2px] origin-left rounded-full bg-primary shadow-[0_0_14px_var(--color-primary)] transition-transform duration-300 xl:inset-x-4",
+                            "absolute inset-x-3.5 bottom-0 h-[2px] origin-left rounded-full bg-primary transition-transform duration-300 xl:inset-x-4",
                             open === item.id || isActive(item) ? "scale-x-100" : "scale-x-0",
                           )}
                         />
@@ -215,7 +215,7 @@ export default function SiteHeader() {
                       <span
                         aria-hidden
                         className={cn(
-                          "absolute inset-x-3.5 bottom-0 h-[2px] rounded-full bg-primary shadow-[0_0_14px_var(--color-primary)] xl:inset-x-4",
+                          "absolute inset-x-3.5 bottom-0 h-[2px] rounded-full bg-primary xl:inset-x-4",
                           isActive(item) ? "block" : "hidden",
                         )}
                       />
@@ -260,7 +260,7 @@ export default function SiteHeader() {
       {open && open !== "signin" && (
         <div
           aria-hidden
-          className="anim-panel fixed inset-x-0 top-[4.5rem] bottom-0 z-40 hidden bg-deep/55 backdrop-blur-[2px] lg:block"
+          className="anim-panel fixed inset-x-0 top-[4.5rem] bottom-0 z-40 hidden bg-deep/55 lg:block"
           onClick={() => close()}
         />
       )}

@@ -23,7 +23,6 @@ export type ProductPage = {
   showcase: { title: string; accent: string; text: string; points: string[]; visual: { kind: "app"; shot: Shot } | { kind: "photo"; image: Img } }[];
   audience: string[];
   solutions: string[];
-  research?: string[];
 };
 
 export const productPages: ProductPage[] = [
@@ -74,11 +73,6 @@ export const productPages: ProductPage[] = [
     ],
     audience: ["State and city DOTs", "Municipal public-works teams", "Engineering consultancies", "Toll and highway operators"],
     solutions: ["road-asset-inventory", "pavement-condition"],
-    research: [
-      "Image2PCI: a multitask learning framework for estimating pavement condition indices directly from images",
-      "Smartphone-based pavement roughness estimation using deep learning with entity embedding",
-      "Mobile sensing for multipurpose applications in transportation",
-    ],
   },
   {
     slug: "traffic-management",
@@ -118,10 +112,6 @@ export const productPages: ProductPage[] = [
     ],
     audience: ["Traffic management centres", "City transportation departments", "Corridor and signal engineers"],
     solutions: ["traffic-operations", "traffic-studies"],
-    research: [
-      "A vision-based system for traffic anomaly detection using deep learning and decision trees",
-      "Enhancing traffic safety with parallel dense video captioning for end-to-end event analysis",
-    ],
   },
   {
     slug: "turnflow",
@@ -162,7 +152,6 @@ export const productPages: ProductPage[] = [
     ],
     audience: ["Traffic engineering consultancies", "City and county traffic departments", "Developers preparing traffic impact studies"],
     solutions: ["traffic-studies"],
-    research: ["3D object detection and high-resolution traffic parameters extraction using low-resolution LiDAR data"],
   },
   {
     slug: "roadlogger",

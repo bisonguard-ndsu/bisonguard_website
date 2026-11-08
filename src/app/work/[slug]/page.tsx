@@ -63,7 +63,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       </section>
 
       <section className="section relative overflow-clip bg-deep">
-        <div aria-hidden className="pointer-events-none absolute -top-40 left-1/3 h-[30rem] w-[30rem] rounded-full bg-primary/10 blur-3xl" />
         <div className="wrap">
           <div className="max-w-3xl">
             <Reveal y={12}>

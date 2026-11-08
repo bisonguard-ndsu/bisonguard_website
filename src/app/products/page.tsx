@@ -43,15 +43,15 @@ export default function ProductsPage() {
                       <Tag tone="primary">{statusLabel[prod.status]}</Tag>
                     </div>
                     <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-fg sm:text-5xl">{p.name}</h2>
-                    {p.fullName && <p className="mt-2 font-mono text-xs tracking-wide text-fg-3 uppercase">{p.fullName}</p>}
+                    {p.fullName && <p className="mt-2 text-[0.875rem] text-fg-3">{p.fullName}</p>}
                     <p className="mt-5 max-w-[46ch] text-[1.0625rem] leading-relaxed text-fg-2">{p.lead}</p>
                     <dl className="mt-8 grid gap-4 border-t border-white/10 pt-6 sm:grid-cols-2">
                       <div>
-                        <dt className="font-mono text-[0.6875rem] tracking-wide text-fg-3 uppercase">Takes in</dt>
+                        <dt className="text-[0.8125rem] text-fg-3">Takes in</dt>
                         <dd className="mt-1 text-fg">{prod.input}</dd>
                       </div>
                       <div>
-                        <dt className="font-mono text-[0.6875rem] tracking-wide text-fg-3 uppercase">Gives back</dt>
+                        <dt className="text-[0.8125rem] text-fg-3">Gives back</dt>
                         <dd className="mt-1 text-fg">{prod.output}</dd>
                       </div>
                     </dl>
