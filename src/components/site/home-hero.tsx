@@ -9,7 +9,7 @@ import {
   useScroll,
   useTransform,
 } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
 
 export function HomeHero() {
   const hero = useRef<HTMLElement>(null);
@@ -26,8 +26,8 @@ export function HomeHero() {
         style={{ y: reduced ? 0 : imageY }}
       >
         <Image
-          src="/images/highway-interchange.jpg"
-          alt="Aerial photograph of a highway interchange and the infrastructure around it"
+          src="/images/infrastructure-aerial.webp"
+          alt="Illustrative aerial scene of a bridge, roads, and a city skyline"
           fill
           priority
           sizes="100vw"
@@ -36,53 +36,32 @@ export function HomeHero() {
       <div className="corporate-hero-shade" />
       <div className="wrap corporate-hero-content">
         <div className="corporate-introduction">
-          <p className="eyebrow">InfiniCity Labs</p>
+          <p className="eyebrow">Infrastructure. Mobility. Applied AI.</p>
           <h1 id="home-title">
-            Advancing
+            Intelligence for
             <br />
-            infrastructure
-            <br />& mobility.
+            a world <em>in motion.</em>
           </h1>
           <p>
-            We bring research, engineering, and applied AI to the roads,
-            traffic, and physical systems people depend on.
+            We bring research and engineering together to help people
+            understand roads, movement, and the world around them.
           </p>
           <div className="corporate-hero-actions">
             <Link href="/products" className="link-button">
-              Explore our products <ArrowUpRight size={18} />
+              Explore our products <ArrowUpRight size={18} aria-hidden="true" />
             </Link>
             <Link href="/book-a-demo" className="text-link">
-              Book a demo <ArrowUpRight size={18} />
+              Book a demo <ArrowUpRight size={18} aria-hidden="true" />
             </Link>
           </div>
         </div>
       </div>
-      <nav
-        className="wrap corporate-hero-topics"
-        aria-label="Explore our areas of work"
-      >
-        <Link href="/solutions/infrastructure-management">
-          <span>
-            <small>Roads, assets & inspection</small>
-            <strong>Infrastructure</strong>
-          </span>
-          <ArrowUpRight size={23} />
-        </Link>
-        <Link href="/solutions/traffic-engineering">
-          <span>
-            <small>Traffic, movement & analysis</small>
-            <strong>Mobility</strong>
-          </span>
-          <ArrowUpRight size={23} />
-        </Link>
-        <Link href="/solutions/visual-ai">
-          <span>
-            <small>Vision, data & understanding</small>
-            <strong>Applied AI</strong>
-          </span>
-          <ArrowUpRight size={23} />
-        </Link>
-      </nav>
+      <div className="wrap corporate-hero-bottom">
+        <a href="#company-introduction">
+          <ArrowDown size={17} aria-hidden="true" /> Discover our work
+        </a>
+        <span>Illustrative infrastructure scene</span>
+      </div>
     </section>
   );
 }

@@ -4,6 +4,8 @@
 
 These photographs illustrate infrastructure and mobility contexts. They do not depict InfiniCity Labs projects, offices, customers, or deployments. Do not use the pictured locations as a claim about the company's location.
 
+The subsequent visual correction uses `infrastructure-aerial.webp` from the first version for the homepage hero. This is a generated placeholder illustration, identified as an illustrative scene on the page. The photographs below remain in supporting company, solution, and research content; the interchange is no longer the homepage hero.
+
 All three source pages identify the standard [Unsplash License](https://unsplash.com/license). Commercial reuse and modification are permitted under that license. Attribution is optional; creator information is retained here. Source pages and licenses were checked on November 6, 2026, and the downloaded images were visually inspected before selection.
 
 | Local file                               | Creator      | Original source                                                                                                                                                    | Use                                                          |

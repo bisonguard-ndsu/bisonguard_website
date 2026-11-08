@@ -49,25 +49,25 @@ export default function HomePage() {
     <>
       <HomeHero />
       <section
-        className="corporate-welcome light-surface"
+        className="corporate-welcome"
+        id="company-introduction"
         aria-labelledby="welcome-title"
       >
         <div className="wrap">
           <div className="welcome-grid">
             <Reveal>
               <p className="eyebrow">
-                Research. Engineering. Real-world application.
+                The company
               </p>
               <h2 id="welcome-title">
-                Welcome to
-                <br />
-                InfiniCity Labs.
+                Research with purpose.
+                <br />Engineering for practice.
               </h2>
             </Reveal>
             <Reveal delay={70} className="welcome-copy">
               <p className="welcome-lead">
-                We develop the technology behind a clearer understanding of our
-                physical world.
+                From a road survey to a working system, we connect the
+                research, the software, and the work on the ground.
               </p>
               <p>
                 Our company brings together infrastructure engineering, computer
@@ -97,7 +97,7 @@ export default function HomePage() {
       </section>
 
       <section
-        className="corporate-areas light-surface"
+        className="corporate-areas"
         id="areas"
         aria-labelledby="areas-title"
       >
@@ -106,9 +106,7 @@ export default function HomePage() {
             <div>
               <p className="eyebrow">Our areas of work</p>
               <h2 id="areas-title">
-                Understanding the systems
-                <br />
-                that connect our world.
+                Built around the real world.
               </h2>
             </div>
             <Link href="/solutions" className="text-link">

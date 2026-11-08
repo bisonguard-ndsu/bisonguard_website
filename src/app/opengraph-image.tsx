@@ -13,13 +13,13 @@ export default function OpenGraphImage() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        background: "#12171b",
-        color: "#f0eee8",
+        background: "#12151b",
+        color: "#f2f4f7",
         padding: 72,
       }}
     >
       <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-        <svg width="45" height="45" viewBox="0 0 36 36" fill="#9bcac4">
+        <svg width="45" height="45" viewBox="0 0 36 36" fill="#c2d3ed">
           <path d="M0 20h9v16H0zM13 10h9v26h-9zM26 0h9v36h-9z" />
         </svg>
         <span style={{ fontSize: 34 }}>InfiniCity Labs</span>
@@ -33,8 +33,8 @@ export default function OpenGraphImage() {
           lineHeight: 1.08,
         }}
       >
-        <span>Advancing infrastructure</span>
-        <span style={{ color: "#9bcac4" }}>& mobility.</span>
+        <span>Intelligence for</span>
+        <span style={{ color: "#c2d3ed" }}>a world in motion.</span>
       </div>
       <div
         style={{
@@ -43,7 +43,7 @@ export default function OpenGraphImage() {
           borderTop: "1px solid #ffffff35",
           paddingTop: 23,
           fontSize: 18,
-          color: "#afb7b8",
+          color: "#b9c1cd",
         }}
       >
         <span>Infrastructure. Mobility. Applied AI.</span>

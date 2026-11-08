@@ -32,6 +32,14 @@ const sans = localFont({
   display: "swap",
 });
 
+const editorial = localFont({
+  src: "./fonts/instrument-serif-italic.ttf",
+  variable: "--font-hero-serif",
+  weight: "400",
+  style: "italic",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
@@ -45,7 +53,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#12171b",
+  themeColor: "#12151b",
   colorScheme: "dark",
 };
 
@@ -68,7 +76,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={sans.variable} data-scroll-behavior="smooth">
+    <html lang="en" className={`${sans.variable} ${editorial.variable}`} data-scroll-behavior="smooth">
       <body>
         <a className="skip-link" href="#main-content">
           Skip to content

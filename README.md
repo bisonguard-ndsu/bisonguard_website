@@ -13,7 +13,7 @@ Open http://localhost:8080. Source checks: `npm run lint` and `npx tsc --noEmit`
 
 ## Design and content
 
-The current corporate direction is documented in [the fourth design plan](docs/website-redesign-v4.md). The provisional product-led direction is preserved at `1cf31f0` and documented in [the third design plan](docs/website-redesign-v3.md). Product source boundaries and the earlier functional verification are in [the second design plan](docs/website-redesign-v2.md), preserved at `08b3eae`. The [original plan](docs/website-redesign-plan.md) describes the first version, saved at `34c94b3` on `codex/company-website-redesign`.
+The current [visual correction plan](docs/website-visual-correction.md) restores the first version's dark composition with a charcoal, cool-white, and blue-grey palette. The rejected green corporate direction is preserved at `c51d96b` and documented in [the fourth design plan](docs/website-redesign-v4.md). The provisional product-led direction is preserved at `1cf31f0` and documented in [the third design plan](docs/website-redesign-v3.md). Product source boundaries and earlier functional verification are in [the second design plan](docs/website-redesign-v2.md), preserved at `08b3eae`. The [original plan](docs/website-redesign-plan.md) describes the first version, saved at `34c94b3` on `codex/company-website-redesign`.
 
 - Products: `src/content/products.ts`
 - Solutions: `src/content/solutions.ts`
