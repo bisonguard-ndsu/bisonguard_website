@@ -1,21 +1,27 @@
 import type { Metadata } from "next";
-import { Barlow } from "next/font/google";
+import { JetBrains_Mono, Onest } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
+import Header from "@/components/site/header";
+import Footer from "@/components/site/footer";
 import { Toaster } from "@/components/ui/sonner";
 import CookieConsent from "@/components/cookie-consent";
 
-const ibmPlex = Barlow({
-  variable: "--font-ibm-plex",
+const onest = Onest({
+  variable: "--font-onest",
   subsets: ["latin"],
   display: "swap",
-  weight: ["100", "200", "300", "400", "500", "600", "700"],
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://infinicitylabs.org"),
-  title: "InfiniCity Labs | AI-Powered Smart Infrastructure",
+  title: "InfiniCity Labs | Computer vision for roads and traffic",
   description:
     "InfiniCity Labs pioneers smart infrastructure and mobility solutions through advanced big data analytics, digital twins, and intelligent systems for civil engineering",
   keywords: [
@@ -96,16 +102,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${ibmPlex.variable} antialiased`}
-      >
+    <html lang="en" className={`${onest.variable} ${mono.variable}`}>
+      <body className="antialiased">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <Navbar />
-        {children}
+        <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-accent focus:px-4 focus:py-2 focus:text-accent-ink">
+          Skip to content
+        </a>
+        <Header />
+        <main id="main">{children}</main>
         <Footer />
         <Toaster />
         <CookieConsent />
