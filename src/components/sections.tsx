@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Parallax, Reveal, ScanReveal, WordRise } from "@/components/motion";
@@ -9,7 +10,7 @@ export type Action = { label: string; href: string };
 
 export function Eyebrow({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <p className={cn("text-[0.9375rem] font-semibold text-primary-strong", className)}>{children}</p>
+    <p className={cn("eyebrow", className)}>{children}</p>
   );
 }
 
@@ -115,7 +116,7 @@ export function PageHero({
           as="h1"
           text={title}
           delay={0.35}
-          className="mt-5 max-w-[20ch] font-display text-[2.375rem] leading-[1.06] font-semibold tracking-[-0.03em] text-white sm:text-[3.25rem] lg:text-[4rem]"
+          className="mt-5 max-w-[20ch] font-display text-[2.375rem] leading-[1.06] font-medium tracking-[-0.04em] text-white sm:text-[3.25rem] lg:text-[4rem]"
         />
         {lead && (
           <Reveal delay={0.7} className="mt-6 max-w-[40rem] text-[1.0625rem] leading-relaxed text-white/80 sm:text-lg">
@@ -150,15 +151,11 @@ export function ButtonLink({
   className?: string;
   external?: boolean;
 }) {
-  const cls = cn("btn group h-12 px-6 text-base", `btn-${variant}`, className);
+  const cls = cn("btn group", `btn-${variant}`, className);
   const inner = (
     <>
       {children}
-      {(variant === "primary" || variant === "dark") && (
-        <span className="arrow" aria-hidden>
-          {external ? "↗" : "→"}
-        </span>
-      )}
+      <ArrowUpRight size={18} aria-hidden />
     </>
   );
   if (external || href.startsWith("mailto:"))
@@ -255,7 +252,7 @@ export function Tag({ children, tone = "muted", className }: { children: React.R
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-[0.8125rem]",
+        "inline-flex items-center gap-1.5 border px-2.5 py-1 text-[0.75rem] font-medium tracking-[0.06em] uppercase",
         tone === "primary" && "border-primary/30 bg-primary/10 text-primary-strong",
         tone === "accent" && "border-accent/30 bg-accent/10 text-accent",
         tone === "muted" && "border-white/10 bg-white/[0.04] text-fg-2",

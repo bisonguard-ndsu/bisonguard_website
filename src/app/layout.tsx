@@ -1,13 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono, Lexend } from "next/font/google";
+import { Geist_Mono, Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
 import CookieConsent from "@/components/cookie-consent";
 import { site } from "@/content/site";
 
-const lexend = Lexend({ subsets: ["latin"], variable: "--font-lexend", display: "swap" });
-const geist = Geist({ subsets: ["latin"], variable: "--font-geist", display: "swap" });
+const instrument = Instrument_Sans({ subsets: ["latin"], variable: "--font-instrument", display: "swap" });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
 
 export const metadata: Metadata = {
@@ -27,7 +26,7 @@ export const metadata: Metadata = {
   icons: { icon: "/icon.svg", apple: "/icon.png" },
 };
 
-export const viewport: Viewport = { themeColor: "#13151c" };
+export const viewport: Viewport = { themeColor: "#12151b" };
 
 const orgJsonLd = {
   "@context": "https://schema.org",
@@ -42,7 +41,7 @@ const orgJsonLd = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${lexend.variable} ${geist.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${instrument.variable} ${geistMono.variable}`}>
       <body>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
         <SiteHeader />

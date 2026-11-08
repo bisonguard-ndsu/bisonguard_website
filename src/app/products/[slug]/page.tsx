@@ -41,7 +41,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <ButtonLink href="/contact">Book a demo</ButtonLink>
           {app?.url ? (
             <ButtonLink href={app.url} variant="ghost" external>
-              Sign in to {p.name} ↗
+              Sign in to {p.name}
             </ButtonLink>
           ) : (
             app?.note && <span className="btn btn-ghost h-12 cursor-default px-6 text-base">{app.note}</span>

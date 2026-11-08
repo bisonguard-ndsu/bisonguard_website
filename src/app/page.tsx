@@ -1,19 +1,18 @@
 import Hero from "@/components/home/hero";
 import HomeWorkflow from "@/components/home/workflow";
-import { HomeIntro, HomePartners, HomeProducts, HomeProject, HomeSolutions } from "@/components/home/sections";
-import { CtaBand } from "@/components/sections";
+import { HomeAreas, HomeCollaborate, HomeIntro, HomePartners, HomeProducts, HomeProject } from "@/components/home/sections";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
       <HomeIntro />
+      <HomeAreas />
       <HomeProducts />
       <HomeWorkflow />
-      <HomeSolutions />
       <HomeProject />
       <HomePartners />
-      <CtaBand />
+      <HomeCollaborate />
     </>
   );
 }

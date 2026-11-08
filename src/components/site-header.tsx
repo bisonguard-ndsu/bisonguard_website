@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { motion, useScroll } from "motion/react";
 import { Logo } from "@/components/logo";
 import { nav, type NavItem, type NavPanel } from "@/content/nav";
 import { apps } from "@/content/apps";
@@ -24,6 +26,7 @@ export default function SiteHeader() {
   const triggerRefs = useRef<Record<string, HTMLElement | null>>({});
   const scrollAtOpen = useRef(0);
   const [scrolled, setScrolled] = useState(false);
+  const { scrollYProgress } = useScroll();
 
   // Transparent over the top of the page, frosted glass once it scrolls.
   useEffect(() => {
@@ -181,7 +184,7 @@ export default function SiteHeader() {
                         }}
                         onKeyDown={(e) => onTriggerKey(item, e)}
                         className={cn(
-                          "relative flex cursor-pointer items-center gap-1.5 px-3.5 text-[0.9375rem] font-semibold transition-colors xl:px-4",
+                          "relative flex cursor-pointer items-center gap-1.5 px-3.5 text-[0.875rem] font-medium transition-colors xl:px-4",
                           open === item.id || isActive(item) ? "text-fg" : "text-fg-2 hover:text-fg",
                         )}
                       >
@@ -207,7 +210,7 @@ export default function SiteHeader() {
                       onKeyDown={(e) => onTriggerKey(item, e)}
                       aria-current={isActive(item) ? "page" : undefined}
                       className={cn(
-                        "relative flex items-center px-3.5 text-[0.9375rem] font-semibold transition-colors xl:px-4",
+                        "relative flex items-center px-3.5 text-[0.875rem] font-medium transition-colors xl:px-4",
                         isActive(item) ? "text-fg" : "text-fg-2 hover:text-fg",
                       )}
                     >
@@ -233,8 +236,9 @@ export default function SiteHeader() {
               onClose={() => setOpen(null)}
               onPointerEnter={hoverLeave}
             />
-            <Link href="/contact" className="btn btn-primary min-h-11" onPointerEnter={hoverLeave}>
+            <Link href="/contact" className="btn btn-primary ml-2 min-h-11" onPointerEnter={hoverLeave}>
               Contact us
+              <ArrowUpRight size={16} aria-hidden />
             </Link>
           </div>
 
@@ -254,6 +258,12 @@ export default function SiteHeader() {
             </button>
           </div>
         </div>
+        {/* Reading progress */}
+        <motion.span
+          aria-hidden
+          className="absolute inset-x-0 -bottom-px h-px origin-left bg-primary/70"
+          style={{ scaleX: scrollYProgress, opacity: scrolled ? 1 : 0 }}
+        />
       </header>
 
       {/* Scrim under an open panel */}
@@ -303,7 +313,7 @@ function MegaPanel({
       id={`panel-${id}`}
       role="region"
       aria-label={label}
-      className="absolute inset-x-0 top-full border-y border-white/[0.08] bg-surface shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+      className="absolute inset-x-0 top-full border-y border-white/[0.08] bg-surface shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)]"
     >
       {/* Only the contents fade, so switching panels never shows the page through. */}
       <div className="anim-panel wrap grid grid-cols-12 gap-10 py-10 xl:py-12">
@@ -314,12 +324,10 @@ function MegaPanel({
           <Link
             href={panel.all.href}
             onClick={onNavigate}
-            className="group mt-6 inline-flex items-center gap-2 self-start text-[0.9375rem] font-semibold text-primary"
+            className="text-link mt-6 self-start"
           >
-            <span className="link">{panel.all.label}</span>
-            <span className="arrow" aria-hidden>
-              →
-            </span>
+            {panel.all.label}
+            <ArrowUpRight size={16} aria-hidden />
           </Link>
         </div>
 
@@ -329,20 +337,15 @@ function MegaPanel({
             <div key={gi}>
               {group.heading && <p className="label mb-2 text-fg-3">{group.heading}</p>}
               <ul className={cn(multiGroup ? "space-y-1" : "grid grid-cols-2 gap-x-6 gap-y-1")}>
-                {group.links.map((l, li) => (
+                {group.links.map((l) => (
                   <li key={l.href}>
                     <Link
                       href={l.href}
                       onClick={onNavigate}
-                      className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 rounded-lg px-3 py-3.5 transition-colors hover:bg-white/[0.05] focus-visible:bg-white/[0.05]"
+                      className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 border-b border-line px-1 py-4 transition-colors hover:border-primary/60"
                     >
-                      {!multiGroup && (
-                        <span className="label w-6 text-fg-3" aria-hidden>
-                          {String(li + 1).padStart(2, "0")}
-                        </span>
-                      )}
-                      <span className={cn(multiGroup && "col-span-2")}>
-                        <span className="block font-display text-[1rem] font-medium text-fg transition-colors group-hover:text-primary-strong">{l.label}</span>
+                      <span className="col-span-2">
+                        <span className="block font-display text-[1.0625rem] font-medium tracking-[-0.02em] text-fg transition-colors group-hover:text-primary-strong">{l.label}</span>
                         {l.description && (
                           <span className="mt-0.5 block text-[0.875rem] leading-snug text-fg-2">{l.description}</span>
                         )}
@@ -350,9 +353,7 @@ function MegaPanel({
                       {l.status ? (
                         <span className="status pr-2 text-primary">{l.status}</span>
                       ) : (
-                        <span className="arrow pr-2 text-fg-3" aria-hidden>
-                          →
-                        </span>
+                        <ArrowUpRight size={16} aria-hidden className="text-fg-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
                       )}
                     </Link>
                   </li>
@@ -418,7 +419,7 @@ function SignInMenu({
             else onToggle();
           }
         }}
-        className="flex min-h-11 cursor-pointer items-center gap-1.5 px-3 text-[0.9375rem] font-semibold text-fg-2 transition-colors hover:text-fg"
+        className="flex min-h-11 cursor-pointer items-center gap-1.5 px-3 text-[0.875rem] font-medium text-fg-2 transition-colors hover:text-fg"
       >
         Sign in
         <Chevron open={open} />
@@ -426,7 +427,7 @@ function SignInMenu({
       {open && (
         <div
           id={id}
-          className="anim-panel absolute top-[calc(100%+0.75rem)] right-0 w-72 rounded-2xl border border-white/[0.08] bg-surface/95 p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+          className="anim-panel absolute top-[calc(100%+0.75rem)] right-0 w-72 border border-line bg-surface p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.7)]"
         >
           <p className="label px-3 pt-2 pb-3 text-fg-3">Sign in to</p>
           <ul>
@@ -539,7 +540,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                     aria-expanded={section === item.id}
                     aria-controls={`m-${item.id}`}
                     onClick={() => setSection((s) => (s === item.id ? null : item.id))}
-                    className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-semibold font-display"
+                    className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-medium font-display"
                   >
                     {item.label}
                     <Chevron open={section === item.id} />
@@ -571,7 +572,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                   )}
                 </>
               ) : (
-                <Link href={item.href} onClick={onClose} className="flex min-h-14 items-center text-[1.25rem] font-semibold font-display">
+                <Link href={item.href} onClick={onClose} className="flex min-h-14 items-center text-[1.25rem] font-medium font-display">
                   {item.label}
                 </Link>
               )}
@@ -583,7 +584,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
               aria-expanded={section === "signin"}
               aria-controls="m-signin"
               onClick={() => setSection((s) => (s === "signin" ? null : "signin"))}
-              className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-semibold font-display"
+              className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-medium font-display"
             >
               Sign in
               <Chevron open={section === "signin"} />

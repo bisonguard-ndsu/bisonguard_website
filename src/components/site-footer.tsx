@@ -17,10 +17,10 @@ export default function SiteFooter() {
             <p className="mt-6 max-w-[34ch] text-[0.9375rem] leading-relaxed text-white/65">
               Computer-vision software that turns road and traffic video into the records engineers maintain.
             </p>
-            <p className="mt-10 text-sm font-semibold text-white">Write to us</p>
+            <p className="eyebrow mt-10 text-fg-3">Write to us</p>
             <a
               href={`mailto:${site.email}`}
-              className="group mt-3 inline-flex items-center gap-2 font-display text-[1.375rem] font-semibold text-white transition-colors hover:text-primary-strong sm:text-2xl"
+              className="group mt-3 inline-flex items-center gap-2 font-display text-[1.375rem] font-medium text-white transition-colors hover:text-primary-strong sm:text-2xl"
             >
               <span className="link">{site.email}</span>
               <span className="arrow text-primary-strong" aria-hidden>
@@ -34,7 +34,7 @@ export default function SiteFooter() {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-9 items-center rounded-full border border-white/15 px-4 text-sm text-white/75 transition-colors hover:border-primary/60 hover:text-white"
+                    className="inline-flex h-9 items-center border border-white/15 px-4 text-sm text-white/75 transition-colors hover:border-primary/60 hover:text-white"
                   >
                     {s.name}
                     <span className="sr-only"> (opens in a new tab)</span>
@@ -47,7 +47,7 @@ export default function SiteFooter() {
           <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:col-span-8 lg:grid-cols-5">
             {columns.map((col) => (
               <div key={col.id}>
-                <h2 className="text-sm font-semibold text-white">
+                <h2 className="eyebrow text-fg-3">
                   <Link href={col.href} className="transition-colors hover:text-white">
                     {col.label}
                   </Link>
@@ -66,7 +66,7 @@ export default function SiteFooter() {
               </div>
             ))}
             <div>
-              <h2 className="text-sm font-semibold text-white">Sign in</h2>
+              <h2 className="eyebrow text-fg-3">Sign in</h2>
               <ul className="mt-5 space-y-3">
                 {apps
                   .filter((a) => a.url)
@@ -84,7 +84,7 @@ export default function SiteFooter() {
                     </li>
                   ))}
               </ul>
-              <h2 className="mt-10 text-sm font-semibold text-white">
+              <h2 className="eyebrow mt-10 text-fg-3">
                 <Link href="/work" className="transition-colors hover:text-white">
                   Work
                 </Link>

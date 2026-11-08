@@ -3,7 +3,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { useLayoutEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import { useRef, useState } from "react";
 import { CountUp, Reveal } from "@/components/motion";
 import { ButtonLink, Photo, SectionHeading, type Img } from "@/components/sections";
 import { cn } from "@/lib/utils";
@@ -46,15 +47,15 @@ function StackCard({ p, i, n, progress }: { p: StackItem; i: number; n: number; 
       <motion.div style={reduce ? undefined : { scale }} className="origin-top">
         <Link
           href={p.href}
-          className="group relative grid overflow-clip rounded-3xl border border-line bg-surface lg:h-[34rem] lg:grid-cols-12"
+          className="group relative grid overflow-clip border border-line bg-surface lg:h-[34rem] lg:grid-cols-12"
         >
           <div className="flex flex-col p-8 sm:p-10 lg:col-span-5 lg:p-12">
-            <div className="flex items-center gap-3 text-sm text-fg-3">
+            <div className="eyebrow flex items-center gap-3 text-fg-3">
               <span>{p.category}</span>
-              <span aria-hidden className="h-1 w-1 rounded-full bg-fg-3" />
-              <span className="text-primary-strong">{p.status}</span>
+              <span aria-hidden className="h-3 w-px bg-line" />
+              <span className="text-primary">{p.status}</span>
             </div>
-            <h3 className="mt-6 font-display text-[2.5rem] leading-none font-semibold tracking-tight text-fg sm:text-[3.25rem]">{p.name}</h3>
+            <h3 className="mt-6 font-display text-[2.5rem] leading-none font-medium tracking-[-0.04em] text-fg sm:text-[3.25rem]">{p.name}</h3>
             {p.fullName && <p className="mt-2 text-[0.9375rem] text-fg-3">{p.fullName}</p>}
             <p className="mt-6 max-w-[42ch] text-[1.0625rem] leading-relaxed text-fg-2">{p.summary}</p>
             <dl className="mt-auto grid grid-cols-2 gap-6 border-t border-line pt-6 max-lg:mt-8">
@@ -67,11 +68,9 @@ function StackCard({ p, i, n, progress }: { p: StackItem; i: number; n: number; 
                 <dd className="mt-1 text-[0.9375rem] text-fg">{p.output}</dd>
               </div>
             </dl>
-            <span className="mt-8 inline-flex items-center gap-2 font-semibold text-primary-strong">
-              <span className="link">Explore {p.name}</span>
-              <span className="arrow" aria-hidden>
-                →
-              </span>
+            <span className="text-link mt-6 self-start group-hover:text-primary">
+              Explore {p.name}
+              <ArrowUpRight size={18} aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </span>
           </div>
           <Photo image={p.image} className="aspect-[16/10] lg:col-span-7 lg:aspect-auto" sizes="(min-width: 1024px) 58vw, 100vw" />
@@ -100,12 +99,12 @@ export function HowItWorks({ steps }: { steps: Step[] }) {
             viewport={{ amount: 0.6 }}
             className="flex flex-col justify-center border-t border-line py-10 lg:min-h-[70vh] lg:py-0"
           >
-            <span className={cn("font-display text-sm font-semibold transition-colors duration-500", i === active ? "text-primary-strong" : "text-fg-3")}>
+            <span className={cn("eyebrow transition-colors duration-500", i === active ? "text-primary" : "text-fg-3")}>
               Step {i + 1} of {steps.length}
             </span>
             <h3
               className={cn(
-                "mt-3 font-display text-[2rem] font-semibold tracking-tight transition-colors duration-500 sm:text-[2.5rem]",
+                "mt-3 font-display text-[2rem] font-medium tracking-[-0.04em] transition-colors duration-500 sm:text-[2.5rem]",
                 i === active ? "text-fg" : "text-fg-3",
               )}
             >
@@ -155,7 +154,7 @@ export function HowItWorks({ steps }: { steps: Step[] }) {
           </div>
           <div className="mt-5 flex gap-2" aria-hidden>
             {steps.map((s, i) => (
-              <span key={s.key} className={cn("h-1 flex-1 rounded-full transition-colors duration-500", i <= active ? "bg-primary" : "bg-line")} />
+              <span key={s.key} className={cn("h-0.5 flex-1 transition-colors duration-500", i <= active ? "bg-primary" : "bg-line")} />
             ))}
           </div>
         </div>
@@ -186,8 +185,7 @@ export function ProjectExpand({
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.15"] });
   const inset = useTransform(scrollYProgress, [0, 1], [12, 0]);
-  const radius = useTransform(scrollYProgress, [0, 1], [28, 0]);
-  const clipPath = useTransform([inset, radius] as MotionValue<number>[], ([i, r]: number[]) => `inset(0% ${i}% round ${r}px)`);
+  const clipPath = useTransform(inset, (i) => `inset(0% ${i}%)`);
   const imgScale = useTransform(scrollYProgress, [0, 1], [1.15, 1]);
 
   return (
@@ -212,7 +210,7 @@ export function ProjectExpand({
             <Reveal key={s.label} delay={i * 0.08} className="border-t border-line pt-6">
               <dt className="sr-only">{s.label}</dt>
               <dd>
-                <CountUp value={s.value} className="block font-display text-[2rem] font-semibold tracking-tight text-fg sm:text-5xl" />
+                <CountUp value={s.value} className="block font-display text-[2rem] font-medium tracking-[-0.04em] text-fg sm:text-5xl" />
                 <span className="mt-2 block max-w-[22ch] text-[0.9375rem] leading-snug text-fg-2">{s.label}</span>
               </dd>
             </Reveal>
@@ -221,65 +219,6 @@ export function ProjectExpand({
         <Reveal delay={0.2} className="lg:col-span-4 lg:flex lg:justify-end">
           <ButtonLink href={href}>Read the case study</ButtonLink>
         </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ------------------------------------------------------------------------ */
-/* Solutions: a row of tall cards that moves sideways while the page scrolls down */
-
-export type RailItem = { href: string; image: Img; group: string; title: string; text: string };
-
-export function SolutionsRail({ items, children }: { items: RailItem[]; children: React.ReactNode }) {
-  const outer = useRef<HTMLDivElement>(null);
-  const track = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const [distance, setDistance] = useState(0);
-
-  useLayoutEffect(() => {
-    const measure = () => {
-      if (!track.current) return;
-      const desktop = window.matchMedia("(min-width: 1024px)").matches;
-      setDistance(desktop ? Math.max(0, track.current.scrollWidth - window.innerWidth) : 0);
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  const { scrollYProgress } = useScroll({ target: outer, offset: ["start start", "end end"] });
-  const x = useTransform(scrollYProgress, [0, 1], [0, -distance]);
-  const pinned = distance > 0 && !reduce;
-
-  return (
-    <section ref={outer} className="theme-light theme-soft relative" style={pinned ? { height: `calc(100vh + ${distance}px)` } : undefined}>
-      <div className={cn(pinned ? "sticky top-0 flex h-screen flex-col justify-center overflow-clip pt-[4.5rem]" : "section")}>
-        <div className="wrap">{children}</div>
-        <div className={cn("mt-10 lg:mt-14", !pinned && "overflow-x-auto pb-4 [scrollbar-width:thin]")}>
-          <motion.div ref={track} className="flex w-max gap-5 px-5 sm:px-8 lg:px-[max(3rem,calc((100vw-84rem)/2+3rem))]" style={pinned ? { x } : undefined}>
-            {items.map((s) => (
-              <Link
-                key={s.href}
-                href={s.href}
-                className="group flex w-[78vw] shrink-0 flex-col overflow-clip rounded-2xl border border-line bg-surface transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgba(0,0,0,0.35)] sm:w-[22rem] lg:w-[24rem]"
-              >
-                <Photo image={s.image} className="aspect-[4/3]" sizes="(min-width: 1024px) 24rem, 78vw" />
-                <div className="flex flex-1 flex-col p-6">
-                  <p className="text-[0.8125rem] text-fg-3">{s.group}</p>
-                  <h3 className="mt-2 font-display text-xl font-semibold text-fg">{s.title}</h3>
-                  <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-fg-2">{s.text}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary-strong">
-                    <span className="link">See the solution</span>
-                    <span className="arrow" aria-hidden>
-                      →
-                    </span>
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </motion.div>
-        </div>
       </div>
     </section>
   );

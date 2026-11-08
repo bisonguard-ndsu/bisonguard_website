@@ -51,7 +51,7 @@ export default function CareersPage() {
           <ul className="mt-12 grid gap-5 md:grid-cols-2">
             {roles.map((r, i) => (
               <Reveal as="li" key={r.title} delay={(i % 2) * 0.08} className="rounded-2xl border border-white/[0.08] bg-surface p-8">
-                <h3 className="font-display text-2xl font-semibold text-fg">{r.title}</h3>
+                <h3 className="font-display text-2xl font-medium text-fg">{r.title}</h3>
                 <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg-2">{r.text}</p>
               </Reveal>
             ))}

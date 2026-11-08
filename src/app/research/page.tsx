@@ -78,7 +78,7 @@ export default function ResearchPage() {
                       <div className="flex flex-wrap gap-2">
                         <Tag tone="primary">Feeds {a.feeds}</Tag>
                       </div>
-                      <h2 className="mt-5 font-display text-3xl font-semibold text-fg">{a.title}</h2>
+                      <h2 className="mt-5 font-display text-3xl font-medium text-fg">{a.title}</h2>
                       <p className="mt-3 max-w-[56ch] text-[1.0625rem] leading-relaxed text-fg-2">{a.text}</p>
                     </div>
                   </article>

@@ -36,7 +36,7 @@ export default function SolutionsPage() {
                     <Link href={`/solutions/${s.slug}`} className={cn(cardCls, "flex h-full flex-col overflow-clip")}>
                       <Photo image={s.image} className="aspect-[16/10]" sizes="(min-width: 1024px) 33vw, 100vw" />
                       <div className="flex flex-1 flex-col p-7">
-                        <h3 className="font-display text-2xl font-semibold text-fg group-hover:text-primary-strong">{s.title}</h3>
+                        <h3 className="font-display text-2xl font-medium text-fg group-hover:text-primary-strong">{s.title}</h3>
                         <p className="mt-3 flex-1 text-[1rem] leading-relaxed text-fg-2">{s.short}</p>
                         <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary">
                           <span className="link">See the approach</span>

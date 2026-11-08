@@ -41,7 +41,7 @@ export default function CompanyPage() {
               inView
               text="We started in transportation research labs, watching good models stall before they reached the agencies that needed them."
               accent="the agencies that needed them."
-              className="font-display text-[1.75rem] leading-[1.2] font-medium tracking-[-0.02em] text-fg sm:text-[2.25rem] lg:text-[2.75rem]"
+              className="font-display text-[1.75rem] leading-[1.2] font-medium tracking-[-0.04em] text-fg sm:text-[2.25rem] lg:text-[2.75rem]"
             />
             <Reveal delay={0.25} className="mt-8 grid gap-6 text-[1.0625rem] leading-relaxed text-fg-2 md:grid-cols-2">
               <p>
@@ -73,7 +73,7 @@ export default function CompanyPage() {
             {values.map((v, i) => (
               <Reveal as="li" key={v.title} delay={(i % 2) * 0.1} className="rounded-2xl border border-white/[0.08] bg-surface p-8 sm:p-10">
                 
-                <h3 className="mt-4 font-display text-2xl font-semibold text-fg">{v.title}</h3>
+                <h3 className="mt-4 font-display text-2xl font-medium text-fg">{v.title}</h3>
                 <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg-2">{v.text}</p>
               </Reveal>
             ))}
@@ -87,7 +87,7 @@ export default function CompanyPage() {
           <ul className="mt-12 grid grid-cols-2 gap-px overflow-clip rounded-2xl border border-white/[0.08] bg-white/[0.08] md:grid-cols-3 lg:grid-cols-5">
             {partners.map((p, i) => (
               <Reveal as="li" key={p.name} delay={i * 0.05} className="flex min-h-36 flex-col justify-between bg-surface p-6">
-                <span className="font-display text-2xl font-semibold text-fg">{p.name}</span>
+                <span className="font-display text-2xl font-medium text-fg">{p.name}</span>
                 {p.full !== p.name && <span className="mt-4 text-sm leading-snug text-fg-3">{p.full}</span>}
               </Reveal>
             ))}
@@ -105,7 +105,7 @@ export default function CompanyPage() {
               <Link href={c.href} className={cn(cardCls, "relative flex h-[22rem] flex-col justify-end overflow-clip p-8 sm:p-10")}>
                 <Photo image={c.image} className="absolute inset-0 -z-10" sizes="(min-width: 768px) 50vw, 100vw" />
                 <div aria-hidden className="absolute inset-0 -z-10 bg-black/45" />
-                <h2 className="font-display text-3xl font-semibold text-white">{c.title}</h2>
+                <h2 className="font-display text-3xl font-medium text-white">{c.title}</h2>
                 <p className="mt-2 text-white/80">{c.text}</p>
                 <span className="mt-5 inline-flex items-center gap-2 font-semibold text-primary-strong">
                   <span className="link">Read more</span>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, type PanInfo } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Slide = {
@@ -207,28 +208,31 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0, transition: { duration: 0.7, delay: 0.25, ease: EASE } }}
               exit={reduce ? undefined : { opacity: 0, transition: { duration: 0.3 } }}
             >
-              <p className="text-[0.9375rem] font-semibold text-primary-strong">{slide.eyebrow}</p>
+              <p className="eyebrow">{slide.eyebrow}</p>
               {index === 0 ? (
-                <h1 className="mt-4 font-display text-[2.5rem] leading-[1.05] font-semibold tracking-[-0.03em] text-white sm:text-[3.75rem] lg:text-[4.5rem]">
+                <h1 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-medium tracking-[-0.045em] text-white sm:text-[4rem] lg:text-[5rem]">
                   {slide.title}
                 </h1>
               ) : (
-                <h2 className="mt-4 font-display text-[2.5rem] leading-[1.05] font-semibold tracking-[-0.03em] text-white sm:text-[3.75rem] lg:text-[4.5rem]">
+                <h2 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-medium tracking-[-0.045em] text-white sm:text-[4rem] lg:text-[5rem]">
                   {slide.title}
                 </h2>
               )}
               <p className="mt-5 max-w-[38rem] text-[1.0625rem] leading-relaxed text-white/85 sm:text-lg">{slide.text}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                {slide.actions.map((a, i) => (
-                  <Link key={a.href + a.label} href={a.href} className={cn("btn group h-12 px-6 text-base", i === 0 ? "btn-primary" : "btn-ghost")}>
-                    {a.label}
-                    {i === 0 && (
-                      <span className="arrow" aria-hidden>
-                        →
-                      </span>
-                    )}
-                  </Link>
-                ))}
+              <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-3">
+                {slide.actions.map((a, i) =>
+                  i === 0 ? (
+                    <Link key={a.href + a.label} href={a.href} className="btn btn-light">
+                      {a.label}
+                      <ArrowUpRight size={18} aria-hidden />
+                    </Link>
+                  ) : (
+                    <Link key={a.href + a.label} href={a.href} className="text-link text-white">
+                      {a.label}
+                      <ArrowUpRight size={18} aria-hidden />
+                    </Link>
+                  ),
+                )}
               </div>
             </motion.div>
           </AnimatePresence>
@@ -261,7 +265,7 @@ export default function Hero() {
                     </span>
                     <span
                       className={cn(
-                        "block font-display text-[0.9375rem] font-semibold transition-colors duration-300",
+                        "block font-display text-[0.9375rem] font-medium transition-colors duration-300",
                         active ? "text-white" : "text-white/55 group-hover:text-white/85",
                       )}
                     >
@@ -284,7 +288,7 @@ export default function Hero() {
                 type="button"
                 onClick={() => setPaused((p) => !p)}
                 aria-label={paused ? "Play slideshow" : "Pause slideshow"}
-                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/30 text-white transition-[background-color,border-color,transform] duration-200 hover:border-white/70 hover:bg-white/10 active:scale-95"
+                className="flex h-10 w-10 cursor-pointer items-center justify-center border border-white/30 text-white transition-[background-color,border-color,transform] duration-200 hover:border-white/70 hover:bg-white/10 active:scale-95"
               >
                 <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden>
                   {paused || reduce ? (
