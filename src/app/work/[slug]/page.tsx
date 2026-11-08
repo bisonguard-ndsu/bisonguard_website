@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHero, SplitText, Tiles } from "@/components/page";
-import { getProduct } from "@/content/products";
-import { getSolution } from "@/content/solutions";
+import { ProductCards, SolutionCards, StatStrip } from "@/components/blocks";
+import { Reveal, WordRise } from "@/components/motion";
+import { AppFrame, CtaBand, Eyebrow, PageHero } from "@/components/sections";
 import { getProject, projects } from "@/content/work";
 
 export const dynamicParams = false;
@@ -17,46 +17,76 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const p = getProject((await params).slug);
   if (!p) notFound();
-  const [map, sign, recording] = p.gallery;
 
   return (
     <>
       <PageHero
-        notice={p.place}
-        h1="Sign and pavement survey of two cities"
+        eyebrow={p.place}
+        title={p.title}
+        accent={p.accent}
         lead={p.summary}
-        facts={p.stats.map((s) => [s.label.replace(/^traffic signs /, "Signs ").replace(/^road segments /, "Segments ").replace(/^frames analysed.*/, "Frames in one recording"), s.value] as [string, string])}
-        shot={{ src: map.src, alt: map.alt }}
+        image={{ src: "/media/site/interchange.webp", alt: "A highway interchange seen from above", position: "50% 50%" }}
+        crumbs={[{ label: "Work", href: "/work" }]}
       />
-      <SplitText
-        id="challenge"
-        h2="A current inventory without crews on foot"
-        lead={p.challenge}
-        lines={p.approach}
-        pic={{ src: "/media/site/phone-dashboard.webp", alt: "A phone on a car dashboard recording the road" }}
-      />
-      <SplitText id="evidence" ground="inverse" h2="Every sign with the frame it came from" lead={p.results} shot={{ src: sign.src, alt: sign.alt }} />
-      <SplitText
-        id="recording"
-        h2="Recording 74, read in full"
-        lead="One 1 min 42 s drive: 3,085 frames, 14 signs found and each counted once across the frames it appeared in."
-        lines={["3 no-parking signs with plaques", "2 do-not-enter and 2 stop signs", "7 more regulatory signs"]}
-        shot={{ src: recording.src, alt: recording.alt }}
-      />
-      <Tiles
-        id="used"
-        h2="Products and solutions used"
-        items={[
-          ...p.products.map((slug) => {
-            const prod = getProduct(slug);
-            return { href: prod.href, img: "/media/hero/adams.webp", alt: "A motorway at dusk seen from the driver's seat", position: "50% 60%", title: prod.name, fact: prod.output };
-          }),
-          ...p.solutions.map((slug) => {
-            const s = getSolution(slug)!;
-            return { href: `/solutions/${s.slug}`, img: s.image.src, alt: s.image.alt, position: s.image.position, title: s.title, fact: s.group };
-          }),
-        ]}
-      />
+
+      <section className="bg-bg pt-4 pb-4">
+        <div className="wrap">
+          <StatStrip stats={p.stats} />
+        </div>
+      </section>
+
+      <section className="section bg-bg">
+        <div className="wrap grid gap-16 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <Reveal y={12}>
+              <Eyebrow>The challenge</Eyebrow>
+            </Reveal>
+            <WordRise inView text="What the cities needed" accent="needed" className="t-h2 mt-5 text-fg" />
+            <Reveal delay={0.15} className="mt-6 text-[1.125rem] leading-relaxed text-fg-2">
+              <p>{p.challenge}</p>
+            </Reveal>
+          </div>
+          <div className="lg:col-span-7">
+            <Reveal y={12}>
+              <Eyebrow>Our approach</Eyebrow>
+            </Reveal>
+            <ol className="mt-6 space-y-4">
+              {p.approach.map((a, i) => (
+                <Reveal as="li" key={a} delay={i * 0.08} className="flex gap-5 rounded-2xl border border-white/[0.08] bg-surface p-6">
+                  <span className="font-mono text-sm text-primary-strong">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-[1.0625rem] leading-relaxed text-fg">{a}</span>
+                </Reveal>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="section relative overflow-clip bg-deep">
+        <div aria-hidden className="pointer-events-none absolute -top-40 left-1/3 h-[30rem] w-[30rem] rounded-full bg-primary/10 blur-3xl" />
+        <div className="wrap">
+          <div className="max-w-3xl">
+            <Reveal y={12}>
+              <Eyebrow>The result</Eyebrow>
+            </Reveal>
+            <WordRise inView text="One current record for the whole network" accent="the whole network" className="t-h2 mt-5 text-fg" />
+            <Reveal delay={0.15} className="mt-6 text-[1.125rem] leading-relaxed text-fg-2">
+              <p>{p.results}</p>
+            </Reveal>
+          </div>
+          <div className="mt-14 grid gap-8 lg:grid-cols-2">
+            {p.gallery.map((g, i) => (
+              <Reveal key={g.src} delay={i * 0.1} className={i === 0 ? "lg:col-span-2" : undefined}>
+                <AppFrame image={g} label={`AdAMS · ${g.label}`} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <ProductCards slugs={p.products} />
+      <SolutionCards slugs={p.solutions} title="Solutions in this project" />
+      <CtaBand title="Want the same for your network?" accent="your network?" />
     </>
   );
 }

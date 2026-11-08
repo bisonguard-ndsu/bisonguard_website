@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const disciplines = [
   { title: "Transportation engineering", text: "Pavement, traffic operations and safety. The people who know what an agency needs from the data." },
-  { title: "Computer vision research", text: "Detection, tracking, segmentation and vision-language models built for road video." },
+  { title: "Computer vision research", text: "Detection, tracking, segmentation and vision-language models, published at CVPR workshops and TRB." },
   { title: "Software and platform", text: "Web and mobile apps, cloud processing and the map that ties every product together." },
 ];
 
@@ -22,7 +22,8 @@ export default function TeamPage() {
       <PageHero
         eyebrow="Team"
         title="The people behind the products"
-        lead="Engineers and researchers who would rather see a model run on a live network than sit in a lab."
+        accent="behind the products"
+        lead="Engineers and researchers who would rather see a model run on a live network than sit in a paper."
         image={{ src: "/media/site/meeting.webp", alt: "A team meeting around a long table with laptops", position: "50% 50%" }}
         crumbs={[{ label: "Company", href: "/company" }]}
       />
@@ -30,10 +31,10 @@ export default function TeamPage() {
       {team.length > 0 && (
         <section className="section bg-bg">
           <div className="wrap">
-            <SectionHeading eyebrow="Leadership" title="Who leads the work" />
+            <SectionHeading eyebrow="Leadership" title="Who leads the work" accent="leads the work" />
             <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {team.map((m, i) => (
-                <Reveal as="li" key={m.id} delay={(i % 3) * 0.08} className="group overflow-clip rounded-2xl border border-edge bg-surface">
+                <Reveal as="li" key={m.id} delay={(i % 3) * 0.08} className="group overflow-clip rounded-2xl border border-white/[0.08] bg-surface">
                   <div className="relative aspect-[4/5] bg-surface-2">
                     {m.image && (
                       <Image
@@ -68,12 +69,12 @@ export default function TeamPage() {
         </section>
       )}
 
-      <section className="section tone-light">
+      <section className="section bg-deep">
         <div className="wrap">
-          <SectionHeading eyebrow="Disciplines" title="Three kinds of expertise in one team" />
+          <SectionHeading eyebrow="Disciplines" title="Three kinds of expertise in one team" accent="in one team" />
           <ul className="mt-12 grid gap-5 md:grid-cols-3">
             {disciplines.map((d, i) => (
-              <Reveal as="li" key={d.title} delay={i * 0.08} className="rounded-2xl border border-edge bg-surface p-8">
+              <Reveal as="li" key={d.title} delay={i * 0.08} className="rounded-2xl border border-white/[0.08] bg-surface p-8">
                 <span className="font-mono text-xs text-primary-strong">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="mt-4 font-display text-2xl font-semibold text-fg">{d.title}</h3>
                 <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg-2">{d.text}</p>

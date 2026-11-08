@@ -1,66 +1,625 @@
-import { Chev, Logo, MAIN_ACTION, MAIN_HREF, SIGN_IN_HREF } from "@/components/kit";
-import { nav } from "@/content/nav";
+"use client";
 
-/** nav-mega: one fixed, opaque bar. system.js adds the phone sheet, Escape and aria-expanded. */
-export default function SiteHeader({ current }: { current?: string }) {
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
+import { Logo } from "@/components/logo";
+import { nav, type NavItem, type NavPanel } from "@/content/nav";
+import { apps } from "@/content/apps";
+import { cn } from "@/lib/utils";
+
+const OPEN_DELAY = 80;
+const CLOSE_GRACE = 200;
+
+/* ------------------------------------------------------------------------ */
+/* Desktop                                                                   */
+/* ------------------------------------------------------------------------ */
+
+export default function SiteHeader() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const triggerRefs = useRef<Record<string, HTMLElement | null>>({});
+  const scrollAtOpen = useRef(0);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Transparent over the top of the page, frosted glass once it scrolls.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const clearTimers = () => {
+    if (openTimer.current) clearTimeout(openTimer.current);
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  };
+
+  const close = useCallback((returnFocusTo?: string) => {
+    clearTimers();
+    setOpen(null);
+    if (returnFocusTo) triggerRefs.current[returnFocusTo]?.focus();
+  }, []);
+
+  // Close on navigation.
+  useEffect(() => {
+    clearTimers();
+    setOpen(null);
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Close after the page scrolls a little — the panel shouldn't follow you down the page.
+  useEffect(() => {
+    if (!open) return;
+    scrollAtOpen.current = window.scrollY;
+    const onScroll = () => {
+      if (Math.abs(window.scrollY - scrollAtOpen.current) > 80) close();
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open, close]);
+
+  useEffect(() => () => clearTimers(), []);
+
+  // ArrowDown on a trigger: move focus to the panel's first link once it has rendered.
+  const focusPanel = useRef<string | null>(null);
+  useEffect(() => {
+    if (open && focusPanel.current === open) {
+      document.querySelector<HTMLElement>(`#panel-${open} a`)?.focus();
+    }
+    focusPanel.current = null;
+  }, [open]);
+
+  // Hover intent: open after a short delay (instant when switching), close after a grace period.
+  const hoverOpen = (id: string, e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    clearTimers();
+    if (open) setOpen(id);
+    else openTimer.current = setTimeout(() => setOpen(id), OPEN_DELAY);
+  };
+  const hoverLeave = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    if (openTimer.current) clearTimeout(openTimer.current);
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => setOpen(null), CLOSE_GRACE);
+  };
+  const hoverStay = (e: React.PointerEvent) => {
+    if (e.pointerType !== "mouse") return;
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+  };
+
+  const topIds = [...nav.map((n) => n.id)];
+
+  const moveTrigger = (fromId: string, dir: 1 | -1) => {
+    const i = topIds.indexOf(fromId);
+    const next = topIds[(i + dir + topIds.length) % topIds.length];
+    triggerRefs.current[next]?.focus();
+    if (open) {
+      const item = nav.find((n) => n.id === next);
+      setOpen(item?.panel ? next : null);
+    }
+  };
+
+  const onTriggerKey = (item: NavItem, e: React.KeyboardEvent) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      moveTrigger(item.id, 1);
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      moveTrigger(item.id, -1);
+    } else if (e.key === "ArrowDown" && item.panel) {
+      e.preventDefault();
+      focusPanel.current = item.id;
+      if (open === item.id) document.querySelector<HTMLElement>(`#panel-${item.id} a`)?.focus();
+      else setOpen(item.id);
+    } else if (e.key === "Escape") {
+      close(item.id);
+    }
+  };
+
+  const isActive = (item: NavItem) => pathname === item.href || pathname.startsWith(item.href + "/");
+
   return (
-    <header className="nav">
-      <div className="wrap nav__bar">
-        <a className="skip" href="#top">
-          Skip to content
-        </a>
-        <Logo />
-        <nav className="nav__links" aria-label="Main">
-          {nav.map((item) => (
-            <div className="nav__item" key={item.label}>
-              <a className="nav__link" href={item.href} aria-current={current === item.href ? "page" : undefined}>
-                {item.label}
-                {item.cols && <Chev />}
-              </a>
-              {item.cols && (
-                <div className="nav__menu">
-                  <div className="wrap grid">
-                    {item.cols.map((col) => (
-                      <div className="menu-col span-3" key={col.heading}>
-                        <p className="t-label">{col.heading}</p>
-                        {col.links.map((l) => (
-                          <a href={l.href} key={l.href}>
-                            {l.label}
-                            <span>{l.line}</span>
-                          </a>
-                        ))}
-                      </div>
-                    ))}
-                    {item.card && (
-                      <a className="menu-card span-3 start-10" href={item.card.href}>
-                        <div className="panel">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img className="frame__img" src={item.card.img} alt={item.card.alt} loading="lazy" />
-                        </div>
-                        <span className="t-card">{item.card.title}</span>
-                        <span className="t-small muted">{item.card.line}</span>
-                      </a>
-                    )}
-                  </div>
-                </div>
-              )}
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:bg-deep focus:px-4 focus:py-3 focus:text-white"
+      >
+        Skip to content
+      </a>
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300",
+          scrolled || open || mobileOpen
+            ? "border-white/[0.08] bg-bg/80 backdrop-blur-xl backdrop-saturate-150"
+            : "border-transparent bg-transparent",
+        )}
+        onPointerLeave={hoverLeave}
+        onPointerEnter={hoverStay}
+        onKeyDown={(e) => {
+          if (e.key === "Escape" && open) {
+            const id = open;
+            close(id);
+          }
+        }}
+      >
+        <div className="wrap flex h-[4.5rem] items-center justify-between gap-6">
+          <Link href="/" aria-label="InfiniCity Labs — home" className="shrink-0 py-2" onPointerEnter={hoverLeave}>
+            <Logo />
+          </Link>
+
+          {/* Desktop navigation */}
+          <nav aria-label="Main" className="hidden h-full lg:block">
+            <ul className="flex h-full items-stretch">
+              {nav.map((item) => (
+                <li
+                  key={item.id}
+                  className="flex"
+                  onBlur={(e) => {
+                    // Focus left this item and its panel → close it.
+                    if (open === item.id && !e.currentTarget.contains(e.relatedTarget as Node)) {
+                      setOpen((cur) => (cur === item.id ? null : cur));
+                    }
+                  }}
+                >
+                  {item.panel ? (
+                    <>
+                      <button
+                        ref={(el) => {
+                          triggerRefs.current[item.id] = el;
+                        }}
+                        type="button"
+                        aria-expanded={open === item.id}
+                        aria-controls={`panel-${item.id}`}
+                        onPointerEnter={(e) => hoverOpen(item.id, e)}
+                        onClick={() => {
+                          clearTimers();
+                          setOpen((cur) => (cur === item.id ? null : item.id));
+                        }}
+                        onKeyDown={(e) => onTriggerKey(item, e)}
+                        className={cn(
+                          "relative flex cursor-pointer items-center gap-1.5 px-3.5 text-[0.9375rem] font-semibold transition-colors xl:px-4",
+                          open === item.id || isActive(item) ? "text-fg" : "text-fg-2 hover:text-fg",
+                        )}
+                      >
+                        {item.label}
+                        <Chevron open={open === item.id} />
+                        <span
+                          aria-hidden
+                          className={cn(
+                            "absolute inset-x-3.5 bottom-0 h-[2px] origin-left rounded-full bg-primary shadow-[0_0_14px_var(--color-primary)] transition-transform duration-300 xl:inset-x-4",
+                            open === item.id || isActive(item) ? "scale-x-100" : "scale-x-0",
+                          )}
+                        />
+                      </button>
+                      {open === item.id && <MegaPanel id={item.id} label={item.label} panel={item.panel} onNavigate={() => close()} />}
+                    </>
+                  ) : (
+                    <Link
+                      ref={(el) => {
+                        triggerRefs.current[item.id] = el;
+                      }}
+                      href={item.href}
+                      onPointerEnter={hoverLeave}
+                      onKeyDown={(e) => onTriggerKey(item, e)}
+                      aria-current={isActive(item) ? "page" : undefined}
+                      className={cn(
+                        "relative flex items-center px-3.5 text-[0.9375rem] font-semibold transition-colors xl:px-4",
+                        isActive(item) ? "text-fg" : "text-fg-2 hover:text-fg",
+                      )}
+                    >
+                      {item.label}
+                      <span
+                        aria-hidden
+                        className={cn(
+                          "absolute inset-x-3.5 bottom-0 h-[2px] rounded-full bg-primary shadow-[0_0_14px_var(--color-primary)] xl:inset-x-4",
+                          isActive(item) ? "block" : "hidden",
+                        )}
+                      />
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="hidden items-center gap-2 lg:flex">
+            <SignInMenu
+              open={open === "signin"}
+              onToggle={() => setOpen((cur) => (cur === "signin" ? null : "signin"))}
+              onClose={() => setOpen(null)}
+              onPointerEnter={hoverLeave}
+            />
+            <Link href="/contact" className="btn btn-primary min-h-11" onPointerEnter={hoverLeave}>
+              Contact us
+            </Link>
+          </div>
+
+          {/* Mobile controls */}
+          <div className="flex items-center gap-2 lg:hidden">
+            <Link href="/contact" className="btn btn-primary min-h-11 px-4 text-sm">
+              Contact
+            </Link>
+            <button
+              type="button"
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-menu"
+              onClick={() => setMobileOpen(true)}
+              className="btn btn-secondary min-h-11 px-4 text-sm"
+            >
+              Menu
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Scrim under an open panel */}
+      {open && open !== "signin" && (
+        <div
+          aria-hidden
+          className="anim-panel fixed inset-x-0 top-[4.5rem] bottom-0 z-40 hidden bg-deep/55 backdrop-blur-[2px] lg:block"
+          onClick={() => close()}
+        />
+      )}
+
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} />
+    </>
+  );
+}
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 12 12"
+      className={cn("h-3 w-3 transition-transform duration-200", open && "rotate-180")}
+    >
+      <path d="M2.5 4.5 6 8l3.5-3.5" fill="none" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* Mega panel                                                                */
+/* ------------------------------------------------------------------------ */
+
+function MegaPanel({
+  id,
+  label,
+  panel,
+  onNavigate,
+}: {
+  id: string;
+  label: string;
+  panel: NavPanel;
+  onNavigate: () => void;
+}) {
+  const multiGroup = panel.groups.length > 1;
+  return (
+    <div
+      id={`panel-${id}`}
+      role="region"
+      aria-label={label}
+      className="absolute inset-x-0 top-full border-y border-white/[0.08] bg-surface shadow-[0_40px_80px_-30px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+    >
+      {/* Only the contents fade, so switching panels never shows the page through. */}
+      <div className="anim-panel wrap grid grid-cols-12 gap-10 py-10 xl:py-12">
+        {/* Intro */}
+        <div className="col-span-3 flex flex-col">
+          <p className="label text-fg-3">{label}</p>
+          <p className="mt-4 max-w-[30ch] text-[1.0625rem] leading-snug text-fg">{panel.intro}</p>
+          <Link
+            href={panel.all.href}
+            onClick={onNavigate}
+            className="group mt-6 inline-flex items-center gap-2 self-start text-[0.9375rem] font-semibold text-primary"
+          >
+            <span className="link">{panel.all.label}</span>
+            <span className="arrow" aria-hidden>
+              →
+            </span>
+          </Link>
+        </div>
+
+        {/* Links */}
+        <div className={cn("col-span-9", multiGroup && "grid grid-cols-3 gap-x-8 gap-y-6")}>
+          {panel.groups.map((group, gi) => (
+            <div key={gi}>
+              {group.heading && <p className="label mb-2 text-fg-3">{group.heading}</p>}
+              <ul className={cn(multiGroup ? "space-y-1" : "grid grid-cols-2 gap-x-6 gap-y-1")}>
+                {group.links.map((l, li) => (
+                  <li key={l.href}>
+                    <Link
+                      href={l.href}
+                      onClick={onNavigate}
+                      className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 rounded-lg px-3 py-3.5 transition-colors hover:bg-white/[0.05] focus-visible:bg-white/[0.05]"
+                    >
+                      {!multiGroup && (
+                        <span className="label w-6 text-fg-3" aria-hidden>
+                          {String(li + 1).padStart(2, "0")}
+                        </span>
+                      )}
+                      <span className={cn(multiGroup && "col-span-2")}>
+                        <span className="block font-display text-[1rem] font-medium text-fg transition-colors group-hover:text-primary-strong">{l.label}</span>
+                        {l.description && (
+                          <span className="mt-0.5 block text-[0.875rem] leading-snug text-fg-2">{l.description}</span>
+                        )}
+                      </span>
+                      {l.status ? (
+                        <span className="status pr-2 text-primary">{l.status}</span>
+                      ) : (
+                        <span className="arrow pr-2 text-fg-3" aria-hidden>
+                          →
+                        </span>
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
-        </nav>
-        <div className="nav__actions">
-          <a className="nav__link" href={SIGN_IN_HREF}>
-            Sign in
-          </a>
-          <a className="btn btn--primary" href={MAIN_HREF}>
-            {MAIN_ACTION}
-          </a>
         </div>
-        <button className="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
-          <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-            <path d="M2 5h14M2 13h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-          </svg>
+
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* Sign-in menu                                                              */
+/* ------------------------------------------------------------------------ */
+
+function SignInMenu({
+  open,
+  onToggle,
+  onClose,
+  onPointerEnter,
+}: {
+  open: boolean;
+  onToggle: () => void;
+  onClose: () => void;
+  onPointerEnter: (e: React.PointerEvent) => void;
+}) {
+  const id = useId();
+  const btn = useRef<HTMLButtonElement>(null);
+  const focusFirst = useRef(false);
+  useEffect(() => {
+    if (open && focusFirst.current) document.getElementById(id)?.querySelector<HTMLElement>("a")?.focus();
+    focusFirst.current = false;
+  }, [open, id]);
+  return (
+    <div
+      className="relative"
+      onBlur={(e) => {
+        if (open && !e.currentTarget.contains(e.relatedTarget as Node)) onClose();
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Escape" && open) {
+          e.stopPropagation();
+          onClose();
+          btn.current?.focus();
+        }
+      }}
+    >
+      <button
+        ref={btn}
+        type="button"
+        aria-expanded={open}
+        aria-controls={id}
+        onClick={onToggle}
+        onPointerEnter={onPointerEnter}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowDown") {
+            e.preventDefault();
+            focusFirst.current = true;
+            if (open) document.getElementById(id)?.querySelector<HTMLElement>("a")?.focus();
+            else onToggle();
+          }
+        }}
+        className="flex min-h-11 cursor-pointer items-center gap-1.5 px-3 text-[0.9375rem] font-semibold text-fg-2 transition-colors hover:text-fg"
+      >
+        Sign in
+        <Chevron open={open} />
+      </button>
+      {open && (
+        <div
+          id={id}
+          className="anim-panel absolute top-[calc(100%+0.75rem)] right-0 w-72 rounded-2xl border border-white/[0.08] bg-surface/95 p-2 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+        >
+          <p className="label px-3 pt-2 pb-3 text-fg-3">Sign in to</p>
+          <ul>
+            {apps.map((app) => (
+              <li key={app.key}>
+                {app.url ? (
+                  <a
+                    href={app.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={onClose}
+                    className="group flex items-center justify-between rounded-lg px-3 py-2.5 text-[0.9375rem] font-semibold text-fg hover:bg-white/[0.06] focus-visible:bg-white/[0.06]"
+                  >
+                    {app.name}
+                    <span aria-hidden className="text-fg-3 group-hover:text-primary">
+                      ↗
+                    </span>
+                    <span className="sr-only">(opens in a new tab)</span>
+                  </a>
+                ) : (
+                  <span className="flex items-center justify-between px-3 py-2.5 text-[0.9375rem] font-semibold text-fg-3">
+                    {app.name}
+                    <span className="text-xs font-normal">{app.note}</span>
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* Mobile menu                                                               */
+/* ------------------------------------------------------------------------ */
+
+function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const [section, setSection] = useState<string | null>(null);
+  const dialog = useRef<HTMLDivElement>(null);
+  const lastFocus = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    lastFocus.current = document.activeElement as HTMLElement;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    // The dialog is committed before effects run, so focus can move now.
+    dialog.current?.querySelector<HTMLElement>("button")?.focus();
+    return () => {
+      document.body.style.overflow = prev;
+      lastFocus.current?.focus();
+    };
+  }, [open]);
+
+  // Close if the viewport grows into the desktop layout.
+  useEffect(() => {
+    if (!open) return;
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const onChange = () => mq.matches && onClose();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  const trap = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") return onClose();
+    if (e.key !== "Tab" || !dialog.current) return;
+    const items = dialog.current.querySelectorAll<HTMLElement>("a[href], button:not([disabled])");
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+
+  return (
+    <div
+      id="mobile-menu"
+      ref={dialog}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu"
+      onKeyDown={trap}
+      className="anim-panel fixed inset-0 z-[60] flex flex-col bg-bg lg:hidden"
+    >
+      <div className="wrap flex h-[4.5rem] shrink-0 items-center justify-between border-b border-line">
+        <Link href="/" onClick={onClose} aria-label="InfiniCity Labs — home">
+          <Logo />
+        </Link>
+        <button type="button" onClick={onClose} className="btn btn-secondary min-h-11 px-4 text-sm">
+          Close
         </button>
       </div>
-    </header>
+
+      <nav aria-label="Main" className="wrap flex-1 overflow-y-auto overscroll-contain py-2">
+        <ul>
+          {nav.map((item) => (
+            <li key={item.id} className="border-b border-line">
+              {item.panel ? (
+                <>
+                  <button
+                    type="button"
+                    aria-expanded={section === item.id}
+                    aria-controls={`m-${item.id}`}
+                    onClick={() => setSection((s) => (s === item.id ? null : item.id))}
+                    className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-semibold font-display"
+                  >
+                    {item.label}
+                    <Chevron open={section === item.id} />
+                  </button>
+                  {section === item.id && (
+                    <div id={`m-${item.id}`} className="pb-4">
+                      {item.panel.groups.map((g, gi) => (
+                        <div key={gi} className={cn(gi > 0 && "mt-3")}>
+                          {g.heading && <p className="label mb-1 text-fg-3">{g.heading}</p>}
+                          <ul>
+                            {g.links.map((l) => (
+                              <li key={l.href}>
+                                <Link href={l.href} onClick={onClose} className="flex min-h-12 flex-col justify-center py-2">
+                                  <span className="flex items-center gap-3 font-semibold text-fg">
+                                    {l.label}
+                                    {l.status && <span className="status text-primary">{l.status}</span>}
+                                  </span>
+                                  {l.description && <span className="text-sm leading-snug text-fg-2">{l.description}</span>}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ))}
+                      <Link href={item.panel.all.href} onClick={onClose} className="mt-2 flex min-h-12 items-center font-semibold text-primary">
+                        {item.panel.all.label} →
+                      </Link>
+                    </div>
+                  )}
+                </>
+              ) : (
+                <Link href={item.href} onClick={onClose} className="flex min-h-14 items-center text-[1.25rem] font-semibold font-display">
+                  {item.label}
+                </Link>
+              )}
+            </li>
+          ))}
+          <li className="border-b border-line">
+            <button
+              type="button"
+              aria-expanded={section === "signin"}
+              aria-controls="m-signin"
+              onClick={() => setSection((s) => (s === "signin" ? null : "signin"))}
+              className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-semibold font-display"
+            >
+              Sign in
+              <Chevron open={section === "signin"} />
+            </button>
+            {section === "signin" && (
+              <ul id="m-signin" className="pb-4">
+                {apps.map((app) => (
+                  <li key={app.key}>
+                    {app.url ? (
+                      <a
+                        href={app.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex min-h-12 items-center justify-between font-semibold"
+                      >
+                        {app.name} <span aria-hidden>↗</span>
+                        <span className="sr-only">(opens in a new tab)</span>
+                      </a>
+                    ) : (
+                      <span className="flex min-h-12 items-center justify-between text-fg-3">
+                        {app.name} <span className="text-sm">{app.note}</span>
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        </ul>
+      </nav>
+
+      <div className="wrap shrink-0 border-t border-line py-4">
+        <Link href="/contact" onClick={onClose} className="btn btn-primary w-full">
+          Contact us
+        </Link>
+      </div>
+    </div>
   );
 }

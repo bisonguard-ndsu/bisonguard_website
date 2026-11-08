@@ -13,6 +13,7 @@ const pages = [
   "/work",
   ...projects.map((p) => `/work/${p.slug}`),
   "/research",
+  "/research/publications",
   "/company",
   "/company/team",
   "/company/careers",

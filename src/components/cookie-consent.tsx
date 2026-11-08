@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Script from "next/script";
 import { useEffect, useState, useSyncExternalStore } from "react";
 
@@ -100,36 +101,51 @@ export default function CookieConsent() {
     <>
       <Analytics allowed={!!consent?.analytics} />
       {visible && (
-        <section aria-label="Cookie preferences" className="cookie">
-          <div className="wrap">
-            <div className="cookie__row">
-              <p>
-                We use necessary cookies to run this site and, with your permission, analytics cookies to see which pages are useful.{" "}
-                <a className="link" href="/cookies">
-                  Read the cookie policy
-                </a>
+        <section
+          aria-label="Cookie preferences"
+          className="anim-panel fixed inset-x-0 bottom-0 z-[55] border-t border-line bg-bg shadow-[0_-16px_40px_-24px_rgba(17,19,17,0.35)]"
+        >
+          <div className="wrap py-5 lg:py-6">
+            <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+              <p className="max-w-[70ch] text-[0.9375rem] leading-relaxed text-fg-2">
+                We use necessary cookies to run this site and, with your permission, analytics cookies to see which pages
+                are useful. Read the{" "}
+                <Link href="/cookies" className="font-semibold text-fg underline underline-offset-2">
+                  cookie policy
+                </Link>
+                .
               </p>
-              <div className="cookie__actions">
-                <button type="button" onClick={() => setDetails((d) => !d)} className="nav__link" aria-expanded={details}>
+              <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+                <button type="button" onClick={() => setDetails((d) => !d)} className="btn min-h-11 text-fg-2 hover:text-fg" aria-expanded={details}>
                   Choose
                 </button>
-                <button type="button" onClick={() => decide({ analytics: false, marketing: false })} className="btn btn--secondary">
+                <button type="button" onClick={() => decide({ analytics: false, marketing: false })} className="btn btn-secondary min-h-11">
                   Reject all
                 </button>
-                <button type="button" onClick={() => decide({ analytics: true, marketing: true })} className="btn btn--secondary">
+                <button type="button" onClick={() => decide({ analytics: true, marketing: true })} className="btn btn-secondary min-h-11">
                   Accept all
                 </button>
               </div>
             </div>
+
             {details && (
-              <fieldset className="cookie__details">
+              <fieldset className="mt-5 border-t border-line pt-5">
                 <legend className="sr-only">Cookie categories</legend>
-                <Toggle label="Necessary" note="Required for the site to work. Always on." checked disabled />
-                <Toggle label="Analytics" note="Anonymous page statistics (Google Analytics)." checked={analytics} onChange={setAnalytics} />
-                <Toggle label="Marketing" note="Campaign measurement. Off unless you opt in." checked={marketing} onChange={setMarketing} />
-                <button type="button" onClick={() => decide({ analytics, marketing })} className="btn btn--secondary">
-                  Save choices
-                </button>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <Toggle label="Necessary" note="Required for the site to work. Always on." checked disabled />
+                  <Toggle
+                    label="Analytics"
+                    note="Anonymous page statistics (Google Analytics)."
+                    checked={analytics}
+                    onChange={setAnalytics}
+                  />
+                  <Toggle label="Marketing" note="Campaign measurement. Off unless you opt in." checked={marketing} onChange={setMarketing} />
+                </div>
+                <div className="mt-5 flex justify-end">
+                  <button type="button" onClick={() => decide({ analytics, marketing })} className="btn btn-primary min-h-11">
+                    Save choices
+                  </button>
+                </div>
               </fieldset>
             )}
           </div>
@@ -153,11 +169,17 @@ function Toggle({
   onChange?: (v: boolean) => void;
 }) {
   return (
-    <label className="cookie__toggle">
-      <input type="checkbox" checked={checked} disabled={disabled} onChange={(e) => onChange?.(e.target.checked)} />
+    <label className={`flex gap-3 ${disabled ? "opacity-70" : "cursor-pointer"}`}>
+      <input
+        type="checkbox"
+        checked={checked}
+        disabled={disabled}
+        onChange={(e) => onChange?.(e.target.checked)}
+        className="mt-1 h-5 w-5 shrink-0 accent-[var(--color-guide)]"
+      />
       <span>
-        <b>{label}</b>
-        <span className="t-small muted">{note}</span>
+        <span className="block font-semibold text-fg">{label}</span>
+        <span className="block text-sm leading-snug text-fg-2">{note}</span>
       </span>
     </label>
   );

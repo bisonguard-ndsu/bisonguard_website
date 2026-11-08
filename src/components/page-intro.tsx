@@ -1,6 +1,6 @@
-import { Crumbs } from "@/components/sections";
+import Link from "next/link";
 
-/** Plain page opening on the dark band, used by legal pages and the contact page. */
+/** Plain page opening used by legal pages and pages still being built. */
 export function PageIntro({
   label,
   title,
@@ -13,13 +13,28 @@ export function PageIntro({
   crumbs?: { label: string; href: string }[];
 }) {
   return (
-    <section className="-mt-[4.5rem] bg-deep pt-[4.5rem]">
-      <div className="wrap pt-12 pb-14 lg:pt-20 lg:pb-20">
-        {crumbs ? <Crumbs items={crumbs} current={title} /> : <p className="text-sm font-semibold text-primary">{label}</p>}
-        <h1 className="mt-6 max-w-[18ch] font-display text-[2.375rem] leading-[1.06] font-semibold tracking-[-0.03em] text-white sm:text-[3.25rem] lg:text-[3.75rem]">
-          {title}
-        </h1>
-        {lead && <p className="mt-6 max-w-[56ch] text-[1.0625rem] leading-relaxed text-white/70 sm:text-lg">{lead}</p>}
+    <section className="border-b border-line pt-8 pb-14 lg:pt-10 lg:pb-20">
+      <div className="wrap">
+        {crumbs && (
+          <nav aria-label="Breadcrumb" className="mb-10 lg:mb-14">
+            <ol className="label flex flex-wrap gap-2 text-fg-3">
+              {crumbs.map((c) => (
+                <li key={c.href} className="flex gap-2">
+                  <Link href={c.href} className="link hover:text-fg">
+                    {c.label}
+                  </Link>
+                  <span aria-hidden>/</span>
+                </li>
+              ))}
+              <li aria-current="page" className="text-fg">
+                {title}
+              </li>
+            </ol>
+          </nav>
+        )}
+        <p className="label text-primary">{label}</p>
+        <h1 className="t-h1 mt-5 max-w-[18ch]">{title}</h1>
+        {lead && <p className="t-lead mt-6 max-w-[56ch] text-fg-2">{lead}</p>}
       </div>
     </section>
   );
@@ -27,11 +42,9 @@ export function PageIntro({
 
 export function Prose({ children }: { children: React.ReactNode }) {
   return (
-    <div className="bg-bg">
-      <div className="wrap section">
-        <div className="max-w-[68ch] space-y-5 text-[1.0625rem] leading-relaxed text-fg-2 [&_a]:font-semibold [&_a]:text-fg [&_a]:underline [&_a]:underline-offset-2 [&_h2]:pt-8 [&_h2]:font-display [&_h2]:text-[1.5rem] [&_h2]:font-semibold [&_h2]:text-fg [&_h3]:font-semibold [&_h3]:text-fg">
-          {children}
-        </div>
+    <div className="wrap section">
+      <div className="max-w-[68ch] space-y-5 text-[1.0625rem] leading-relaxed text-fg-2 [&_a]:font-semibold [&_a]:text-fg [&_a]:underline [&_a]:underline-offset-2 [&_h2]:pt-8 [&_h2]:text-[1.5rem] [&_h2]:font-bold [&_h2]:text-fg [&_h3]:font-bold [&_h3]:text-fg">
+        {children}
       </div>
     </div>
   );

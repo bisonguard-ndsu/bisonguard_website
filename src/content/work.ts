@@ -1,4 +1,5 @@
-import type { Pic, Shot } from "@/components/page";
+import type { Img } from "@/components/sections";
+import type { Shot } from "@/content/product-pages";
 
 export type Project = {
   slug: string;
@@ -6,14 +7,14 @@ export type Project = {
   accent: string;
   place: string;
   summary: string;
-  hero: Pic;
+  hero: Img;
   products: string[];
   solutions: string[];
   stats: { value: string; label: string }[];
   challenge: string;
   approach: string[];
   results: string;
-  gallery: (Shot & { width: number; height: number; label?: string })[];
+  gallery: Shot[];
 };
 
 export const projects: Project[] = [

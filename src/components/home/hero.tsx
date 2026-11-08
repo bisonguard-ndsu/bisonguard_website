@@ -1,175 +1,390 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useReducedMotion } from "motion/react";
-import { useEffect, useState } from "react";
-import { EASE } from "@/components/motion";
-import { ButtonLink } from "@/components/sections";
-import { partners } from "@/content/evidence";
+import Link from "next/link";
+import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "motion/react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
-type Kind = "sign" | "signal" | "vehicle" | "roadside";
-
-const colour: Record<Kind, string> = {
-  sign: "oklch(0.8 0.13 185)",
-  signal: "oklch(0.84 0.15 78)",
-  vehicle: "oklch(0.78 0.11 250)",
-  roadside: "oklch(0.76 0.13 300)",
+type Slide = {
+  key: string;
+  tab: string;
+  tagline: string;
+  eyebrow: string;
+  title: string;
+  /** The part of the title drawn in the brand gradient. Must appear at the end of `title`. */
+  accent: string;
+  text: string;
+  image: { src: string; alt: string; position: string; flip?: boolean };
+  actions: { label: string; href: string }[];
 };
 
-/** Boxes in percent of the frame (highway-sign.webp, 1600 × 1067). */
-const boxes: { label: string; score: string; kind: Kind; l: number; t: number; w: number; h: number; tag?: "in" | "below"; right?: boolean }[] = [
-  { label: "Guide sign", score: "0.98", kind: "sign", l: 34.6, t: 32.8, w: 32.5, h: 24 },
-  { label: "Exit panel", score: "0.95", kind: "sign", l: 54, t: 27.6, w: 12.5, h: 5.2 },
-  { label: "Lane-use signals", score: "0.93", kind: "signal", l: 47.6, t: 60.8, w: 13.4, h: 8 },
-  { label: "Vehicle", score: "0.99", kind: "vehicle", l: 43.4, t: 82.8, w: 7.6, h: 9.6 },
-  { label: "Vehicle", score: "0.97", kind: "vehicle", l: 57, t: 83.3, w: 5.4, h: 7.4 },
-  { label: "Truck", score: "0.96", kind: "vehicle", l: 5, t: 76, w: 8.2, h: 6.6 },
-  { label: "Light pole", score: "0.91", kind: "roadside", l: 85.5, t: 0.6, w: 4.5, h: 83.4, tag: "in", right: true },
-  { label: "Guardrail", score: "0.88", kind: "roadside", l: 64, t: 83, w: 35.6, h: 16.6, tag: "in" },
+const SLIDE_MS = 7000;
+const WIPE_S = 1.15;
+const WIPE_EASE = [0.77, 0, 0.175, 1] as const;
+const EXPO = [0.16, 1, 0.3, 1] as const;
+
+const slides: Slide[] = [
+  {
+    key: "company",
+    tab: "Overview",
+    tagline: "What we do",
+    eyebrow: "InfiniCity Labs",
+    title: "Computer vision for the roads you manage",
+    accent: "the roads you manage",
+    text: "We build software that maps road assets, rates pavement condition, counts traffic and tracks every repair, all from the video your crews and cameras already capture.",
+    image: { src: "/media/hero/company.webp", alt: "A city highway interchange at night, seen from above", position: "50% 50%" },
+    actions: [
+      { label: "Talk to us", href: "/contact" },
+      { label: "Explore products", href: "/products" },
+    ],
+  },
+  {
+    key: "adams",
+    tab: "AdAMS",
+    tagline: "Asset management",
+    eyebrow: "AdAMS · Advanced Asset Management System",
+    title: "Drive the network once. Map every asset and defect.",
+    accent: "Map every asset and defect.",
+    text: "Record from a phone on the dashboard. AdAMS finds and geolocates signs, markings, street lights and signals, grades cracks and potholes on a five-level scale, and turns them into work orders.",
+    image: { src: "/media/hero/adams.webp", alt: "A motorway at dusk seen from the driver's seat", position: "50% 62%" },
+    actions: [
+      { label: "Explore AdAMS", href: "/products/adams" },
+      { label: "Book a demo", href: "/contact" },
+    ],
+  },
+  {
+    key: "tmc",
+    tab: "TMC",
+    tagline: "Traffic cameras",
+    eyebrow: "TMC",
+    title: "Every traffic camera, live on one screen",
+    accent: "live on one screen",
+    text: "Watch live feeds, schedule recordings and run analyses for volume, speed, occupancy and density, with alerts and reports your operations team can act on.",
+    image: { src: "/media/hero/tmc.webp", alt: "A traffic camera mounted on a pole against the sky", position: "50% 50%", flip: true },
+    actions: [
+      { label: "Explore TMC", href: "/products/traffic-management" },
+      { label: "Book a demo", href: "/contact" },
+    ],
+  },
+  {
+    key: "turnflow",
+    tab: "Turnflow",
+    tagline: "Movement counts",
+    eyebrow: "Turnflow",
+    title: "Turning-movement counts, report-ready",
+    accent: "report-ready",
+    text: "Upload intersection video or record a live camera. Turnflow counts every movement by interval, measures headways and lane occupancy, and exports PDF or Word engineering reports.",
+    image: { src: "/media/hero/turnflow.webp", alt: "A busy road intersection seen from directly above", position: "50% 50%" },
+    actions: [
+      { label: "Explore Turnflow", href: "/products/turnflow" },
+      { label: "Book a demo", href: "/contact" },
+    ],
+  },
+  {
+    key: "roadlogger",
+    tab: "RoadLogger",
+    tagline: "Field inspections",
+    eyebrow: "RoadLogger",
+    title: "Every defect logged, every case tracked to repair",
+    accent: "tracked to repair",
+    text: "Inspectors capture issues on their phones, even offline. Each case moves from triage to monitoring to repair, pinned to the map and visible to the whole team.",
+    image: { src: "/media/hero/roadlogger.webp", alt: "Cracked asphalt across a worn yellow lane marking", position: "50% 50%" },
+    actions: [
+      { label: "Explore RoadLogger", href: "/products/roadlogger" },
+      { label: "Book a demo", href: "/contact" },
+    ],
+  },
 ];
 
-const tally: { kind: Kind; label: string }[] = [
-  { kind: "sign", label: "Signs" },
-  { kind: "signal", label: "Signals" },
-  { kind: "vehicle", label: "Vehicles" },
-  { kind: "roadside", label: "Roadside assets" },
-];
-
-const START_MS = 900;
-const STEP_MS = 380;
-
-function DetectionFrame() {
-  const reduce = useReducedMotion();
-  const [shown, setShown] = useState(reduce ? boxes.length : 0);
-
-  useEffect(() => {
-    if (reduce) return;
-    const timers = boxes.map((_, i) => setTimeout(() => setShown(i + 1), START_MS + i * STEP_MS));
-    return () => timers.forEach(clearTimeout);
-  }, [reduce]);
-
-  const done = shown >= boxes.length;
-  const visible = boxes.slice(0, shown);
-
-  return (
-    <div className="overflow-clip rounded-xl border border-white/12 bg-[oklch(0.17_0.016_265)] shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
-      <div className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-3 text-xs text-white/60">
-        <span className="flex min-w-0 items-center gap-2.5">
-          <span className={cn("h-2 w-2 shrink-0 rounded-full", done ? "bg-[oklch(0.8_0.13_185)]" : "anim-pulse bg-[oklch(0.84_0.15_78)]")} />
-          <span className="truncate">
-            <span className="font-semibold text-white/85">AdAMS</span> · Survey run 0412 · I-190 northbound
-          </span>
-        </span>
-        <span className="shrink-0 font-mono tabular-nums">{done ? "Frame analysed" : "Analysing frame…"}</span>
-      </div>
-
-      <div className="relative aspect-[1600/1067]">
-        <Image
-          src="/media/site/highway-sign.webp"
-          alt="A highway approaching an overhead guide sign for Niagara Falls, with lane signals, vehicles, a light pole and a guardrail"
-          fill
-          priority
-          sizes="(min-width: 1024px) 56vw, 100vw"
-          className="object-fill"
-        />
-        <div aria-hidden className="absolute inset-0">
-          {boxes.map((b, i) => (
-            <motion.div
-              key={i}
-              className="absolute rounded-[2px] border-2"
-              style={{ left: `${b.l}%`, top: `${b.t}%`, width: `${b.w}%`, height: `${b.h}%`, borderColor: colour[b.kind] }}
-              initial={reduce ? false : { opacity: 0, scale: 1.06 }}
-              animate={i < shown ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 1.06 }}
-              transition={{ duration: 0.35, ease: EASE }}
-            >
-              <span
-                className={cn(
-                  "absolute hidden px-1.5 py-[3px] font-mono text-[10px] leading-none font-medium whitespace-nowrap text-[oklch(0.16_0.02_265)] sm:block lg:text-[11px]",
-                  b.tag === "in" ? "top-0" : "bottom-full",
-                  b.right ? "right-[-2px]" : "left-[-2px]",
-                )}
-                style={{ background: colour[b.kind] }}
-              >
-                {b.label} {b.score}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      <dl className="grid grid-cols-2 border-t border-white/10 sm:grid-cols-4">
-        {tally.map((t, i) => (
-          <div key={t.kind} className={cn("px-4 py-3.5", i > 0 && "sm:border-l sm:border-white/10", i % 2 === 1 && "max-sm:border-l max-sm:border-white/10", i > 1 && "max-sm:border-t max-sm:border-white/10")}>
-            <dt className="flex items-center gap-2 text-xs text-white/55">
-              <span className="h-2 w-2 rounded-[2px]" style={{ background: colour[t.kind] }} />
-              {t.label}
-            </dt>
-            <dd className="mt-1 font-display text-2xl font-semibold text-white tabular-nums">{visible.filter((b) => b.kind === t.kind).length}</dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  );
-}
+const FULL = "inset(0% 0% 0% 0%)";
+const hiddenFor = (dir: number) => (dir > 0 ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)");
 
 export default function Hero() {
   const reduce = useReducedMotion();
-  const rise = (delay: number) => ({
-    initial: reduce ? false : { opacity: 0, y: 14 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.7, delay, ease: EASE },
-  });
+  const [{ index, prev, dir }, setState] = useState({ index: 0, prev: -1, dir: 1 });
+  const [paused, setPaused] = useState(false);
+  const [hover, setHover] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const playing = !paused && !hover && !hidden && !reduce;
+  const go = useCallback((to: number, d?: number) => {
+    setState((s) => {
+      const next = (to + slides.length) % slides.length;
+      if (next === s.index) return s;
+      return { index: next, prev: s.index, dir: d ?? (next > s.index ? 1 : -1) };
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!playing) return;
+    const t = setTimeout(() => go(index + 1, 1), SLIDE_MS);
+    return () => clearTimeout(t);
+  }, [playing, index, go]);
+
+  useEffect(() => {
+    const onVis = () => setHidden(document.hidden);
+    document.addEventListener("visibilitychange", onVis);
+    return () => document.removeEventListener("visibilitychange", onVis);
+  }, []);
+
+  const onPanEnd = (e: PointerEvent, info: PanInfo) => {
+    if (e.pointerType === "mouse") return;
+    if (Math.abs(info.offset.x) < Math.abs(info.offset.y)) return;
+    if (info.offset.x < -50 || info.velocity.x < -400) go(index + 1, 1);
+    else if (info.offset.x > 50 || info.velocity.x > 400) go(index - 1, -1);
+  };
+
+  const slide = slides[index];
 
   return (
-    <section className="relative -mt-[4.5rem] bg-deep pt-[4.5rem]">
-      <div className="wrap grid items-center gap-12 pt-12 pb-16 lg:grid-cols-12 lg:gap-14 lg:pt-20 lg:pb-24">
-        <div className="min-w-0 lg:col-span-6 xl:col-span-5">
-          <motion.p {...rise(0)} className="text-sm font-semibold text-primary">
-            Road and traffic analytics
-          </motion.p>
-          <motion.h1
-            {...rise(0.08)}
-            className="mt-5 font-display text-[2.625rem] leading-[1.04] font-semibold tracking-[-0.035em] text-white sm:text-[3.5rem] lg:text-[3.75rem] xl:text-[4.25rem]"
+    <motion.section
+      aria-roledescription="carousel"
+      aria-label="What we build"
+      className="relative isolate -mt-[4.5rem] h-[86svh] min-h-[36rem] touch-pan-y overflow-clip bg-deep lg:max-h-[54rem] lg:min-h-[40rem]"
+      onPointerEnter={(e) => e.pointerType === "mouse" && setHover(true)}
+      onPointerLeave={() => setHover(false)}
+      onPanEnd={onPanEnd}
+    >
+      {/* Photos: the next one is uncovered by a sweeping wipe, then slowly settles */}
+      {slides.map((s, i) => {
+        const active = i === index;
+        const behind = i === prev;
+        return (
+          <motion.div
+            key={s.key}
+            aria-hidden={!active}
+            className="absolute inset-0"
+            style={{ zIndex: active ? 2 : behind ? 1 : 0 }}
+            initial={false}
+            animate={{
+              clipPath: active ? (reduce || prev < 0 ? FULL : [hiddenFor(dir), FULL]) : behind ? FULL : hiddenFor(dir),
+            }}
+            transition={active && !reduce ? { duration: WIPE_S, ease: WIPE_EASE } : { duration: 0 }}
           >
-            Computer vision for the roads you manage
-          </motion.h1>
-          <motion.p {...rise(0.16)} className="mt-6 max-w-[34rem] text-lg leading-relaxed text-white/70">
-            We turn the video your crews and cameras already capture into the records engineers maintain: asset inventories, pavement ratings,
-            traffic counts and repair histories.
-          </motion.p>
-          <motion.div {...rise(0.24)} className="mt-9 flex flex-wrap gap-3">
-            <ButtonLink href="/contact">Talk to us</ButtonLink>
-            <ButtonLink href="/products" variant="ghost">
-              Explore the products
-            </ButtonLink>
+            <motion.div
+              className="absolute inset-0"
+              initial={false}
+              animate={{ scale: active || behind ? 1 : 1.18 }}
+              transition={
+                active && !reduce
+                  ? { duration: SLIDE_MS / 1000 + WIPE_S, ease: [0.22, 1, 0.36, 1] }
+                  : { duration: 0 }
+              }
+            >
+              <Image
+                src={s.image.src}
+                alt={s.image.alt}
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                draggable={false}
+                className={cn("object-cover select-none", s.image.flip && "-scale-x-100")}
+                style={{ objectPosition: s.image.position }}
+              />
+            </motion.div>
           </motion.div>
-        </div>
+        );
+      })}
 
-        <motion.div
-          className="min-w-0 lg:col-span-6 xl:col-span-7"
-          initial={reduce ? false : { opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.2, ease: EASE }}
-        >
-          <DetectionFrame />
-        </motion.div>
+      {/* Scan line riding the wipe's edge */}
+      {!reduce && (
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={`scan-${index}`}
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 z-[3] w-px"
+            initial={{ left: dir > 0 ? "100%" : "0%", opacity: 1 }}
+            animate={{ left: dir > 0 ? "0%" : "100%", opacity: [1, 1, 0] }}
+            exit={{ opacity: 0 }}
+            transition={{ left: { duration: WIPE_S, ease: WIPE_EASE }, opacity: { duration: WIPE_S + 0.25, times: [0, 0.8, 1] } }}
+          >
+            <span className="absolute inset-y-0 left-0 w-px bg-primary-strong shadow-[0_0_18px_3px_var(--color-primary)]" />
+            <span
+              className={cn(
+                "absolute inset-y-0 w-40 from-primary/25 to-transparent",
+                dir > 0 ? "left-0 bg-gradient-to-r" : "right-0 bg-gradient-to-l",
+              )}
+            />
+          </motion.div>
+        </AnimatePresence>
+      )}
+
+      {/* Legibility */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-[4]">
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-deep/75 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-[78%] bg-gradient-to-t from-deep via-deep/70 to-transparent" />
+        <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-deep/70 via-deep/20 to-transparent lg:w-2/3" />
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="wrap flex flex-col gap-4 py-7 sm:flex-row sm:items-center sm:gap-10">
-          <p className="shrink-0 text-sm text-white/50">Working with</p>
-          <ul className="flex flex-wrap items-center gap-x-9 gap-y-3">
-            {partners
-              .filter((p) => p.verified)
-              .map((p) => (
-                <li key={p.name} title={p.full} className="font-display text-lg font-semibold tracking-tight text-white/70">
-                  {p.name}
-                </li>
-              ))}
-          </ul>
+      {/* Copy */}
+      <div className="relative z-10 flex h-full flex-col justify-end">
+        <div className="wrap pb-8 sm:pb-10">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={slide.key}
+              className="max-w-[48rem]"
+              exit={reduce ? undefined : { opacity: 0, y: -14, filter: "blur(6px)" }}
+              transition={{ duration: 0.35, ease: "easeIn" }}
+            >
+              <motion.p
+                initial={reduce ? false : { opacity: 0, x: -16 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.35, ease: EXPO }}
+                className="flex items-center gap-3 text-[0.75rem] font-semibold tracking-[0.08em] text-primary-strong uppercase sm:text-[0.8125rem]"
+              >
+                <span className="shrink-0 font-mono whitespace-nowrap text-white/60">
+                  {String(index + 1).padStart(2, "0")}
+                  <span className="text-white/30"> / {String(slides.length).padStart(2, "0")}</span>
+                </span>
+                <span className="h-px w-8 shrink-0 bg-primary-strong/70" aria-hidden />
+                {slide.eyebrow}
+              </motion.p>
+
+              <Headline as={index === 0 ? "h1" : "h2"} title={slide.title} accent={slide.accent} reduce={!!reduce} />
+
+              <motion.p
+                initial={reduce ? false : { opacity: 0, y: 14, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.9, delay: 0.75, ease: EXPO }}
+                className="mt-5 max-w-[38rem] text-[1.0625rem] leading-relaxed text-white/80 sm:text-lg"
+              >
+                {slide.text}
+              </motion.p>
+
+              <motion.div
+                initial={reduce ? false : { opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.9, ease: EXPO }}
+                className="mt-8 flex flex-wrap gap-3"
+              >
+                {slide.actions.map((a, i) => (
+                  <Link
+                    key={a.href + a.label}
+                    href={a.href}
+                    className={cn("btn group h-12 px-6 text-base", i === 0 ? "btn-primary" : "btn-ghost")}
+                  >
+                    {a.label}
+                    {i === 0 && (
+                      <span className="arrow" aria-hidden>
+                        →
+                      </span>
+                    )}
+                  </Link>
+                ))}
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Product rail */}
+        <div className="wrap pb-5 sm:pb-6">
+          <div className="flex items-stretch gap-4 border-t border-white/15">
+            <div className="grid flex-1 grid-cols-5" role="group" aria-label="Choose a product">
+              {slides.map((s, i) => {
+                const active = i === index;
+                return (
+                  <button
+                    key={s.key}
+                    type="button"
+                    onClick={() => go(i)}
+                    aria-label={`${s.tab}: ${s.tagline}`}
+                    aria-current={active}
+                    className="group relative cursor-pointer pt-4 pr-3 text-left"
+                  >
+                    <span aria-hidden className="absolute inset-x-0 -top-px h-[2px] overflow-hidden">
+                      <span
+                        key={`${index}-${playing}`}
+                        className="block h-full origin-left bg-primary-strong shadow-[0_0_10px_var(--color-primary)]"
+                        style={{
+                          transform: active && !playing ? "scaleX(1)" : "scaleX(0)",
+                          animation: active && playing ? `hero-fill ${SLIDE_MS}ms linear forwards` : undefined,
+                        }}
+                      />
+                    </span>
+                    <span
+                      className={cn(
+                        "block font-mono text-xs transition-colors duration-300",
+                        active ? "text-primary-strong" : "text-white/45 group-hover:text-white/75",
+                      )}
+                    >
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span
+                      className={cn(
+                        "mt-1 hidden font-display text-[0.9375rem] font-semibold transition-colors duration-300 sm:block",
+                        active ? "text-white" : "text-white/55 group-hover:text-white/85",
+                      )}
+                    >
+                      {s.tab}
+                    </span>
+                    <span
+                      className={cn(
+                        "mt-0.5 hidden text-[0.8125rem] transition-colors duration-300 lg:block",
+                        active ? "text-white/65" : "text-white/35 group-hover:text-white/55",
+                      )}
+                    >
+                      {s.tagline}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            <div className="flex items-center pt-4">
+              <button
+                type="button"
+                onClick={() => setPaused((p) => !p)}
+                aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-white/25 text-white transition-[background-color,border-color,transform] duration-200 hover:border-white/60 hover:bg-white/10 active:scale-95"
+              >
+                <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" aria-hidden>
+                  {paused || reduce ? (
+                    <path d="M5 3v10l8-5z" fill="currentColor" />
+                  ) : (
+                    <>
+                      <rect x="4" y="3" width="2.5" height="10" rx="0.5" fill="currentColor" />
+                      <rect x="9.5" y="3" width="2.5" height="10" rx="0.5" fill="currentColor" />
+                    </>
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+
+      <style>{`@keyframes hero-fill { from { transform: scaleX(0) } to { transform: scaleX(1) } }`}</style>
+    </motion.section>
+  );
+}
+
+/** Headline whose words rise out of a mask one after another; the accent phrase is drawn in the brand gradient. */
+function Headline({ as, title, accent, reduce }: { as: "h1" | "h2"; title: string; accent: string; reduce: boolean }) {
+  const Tag = as;
+  const cut = title.endsWith(accent) ? title.length - accent.length : title.length;
+  const words = [
+    ...title.slice(0, cut).split(" ").filter(Boolean).map((w) => ({ w, accent: false })),
+    ...title.slice(cut).split(" ").filter(Boolean).map((w) => ({ w, accent: true })),
+  ];
+  return (
+    <Tag
+      aria-label={title}
+      className="mt-5 font-display text-[2.375rem] leading-[1.06] font-semibold tracking-[-0.03em] text-white sm:text-[3.5rem] lg:text-[4.25rem]"
+    >
+      {words.map(({ w, accent: a }, i) => (
+        <Fragment key={i}>
+        <span aria-hidden className="-mb-[0.12em] inline-block overflow-clip pb-[0.12em] align-top">
+          <motion.span
+            className={cn("inline-block", a && "text-gradient")}
+            initial={reduce ? false : { y: "110%", rotate: 4 }}
+            animate={{ y: "0%", rotate: 0 }}
+            transition={{ duration: 0.9, delay: 0.42 + i * 0.055, ease: EXPO }}
+          >
+            {w}
+          </motion.span>
+        </span>
+        {i < words.length - 1 && " "}
+        </Fragment>
+      ))}
+    </Tag>
   );
 }

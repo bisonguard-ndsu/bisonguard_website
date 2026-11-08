@@ -1,177 +1,206 @@
 /**
- * Copy and pictures for each product page. Facts come from the product
+ * Copy and imagery for each product page. Facts come from the product
  * repositories (webapp modules, mobile apps, Turnflow docs). Figures marked
  * in evidence.ts still need confirming before launch.
  */
-import type { Pic, Shot } from "@/components/page";
+import type { Img } from "@/components/sections";
+
+export type Shot = Img & { width: number; height: number; label?: string };
 
 export type ProductPage = {
   slug: string;
   name: string;
-  /** h1: the category and the buyer, 2 to 8 words */
-  h1: string;
+  fullName?: string;
+  category: string;
+  title: string;
+  accent: string;
   lead: string;
-  hero: { pic?: Pic; shot?: Shot };
-  facts: [string, string][];
-  steps: { title: string; text: string; img: string; alt: string }[];
+  hero: Img;
+  card: Img;
+  stats: { value: string; label: string }[];
+  steps: { title: string; text: string }[];
   features: { title: string; text: string }[];
-  featuresPic: Pic;
-  showcase: { h2: string; lead: string; lines: string[]; pic?: Pic; shot?: Shot };
-  faq: { q: string; a: string }[];
+  showcase: { title: string; accent: string; text: string; points: string[]; visual: { kind: "app"; shot: Shot } | { kind: "photo"; image: Img } }[];
+  audience: string[];
   solutions: string[];
+  research?: string[];
 };
 
 export const productPages: ProductPage[] = [
   {
     slug: "adams",
     name: "AdAMS",
-    h1: "Road asset management from phone video",
-    lead: "AdAMS turns drive video into a geolocated record of every sign, marking, light and pavement defect on your network, with the frame behind each one.",
-    hero: { shot: { src: "/media/site/adams-map.webp", alt: "The AdAMS asset map of Fargo and West Fargo with sign and road-condition layers switched on" } },
-    facts: [
-      ["Signs mapped in Fargo", "118"],
-      ["Segments rated", "2,267"],
-      ["Asset layers", "12"],
+    fullName: "Advanced Asset Management System",
+    category: "Asset management",
+    title: "Drive the network once. Map every asset and defect.",
+    accent: "Map every asset and defect.",
+    lead: "AdAMS turns ordinary drive video into a complete, geolocated record of your road network: every sign, marking, light and signal, every crack and pothole, and the ride quality of every segment.",
+    hero: { src: "/media/site/guardrail.webp", alt: "A highway curving through pine forest with guardrails and an overhead sign", position: "50% 55%" },
+    card: { src: "/media/hero/adams.webp", alt: "A motorway at dusk seen from the driver's seat", position: "50% 60%" },
+    stats: [
+      { value: "118", label: "traffic signs geolocated in the Fargo – West Fargo survey" },
+      { value: "2,267", label: "road segments rated for roughness in that survey" },
+      { value: "5", label: "severity levels for every pavement defect" },
+      { value: "12", label: "asset layers on one map" },
     ],
     steps: [
-      { title: "Record the drive", text: "Mount a phone on the dashboard and drive. Video and GPS upload once you are back on Wi-Fi.", img: "/media/site/phone-dashboard.webp", alt: "A phone on a car dashboard recording the road ahead" },
-      { title: "Detect every asset", text: "Models classify each sign and defect and follow it across frames, so it is counted once.", img: "/media/site/highway-sign.webp", alt: "An overhead highway sign above a freeway" },
-      { title: "Act from the map", text: "Open any asset with its photo and condition, raise a work order and export the report.", img: "/media/site/adams-sign.webp", alt: "An R7-1 no-parking sign record opened on the AdAMS map" },
+      { title: "Record", text: "Mount a phone on the dashboard and drive with the AdAMS app. Video and GPS upload on their own once you are back on Wi-Fi." },
+      { title: "Detect", text: "Our models find and classify signs, markings, lights, signals and pavement distress, follow each across frames and fix its position on the map." },
+      { title: "Act", text: "Everything lands on one asset map with photos, condition and severity. Raise work orders, set alerts and export reports for your engineers." },
     ],
     features: [
-      { title: "Traffic sign inventory", text: "Every sign classified to its MUTCD code, with its frame, track and position." },
-      { title: "Pavement distress", text: "Cracks, potholes and raveling graded from level 1 to level 5." },
-      { title: "Ride quality", text: "An IRI roughness score for every segment you drive." },
-      { title: "One asset map", text: "Signs, markings, guardrails, lights, hydrants and signals as layers." },
-      { title: "Work orders and alerts", text: "Turn a defect into a work order and follow it to a verified repair." },
+      { title: "Traffic sign inventory", text: "Every sign classified to its MUTCD code, with the frame it was seen in, its track and its GPS position." },
+      { title: "Pavement distress", text: "Cracks, potholes and raveling graded from Level 1 (minor) to Level 5 (critical), so crews see the worst first." },
+      { title: "Ride quality", text: "A roughness (IRI) score for every segment you drive, colour-coded from excellent to poor." },
+      { title: "One asset map", text: "Signs, road conditions, markings, guardrails, street lights, hydrants, poles, signals and delineators as layers you switch on and off." },
+      { title: "Work orders and alerts", text: "Turn a defect into a work order, assign it, and follow it from triage to verified repair." },
+      { title: "Reports", text: "Project reports and exports your asset managers can share with leadership and funders." },
     ],
-    featuresPic: { src: "/media/site/markings.webp", alt: "Fresh white lane markings on dark asphalt" },
-    showcase: {
-      h2: "Every detection, with its evidence",
-      lead: "Open a recording to see what the models found, how often and where in the video. An engineer can check any detection in seconds.",
-      lines: ["Detections counted by class for each recording", "Scrub to the frame where a sign was seen", "Track IDs keep one sign from being counted twice"],
-      shot: { src: "/media/site/adams-recording.webp", alt: "An AdAMS recording with its sign detection summary listing stop, no-parking and do-not-enter signs" },
-    },
-    faq: [
-      { q: "What hardware do we need?", a: "A phone with the AdAMS app on a dashboard mount. No survey vehicle or extra sensors." },
-      { q: "Which assets does it find?", a: "Signs, markings, street lights, signals, guardrails, hydrants, poles and delineators, plus pavement distress and roughness." },
-      { q: "How do we check a detection?", a: "Every asset links to the frame it was seen in and the recording it came from." },
-      { q: "Can we keep the inventory current?", a: "Yes. Repeat drives update the map, and missing or damaged assets are flagged for work orders." },
+    showcase: [
+      {
+        title: "Your network, layer by layer",
+        accent: "layer by layer",
+        text: "The asset map brings every survey together. Filter by layer, project or condition and open any point to see the evidence behind it.",
+        points: ["Signs, conditions, markings and furniture on one map", "IRI filter from excellent to poor", "Every point links to its video frame"],
+        visual: { kind: "app", shot: { src: "/media/site/adams-map.webp", alt: "The AdAMS asset map of Fargo and West Fargo with sign and road-condition layers switched on", width: 1651, height: 871, label: "AdAMS · Asset map" } },
+      },
+      {
+        title: "Every detection, with its evidence",
+        accent: "with its evidence",
+        text: "Open a recording to see what the models found, how often, and exactly where in the video. Engineers can check any detection in seconds.",
+        points: ["Detections counted by class for each recording", "Scrub to the frame where a sign was seen", "Track IDs keep one sign from being counted twice"],
+        visual: { kind: "app", shot: { src: "/media/site/adams-recording.webp", alt: "An AdAMS recording with its sign detection summary listing stop, no-parking and do-not-enter signs", width: 1918, height: 1021, label: "AdAMS · Recording 74" } },
+      },
     ],
-    solutions: ["road-asset-inventory", "pavement-condition", "field-inspection"],
+    audience: ["State and city DOTs", "Municipal public-works teams", "Engineering consultancies", "Toll and highway operators"],
+    solutions: ["road-asset-inventory", "pavement-condition"],
+    research: [
+      "Image2PCI: a multitask learning framework for estimating pavement condition indices directly from images",
+      "Smartphone-based pavement roughness estimation using deep learning with entity embedding",
+      "Mobile sensing for multipurpose applications in transportation",
+    ],
   },
   {
     slug: "traffic-management",
     name: "TMC",
-    h1: "Traffic camera monitoring for operations teams",
-    lead: "TMC brings the cameras you already run into one workspace: watch them live, record on a schedule and turn footage into volume, speed, occupancy and density.",
-    hero: { pic: { src: "/media/hero/tmc.webp", alt: "A traffic camera mounted on a pole against the sky", position: "40% 50%" } },
-    facts: [
-      ["Monitoring", "24/7"],
-      ["Measures from video", "4"],
-      ["Workspace", "1"],
+    category: "Traffic cameras",
+    title: "Every traffic camera, live on one screen",
+    accent: "live on one screen",
+    lead: "TMC brings the cameras you already run into one workspace: watch them live, record on a schedule, and turn footage into volume, speed, occupancy and density figures your operations team can act on.",
+    hero: { src: "/media/site/night-intersection.webp", alt: "A city intersection at night with traffic moving through", position: "50% 50%" },
+    card: { src: "/media/hero/tmc.webp", alt: "A traffic camera mounted on a pole against the sky", position: "40% 50%" },
+    stats: [
+      { value: "24/7", label: "live monitoring of connected cameras" },
+      { value: "4", label: "traffic measures from video: volume, speed, occupancy, density" },
+      { value: "1", label: "workspace for feeds, recordings, analyses and alerts" },
     ],
     steps: [
-      { title: "Connect your cameras", text: "Add the intersection and corridor cameras you already operate. Each appears on the map and the wall.", img: "/media/site/interchange.webp", alt: "An interchange from above with traffic on every ramp" },
-      { title: "Monitor and record", text: "Watch feeds live, record when something happens, or schedule recordings for the periods you study.", img: "/media/site/night-intersection.webp", alt: "A city intersection at night" },
-      { title: "Measure the traffic", text: "Run any recording for volume, speed profiles, occupancy and density, then share the report.", img: "/media/site/control-room.webp", alt: "Camera footage with each vehicle and sign boxed by the model" },
+      { title: "Connect", text: "Add the intersection and corridor cameras you already operate. Each one appears on the map and in the live wall." },
+      { title: "Monitor and record", text: "Watch feeds live, start a recording when something happens, or schedule recordings for the periods you study." },
+      { title: "Analyse and report", text: "Run analyses on any recording for volume, speed profiles, occupancy and density, then share the report." },
     ],
     features: [
-      { title: "Live wall", text: "Every feed on one wall and every camera on a map, with its status." },
-      { title: "Scheduled recording", text: "Record by schedule or on demand, searchable by camera and time." },
-      { title: "Volume throughput", text: "Vehicle counts over any interval for corridor and signal work." },
-      { title: "Speed profiles", text: "Speeds along each camera's view, from the same footage." },
-      { title: "Occupancy and density", text: "How full each approach is and for how long, measured." },
+      { title: "Live monitoring", text: "A wall of live feeds and a map of every camera, with its status at a glance." },
+      { title: "Scheduled recording", text: "Record by schedule or on demand. Recordings are stored and searchable by camera and time." },
+      { title: "Volume throughput", text: "Vehicle counts over any interval, ready for corridor and signal-timing work." },
+      { title: "Velocity profiling", text: "Speed profiles along a camera's field of view, from the same footage." },
+      { title: "Occupancy and density", text: "How full each approach is and for how long, measured rather than estimated." },
+      { title: "Alerts and reports", text: "Operational alerts for your team and exportable reports for every analysis." },
     ],
-    featuresPic: { src: "/media/site/signal-traffic.webp", alt: "Cars waiting at a signalised intersection at night" },
-    showcase: {
-      h2: "Built for the operations room",
-      lead: "A clear live wall, cameras on a map and recordings one click away, for the people who watch the network every day.",
-      lines: ["Live wall and camera map", "Recording sessions by camera and time", "Alerts routed to the right operator"],
-      pic: { src: "/media/hero/company.webp", alt: "A city interchange at night from above" },
-    },
-    faq: [
-      { q: "Do we need new cameras?", a: "No. TMC works with the intersection and corridor cameras you already operate." },
-      { q: "Can we record only some hours?", a: "Yes. Schedule recordings for the periods you study, or start one on demand." },
-      { q: "What does it measure?", a: "Volume, speed, occupancy and density, from any recording." },
-      { q: "Who sees the alerts?", a: "Alerts go to the operator responsible for that camera or corridor." },
+    showcase: [
+      {
+        title: "Built for the operations room",
+        accent: "the operations room",
+        text: "TMC is designed for the people who watch the network every day: a clear live wall, cameras on a map, and recordings one click away.",
+        points: ["Live wall and camera map", "Recording sessions by camera and time", "Alerts routed to the right operator"],
+        visual: { kind: "photo", image: { src: "/media/site/control-room.webp", alt: "A traffic management centre with a video wall of intersection feeds and an operator at his desk" } },
+      },
     ],
+    audience: ["Traffic management centres", "City transportation departments", "Corridor and signal engineers"],
     solutions: ["traffic-operations", "traffic-studies"],
+    research: [
+      "A vision-based system for traffic anomaly detection using deep learning and decision trees",
+      "Enhancing traffic safety with parallel dense video captioning for end-to-end event analysis",
+    ],
   },
   {
     slug: "turnflow",
     name: "Turnflow",
-    h1: "Turning-movement counts for traffic engineers",
-    lead: "Turnflow counts traffic from intersection video: draw the approaches, name the movements and get counts, headways and occupancy with the clip behind every vehicle.",
-    hero: { pic: { src: "/media/hero/turnflow.webp", alt: "A busy road intersection seen from directly above" } },
-    facts: [
-      ["Public cameras listed", "27,000+"],
-      ["US states covered", "28"],
-      ["Report formats", "PDF, Word"],
+    category: "Movement counts",
+    title: "Turning-movement counts, report-ready",
+    accent: "report-ready",
+    lead: "Turnflow counts traffic from intersection video. Draw the approaches, define the movements and get counts by interval, headways and lane occupancy, with the video evidence for every vehicle and a report you can submit.",
+    hero: { src: "/media/site/interchange.webp", alt: "A highway interchange seen from above with traffic on every ramp", position: "50% 50%" },
+    card: { src: "/media/hero/turnflow.webp", alt: "A busy road intersection seen from directly above", position: "50% 50%" },
+    stats: [
+      { value: "27,000+", label: "public traffic cameras in the built-in directory" },
+      { value: "28", label: "US states covered by that directory" },
+      { value: "4", label: "cameras recorded at once" },
+      { value: "2", label: "report formats: PDF and Word" },
     ],
     steps: [
-      { title: "Choose the footage", text: "Upload a recording, or pick a live camera from the directory and record the window you need.", img: "/media/site/signal-traffic.webp", alt: "Cars at a signalised intersection at night" },
-      { title: "Set up the count", text: "Draw zones or example paths for each approach, name the movements and test the layout.", img: "/media/site/plans.webp", alt: "Two engineers pointing at a printed plan" },
-      { title: "Review and report", text: "Check counts against the evidence video, compare sessions, then export an engineering report.", img: "/media/site/meeting.webp", alt: "A team reviewing results around a long table" },
+      { title: "Choose footage", text: "Upload a recording, or pick a live camera from the directory and record the window you need." },
+      { title: "Set up the count", text: "Draw zones or example paths for each approach and name the movements. Test the layout before you run it." },
+      { title: "Review and report", text: "Check counts against the evidence video, compare sessions, then export an engineering report." },
     ],
     features: [
-      { title: "Turning-movement counts", text: "Counts by movement and interval, from zone pairs or paths." },
-      { title: "Headways and occupancy", text: "Time between vehicles and how long a detector area is occupied." },
-      { title: "Live camera recording", text: "A camera directory and map; up to four recordings at once." },
-      { title: "Evidence for every count", text: "Annotated video for each passage, so any number can be checked." },
-      { title: "Engineering reports", text: "PDF and Word reports that keep observed and adjusted values apart." },
+      { title: "Turning-movement counts", text: "Counts by movement and interval, built from zone pairs or trajectory paths." },
+      { title: "Headways and occupancy", text: "Time between vehicles at a lane line and how long a detector area stays occupied." },
+      { title: "Live camera recording", text: "A camera directory, a map and a live wall. Schedule up to four recordings at once." },
+      { title: "Evidence for every count", text: "Annotated video for each passage, so any number can be checked and defended." },
+      { title: "Site studies", text: "Combine observations at one location across periods without double-counting time." },
+      { title: "Engineering reports", text: "Professional PDF and Word reports that keep observed, adjusted and forecast values apart." },
     ],
-    featuresPic: { src: "/media/site/interchange.webp", alt: "A highway interchange from above with traffic on every ramp" },
-    showcase: {
-      h2: "Counts an engineer can defend",
-      lead: "Every count traces back to the vehicle path that produced it. Reviewers watch the evidence, validate samples and compare runs before anything is shared.",
-      lines: ["Evidence video for each passage", "Session comparison and validation", "Missing time is tracked, never read as zero traffic"],
-      pic: { src: "/media/site/night-intersection.webp", alt: "A city intersection at night with traffic moving through" },
-    },
-    faq: [
-      { q: "Where does the video come from?", a: "Your own recordings, or a public camera picked from the built-in directory." },
-      { q: "How many cameras can we record at once?", a: "Up to four scheduled recordings at a time." },
-      { q: "Can we check a count?", a: "Yes. Each passage has its own annotated clip, so any number can be reviewed." },
-      { q: "What does the report look like?", a: "A PDF or Word engineering report with observed, adjusted and forecast values kept apart." },
+    showcase: [
+      {
+        title: "Counts you can defend",
+        accent: "you can defend",
+        text: "Every count in Turnflow traces back to the vehicle path that produced it. Reviewers can watch the evidence, validate samples and compare runs before anything is shared.",
+        points: ["Evidence video for each passage", "Session comparison and validation", "Coverage tracked, so missing time is never read as zero traffic"],
+        visual: { kind: "photo", image: { src: "/media/site/signal-traffic.webp", alt: "Cars waiting at a signalised intersection at night" } },
+      },
     ],
+    audience: ["Traffic engineering consultancies", "City and county traffic departments", "Developers preparing traffic impact studies"],
     solutions: ["traffic-studies"],
+    research: ["3D object detection and high-resolution traffic parameters extraction using low-resolution LiDAR data"],
   },
   {
     slug: "roadlogger",
     name: "RoadLogger",
-    h1: "Field inspection app for road crews",
-    lead: "RoadLogger puts inspections on the phones your crews already carry. Log what you find, even offline, and follow each case to a verified repair.",
-    hero: { pic: { src: "/media/site/paving.webp", alt: "A paving machine laying fresh asphalt on a residential street" } },
-    facts: [
-      ["Stages to a repair", "5"],
-      ["Works", "Offline"],
-      ["Shared map", "1"],
+    category: "Field inspections",
+    title: "Every defect logged, every case tracked to repair",
+    accent: "tracked to repair",
+    lead: "RoadLogger puts inspections on the phones your crews already carry. Log what you find, even offline, and follow each case from triage to verified repair on a map the whole team shares.",
+    hero: { src: "/media/site/roller.webp", alt: "A road roller compacting fresh asphalt beside a traffic cone", position: "50% 60%" },
+    card: { src: "/media/hero/roadlogger.webp", alt: "Cracked asphalt across a worn yellow lane marking", position: "50% 50%" },
+    stats: [
+      { value: "5", label: "stages from new defect to verified repair" },
+      { value: "Offline", label: "inspections queue on the phone and sync on reconnect" },
+      { value: "1", label: "map shared by field crews and the office" },
     ],
     steps: [
-      { title: "Inspect on the roadside", text: "Capture an issue with photos, location and severity. With no signal it waits and sends later.", img: "/media/hero/roadlogger.webp", alt: "Cracked asphalt across a worn yellow lane marking" },
-      { title: "Triage in the office", text: "Engineers review new defects, set priority and decide: monitor, schedule a repair or close.", img: "/media/site/hardhat.webp", alt: "A road worker in a hard hat" },
-      { title: "Repair and verify", text: "Crews update the case as work goes on. It closes only when the repair is verified.", img: "/media/site/roller.webp", alt: "A road roller compacting fresh asphalt" },
+      { title: "Inspect", text: "Capture an issue with photos, location and severity. With no signal, it waits in the outbox and sends when you reconnect." },
+      { title: "Triage", text: "Engineers review new defects, set priority and decide: monitor, schedule a repair or close." },
+      { title: "Repair and verify", text: "Crews update the case as work progresses. It closes only when the repair is verified." },
     ],
     features: [
-      { title: "Works offline", text: "Inspections queue on the phone and sync when the crew is back in coverage." },
-      { title: "Case lifecycle", text: "Awaiting triage, monitored, in repair, resolved: one owner per case." },
-      { title: "Map of cases", text: "Every open case on the map, filtered by severity, type and team." },
-      { title: "Inspection logs", text: "Daily inspections across the network, searchable by date and route." },
-      { title: "Supervisor dashboard", text: "An action queue and the repair pipeline in one view." },
+      { title: "Works offline", text: "Inspections queue on the phone and sync on their own when the crew is back in coverage." },
+      { title: "Case lifecycle", text: "Awaiting triage, monitored, active repair, resolved: every case has a clear owner and status." },
+      { title: "Map of cases and assets", text: "Every open case pinned to the map, filterable by severity, type and team." },
+      { title: "Surveys and inspection logs", text: "Daily inspections recorded across the network, searchable by date and route." },
+      { title: "Dashboard", text: "KPIs, an action queue and the repair pipeline in one view for supervisors." },
+      { title: "Reports", text: "Inspection and case reports for maintenance planning and audits." },
     ],
-    featuresPic: { src: "/media/site/road-crew.webp", alt: "A paving crew at work on a road" },
-    showcase: {
-      h2: "From the roadside to the office in one step",
-      lead: "What an inspector logs is on the supervisor's dashboard as soon as the phone reconnects, with photos and location attached.",
-      lines: ["Photos, location and severity on every case", "An action queue for supervisors", "Full history for audits"],
-      pic: { src: "/media/site/guardrail.webp", alt: "A divided highway with a guardrail and overhead sign" },
-    },
-    faq: [
-      { q: "Does it work without signal?", a: "Yes. Inspections queue on the phone and send on their own when it reconnects." },
-      { q: "Which phones does it run on?", a: "The phones your crews already carry." },
-      { q: "Who closes a case?", a: "A case closes only when the repair is verified, with a photo on record." },
-      { q: "Can contractors use it?", a: "Yes. Contractors can log and update cases for the agency they work for." },
+    showcase: [
+      {
+        title: "From the field to the office in one step",
+        accent: "in one step",
+        text: "What an inspector logs on the roadside is on the supervisor's dashboard as soon as the phone reconnects, with the photos and location attached.",
+        points: ["Photos, location and severity on every case", "Action queue for supervisors", "Full history for audits"],
+        visual: { kind: "photo", image: { src: "/media/site/paving.webp", alt: "A paving machine laying fresh asphalt on a residential street" } },
+      },
     ],
+    audience: ["Road maintenance crews", "Public-works supervisors", "Contractors reporting to agencies"],
     solutions: ["field-inspection", "pavement-condition"],
   },
 ];

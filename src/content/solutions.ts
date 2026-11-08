@@ -1,4 +1,4 @@
-import type { Pic } from "@/components/page";
+import type { Img } from "@/components/sections";
 
 export type Solution = {
   slug: string;
@@ -8,12 +8,7 @@ export type Solution = {
   headline: string;
   accent: string;
   lead: string;
-  image: Pic;
-  /** h1: the category and the buyer */
-  h1: string;
-  /** a second photograph beside the problem, and one per approach step */
-  side: Pic;
-  stepPics: Pic[];
+  image: Img;
   problem: string;
   approach: { title: string; text: string }[];
   outcomes: string[];
@@ -24,9 +19,6 @@ export type Solution = {
 export const solutions: Solution[] = [
   {
     slug: "road-asset-inventory",
-    h1: "Road asset inventory from drive video",
-    side: { src: "/media/site/guardrail.webp", alt: "A divided highway with a guardrail and overhead sign" },
-    stepPics: [{ src: "/media/site/phone-dashboard.webp", alt: "A phone on a car dashboard recording the road" }, { src: "/media/site/control-room.webp", alt: "Road video with each sign and vehicle boxed by the model" }, { src: "/media/site/adams-sign.webp", alt: "A no-parking sign record opened on the AdAMS map" }],
     group: "Roads and assets",
     title: "Road asset inventory",
     short: "Signs, markings, lights and guardrails, inventoried from drive video.",
@@ -47,9 +39,6 @@ export const solutions: Solution[] = [
   },
   {
     slug: "pavement-condition",
-    h1: "Pavement condition ratings for every segment",
-    side: { src: "/media/site/paving.webp", alt: "A paving machine laying fresh asphalt on a street" },
-    stepPics: [{ src: "/media/hero/adams.webp", alt: "A motorway at dusk seen from the driver's seat" }, { src: "/media/site/markings.webp", alt: "Fresh white lane markings on dark asphalt" }, { src: "/media/site/road-crew.webp", alt: "A paving crew at work on a road" }],
     group: "Roads and assets",
     title: "Pavement condition",
     short: "Distress, severity and ride quality for every segment you drive.",
@@ -70,9 +59,6 @@ export const solutions: Solution[] = [
   },
   {
     slug: "field-inspection",
-    h1: "Field inspections tracked to repair",
-    side: { src: "/media/site/hardhat.webp", alt: "A road worker in a hard hat" },
-    stepPics: [{ src: "/media/hero/roadlogger.webp", alt: "Cracked asphalt across a worn lane marking" }, { src: "/media/site/plans.webp", alt: "Two engineers pointing at a printed plan" }, { src: "/media/site/paving.webp", alt: "A paving machine laying fresh asphalt" }],
     group: "Roads and assets",
     title: "Field inspection",
     short: "Issues logged from the field and tracked to verified repair.",
@@ -91,9 +77,6 @@ export const solutions: Solution[] = [
   },
   {
     slug: "traffic-studies",
-    h1: "Traffic studies from intersection video",
-    side: { src: "/media/site/signal-traffic.webp", alt: "Cars waiting at a signalised intersection at night" },
-    stepPics: [{ src: "/media/hero/tmc.webp", alt: "A traffic camera mounted on a pole" }, { src: "/media/site/plans.webp", alt: "Two engineers pointing at a printed plan" }, { src: "/media/site/meeting.webp", alt: "A team reviewing results around a long table" }],
     group: "Traffic",
     title: "Traffic studies",
     short: "Counts, headways and occupancy from video, ready for the report.",
@@ -113,16 +96,13 @@ export const solutions: Solution[] = [
   },
   {
     slug: "traffic-operations",
-    h1: "Traffic camera operations in one workspace",
-    side: { src: "/media/site/night-intersection.webp", alt: "A city intersection at night" },
-    stepPics: [{ src: "/media/hero/tmc.webp", alt: "A traffic camera mounted on a pole" }, { src: "/media/hero/company.webp", alt: "A city interchange at night from above" }, { src: "/media/site/interchange.webp", alt: "An interchange from above with traffic on every ramp" }],
     group: "Traffic",
     title: "Traffic operations",
     short: "Live camera monitoring, recordings and alerts for operations rooms.",
     headline: "One screen for every camera in your network",
     accent: "every camera in your network",
     lead: "Bring live feeds, scheduled recordings and traffic analyses into one workspace for the team that runs the network day to day.",
-    image: { src: "/media/site/control-room.webp", alt: "Camera footage with each vehicle and sign boxed by the model", position: "50% 40%" },
+    image: { src: "/media/site/control-room.webp", alt: "A traffic management centre with a video wall of intersection feeds", position: "50% 40%" },
     problem:
       "Camera feeds sit in one system, recordings in another and analysis in spreadsheets. Operators lose time switching tools when something happens.",
     approach: [
@@ -135,9 +115,6 @@ export const solutions: Solution[] = [
   },
   {
     slug: "herd-monitoring",
-    h1: "Herd monitoring on open range",
-    side: { src: "/media/site/herd.webp", alt: "Cattle silhouetted on a ridge at dusk" },
-    stepPics: [{ src: "/herd2.JPEG", alt: "A herd of cattle on open grassland" }, { src: "/herd.JPG", alt: "Cattle grazing on a ranch" }, { src: "/media/site/engineers.webp", alt: "Engineers reviewing model output at laptops" }],
     group: "Beyond the road",
     title: "Herd monitoring",
     short: "Detection and counting of livestock on open range.",

@@ -22,7 +22,8 @@ export default function TermsPage() {
         <h2>Content</h2>
         <p>
           Text, images, product screenshots and logos on this site belong to InfiniCity Labs or are used with permission. Photographs from
-          third-party libraries remain under their own licences.
+          third-party libraries remain under their own licences. Publications link to the publisher or preprint server and are subject to
+          their terms.
         </p>
         <h2>Accuracy</h2>
         <p>
@@ -35,7 +36,7 @@ export default function TermsPage() {
           organisation and InfiniCity Labs.
         </p>
         <h2>Links to other sites</h2>
-        <p>We link to partners and social profiles we do not control. We are not responsible for their content.</p>
+        <p>We link to papers, partners and social profiles we do not control. We are not responsible for their content.</p>
         <h2>Privacy</h2>
         <p>
           How we handle information you send us is set out in the <Link href="/privacy">privacy policy</Link> and the{" "}
