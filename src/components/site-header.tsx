@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
-import { motion, useScroll } from "motion/react";
 import { Logo } from "@/components/logo";
 import { nav, type NavItem, type NavPanel } from "@/content/nav";
 import { apps } from "@/content/apps";
@@ -26,7 +25,6 @@ export default function SiteHeader() {
   const triggerRefs = useRef<Record<string, HTMLElement | null>>({});
   const scrollAtOpen = useRef(0);
   const [scrolled, setScrolled] = useState(false);
-  const { scrollYProgress } = useScroll();
 
   // Transparent over the top of the page, frosted glass once it scrolls.
   useEffect(() => {
@@ -258,12 +256,6 @@ export default function SiteHeader() {
             </button>
           </div>
         </div>
-        {/* Reading progress */}
-        <motion.span
-          aria-hidden
-          className="absolute inset-x-0 -bottom-px h-px origin-left bg-primary/70"
-          style={{ scaleX: scrollYProgress, opacity: scrolled ? 1 : 0 }}
-        />
       </header>
 
       {/* Scrim under an open panel */}

@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "InfiniCity Labs" }],
   },
   twitter: { card: "summary_large_image", creator: "@InfiniCityLabs" },
-  icons: { icon: "/icon.svg", apple: "/icon.png" },
+  icons: { icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.svg", type: "image/svg+xml" }], apple: "/apple-icon.png" },
 };
 
 export const viewport: Viewport = { themeColor: "#12151b" };

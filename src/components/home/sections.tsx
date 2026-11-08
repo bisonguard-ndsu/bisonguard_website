@@ -1,10 +1,12 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, FileText, FlaskConical, Map as MapIcon, ScanSearch, Smartphone, WifiOff } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { CountUp, Reveal, ScrollText } from "@/components/motion";
+import { FaqJsonLd, FaqList } from "@/components/faq";
 import { ProductStack, ProjectExpand } from "@/components/home/scroll";
 import { ButtonLink, Eyebrow, SectionHeading } from "@/components/sections";
 import { site } from "@/content/site";
+import { homeFaqs } from "@/content/faqs";
 import { metrics, partners, testimonial } from "@/content/evidence";
 import { productPages } from "@/content/product-pages";
 import { getProduct, statusLabel } from "@/content/products";
@@ -340,6 +342,100 @@ export function HomeCollaborate() {
               </li>
             ))}
           </ul>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* Why InfiniCity — who we serve, and six things that set the tools apart */
+
+const audiences = ["State and city DOTs", "Municipal public works", "Engineering consultancies", "Traffic management centres", "Universities and researchers"];
+
+const reasons = [
+  { icon: Smartphone, title: "Uses what you already have", text: "Phones on the dashboard and the traffic cameras already on your poles. No survey vans or special sensors." },
+  { icon: ScanSearch, title: "Evidence behind every number", text: "Each detection links to the video frame it came from, and every counted vehicle has its clip." },
+  { icon: MapIcon, title: "One map for field and office", text: "Assets, defects, cases and cameras on the same map, so crews and engineers see the same picture." },
+  { icon: FileText, title: "Report-ready outputs", text: "Work orders, inspection logs and PDF or Word engineering reports, ready to share with leadership." },
+  { icon: WifiOff, title: "Built for the roadside", text: "Inspections queue on the phone without signal and sync on their own when the crew reconnects." },
+  { icon: FlaskConical, title: "Grounded in research", text: "Methods from our published work on pavement condition, traffic safety and vision-language models." },
+] as const;
+
+export function HomeWhy() {
+  return (
+    <section className="section bg-bg" aria-labelledby="why-title">
+      <div className="wrap grid gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-4">
+          <Reveal y={12}>
+            <Eyebrow>Why InfiniCity Labs</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 id="why-title" className="t-h2 mt-5 max-w-[18ch] text-fg">
+              Made for the teams who look after roads
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1} className="mt-10">
+            <p className="eyebrow text-fg-3">Who we work with</p>
+            <ul className="mt-4 border-t border-line">
+              {audiences.map((a) => (
+                <li key={a} className="border-b border-line py-3.5 text-[0.9375rem] text-fg-2">
+                  {a}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+        <ul className="grid border-t border-l border-line sm:grid-cols-2 lg:col-span-8">
+          {reasons.map((r, i) => (
+            <Reveal
+              as="li"
+              key={r.title}
+              delay={(i % 2) * 0.06 + Math.floor(i / 2) * 0.04}
+              className="group border-r border-b border-line p-8 transition-colors duration-300 hover:bg-surface lg:p-10"
+            >
+              <r.icon size={26} strokeWidth={1.5} aria-hidden className="text-primary transition-transform duration-300 group-hover:-translate-y-0.5" />
+              <h3 className="mt-8 font-display text-[1.25rem] font-medium tracking-[-0.03em] text-fg">{r.title}</h3>
+              <p className="mt-3 text-[0.9375rem] leading-relaxed text-fg-2">{r.text}</p>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* Questions — a short accordion with a link to the full list */
+
+export function HomeFaq() {
+  return (
+    <section className="section bg-bg" aria-labelledby="faq-title">
+      <FaqJsonLd items={homeFaqs} />
+      <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div className="lg:col-span-4">
+          <Reveal y={12}>
+            <Eyebrow>Questions</Eyebrow>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <h2 id="faq-title" className="t-h2 mt-5 max-w-[12ch] text-fg">
+              What agencies ask us first
+            </h2>
+          </Reveal>
+          <Reveal delay={0.1} className="mt-6 max-w-[36ch] text-[1.0625rem] leading-relaxed text-fg-2">
+            <p>Equipment, pilots, accuracy and reports. If your question is not here, a person reads every message.</p>
+          </Reveal>
+          <Reveal delay={0.15} className="mt-6 flex flex-wrap gap-x-8">
+            <Link href="/faq" className="text-link">
+              All questions <ArrowUpRight size={18} aria-hidden />
+            </Link>
+            <Link href="/contact" className="text-link">
+              Ask us <ArrowUpRight size={18} aria-hidden />
+            </Link>
+          </Reveal>
+        </div>
+        <Reveal delay={0.1} className="lg:col-span-8">
+          <FaqList items={homeFaqs} />
         </Reveal>
       </div>
     </section>

@@ -16,6 +16,7 @@ const pages = [
   "/company",
   "/company/team",
   "/company/careers",
+  "/faq",
   "/contact",
   "/privacy",
   "/cookies",

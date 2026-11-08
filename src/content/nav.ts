@@ -112,6 +112,7 @@ export const nav: NavItem[] = [
             { label: "About", href: "/company", description: "What we do and how we work" },
             { label: "Team", href: "/company/team", description: "The people behind the products" },
             { label: "Careers", href: "/company/careers", description: "Engineering and research roles" },
+            { label: "Questions", href: "/faq", description: "Answers before you get in touch" },
             { label: "Contact", href: "/contact", description: "Write to us" },
           ],
         },
