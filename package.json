@@ -6,8 +6,10 @@
     "dev": "next dev --turbopack -p 8080",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint lint",
-    "lint:fix": "eslint --fix"
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit",
+    "prelaunch": "node scripts/prelaunch.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",
