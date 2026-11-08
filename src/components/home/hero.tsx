@@ -27,7 +27,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 const slides: Slide[] = [
   {
     key: "company",
-    shade: 0.15,
+    shade: 0.35,
     tab: "Overview",
     tagline: "What we do",
     eyebrow: "InfiniCity Labs",
@@ -41,7 +41,7 @@ const slides: Slide[] = [
   },
   {
     key: "adams",
-    shade: 0.4,
+    shade: 0.55,
     tab: "AdAMS",
     tagline: "Asset management",
     eyebrow: "AdAMS · Advanced Asset Management System",
@@ -55,7 +55,7 @@ const slides: Slide[] = [
   },
   {
     key: "tmc",
-    shade: 0.5,
+    shade: 0.62,
     tab: "TMC",
     tagline: "Traffic cameras",
     eyebrow: "TMC",
@@ -69,7 +69,7 @@ const slides: Slide[] = [
   },
   {
     key: "turnflow",
-    shade: 0.45,
+    shade: 0.6,
     tab: "Turnflow",
     tagline: "Movement counts",
     eyebrow: "Turnflow",
@@ -83,7 +83,7 @@ const slides: Slide[] = [
   },
   {
     key: "roadlogger",
-    shade: 0.5,
+    shade: 0.62,
     tab: "RoadLogger",
     tagline: "Field inspections",
     eyebrow: "RoadLogger",
