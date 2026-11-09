@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaqJsonLd, FaqList } from "@/components/faq";
 import { CountUp, Reveal } from "@/components/motion";
-import { EvidenceFunnel, ExportPreview, IntersectionCounter, StepTour } from "@/components/products/turnflow-ui";
+import { EvidenceFunnel, ExportPreview, FootageToggle, IntersectionCounter, StepTour, VehicleClasses } from "@/components/products/turnflow-ui";
 import { ButtonLink, Crumbs } from "@/components/sections";
 import { productFaqs } from "@/content/faqs";
+
+const SITE = "https://turnflow.infinicitylabs.org";
 
 const directory = [
   { value: "27,361", label: "public cameras in the directory" },
@@ -46,26 +48,26 @@ export function TurnflowPage() {
           <div className="mt-10 grid gap-8 lg:mt-14 lg:grid-cols-12 lg:items-end">
             <div className="lg:col-span-8">
               <Reveal y={12}>
-                <p className="eyebrow">Turnflow · Turning-movement counts</p>
+                <p className="eyebrow">Turnflow · Video → movement → insight</p>
               </Reveal>
               <Reveal delay={0.05}>
                 <h1 id="tf-title" className="mt-5 font-display text-[2.75rem] leading-[0.98] font-semibold tracking-[-0.04em] text-fg sm:text-[4rem] lg:text-[5rem]">
-                  Intersection counts, from video to report
+                  Every movement tells a story
                 </h1>
               </Reveal>
             </div>
             <Reveal delay={0.12} className="lg:col-span-4">
-              <p className="text-[1.0625rem] leading-relaxed text-fg-2">Draw the approaches, name the movements and let Turnflow count every vehicle. Each number keeps the clip that produced it.</p>
+              <p className="text-[1.0625rem] leading-relaxed text-fg-2">Turn intersection footage into directional counts you can inspect, compare and share, from the first vehicle to the final engineering report.</p>
               <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
-                <ButtonLink href="/contact">Book a demo</ButtonLink>
-                <span className="text-[0.875rem] text-fg-3">Access by invitation</span>
+                <ButtonLink href={`${SITE}/request-access`}>Create an account</ButtonLink>
+                <a href={`${SITE}/signin`} className="text-link">
+                  Sign in
+                </a>
               </div>
             </Reveal>
           </div>
           <Reveal delay={0.18} className="mt-12 lg:mt-16">
-            <div className="relative aspect-[1919/1005] overflow-clip border border-line bg-black">
-              <Image src="/media/evidence/turnflow-cam9-report.webp" alt="Turnflow's annotated video: each vehicle tracked with an ID, zones on every approach and a running count of each movement" fill priority sizes="(min-width: 1344px) 1248px, 100vw" className="object-cover" />
-            </div>
+            <FootageToggle />
           </Reveal>
         </div>
       </section>
@@ -73,7 +75,7 @@ export function TurnflowPage() {
       {/* 2. The intersection, replayable */}
       <section className="section bg-bg" aria-labelledby="count-title">
         <div className="wrap">
-          <Heading eyebrow="One minute at cam_9" id="count-title" title="Twelve movements, fourteen vehicles" lead="These are the counts from the approved 60-second run on the frame above. Replay it, or trace any movement through the intersection." />
+          <Heading eyebrow="Camera 9 · run 5d13e66a109d" id="count-title" title="Twelve movements, fifty-nine vehicles" lead="The counts from the saved run above, at 00:03:31. Replay them, or trace any movement through the intersection. These are automated observations, not independently validated totals." />
           <Reveal delay={0.1} className="mt-12 lg:mt-16">
             <IntersectionCounter />
           </Reveal>
@@ -90,10 +92,21 @@ export function TurnflowPage() {
         </div>
       </section>
 
+      {/* 3b. Vehicle classes */}
+      <section className="section bg-bg" aria-labelledby="classes-title">
+        <div className="wrap">
+          <Heading eyebrow="13 FHWA classes" id="classes-title" title="More than car, bus or truck" lead="Bring an FHWA-trained model and Turnflow tracks the full 13-class mix, then carries those labels into the counts, the analysis and the reports." />
+          <Reveal delay={0.1} className="mt-12 lg:mt-16">
+            <VehicleClasses />
+          </Reveal>
+          <p className="mt-6 max-w-[70ch] text-[0.875rem] leading-relaxed text-fg-3">Classes follow the selected model&apos;s labels. Full FHWA output needs a model trained for these 13 classes.</p>
+        </div>
+      </section>
+
       {/* 4. Evidence (the light section) */}
       <section className="section theme-light" aria-labelledby="evidence-title">
         <div className="wrap">
-          <Heading eyebrow="Counts you can defend" id="evidence-title" title="Not every track is a count" lead="Turnflow follows everything that moves, then counts only the passages between zones. What it leaves out stays on record, with the checks a reviewer needs." />
+          <Heading eyebrow="Counts you can defend" id="evidence-title" title="Not every track is a count" lead="Turnflow follows everything that moves, then counts only the passages between zones. In this 60-second study, what it left out stays on record, with the checks a reviewer needs." />
           <Reveal delay={0.1} className="mt-12 lg:mt-16">
             <EvidenceFunnel />
           </Reveal>
@@ -163,20 +176,20 @@ export function TurnflowPage() {
 
       {/* 8. Close */}
       <section className="relative isolate overflow-clip bg-black" aria-labelledby="tf-cta">
-        <Image src="/media/hero/turnflow.webp" alt="" fill sizes="100vw" className="-z-20 object-cover opacity-45" />
+        <Image src="/media/products/turnflow/camera9-source.webp" alt="" fill sizes="100vw" className="-z-20 object-cover opacity-40" />
         <div aria-hidden className="absolute inset-0 -z-10 bg-black/55" />
         <div className="wrap py-24 lg:py-36">
           <p className="eyebrow">Your intersection</p>
           <h2 id="tf-cta" className="t-h1 mt-5 max-w-[15ch] text-white">
-            Send us the video, see the counts
+            Your next traffic study starts with a better view
           </h2>
-          <p className="mt-6 max-w-[46ch] text-[1.125rem] leading-relaxed text-white/75">Book a demo and we will walk you through Turnflow on an intersection like yours, from zones to the engineering report.</p>
+          <p className="mt-6 max-w-[46ch] text-[1.125rem] leading-relaxed text-white/75">A focused workspace for researchers, transportation engineers and the teams turning observations into decisions. Create an account; access is reviewed by the platform administrators.</p>
           <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3">
-            <ButtonLink href="/contact" variant="light">
-              Book a demo
+            <ButtonLink href={`${SITE}/request-access`} variant="light">
+              Create an account
             </ButtonLink>
-            <Link href="/products" className="text-link text-white">
-              All products
+            <Link href="/contact" className="text-link text-white">
+              Book a demo
             </Link>
           </div>
         </div>

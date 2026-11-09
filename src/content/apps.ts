@@ -8,8 +8,8 @@ export const apps: AppLink[] = [
   { key: "adams", name: "AdAMS", url: "https://app.infinicitylabs.org" },
   { key: "tmc", name: "TMC", url: "https://app.infinicitylabs.org" },
   { key: "roadlogger", name: "RoadLogger", url: "https://app.infinicitylabs.org" },
-  // Turnflow runs as its own deployment. URL pending — see plan §5.3.
-  { key: "turnflow", name: "Turnflow", url: null, note: "Access by invitation" },
+  // Turnflow runs as its own deployment.
+  { key: "turnflow", name: "Turnflow", url: "https://turnflow.infinicitylabs.org/signin" },
 ];
 
 export const getApp = (key: string) => apps.find((a) => a.key === key);

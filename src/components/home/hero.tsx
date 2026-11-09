@@ -72,9 +72,9 @@ const slides: Slide[] = [
     tab: "Turnflow",
     tagline: "Movement counts",
     eyebrow: "Turnflow",
-    title: "Turning-movement counts, report-ready",
-    text: "Upload intersection video or record a live camera. Turnflow counts every movement by interval, measures headways and lane occupancy, and exports PDF or Word engineering reports.",
-    image: { src: "/media/hero/turnflow.webp", alt: "A busy road intersection seen from directly above", position: "50% 50%" },
+    title: "Every movement at the intersection, counted",
+    text: "Turn intersection footage into directional counts you can inspect, compare and share, from the first vehicle to the final engineering report.",
+    image: { src: "/media/products/turnflow/camera9-source.webp", alt: "Camera 9 footage of an intersection, with cars and a bus approaching", position: "50% 50%" },
     actions: [
       { label: "Explore Turnflow", href: "/products/turnflow" },
       { label: "Book a demo", href: "/contact" },

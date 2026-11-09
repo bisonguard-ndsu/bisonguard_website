@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils";
 const M = "/media/products/turnflow";
 
 /* ------------------------------------------------------------------------ */
-/* The intersection: 12 movements from the cam_9 count, replayable          */
+/* The intersection: 12 movements from saved Camera 9 run 5d13e66a109d      */
 
 type Dir = "N" | "S" | "E" | "W";
 const box: Record<Dir, string> = { S: "Box 1", N: "Box 2", E: "Box 3", W: "Box 4" };
@@ -19,18 +19,18 @@ const entry: Record<Dir, [number, number]> = { S: [340, 600], N: [260, 0], E: [6
 const exit: Record<Dir, [number, number]> = { N: [340, 0], S: [260, 600], E: [600, 340], W: [0, 260] };
 
 const moves: { code: string; from: Dir; to: Dir; n: number }[] = [
-  { code: "NBT", from: "S", to: "N", n: 1 },
-  { code: "SBT", from: "N", to: "S", n: 2 },
+  { code: "NBT", from: "S", to: "N", n: 4 },
+  { code: "SBT", from: "N", to: "S", n: 11 },
   { code: "NBRT", from: "S", to: "E", n: 0 },
   { code: "NBLT", from: "S", to: "W", n: 1 },
-  { code: "SBLT", from: "N", to: "E", n: 0 },
-  { code: "SBRT", from: "N", to: "W", n: 1 },
-  { code: "EBT", from: "W", to: "E", n: 3 },
-  { code: "EBLT", from: "W", to: "N", n: 2 },
+  { code: "SBLT", from: "N", to: "E", n: 1 },
+  { code: "SBRT", from: "N", to: "W", n: 2 },
+  { code: "EBT", from: "W", to: "E", n: 12 },
+  { code: "EBLT", from: "W", to: "N", n: 3 },
   { code: "EBRT", from: "W", to: "S", n: 0 },
-  { code: "WBT", from: "E", to: "W", n: 1 },
-  { code: "WBRT", from: "E", to: "N", n: 1 },
-  { code: "WBLT", from: "E", to: "S", n: 2 },
+  { code: "WBT", from: "E", to: "W", n: 12 },
+  { code: "WBRT", from: "E", to: "N", n: 3 },
+  { code: "WBLT", from: "E", to: "S", n: 10 },
 ];
 const tone: Record<string, string> = { N: "#34d399", S: "#60a5fa", W: "#f59e0b", E: "#f87171" };
 const colorOf = (code: string) => tone[code[0] === "N" ? "N" : code[0] === "S" ? "S" : code[0] === "E" ? "W" : "E"];
@@ -51,18 +51,22 @@ const pathOf = (from: Dir, to: Dir) => {
   return `M${x0},${y0} L${x1},${y1} Q${cx},${cy} ${x2},${y2} L${x3},${y3}`;
 };
 
-// Replay order for the 14 passages (one is the bus)
-const events = moves.flatMap((m) => Array.from({ length: m.n }, (_, k) => ({ code: m.code, k })));
-const order = [6, 0, 9, 3, 12, 1, 7, 13, 4, 10, 2, 8, 11, 5].map((i) => events[i]);
-const BUS_INDEX = 8;
+// Replay order for the 59 passages: interleave the movements so traffic flows from every side
+const queues = moves.map((m) => Array.from({ length: m.n }, () => m.code));
+const order: string[] = [];
+for (let round = 0; order.length < 59; round++) queues.forEach((q) => q[round] && order.push(q[round]));
+// Two buses and three trucks in the run; the rest are cars
+const BIG = new Map<number, "bus" | "truck">([[7, "bus"], [33, "bus"], [15, "truck"], [28, "truck"], [46, "truck"]]);
+const RUN_SECONDS = 211; // 00:03:31
+const mmss = (t: number) => `00:${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`;
 
 export function IntersectionCounter() {
   const reduce = useReducedMotion();
   const [focus, setFocus] = useState<string | null>(null);
   const [counts, setCounts] = useState<Record<string, number>>(() => Object.fromEntries(moves.map((m) => [m.code, m.n])));
-  const [cars, setCars] = useState<{ id: number; code: string; bus: boolean }[]>([]);
+  const [cars, setCars] = useState<{ id: number; code: string; big?: "bus" | "truck" }[]>([]);
   const [playing, setPlaying] = useState(false);
-  const [clock, setClock] = useState(60);
+  const [clock, setClock] = useState(RUN_SECONDS);
   const timers = useRef<ReturnType<typeof setTimeout>[]>([]);
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
 
@@ -78,19 +82,19 @@ export function IntersectionCounter() {
     setCars([]);
     setClock(0);
     setPlaying(true);
-    const span = 9000;
+    const span = 12000;
     const travel = reduce ? 0 : 1600;
-    order.forEach((e, i) => {
+    order.forEach((code, i) => {
       const t = (i / order.length) * span;
       timers.current.push(
-        setTimeout(() => setCars((c) => [...c, { id: i, code: e.code, bus: i === BUS_INDEX }]), t),
+        setTimeout(() => setCars((c) => [...c, { id: i, code, big: BIG.get(i) }]), t),
         setTimeout(() => {
-          setCounts((c) => ({ ...c, [e.code]: c[e.code] + 1 }));
+          setCounts((c) => ({ ...c, [code]: c[code] + 1 }));
           setCars((c) => c.filter((x) => x.id !== i));
         }, t + travel),
       );
     });
-    for (let s = 1; s <= 60; s++) timers.current.push(setTimeout(() => setClock(s), (s / 60) * (span + travel)));
+    for (let s = 1; s <= 60; s++) timers.current.push(setTimeout(() => setClock(Math.round((s / 60) * RUN_SECONDS)), (s / 60) * (span + travel)));
     timers.current.push(setTimeout(() => setPlaying(false), span + travel + 50));
   };
 
@@ -98,7 +102,7 @@ export function IntersectionCounter() {
     <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
       <div className="lg:col-span-7">
         <div className="relative border border-line bg-deep">
-          <svg viewBox="0 0 600 600" className="block w-full" role="img" aria-label="The cam_9 intersection with its twelve counted movements">
+          <svg viewBox="0 0 600 600" className="block w-full" role="img" aria-label="The Camera 9 intersection with its twelve counted movements">
             {/* roads */}
             <rect x="220" y="0" width="160" height="600" className="fill-surface" />
             <rect x="0" y="220" width="600" height="160" className="fill-surface" />
@@ -128,7 +132,7 @@ export function IntersectionCounter() {
                   d={pathOf(m.from, m.to)}
                   fill="none"
                   stroke={colorOf(m.code)}
-                  strokeWidth={on ? 6 : m.n === 0 ? 1.5 : 1.5 + m.n * 1.2}
+                  strokeWidth={on ? 7 : m.n === 0 ? 1.5 : 2 + m.n * 0.35}
                   strokeOpacity={dim ? 0.12 : m.n === 0 && !on ? 0.35 : 0.85}
                   strokeDasharray={m.n === 0 ? "6 6" : undefined}
                   strokeLinecap="round"
@@ -142,10 +146,10 @@ export function IntersectionCounter() {
               return (
                 <motion.rect
                   key={c.id}
-                  width={c.bus ? 26 : 16}
-                  height={c.bus ? 12 : 9}
-                  x={c.bus ? -13 : -8}
-                  y={c.bus ? -6 : -4.5}
+                  width={c.big ? 26 : 16}
+                  height={c.big ? 12 : 9}
+                  x={c.big ? -13 : -8}
+                  y={c.big ? -6 : -4.5}
                   rx="2"
                   fill={colorOf(c.code)}
                   stroke="#000"
@@ -158,7 +162,7 @@ export function IntersectionCounter() {
               );
             })}
           </svg>
-          <div className="absolute top-3 left-3 bg-black/70 px-2.5 py-1 text-[0.75rem] text-white tabular-nums">cam_9 · 00:00:{String(clock).padStart(2, "0")}</div>
+          <div className="absolute top-3 left-3 bg-black/70 px-2.5 py-1 text-[0.75rem] text-white tabular-nums">Camera 9 · {mmss(clock)}</div>
           <div className="absolute top-3 right-3 bg-black/70 px-3 py-1.5 text-right text-white">
             <span className="block text-[0.625rem] tracking-[0.14em] text-white/60 uppercase">Confirmed passages</span>
             <span className="block font-display text-[1.75rem] leading-none font-semibold tabular-nums">{total}</span>
@@ -166,8 +170,8 @@ export function IntersectionCounter() {
         </div>
         <div className="mt-4 flex flex-wrap items-center gap-4">
           <button onClick={play} disabled={playing} className="btn btn-primary cursor-pointer disabled:opacity-50">
-            {total === 14 && !playing && clock === 60 ? <Play size={16} aria-hidden /> : <RotateCcw size={16} aria-hidden />}
-            {playing ? "Counting" : "Replay the 60-second count"}
+            {total === 59 && !playing && clock === RUN_SECONDS ? <Play size={16} aria-hidden /> : <RotateCcw size={16} aria-hidden />}
+            {playing ? "Counting" : "Replay the count"}
           </button>
           <p className="text-[0.8125rem] text-fg-3">Hover a movement to trace its path.</p>
         </div>
@@ -213,7 +217,7 @@ export function IntersectionCounter() {
           <tfoot>
             <tr>
               <td className="pt-4 text-fg-3" colSpan={2}>
-                Vehicle mix: car 13, bus 1
+                Car 54 · truck 3 · bus 2
               </td>
               <td className="pt-4 text-right font-display text-[1.25rem] font-semibold text-fg tabular-nums">{total}</td>
             </tr>
@@ -228,12 +232,12 @@ export function IntersectionCounter() {
 /* The six steps, as they appear in the app                                   */
 
 const steps = [
-  { label: "Source", text: "Upload a recording, or pick a camera from the directory and record the window you need.", src: `${M}/source.webp`, w: 1720, h: 867 },
-  { label: "Movements", text: "Draw a zone on each approach and name the movements between them: twelve at a four-way intersection.", src: `${M}/movements.webp`, w: 1204, h: 436 },
+  { label: "Source", text: "Upload a recording, connect an authorized live camera over RTSP or HLS, or record from a public camera in the directory.", src: `${M}/source.webp`, w: 1720, h: 867 },
+  { label: "Movements", text: "Draw the road approaches and map the turning movements, as zone pairs or labelled trajectory paths.", src: `${M}/movements.webp`, w: 1204, h: 436 },
   { label: "Run count", text: "Every vehicle is detected and tracked across the frame. Each confirmed passage from one zone to another is counted once.", src: `${M}/run.webp`, w: 1235, h: 867 },
   { label: "Results", text: "Counts by movement and class, ready to download as CSV, JSON, an engineering report or the annotated video.", src: `${M}/results.webp`, w: 1380, h: 868 },
-  { label: "Review", text: "Step through the passages with the video evidence beside each one, confirm them, and add any the run missed.", src: `${M}/review.webp`, w: 1235, h: 865 },
-  { label: "Analysis", text: "Filter by approach, movement, class and interval. See where traffic goes, time patterns and how sessions compare.", src: `${M}/analysis.webp`, w: 1235, h: 867 },
+  { label: "Review", text: "Compare repeated runs, inspect frame-level disagreements and review candidate consensus events. Agreement is evidence, not accuracy.", src: `${M}/review.webp`, w: 1235, h: 865 },
+  { label: "Analysis", text: "Movement tables, time-series plots and visual analysis, filtered by approach, movement, class and interval.", src: `${M}/analysis.webp`, w: 1235, h: 867 },
 ];
 
 export function StepTour() {
@@ -357,14 +361,15 @@ export function EvidenceFunnel() {
 const csv = ["movement,from,to,count", ...moves.map((m) => `${m.code},${box[m.from]},${box[m.to]},${m.n}`)].join("\n");
 const json = JSON.stringify(
   {
-    session: "cam_9 · approved 60-second comparison",
-    status: "completed",
-    processed: "00:59",
-    detector: "YOLO + ByteTrack",
+    source: "cam_9.mp4",
+    run: "5d13e66a109d",
+    at: "00:03:31",
+    method: "zone pairs",
     zones: 4,
     movements: 12,
-    passages: 14,
-    classes: { car: 13, bus: 1 },
+    passages: 59,
+    approaches: { northbound: 5, southbound: 14, eastbound: 15, westbound: 25 },
+    classes: { car: 54, truck: 3, bus: 2 },
   },
   null,
   2,
@@ -410,13 +415,108 @@ export function ExportPreview() {
               </div>
             )}
             {id === "mp4" && (
-              <div className="relative aspect-[1919/1005] w-full">
-                <Image src="/media/evidence/turnflow-cam9-report.webp" alt="A frame of the annotated video: tracked vehicles with IDs and a running movement count" fill sizes="(min-width: 1024px) 55vw, 100vw" className="object-contain" />
+              <div className="relative aspect-video w-full">
+                <video src={`${M}/camera9.mp4`} poster={`${M}/camera9-annotated.webp`} controls muted playsInline preload="none" className="absolute inset-0 h-full w-full object-contain" aria-label="Annotated Turnflow export of Camera 9" />
               </div>
             )}
           </motion.div>
         </AnimatePresence>
       </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* Hero: the same Camera 9 frame as footage and as tracked output             */
+
+export function FootageToggle() {
+  const [tracked, setTracked] = useState(true);
+  return (
+    <div>
+      <div className="relative aspect-video overflow-clip border border-line bg-black">
+        <Image src={`${M}/camera9-source.webp`} alt="Camera 9 footage of an intersection, with cars and a bus approaching" fill priority sizes="(min-width: 1344px) 1248px, 100vw" className="object-cover" />
+        <AnimatePresence>
+          {tracked && (
+            <motion.video
+              key="tracked"
+              src={`${M}/camera9.mp4`}
+              poster={`${M}/camera9-annotated.webp`}
+              autoPlay
+              muted
+              loop
+              playsInline
+              aria-label="Turnflow's tracked output of Camera 9: vehicles boxed with IDs and a count for each movement"
+              className="absolute inset-0 h-full w-full object-cover"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.5 }}
+            />
+          )}
+        </AnimatePresence>
+      </div>
+      <div role="tablist" aria-label="Footage or tracked output" className="mt-4 inline-flex border border-line">
+        {[
+          { on: false, label: "Footage" },
+          { on: true, label: "Tracked output" },
+        ].map((t) => (
+          <button key={t.label} role="tab" aria-selected={tracked === t.on} onClick={() => setTracked(t.on)} className={cn("cursor-pointer px-5 py-2.5 text-[0.875rem] transition-colors", tracked === t.on ? "bg-surface text-fg" : "text-fg-3 hover:text-fg-2")}>
+            {t.label}
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------------ */
+/* FHWA 13 vehicle classes                                                    */
+
+const classGroups = [
+  { id: "light", label: "Light vehicles and buses" },
+  { id: "single", label: "Single unit" },
+  { id: "trailer", label: "Single trailer" },
+  { id: "multi", label: "Multiple trailers" },
+];
+const fhwa = [
+  { n: 1, name: "Motorcycles", d: "Motorized two- and three-wheelers", g: "light" },
+  { n: 2, name: "Passenger cars", d: "Cars, including those towing light trailers", g: "light" },
+  { n: 3, name: "Other light vehicles", d: "2 axles, 4 tires: pickups, vans and similar", g: "light" },
+  { n: 4, name: "Buses", d: "Passenger-carrying buses", g: "light" },
+  { n: 5, name: "Single-unit trucks", d: "2 axles, 6 tires", g: "single" },
+  { n: 6, name: "Single-unit trucks", d: "3 axles", g: "single" },
+  { n: 7, name: "Single-unit trucks", d: "4 or more axles", g: "single" },
+  { n: 8, name: "Single-trailer trucks", d: "4 or fewer axles", g: "trailer" },
+  { n: 9, name: "Single-trailer trucks", d: "5 axles", g: "trailer" },
+  { n: 10, name: "Single-trailer trucks", d: "6 or more axles", g: "trailer" },
+  { n: 11, name: "Multi-trailer trucks", d: "5 or fewer axles", g: "multi" },
+  { n: 12, name: "Multi-trailer trucks", d: "6 axles", g: "multi" },
+  { n: 13, name: "Multi-trailer trucks", d: "7 or more axles", g: "multi" },
+];
+
+export function VehicleClasses() {
+  const [g, setG] = useState<string | null>(null);
+  return (
+    <div>
+      <div className="flex flex-wrap gap-2">
+        {[{ id: null as string | null, label: "All 13 classes" }, ...classGroups].map((x) => (
+          <button key={x.label} onClick={() => setG(x.id)} aria-pressed={g === x.id} className={cn("cursor-pointer border px-4 py-2 text-[0.875rem] transition-colors", g === x.id ? "border-primary bg-primary text-primary-ink" : "border-line text-fg-2 hover:text-fg")}>
+            {x.label}
+          </button>
+        ))}
+      </div>
+      <ul className="mt-8 grid grid-cols-1 pt-px pl-px sm:grid-cols-2 lg:grid-cols-4">
+        {fhwa.map((c) => {
+          const on = g === null || c.g === g;
+          return (
+            <li key={c.n} className={cn("-mt-px -ml-px border border-line bg-bg p-5 transition-opacity duration-300", on ? "opacity-100" : "opacity-25")}>
+              <span className="text-[0.75rem] tracking-[0.14em] text-fg-3 uppercase">Class {c.n}</span>
+              <span className="mt-3 block text-[1rem] font-medium text-fg">{c.name}</span>
+              <span className="mt-1 block text-[0.875rem] text-fg-2">{c.d}</span>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
