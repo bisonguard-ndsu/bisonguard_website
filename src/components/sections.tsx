@@ -180,7 +180,7 @@ export function Photo({ image, className, sizes = "(min-width: 1024px) 50vw, 100
         fill
         sizes={sizes}
         priority={priority}
-        className="object-center transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+        className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
         style={{ objectPosition: image.position }}
       />
     </div>

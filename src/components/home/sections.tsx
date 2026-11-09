@@ -267,7 +267,7 @@ export function HomePartners() {
                       alt={copy === 1 || i >= list.length ? "" : p.full}
                       width={220}
                       height={90}
-                      className="max-h-16 w-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                      className="h-14 w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
                   <p className="border-t border-line px-5 py-3 text-[0.8125rem] text-fg-3">{p.full}</p>
