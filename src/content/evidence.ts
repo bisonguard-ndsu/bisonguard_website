@@ -61,7 +61,7 @@ export const testimonial = {
     "The quality of research and technological innovation from InfiniCity Labs consistently exceeds expectations. Their asset management solutions have set new standards for infrastructure monitoring and maintenance optimization.",
   name: "Elijah Kofi Osei",
   org: "The Greyspaces Ltd.",
-  image: { src: "/elijah.jpg", width: 1920, height: 1440 },
+  image: { src: "/media/team/elijah.webp", width: 1200, height: 900 },
   verified: true,
 };
 
