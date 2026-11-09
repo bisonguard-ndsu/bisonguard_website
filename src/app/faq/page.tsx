@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { FaqJsonLd, FaqList } from "@/components/faq";
 import { Reveal } from "@/components/motion";
 import { PageIntro } from "@/components/page-intro";
@@ -50,7 +49,6 @@ export default function FaqPage() {
                       className="group flex items-center justify-between border-b border-line py-3.5 text-[0.9375rem] text-fg-2 transition-colors hover:text-fg"
                     >
                       {p.name}
-                      <ArrowUpRight size={15} aria-hidden className="text-fg-3 group-hover:text-primary" />
                     </Link>
                   </li>
                 ))}
@@ -85,7 +83,7 @@ export default function FaqPage() {
               Contact us
             </ButtonLink>
             <a href={`mailto:${site.email}`} className="text-link">
-              {site.email} <ArrowUpRight size={18} aria-hidden />
+              {site.email}
             </a>
           </div>
         </div>

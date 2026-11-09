@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, type PanInfo } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Slide = {
@@ -210,11 +209,11 @@ export default function Hero() {
             >
               <p className="eyebrow">{slide.eyebrow}</p>
               {index === 0 ? (
-                <h1 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-medium tracking-[-0.045em] text-white sm:text-[4rem] lg:text-[5rem]">
+                <h1 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-semibold tracking-[-0.035em] text-white sm:text-[4rem] lg:text-[5rem]">
                   {slide.title}
                 </h1>
               ) : (
-                <h2 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-medium tracking-[-0.045em] text-white sm:text-[4rem] lg:text-[5rem]">
+                <h2 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-semibold tracking-[-0.035em] text-white sm:text-[4rem] lg:text-[5rem]">
                   {slide.title}
                 </h2>
               )}
@@ -224,12 +223,10 @@ export default function Hero() {
                   i === 0 ? (
                     <Link key={a.href + a.label} href={a.href} className="btn btn-light">
                       {a.label}
-                      <ArrowUpRight size={18} aria-hidden />
                     </Link>
                   ) : (
                     <Link key={a.href + a.label} href={a.href} className="text-link text-white">
                       {a.label}
-                      <ArrowUpRight size={18} aria-hidden />
                     </Link>
                   ),
                 )}
@@ -265,7 +262,7 @@ export default function Hero() {
                     </span>
                     <span
                       className={cn(
-                        "block font-display text-[0.9375rem] font-medium transition-colors duration-300",
+                        "block font-display text-[0.9375rem] font-semibold transition-colors duration-300",
                         active ? "text-white" : "text-white/55 group-hover:text-white/85",
                       )}
                     >

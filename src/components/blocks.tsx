@@ -23,7 +23,7 @@ export function StatStrip({ stats, className }: { stats: { value: string; label:
         <Reveal key={s.label} delay={i * 0.06} className={cn("bg-surface p-6 sm:p-8", stats.length === 3 && i === 2 && "max-lg:col-span-2")}>
           <dt className="sr-only">{s.label}</dt>
           <dd>
-            <CountUp value={s.value} className="block font-display text-4xl leading-none font-medium tracking-[-0.04em] text-fg sm:text-5xl" />
+            <CountUp value={s.value} className="block font-display text-4xl leading-none font-semibold tracking-[-0.03em] text-fg sm:text-5xl" />
             <span className="mt-3 block max-w-[28ch] text-[0.9375rem] leading-snug text-fg-2">{s.label}</span>
           </dd>
         </Reveal>
@@ -40,8 +40,8 @@ export function Steps({ steps, eyebrow = "How it works", title, accent, lead }: 
         <ol className={cn("relative mt-14 grid gap-5 lg:mt-20", steps.length === 4 ? "md:grid-cols-2 lg:grid-cols-4" : "md:grid-cols-3")}>
           {steps.map((s, i) => (
             <Reveal as="li" key={s.title} delay={i * 0.1} className="relative border-t-2 border-fg pt-6">
-              <span className="font-display text-sm font-medium text-fg-3">Step {i + 1}</span>
-              <h3 className="mt-3 font-display text-2xl font-medium tracking-[-0.04em] text-fg">{s.title}</h3>
+              <span className="font-display text-sm font-semibold text-fg-3">Step {i + 1}</span>
+              <h3 className="mt-3 font-display text-2xl font-semibold tracking-[-0.03em] text-fg">{s.title}</h3>
               <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg-2">{s.text}</p>
             </Reveal>
           ))}
@@ -60,7 +60,7 @@ export function FeatureGrid({ features, eyebrow = "Capabilities", title, accent,
           {features.map((f, i) => (
             <Reveal as="li" key={f.title} delay={(i % 3) * 0.08} className="group relative bg-surface p-7 transition-colors duration-500 hover:bg-surface-2 sm:p-8">
               <span aria-hidden className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-primary transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
-              <h3 className="font-display text-xl font-medium text-fg">{f.title}</h3>
+              <h3 className="font-display text-xl font-semibold text-fg">{f.title}</h3>
               <p className="mt-3 text-[0.9875rem] leading-relaxed text-fg-2">{f.text}</p>
             </Reveal>
           ))}
@@ -135,7 +135,7 @@ export function ProductCards({ slugs, title = "Products used", eyebrow = "Produc
                   <Photo image={p.card} className="aspect-[16/9]" sizes="(min-width: 1024px) 30vw, 100vw" />
                   <div className="flex flex-1 flex-col p-6">
                     <div className="flex items-center justify-between gap-3">
-                      <h3 className="font-display text-2xl font-medium text-fg">{p.name}</h3>
+                      <h3 className="font-display text-2xl font-semibold text-fg">{p.name}</h3>
                       <Tag tone="primary">{statusLabel[prod.status]}</Tag>
                     </div>
                     <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-fg-2">{prod.summary}</p>
@@ -170,7 +170,7 @@ export function SolutionCards({ slugs, title = "Where it helps", eyebrow = "Solu
                 <Photo image={s.image} className="aspect-[16/9]" sizes="(min-width: 1024px) 30vw, 100vw" />
                 <div className="flex flex-1 flex-col p-6">
                   <p className="text-[0.8125rem] text-fg-3">{s.group}</p>
-                  <h3 className="mt-2 font-display text-xl font-medium text-fg group-hover:text-primary-strong">{s.title}</h3>
+                  <h3 className="mt-2 font-display text-xl font-semibold text-fg group-hover:text-primary-strong">{s.title}</h3>
                   <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-fg-2">{s.short}</p>
                 </div>
               </Link>

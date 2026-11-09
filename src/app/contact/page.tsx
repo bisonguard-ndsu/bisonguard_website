@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import ContactForm from "@/components/contact-form";
 import { FaqList } from "@/components/faq";
 import { Reveal } from "@/components/motion";
@@ -35,7 +34,7 @@ export default function ContactPage() {
             <div className="mt-10 border-t border-line pt-6">
               <p className="eyebrow text-fg-3">Or write directly</p>
               <a href={`mailto:${site.email}`} className="text-link mt-2 text-[1.25rem]">
-                {site.email} <ArrowUpRight size={18} aria-hidden />
+                {site.email}
               </a>
             </div>
           </div>
@@ -55,7 +54,7 @@ export default function ContactPage() {
             {next.map((s, i) => (
               <Reveal as="li" key={s.title} delay={i * 0.08} className="border-b border-line py-8 md:border-b-0 md:pr-8 md:[&:not(:first-child)]:border-l md:[&:not(:first-child)]:pl-8">
                 <p className="eyebrow text-fg-3">Step {i + 1}</p>
-                <h3 className="mt-4 font-display text-[1.375rem] font-medium tracking-[-0.03em] text-fg">{s.title}</h3>
+                <h3 className="mt-4 font-display text-[1.375rem] font-semibold tracking-[-0.03em] text-fg">{s.title}</h3>
                 <p className="mt-3 max-w-[36ch] text-[0.9375rem] leading-relaxed text-fg-2">{s.text}</p>
               </Reveal>
             ))}
@@ -71,7 +70,7 @@ export default function ContactPage() {
               Common questions
             </h2>
             <Link href="/faq" className="text-link mt-6">
-              All questions <ArrowUpRight size={18} aria-hidden />
+              All questions
             </Link>
           </div>
           <div className="lg:col-span-8">

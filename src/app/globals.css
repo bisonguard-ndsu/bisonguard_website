@@ -21,7 +21,7 @@
   --color-accent: oklch(0.82 0.15 78);
   --color-danger: oklch(0.7 0.19 25);
 
-  --font-display: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-schibsted), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
@@ -71,8 +71,8 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: -0.035em;
+    font-weight: 600;
+    letter-spacing: -0.03em;
     text-wrap: balance;
   }
   p {
@@ -131,30 +131,30 @@
   .t-display {
     font-family: var(--font-display);
     font-size: var(--text-display);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.02;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.035em;
   }
   .t-h1 {
     font-family: var(--font-display);
     font-size: var(--text-h1);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.05;
-    letter-spacing: -0.045em;
+    letter-spacing: -0.035em;
   }
   .t-h2 {
     font-family: var(--font-display);
     font-size: var(--text-h2);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.08;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.03em;
   }
   .t-h3 {
     font-family: var(--font-display);
     font-size: var(--text-h3);
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.2;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.025em;
   }
   .t-lead {
     font-size: var(--text-lead);
@@ -216,24 +216,30 @@
     flex: none;
     transition: transform 180ms var(--ease-out-quart);
   }
-  .btn:hover svg,
-  .text-link:hover svg {
-    transform: translate(2px, -2px);
+  .btn:hover svg {
+    transform: translateX(2px);
   }
 
-  /* Text link with a trailing arrow */
+  /* Underlined text link */
   .text-link {
     display: inline-flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0.5rem;
     min-height: 2.75rem;
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--color-fg);
-    transition: color 180ms;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.4em;
+    text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+    transition:
+      color 180ms,
+      text-decoration-color 180ms;
   }
   .text-link:hover {
     color: var(--color-primary);
+    text-decoration-color: currentColor;
   }
   .text-link svg {
     flex: none;
@@ -331,6 +337,35 @@
 }
 
 /* Motion */
+/* Partner logo strip */
+.marquee {
+  overflow: hidden;
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+  }
+  .marquee-track > ul:last-child,
+  .marquee-dup {
+    display: none;
+  }
+}
+
 @keyframes panel-in {
   from {
     opacity: 0;
@@ -383,4 +418,5 @@
     transition-duration: 0.01ms !important;
   }
 }
+
 

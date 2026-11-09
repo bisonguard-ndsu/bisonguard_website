@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FeatureGrid, ProductCards, Showcase, SolutionCards, StatStrip, Steps } from "@/components/blocks";
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { FaqJsonLd, FaqList } from "@/components/faq";
 import { Reveal } from "@/components/motion";
@@ -73,7 +72,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
           <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-7 lg:self-end">
             {p.audience.map((a, i) => (
-              <Reveal as="li" key={a} delay={i * 0.06} className="border border-line bg-surface px-5 py-5 font-display text-lg font-medium tracking-[-0.02em] text-fg">
+              <Reveal as="li" key={a} delay={i * 0.06} className="border border-line bg-surface px-5 py-5 font-display text-lg font-semibold tracking-[-0.02em] text-fg">
                 {a}
               </Reveal>
             ))}
@@ -89,7 +88,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <SectionHeading eyebrow="Questions" title={`About ${p.name}`} side={false} />
               <Reveal delay={0.15} className="mt-6">
                 <Link href="/faq" className="text-link">
-                  All questions <ArrowUpRight size={18} aria-hidden />
+                  All questions
                 </Link>
               </Reveal>
             </div>

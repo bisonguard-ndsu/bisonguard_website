@@ -71,7 +71,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
                 <Photo image={project.hero} className="aspect-[16/9] lg:col-span-7 lg:aspect-auto lg:min-h-[22rem]" />
                 <div className="flex flex-col justify-center p-8 sm:p-10 lg:col-span-5">
                   <p className="text-[0.875rem] text-fg-3">{project.place}</p>
-                  <h3 className="mt-3 font-display text-2xl font-medium text-fg sm:text-3xl">{project.title}</h3>
+                  <h3 className="mt-3 font-display text-2xl font-semibold text-fg sm:text-3xl">{project.title}</h3>
                   <p className="mt-4 text-fg-2">{project.summary}</p>
                   <span className="mt-6 inline-flex items-center gap-2 font-semibold text-primary">
                     <span className="link">Read the case study</span>
@@ -95,7 +95,7 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
                 <Link href={`/solutions/${o.slug}`} className={cn(cardCls, "flex h-full flex-col overflow-clip")}>
                   <Photo image={o.image} className="aspect-[16/9]" sizes="(min-width: 768px) 33vw, 100vw" />
                   <div className="p-6">
-                    <h3 className="font-display text-xl font-medium text-fg group-hover:text-primary-strong">{o.title}</h3>
+                    <h3 className="font-display text-xl font-semibold text-fg group-hover:text-primary-strong">{o.title}</h3>
                     <p className="mt-2 text-[0.9375rem] text-fg-2">{o.short}</p>
                   </div>
                 </Link>

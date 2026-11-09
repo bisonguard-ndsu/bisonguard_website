@@ -38,14 +38,14 @@ export default function WorkPage() {
                     ))}
                     <Tag>{p.place}</Tag>
                   </div>
-                  <h2 className="mt-6 font-display text-3xl leading-tight font-medium text-fg sm:text-4xl">{p.title}</h2>
+                  <h2 className="mt-6 font-display text-3xl leading-tight font-semibold text-fg sm:text-4xl">{p.title}</h2>
                   <p className="mt-4 text-[1.0625rem] leading-relaxed text-fg-2">{p.summary}</p>
                   <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-white/10 pt-6">
                     {p.stats.slice(0, 2).map((s) => (
                       <div key={s.label}>
                         <dt className="sr-only">{s.label}</dt>
                         <dd>
-                          <CountUp value={s.value} className="block font-display text-3xl font-medium text-fg" />
+                          <CountUp value={s.value} className="block font-display text-3xl font-semibold text-fg" />
                           <span className="mt-1 block text-sm text-fg-2">{s.label}</span>
                         </dd>
                       </div>

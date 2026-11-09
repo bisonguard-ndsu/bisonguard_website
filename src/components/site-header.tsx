@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { nav, type NavItem, type NavPanel } from "@/content/nav";
 import { apps } from "@/content/apps";
@@ -236,7 +235,6 @@ export default function SiteHeader() {
             />
             <Link href="/contact" className="btn btn-primary ml-2 min-h-11" onPointerEnter={hoverLeave}>
               Contact us
-              <ArrowUpRight size={16} aria-hidden />
             </Link>
           </div>
 
@@ -319,7 +317,6 @@ function MegaPanel({
             className="text-link mt-6 self-start"
           >
             {panel.all.label}
-            <ArrowUpRight size={16} aria-hidden />
           </Link>
         </div>
 
@@ -337,16 +334,12 @@ function MegaPanel({
                       className="group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-4 border-b border-line px-1 py-4 transition-colors hover:border-primary/60"
                     >
                       <span className="col-span-2">
-                        <span className="block font-display text-[1.0625rem] font-medium tracking-[-0.02em] text-fg transition-colors group-hover:text-primary-strong">{l.label}</span>
+                        <span className="block font-display text-[1.0625rem] font-semibold tracking-[-0.02em] text-fg transition-colors group-hover:text-primary-strong">{l.label}</span>
                         {l.description && (
                           <span className="mt-0.5 block text-[0.875rem] leading-snug text-fg-2">{l.description}</span>
                         )}
                       </span>
-                      {l.status ? (
-                        <span className="status pr-2 text-primary">{l.status}</span>
-                      ) : (
-                        <ArrowUpRight size={16} aria-hidden className="text-fg-3 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary" />
-                      )}
+                      {l.status && <span className="status pr-2 text-primary">{l.status}</span>}
                     </Link>
                   </li>
                 ))}
@@ -532,7 +525,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                     aria-expanded={section === item.id}
                     aria-controls={`m-${item.id}`}
                     onClick={() => setSection((s) => (s === item.id ? null : item.id))}
-                    className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-medium font-display"
+                    className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-semibold font-display"
                   >
                     {item.label}
                     <Chevron open={section === item.id} />
@@ -564,7 +557,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
                   )}
                 </>
               ) : (
-                <Link href={item.href} onClick={onClose} className="flex min-h-14 items-center text-[1.25rem] font-medium font-display">
+                <Link href={item.href} onClick={onClose} className="flex min-h-14 items-center text-[1.25rem] font-semibold font-display">
                   {item.label}
                 </Link>
               )}
@@ -576,7 +569,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
               aria-expanded={section === "signin"}
               aria-controls="m-signin"
               onClick={() => setSection((s) => (s === "signin" ? null : "signin"))}
-              className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-medium font-display"
+              className="flex min-h-14 w-full cursor-pointer items-center justify-between text-left text-[1.25rem] font-semibold font-display"
             >
               Sign in
               <Chevron open={section === "signin"} />

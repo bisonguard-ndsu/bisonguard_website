@@ -42,7 +42,7 @@ export default function ProductsPage() {
                       <Tag>{p.category}</Tag>
                       <Tag tone="primary">{statusLabel[prod.status]}</Tag>
                     </div>
-                    <h2 className="mt-6 font-display text-4xl font-medium tracking-[-0.04em] text-fg sm:text-5xl">{p.name}</h2>
+                    <h2 className="mt-6 font-display text-4xl font-semibold tracking-[-0.03em] text-fg sm:text-5xl">{p.name}</h2>
                     {p.fullName && <p className="mt-2 text-[0.875rem] text-fg-3">{p.fullName}</p>}
                     <p className="mt-5 max-w-[46ch] text-[1.0625rem] leading-relaxed text-fg-2">{p.lead}</p>
                     <dl className="mt-8 grid gap-4 border-t border-white/10 pt-6 sm:grid-cols-2">
@@ -81,7 +81,7 @@ export default function ProductsPage() {
             {platformExtras.map((x, i) => (
               <Reveal as="li" key={x.name} delay={i * 0.08} className="rounded-2xl border border-white/[0.08] bg-surface p-8">
                 <div className="flex items-center justify-between gap-4">
-                  <h3 className="font-display text-2xl font-medium text-fg">{x.name}</h3>
+                  <h3 className="font-display text-2xl font-semibold text-fg">{x.name}</h3>
                   <Tag tone={x.status === "in-development" ? "accent" : "muted"}>{statusLabel[x.status]}</Tag>
                 </div>
                 <p className="mt-4 text-[1.0625rem] leading-relaxed text-fg-2">{x.line}</p>

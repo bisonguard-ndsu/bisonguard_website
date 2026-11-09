@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform, type MotionValue } from "motion/react";
-import { ArrowUpRight } from "lucide-react";
 import { useRef, useState } from "react";
 import { CountUp, Reveal } from "@/components/motion";
 import { ButtonLink, Photo, SectionHeading, type Img } from "@/components/sections";
@@ -55,7 +54,7 @@ function StackCard({ p, i, n, progress }: { p: StackItem; i: number; n: number; 
               <span aria-hidden className="h-3 w-px bg-line" />
               <span className="text-primary">{p.status}</span>
             </div>
-            <h3 className="mt-6 font-display text-[2.5rem] leading-none font-medium tracking-[-0.04em] text-fg sm:text-[3.25rem]">{p.name}</h3>
+            <h3 className="mt-6 font-display text-[2.5rem] leading-none font-semibold tracking-[-0.03em] text-fg sm:text-[3.25rem]">{p.name}</h3>
             {p.fullName && <p className="mt-2 text-[0.9375rem] text-fg-3">{p.fullName}</p>}
             <p className="mt-6 max-w-[42ch] text-[1.0625rem] leading-relaxed text-fg-2">{p.summary}</p>
             <dl className="mt-auto grid grid-cols-2 gap-6 border-t border-line pt-6 max-lg:mt-8">
@@ -70,7 +69,6 @@ function StackCard({ p, i, n, progress }: { p: StackItem; i: number; n: number; 
             </dl>
             <span className="text-link mt-6 self-start group-hover:text-primary">
               Explore {p.name}
-              <ArrowUpRight size={18} aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </span>
           </div>
           <Photo image={p.image} className="aspect-[16/10] lg:col-span-7 lg:aspect-auto" sizes="(min-width: 1024px) 58vw, 100vw" />
@@ -104,7 +102,7 @@ export function HowItWorks({ steps }: { steps: Step[] }) {
             </span>
             <h3
               className={cn(
-                "mt-3 font-display text-[2rem] font-medium tracking-[-0.04em] transition-colors duration-500 sm:text-[2.5rem]",
+                "mt-3 font-display text-[2rem] font-semibold tracking-[-0.03em] transition-colors duration-500 sm:text-[2.5rem]",
                 i === active ? "text-fg" : "text-fg-3",
               )}
             >
@@ -210,7 +208,7 @@ export function ProjectExpand({
             <Reveal key={s.label} delay={i * 0.08} className="border-t border-line pt-6">
               <dt className="sr-only">{s.label}</dt>
               <dd>
-                <CountUp value={s.value} className="block font-display text-[2rem] font-medium tracking-[-0.04em] text-fg sm:text-5xl" />
+                <CountUp value={s.value} className="block font-display text-[2rem] font-semibold tracking-[-0.03em] text-fg sm:text-5xl" />
                 <span className="mt-2 block max-w-[22ch] text-[0.9375rem] leading-snug text-fg-2">{s.label}</span>
               </dd>
             </Reveal>
