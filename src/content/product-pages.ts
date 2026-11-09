@@ -35,7 +35,7 @@ export const productPages: ProductPage[] = [
     accent: "Map every asset and defect.",
     lead: "AdAMS turns ordinary drive video into a complete, geolocated record of your road network: every sign, marking, light and signal, every crack and pothole, and the ride quality of every segment.",
     hero: { src: "/media/site/guardrail.webp", alt: "A highway curving through pine forest with guardrails and an overhead sign", position: "50% 55%" },
-    card: { src: "/media/products/adams/assets-map.webp", alt: "The AdAMS asset map with signs and road segments plotted across the network", position: "50% 50%" },
+    card: { src: "/media/products/adams/crack-detect.webp", alt: "AdAMS detecting two longitudinal cracks on a rural highway from a dashboard phone", position: "50% 100%" },
     stats: [
       { value: "118", label: "traffic signs geolocated in the Fargo – West Fargo survey" },
       { value: "2,267", label: "road segments rated for roughness in that survey" },
@@ -121,7 +121,7 @@ export const productPages: ProductPage[] = [
     accent: "report-ready",
     lead: "Turnflow counts traffic from intersection video. Draw the approaches, define the movements and get counts by interval, headways and lane occupancy, with the video evidence for every vehicle and a report you can submit.",
     hero: { src: "/media/site/interchange.webp", alt: "A highway interchange seen from above with traffic on every ramp", position: "50% 50%" },
-    card: { src: "/media/products/turnflow/camera9-annotated.webp", alt: "Turnflow's annotated output for Camera 9: tracked vehicles and a count for each movement", position: "50% 50%" },
+    card: { src: "/media/products/turnflow/zones.webp", alt: "Turnflow zones drawn on each approach of the Camera 9 intersection", position: "50% 50%" },
     stats: [
       { value: "27,000+", label: "public traffic cameras in the built-in directory" },
       { value: "28", label: "US states covered by that directory" },
@@ -161,7 +161,7 @@ export const productPages: ProductPage[] = [
     accent: "tracked to repair",
     lead: "RoadLogger puts inspections on the phones your crews already carry. Log what you find, even offline, and follow each case from triage to verified repair on a map the whole team shares.",
     hero: { src: "/media/site/roller.webp", alt: "A road roller compacting fresh asphalt beside a traffic cone", position: "50% 60%" },
-    card: { src: "/media/products/roadlogger/dashboard.webp", alt: "The RoadLogger dashboard: open cases, the case lifecycle and a map of defects", position: "0% 0%" },
+    card: { src: "/media/products/roadlogger/visit-1.webp", alt: "A damaged pavement block beside a blue kerb, photographed during a RoadLogger inspection", position: "50% 22%" },
     stats: [
       { value: "5", label: "stages from new defect to verified repair" },
       { value: "Offline", label: "inspections queue on the phone and sync on reconnect" },
@@ -200,7 +200,7 @@ export const productPages: ProductPage[] = [
     accent: "real-time intelligence",
     lead: "BisonGuard watches the cameras on open range, detects bison and other animals as they appear, raises alerts your team can act on, and keeps every clip as evidence.",
     hero: { src: "/media/herd-ridge.webp", alt: "Bison silhouetted along a ridge at dusk", position: "50% 60%" },
-    card: { src: "/media/products/bisonguard/recordings.webp", alt: "BisonGuard recordings of a camera on open range, with detections boxed in each clip", position: "50% 40%" },
+    card: { src: "/media/products/bisonguard/detection.webp", alt: "A BisonGuard range camera with two zones drawn and a deer detected in zone 2", position: "100% 85%" },
     stats: [
       { value: "192", label: "camera clips in the evidence vault" },
       { value: "18 GB", label: "of recorded video across all clips" },

@@ -233,7 +233,7 @@ export function IntersectionCounter() {
 
 const steps = [
   { label: "Source", text: "Upload a recording, connect an authorized live camera over RTSP or HLS, or record from a public camera in the directory.", src: `${M}/source.webp`, w: 1720, h: 867 },
-  { label: "Movements", text: "Draw the road approaches and map the turning movements, as zone pairs or labelled trajectory paths.", src: `${M}/movements.webp`, w: 1204, h: 436 },
+  { label: "Movements", text: "Draw the road approaches and map the turning movements, as zone pairs or labelled trajectory paths.", src: `${M}/zones.webp`, w: 1686, h: 948 },
   { label: "Run count", text: "Every vehicle is detected and tracked across the frame. Each confirmed passage from one zone to another is counted once.", src: `${M}/run.webp`, w: 1235, h: 867 },
   { label: "Results", text: "Counts by movement and class, ready to download as CSV, JSON, an engineering report or the annotated video.", src: `${M}/results.webp`, w: 1380, h: 868 },
   { label: "Review", text: "Compare repeated runs, inspect frame-level disagreements and review candidate consensus events. Agreement is evidence, not accuracy.", src: `${M}/review.webp`, w: 1235, h: 865 },

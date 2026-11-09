@@ -187,11 +187,10 @@ function StageVisual({ i }: { i: number }) {
   if (i === 0)
     return (
       <div className="relative h-full">
-        <Image src={`${M}/drive-frame.webp`} alt="A frame from a survey drive recorded with the AdAMS app on a dashboard-mounted phone" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+        <video src={`${M}/drive.mp4`} poster={`${M}/drive-poster.webp`} autoPlay muted loop playsInline aria-label="A survey drive recorded on a dashboard-mounted phone, with traffic signs detected along the street" className="absolute inset-0 h-full w-full object-cover" />
         <span className="absolute top-4 left-4 flex items-center gap-2 bg-black/70 px-2.5 py-1 text-[0.75rem] font-medium text-white">
           <span className="inline-block h-2 w-2 animate-pulse bg-red-500" aria-hidden /> REC
         </span>
-        <span className="absolute right-4 bottom-4 bg-black/70 px-2.5 py-1 text-[0.75rem] text-white tabular-nums">Recording 1 · 0:59</span>
       </div>
     );
   if (i === 1)
@@ -202,9 +201,15 @@ function StageVisual({ i }: { i: number }) {
     );
   if (i === 2)
     return (
-      <div className="relative h-full bg-deep">
-        <Image src="/media/rec74-frame.webp" alt="A frame from Recording 74 with a stop sign detected and boxed" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-        <span className="absolute top-4 left-4 bg-black/70 px-2.5 py-1 text-[0.75rem] text-white">Recording 74 · 3,085 frames</span>
+      <div className="grid h-full grid-rows-2 gap-px bg-line">
+        <div className="relative bg-deep">
+          <Image src={`${M}/sign-detect.webp`} alt="A stop sign detected and boxed in a survey drive frame" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-[60%_50%]" />
+          <span className="absolute top-3 left-3 bg-black/70 px-2.5 py-1 text-[0.75rem] text-white">Traffic signs</span>
+        </div>
+        <div className="relative bg-deep">
+          <Image src={`${M}/crack-detect.webp`} alt="Two longitudinal cracks detected and boxed on a rural highway" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-[50%_80%]" />
+          <span className="absolute top-3 left-3 bg-black/70 px-2.5 py-1 text-[0.75rem] text-white">Pavement distress</span>
+        </div>
       </div>
     );
   return (

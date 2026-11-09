@@ -1,9 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import { CloudOff, MapPin, RefreshCw, Send, Wifi } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { EASE } from "@/components/motion";
 import { cn } from "@/lib/utils";
 
 /* ------------------------------------------------------------------------ */
@@ -23,16 +23,10 @@ const levels = [
 ];
 const lvl = (l: number) => levels[l - 1];
 
-// A crack drawn along a fixed line; its length and width follow the measurements
-const crackPts = [
-  [40, 150], [80, 138], [118, 152], [160, 128], [205, 140], [250, 112], [292, 126], [338, 98], [380, 110], [430, 84], [470, 96], [520, 70],
+const photos = [
+  { n: 1, src: "/media/products/roadlogger/visit-1.webp", alt: "The block crack at visit 1: the side block of the pavement beside a blue kerb is damaged" },
+  { n: 2, src: "/media/products/roadlogger/visit-2.webp", alt: "The same crack at visit 2: the damage has spread along the kerb towards the roadside" },
 ];
-const crackPath = (len: number) => {
-  const take = Math.max(2, Math.round((len / 89) * crackPts.length));
-  return crackPts.slice(0, take).map(([x, y], i) => `${i ? "L" : "M"}${x},${y}`).join(" ");
-};
-
-const crackEnd = (len: number) => crackPts[Math.max(2, Math.round((len / 89) * crackPts.length)) - 1][0];
 
 export function CrackTimeline() {
   const [i, setI] = useState(0);
@@ -46,41 +40,21 @@ export function CrackTimeline() {
   return (
     <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
       <div className="lg:col-span-7">
-        <div className="relative border border-line bg-deep">
-          <svg viewBox="0 0 560 240" className="block w-full" role="img" aria-label={`The block crack at visit ${v.n}: ${v.length} cm long, ${v.width} cm wide`}>
-            <defs>
-              <pattern id="asphalt" width="8" height="8" patternUnits="userSpaceOnUse">
-                <rect width="8" height="8" className="fill-surface" />
-                <circle cx="2" cy="3" r="0.8" className="fill-fg-3/30" />
-                <circle cx="6" cy="6" r="0.6" className="fill-fg-3/20" />
-              </pattern>
-            </defs>
-            <rect width="560" height="240" fill="url(#asphalt)" />
-            <rect x="0" y="200" width="560" height="40" className="fill-fg-3/15" />
-            <motion.path
-              d={crackPath(v.length)}
-              fill="none"
-              stroke="#050608"
-              strokeLinejoin="round"
-              strokeLinecap="round"
-              initial={false}
-              animate={{ d: crackPath(v.length), strokeWidth: 4 + v.width * 1.4 }}
-              transition={{ duration: 0.7, ease: EASE }}
-            />
-            {/* length dimension */}
-            <motion.g initial={false} animate={{ x: 0 }}>
-              <motion.line x1="40" y1="178" y2="178" initial={false} animate={{ x2: crackEnd(v.length) }} transition={{ duration: 0.7, ease: EASE }} stroke="currentColor" className="text-fg-2" strokeWidth="1.5" />
-              <line x1="40" y1="171" x2="40" y2="185" stroke="currentColor" className="text-fg-2" strokeWidth="1.5" />
-              <motion.line y1="171" y2="185" initial={false} animate={{ x1: crackEnd(v.length), x2: crackEnd(v.length) }} transition={{ duration: 0.7, ease: EASE }} stroke="currentColor" className="text-fg-2" strokeWidth="1.5" />
-            </motion.g>
-            <motion.path d={crackPath(v.length)} fill="none" stroke={lvl(v.level).c} strokeOpacity="0.9" strokeWidth="1.5" strokeDasharray="4 5" initial={false} animate={{ d: crackPath(v.length) }} transition={{ duration: 0.7, ease: EASE }} />
-          </svg>
-          <div className="absolute top-3 left-3 bg-black/70 px-2.5 py-1 text-[0.75rem] text-white">
-            Pavement defect · Block crack
-          </div>
-          <div className="absolute top-3 right-3 px-2.5 py-1 text-[0.75rem] font-medium text-black" style={{ background: lvl(v.level).c }}>
-            L{v.level} {lvl(v.level).name}
-          </div>
+        <div className="grid grid-cols-2 gap-3">
+          {photos.map((p) => {
+            const on = p.n === v.n;
+            return (
+              <div key={p.n} className={cn("relative aspect-[9/14] overflow-clip border bg-deep transition-all duration-500", on ? "border-primary" : "border-line", v.n !== 3 && !on && "opacity-45")}>
+                <Image src={p.src} alt={p.alt} fill sizes="(min-width: 1024px) 28vw, 50vw" className="object-cover" />
+                <span className="absolute top-3 left-3 bg-black/70 px-2.5 py-1 text-[0.75rem] text-white">
+                  Visit {p.n} · {visits[p.n - 1].date}
+                </span>
+                <span className="absolute right-3 bottom-3 px-2.5 py-1 text-[0.75rem] font-medium text-black" style={{ background: lvl(visits[p.n - 1].level).c }}>
+                  L{visits[p.n - 1].level} {lvl(visits[p.n - 1].level).name}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         <div role="tablist" aria-label="Inspection visits" className="mt-4 grid grid-cols-3 border border-line">

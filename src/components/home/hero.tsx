@@ -46,7 +46,7 @@ const slides: Slide[] = [
     eyebrow: "AdAMS · Advanced Asset Management System",
     title: "Drive the network once. Map every asset and defect.",
     text: "Record from a phone on the dashboard. AdAMS finds and geolocates signs, markings, street lights and signals, grades cracks and potholes on a five-level scale, and turns them into work orders.",
-    image: { src: "/media/hero/adams.webp", alt: "A motorway at dusk seen from the driver's seat", position: "50% 62%" },
+    image: { src: "/media/products/adams/hero.webp", alt: "A survey drive from the driver's seat, with a stop sign detected at the corner", position: "50% 40%" },
     actions: [
       { label: "Explore AdAMS", href: "/products/adams" },
       { label: "Book a demo", href: "/contact" },
