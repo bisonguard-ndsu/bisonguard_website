@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  images: { formats: ["image/avif", "image/webp"] },
+  // Serve images as-is. Our host times out converting large images on the
+  // fly, and every image here is already a sized WebP.
+  images: { unoptimized: true },
   async redirects() {
     return [
       { source: "/adams", destination: "/products/adams", permanent: true },
