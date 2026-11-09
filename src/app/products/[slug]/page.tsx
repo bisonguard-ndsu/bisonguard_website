@@ -9,6 +9,10 @@ import { getApp } from "@/content/apps";
 import { getProductPage, productPages } from "@/content/product-pages";
 import { getProduct } from "@/content/products";
 import { productFaqs } from "@/content/faqs";
+import { AdamsPage } from "@/components/products/adams-page";
+
+/** Products with their own page design; the rest use the shared layout below. */
+const custom: Record<string, () => React.ReactNode> = { adams: AdamsPage };
 
 export const dynamicParams = false;
 export const generateStaticParams = () => productPages.map((p) => ({ slug: p.slug }));
@@ -27,6 +31,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const p = getProductPage((await params).slug);
   if (!p) notFound();
+  const Custom = custom[p.slug];
+  if (Custom) return <Custom />;
   const prod = getProduct(p.slug);
   const app = prod.appKey ? getApp(prod.appKey) : undefined;
   const faqs = productFaqs[p.slug] ?? [];

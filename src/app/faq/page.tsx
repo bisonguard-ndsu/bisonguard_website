@@ -6,6 +6,7 @@ import { PageIntro } from "@/components/page-intro";
 import { ButtonLink } from "@/components/sections";
 import { faqGroups } from "@/content/faqs";
 import { productPages } from "@/content/product-pages";
+import { productFaqs } from "@/content/faqs";
 import { site } from "@/content/site";
 
 export const metadata: Metadata = {
@@ -42,7 +43,7 @@ export default function FaqPage() {
               </ul>
               <p className="eyebrow mt-10 text-fg-3">By product</p>
               <ul className="mt-4 border-t border-line">
-                {productPages.map((p) => (
+                {productPages.filter((p) => productFaqs[p.slug]?.length).map((p) => (
                   <li key={p.slug}>
                     <Link
                       href={`/products/${p.slug}#questions`}

@@ -192,6 +192,58 @@ export const productPages: ProductPage[] = [
     audience: ["Road maintenance crews", "Public-works supervisors", "Contractors reporting to agencies"],
     solutions: ["field-inspection", "pavement-condition"],
   },
+  {
+    slug: "bisonguard",
+    name: "BisonGuard",
+    category: "Wildlife intelligence",
+    title: "Protect the herd with real-time intelligence",
+    accent: "real-time intelligence",
+    lead: "BisonGuard watches the cameras on open range, detects bison and other animals as they appear, raises alerts your team can act on, and keeps every clip as evidence.",
+    hero: { src: "/media/herd-ridge.webp", alt: "Bison silhouetted along a ridge at dusk", position: "50% 60%" },
+    card: { src: "/media/products/bisonguard/recordings.webp", alt: "BisonGuard recordings of a camera on open range, with detections boxed in each clip", position: "50% 40%" },
+    stats: [
+      { value: "192", label: "camera clips in the evidence vault" },
+      { value: "18 GB", label: "of recorded video across all clips" },
+      { value: "24/7", label: "detection across every camera" },
+    ],
+    steps: [
+      { title: "Watch", text: "Cameras on the range stream to a live feed. Detection runs on every camera, around the clock." },
+      { title: "Alert", text: "Each detection raises an alert with its species, priority and time, so the team knows what to look at first." },
+      { title: "Respond and learn", text: "Investigate, resolve and keep the clip. Over time the alerts build a picture of the population." },
+    ],
+    features: [
+      { title: "Live feed", text: "Every camera on one screen, with detections drawn on the video." },
+      { title: "Species alerts", text: "Bison, turkey and other animals detected and raised as alerts with a priority." },
+      { title: "Incident response", text: "Alerts move from active to investigating to resolved, with response timers." },
+      { title: "Evidence vault", text: "Recorded clips kept, searchable by time and ready to download." },
+      { title: "Analytics", text: "Population intelligence over time, built from the detections." },
+      { title: "Team access", text: "Accounts for conservation teams, rangers and research partners." },
+    ],
+    showcase: [
+      {
+        title: "Every sighting, kept as evidence",
+        accent: "kept as evidence",
+        text: "Each detection is recorded with the zone it happened in, so researchers can go back to any sighting and see it for themselves.",
+        points: ["Clips searchable by date", "Detection zones drawn on the video", "Download any clip"],
+        visual: {
+          kind: "app",
+          shot: { src: "/media/products/bisonguard/recordings.webp", alt: "The BisonGuard recordings vault with 192 clips and 18 GB of video", width: 1714, height: 910, label: "BisonGuard · Recordings" },
+        },
+      },
+      {
+        title: "Alerts the team can act on",
+        accent: "can act on",
+        text: "Every detection becomes an alert with its species, priority and status, so nothing seen by a camera is missed.",
+        points: ["Priority and status on every alert", "Active, investigating, resolved", "Filter and search the history"],
+        visual: {
+          kind: "app",
+          shot: { src: "/media/products/bisonguard/alerts.webp", alt: "The BisonGuard alerts list with bison and turkey detections", width: 1714, height: 914, label: "BisonGuard · Alerts" },
+        },
+      },
+    ],
+    audience: ["Conservation teams", "Rangers", "Research institutions"],
+    solutions: ["herd-monitoring"],
+  },
 ];
 
 export const getProductPage = (slug: string) => productPages.find((p) => p.slug === slug);

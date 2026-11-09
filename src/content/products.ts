@@ -79,6 +79,16 @@ export const products: Product[] = [
       "Inspections on the phones crews already carry, even offline, with every case followed to verified repair on a shared map.",
     appKey: "roadlogger",
   },
+  {
+    slug: "bisonguard",
+    name: "BisonGuard",
+    href: "/products/bisonguard",
+    status: "pilot",
+    input: "Cameras on open range",
+    output: "Wildlife alerts, recordings, population trends",
+    summary:
+      "A command centre for conservation teams, rangers and researchers: detection across every camera, alerts with response timers, and population trends over time.",
+  },
 ];
 
 /** Smaller platform pieces mentioned alongside the four products. */

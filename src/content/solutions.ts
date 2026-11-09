@@ -129,7 +129,7 @@ export const solutions: Solution[] = [
       { title: "Report changes", text: "Counts over time and alerts when numbers drop." },
     ],
     outcomes: ["Herd counts without riding out", "Tracking across frames", "Changes over time"],
-    products: [],
+    products: ["bisonguard"],
   },
 ];
 
