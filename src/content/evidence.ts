@@ -53,6 +53,7 @@ export const partners: Partner[] = [
   { name: "NSF", full: "U.S. National Science Foundation", logo: "/usnsf.jpg", verified: true },
   { name: "Sustein", full: "Sustein", logo: "/sustein.png", verified: true },
   { name: "Farms", full: "Farms", logo: "/farms.avif", verified: true },
+  { name: "The Grey Space", full: "The Grey Space LLC", logo: "/greyspace.webp", verified: true },
 ];
 
 export const testimonial = {

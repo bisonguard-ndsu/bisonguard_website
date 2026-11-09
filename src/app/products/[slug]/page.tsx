@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { FeatureGrid, ProductCards, Showcase, SolutionCards, StatStrip, Steps } from "@/components/blocks";
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { FaqJsonLd, FaqList } from "@/components/faq";
 import { Reveal } from "@/components/motion";
@@ -10,6 +9,14 @@ import { getApp } from "@/content/apps";
 import { getProductPage, productPages } from "@/content/product-pages";
 import { getProduct } from "@/content/products";
 import { productFaqs } from "@/content/faqs";
+import { AdamsPage } from "@/components/products/adams-page";
+import { BisonGuardPage } from "@/components/products/bisonguard-page";
+import { TmcPage } from "@/components/products/tmc-page";
+import { RoadLoggerPage } from "@/components/products/roadlogger-page";
+import { TurnflowPage } from "@/components/products/turnflow-page";
+
+/** Products with their own page design; the rest use the shared layout below. */
+const custom: Record<string, () => React.ReactNode> = { adams: AdamsPage, "traffic-management": TmcPage, turnflow: TurnflowPage, roadlogger: RoadLoggerPage, bisonguard: BisonGuardPage };
 
 export const dynamicParams = false;
 export const generateStaticParams = () => productPages.map((p) => ({ slug: p.slug }));
@@ -28,6 +35,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const p = getProductPage((await params).slug);
   if (!p) notFound();
+  const Custom = custom[p.slug];
+  if (Custom) return <Custom />;
   const prod = getProduct(p.slug);
   const app = prod.appKey ? getApp(prod.appKey) : undefined;
   const faqs = productFaqs[p.slug] ?? [];
@@ -73,7 +82,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
           <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-7 lg:self-end">
             {p.audience.map((a, i) => (
-              <Reveal as="li" key={a} delay={i * 0.06} className="border border-line bg-surface px-5 py-5 font-display text-lg font-medium tracking-[-0.02em] text-fg">
+              <Reveal as="li" key={a} delay={i * 0.06} className="border border-line bg-surface px-5 py-5 font-display text-lg font-semibold tracking-[-0.02em] text-fg">
                 {a}
               </Reveal>
             ))}
@@ -89,7 +98,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <SectionHeading eyebrow="Questions" title={`About ${p.name}`} side={false} />
               <Reveal delay={0.15} className="mt-6">
                 <Link href="/faq" className="text-link">
-                  All questions <ArrowUpRight size={18} aria-hidden />
+                  All questions
                 </Link>
               </Reveal>
             </div>

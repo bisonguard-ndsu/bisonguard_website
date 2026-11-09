@@ -46,6 +46,12 @@ export const nav: NavItem[] = [
               description: "Field inspections → cases tracked to repair",
               status: "In service",
             },
+            {
+              label: "BisonGuard",
+              href: "/products/bisonguard",
+              description: "Range cameras → wildlife alerts, evidence, trends",
+              status: "Pilot",
+            },
           ],
         },
       ],

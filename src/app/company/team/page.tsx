@@ -47,7 +47,7 @@ export default function TeamPage() {
                     )}
                   </div>
                   <div className="p-6">
-                    <h3 className="font-display text-xl font-medium text-fg">{m.name}</h3>
+                    <h3 className="font-display text-xl font-semibold text-fg">{m.name}</h3>
                     <p className="mt-1 text-sm text-primary-strong">{m.role}</p>
                     <p className="mt-3 text-[0.9375rem] leading-relaxed text-fg-2">{m.bio}</p>
                     {m.links && (
@@ -76,7 +76,7 @@ export default function TeamPage() {
             {disciplines.map((d, i) => (
               <Reveal as="li" key={d.title} delay={i * 0.08} className="rounded-2xl border border-white/[0.08] bg-surface p-8">
                 
-                <h3 className="mt-4 font-display text-2xl font-medium text-fg">{d.title}</h3>
+                <h3 className="mt-4 font-display text-2xl font-semibold text-fg">{d.title}</h3>
                 <p className="mt-3 text-[1.0625rem] leading-relaxed text-fg-2">{d.text}</p>
               </Reveal>
             ))}

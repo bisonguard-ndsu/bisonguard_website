@@ -145,6 +145,14 @@ export const productFaqs: Record<string, Faq[]> = {
       q: "What report formats are available?",
       a: "PDF and Word engineering reports that keep observed, adjusted and forecast values apart.",
     },
+    {
+      q: "How do I get access?",
+      a: "Create an account on the Turnflow website. Access is reviewed by the platform administrators, and once approved you can start a study straight away.",
+    },
+    {
+      q: "Which vehicle classes can it count?",
+      a: "Whatever the selected model labels. With a model trained on the 13 FHWA classes, Turnflow tracks and counts the full mix, from motorcycles to multi-trailer trucks, and carries the classes into the analysis and reports.",
+    },
   ],
   roadlogger: [
     {

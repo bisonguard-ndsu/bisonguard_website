@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform, type PanInfo } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowUpRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type Slide = {
@@ -47,7 +46,7 @@ const slides: Slide[] = [
     eyebrow: "AdAMS · Advanced Asset Management System",
     title: "Drive the network once. Map every asset and defect.",
     text: "Record from a phone on the dashboard. AdAMS finds and geolocates signs, markings, street lights and signals, grades cracks and potholes on a five-level scale, and turns them into work orders.",
-    image: { src: "/media/hero/adams.webp", alt: "A motorway at dusk seen from the driver's seat", position: "50% 62%" },
+    image: { src: "/media/products/adams/hero-stop.webp", alt: "A survey drive from the driver's seat, with the stop sign on the right detected and boxed", position: "50% 40%" },
     actions: [
       { label: "Explore AdAMS", href: "/products/adams" },
       { label: "Book a demo", href: "/contact" },
@@ -73,9 +72,9 @@ const slides: Slide[] = [
     tab: "Turnflow",
     tagline: "Movement counts",
     eyebrow: "Turnflow",
-    title: "Turning-movement counts, report-ready",
-    text: "Upload intersection video or record a live camera. Turnflow counts every movement by interval, measures headways and lane occupancy, and exports PDF or Word engineering reports.",
-    image: { src: "/media/hero/turnflow.webp", alt: "A busy road intersection seen from directly above", position: "50% 50%" },
+    title: "Every movement at the intersection, counted",
+    text: "Turn intersection footage into directional counts you can inspect, compare and share, from the first vehicle to the final engineering report.",
+    image: { src: "/media/products/turnflow/zones.webp", alt: "The Camera 9 intersection in Turnflow, with a zone drawn on each approach", position: "50% 50%" },
     actions: [
       { label: "Explore Turnflow", href: "/products/turnflow" },
       { label: "Book a demo", href: "/contact" },
@@ -210,11 +209,11 @@ export default function Hero() {
             >
               <p className="eyebrow">{slide.eyebrow}</p>
               {index === 0 ? (
-                <h1 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-medium tracking-[-0.045em] text-white sm:text-[4rem] lg:text-[5rem]">
+                <h1 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-semibold tracking-[-0.035em] text-white sm:text-[4rem] lg:text-[5rem]">
                   {slide.title}
                 </h1>
               ) : (
-                <h2 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-medium tracking-[-0.045em] text-white sm:text-[4rem] lg:text-[5rem]">
+                <h2 className="mt-6 font-display text-[2.625rem] leading-[1.02] font-semibold tracking-[-0.035em] text-white sm:text-[4rem] lg:text-[5rem]">
                   {slide.title}
                 </h2>
               )}
@@ -224,12 +223,10 @@ export default function Hero() {
                   i === 0 ? (
                     <Link key={a.href + a.label} href={a.href} className="btn btn-light">
                       {a.label}
-                      <ArrowUpRight size={18} aria-hidden />
                     </Link>
                   ) : (
                     <Link key={a.href + a.label} href={a.href} className="text-link text-white">
                       {a.label}
-                      <ArrowUpRight size={18} aria-hidden />
                     </Link>
                   ),
                 )}
@@ -265,7 +262,7 @@ export default function Hero() {
                     </span>
                     <span
                       className={cn(
-                        "block font-display text-[0.9375rem] font-medium transition-colors duration-300",
+                        "block font-display text-[0.9375rem] font-semibold transition-colors duration-300",
                         active ? "text-white" : "text-white/55 group-hover:text-white/85",
                       )}
                     >

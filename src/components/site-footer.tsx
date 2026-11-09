@@ -20,7 +20,7 @@ export default function SiteFooter() {
             <p className="eyebrow mt-10 text-fg-3">Write to us</p>
             <a
               href={`mailto:${site.email}`}
-              className="group mt-3 inline-flex items-center gap-2 font-display text-[1.375rem] font-medium text-white transition-colors hover:text-primary-strong sm:text-2xl"
+              className="group mt-3 inline-flex items-center gap-2 font-display text-[1.375rem] font-semibold text-white transition-colors hover:text-primary-strong sm:text-2xl"
             >
               <span className="link">{site.email}</span>
               <span className="arrow text-primary-strong" aria-hidden>

@@ -135,7 +135,7 @@ export function CountUp({ value, className }: { value: string; className?: strin
   }, [seen]);
 
   return (
-    <span ref={ref} className={cn("tabular-nums", className)} aria-label={value}>
+    <span ref={ref} className={className} aria-label={value}>
       <span aria-hidden>{shown}</span>
     </span>
   );

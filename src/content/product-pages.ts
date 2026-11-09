@@ -35,7 +35,7 @@ export const productPages: ProductPage[] = [
     accent: "Map every asset and defect.",
     lead: "AdAMS turns ordinary drive video into a complete, geolocated record of your road network: every sign, marking, light and signal, every crack and pothole, and the ride quality of every segment.",
     hero: { src: "/media/site/guardrail.webp", alt: "A highway curving through pine forest with guardrails and an overhead sign", position: "50% 55%" },
-    card: { src: "/media/hero/adams.webp", alt: "A motorway at dusk seen from the driver's seat", position: "50% 60%" },
+    card: { src: "/media/products/adams/card.webp", alt: "An AdAMS recording with its gyroscope data and linked asset analyses", position: "0% 0%" },
     stats: [
       { value: "118", label: "traffic signs geolocated in the Fargo – West Fargo survey" },
       { value: "2,267", label: "road segments rated for roughness in that survey" },
@@ -82,7 +82,7 @@ export const productPages: ProductPage[] = [
     accent: "live on one screen",
     lead: "TMC brings the cameras you already run into one workspace: watch them live, record on a schedule, and turn footage into volume, speed, occupancy and density figures your operations team can act on.",
     hero: { src: "/media/site/night-intersection.webp", alt: "A city intersection at night with traffic moving through", position: "50% 50%" },
-    card: { src: "/media/hero/tmc.webp", alt: "A traffic camera mounted on a pole against the sky", position: "40% 50%" },
+    card: { src: "/media/products/tmc/card-analysis.webp", alt: "A TMC analysis summary: a truck detected on a highway camera, with volume, speed and vehicle classes", position: "0% 0%" },
     stats: [
       { value: "24/7", label: "live monitoring of connected cameras" },
       { value: "4", label: "traffic measures from video: volume, speed, occupancy, density" },
@@ -121,7 +121,7 @@ export const productPages: ProductPage[] = [
     accent: "report-ready",
     lead: "Turnflow counts traffic from intersection video. Draw the approaches, define the movements and get counts by interval, headways and lane occupancy, with the video evidence for every vehicle and a report you can submit.",
     hero: { src: "/media/site/interchange.webp", alt: "A highway interchange seen from above with traffic on every ramp", position: "50% 50%" },
-    card: { src: "/media/hero/turnflow.webp", alt: "A busy road intersection seen from directly above", position: "50% 50%" },
+    card: { src: "/media/products/turnflow/card.webp", alt: "The Turnflow website: Every movement tells a story, beside Camera 9 footage", position: "0% 0%" },
     stats: [
       { value: "27,000+", label: "public traffic cameras in the built-in directory" },
       { value: "28", label: "US states covered by that directory" },
@@ -161,7 +161,7 @@ export const productPages: ProductPage[] = [
     accent: "tracked to repair",
     lead: "RoadLogger puts inspections on the phones your crews already carry. Log what you find, even offline, and follow each case from triage to verified repair on a map the whole team shares.",
     hero: { src: "/media/site/roller.webp", alt: "A road roller compacting fresh asphalt beside a traffic cone", position: "50% 60%" },
-    card: { src: "/media/hero/roadlogger.webp", alt: "Cracked asphalt across a worn yellow lane marking", position: "50% 50%" },
+    card: { src: "/media/products/roadlogger/card.webp", alt: "A RoadLogger case: a block crack escalating from Level 1 to Level 4 over three visits", position: "0% 0%" },
     stats: [
       { value: "5", label: "stages from new defect to verified repair" },
       { value: "Offline", label: "inspections queue on the phone and sync on reconnect" },
@@ -191,6 +191,58 @@ export const productPages: ProductPage[] = [
     ],
     audience: ["Road maintenance crews", "Public-works supervisors", "Contractors reporting to agencies"],
     solutions: ["field-inspection", "pavement-condition"],
+  },
+  {
+    slug: "bisonguard",
+    name: "BisonGuard",
+    category: "Wildlife intelligence",
+    title: "Protect the herd with real-time intelligence",
+    accent: "real-time intelligence",
+    lead: "BisonGuard watches the cameras on open range, detects bison and other animals as they appear, raises alerts your team can act on, and keeps every clip as evidence.",
+    hero: { src: "/media/herd-ridge.webp", alt: "Bison silhouetted along a ridge at dusk", position: "50% 60%" },
+    card: { src: "/media/products/bisonguard/card.webp", alt: "The BisonGuard sign-in screen: Protect the herd with real-time intelligence", position: "70% 50%" },
+    stats: [
+      { value: "192", label: "camera clips in the evidence vault" },
+      { value: "18 GB", label: "of recorded video across all clips" },
+      { value: "24/7", label: "detection across every camera" },
+    ],
+    steps: [
+      { title: "Watch", text: "Cameras on the range stream to a live feed. Detection runs on every camera, around the clock." },
+      { title: "Alert", text: "Each detection raises an alert with its species, priority and time, so the team knows what to look at first." },
+      { title: "Respond and learn", text: "Investigate, resolve and keep the clip. Over time the alerts build a picture of the population." },
+    ],
+    features: [
+      { title: "Live feed", text: "Every camera on one screen, with detections drawn on the video." },
+      { title: "Species alerts", text: "Bison, turkey and other animals detected and raised as alerts with a priority." },
+      { title: "Incident response", text: "Alerts move from active to investigating to resolved, with response timers." },
+      { title: "Evidence vault", text: "Recorded clips kept, searchable by time and ready to download." },
+      { title: "Analytics", text: "Population intelligence over time, built from the detections." },
+      { title: "Team access", text: "Accounts for conservation teams, rangers and research partners." },
+    ],
+    showcase: [
+      {
+        title: "Every sighting, kept as evidence",
+        accent: "kept as evidence",
+        text: "Each detection is recorded with the zone it happened in, so researchers can go back to any sighting and see it for themselves.",
+        points: ["Clips searchable by date", "Detection zones drawn on the video", "Download any clip"],
+        visual: {
+          kind: "app",
+          shot: { src: "/media/products/bisonguard/recordings.webp", alt: "The BisonGuard recordings vault with 192 clips and 18 GB of video", width: 1714, height: 910, label: "BisonGuard · Recordings" },
+        },
+      },
+      {
+        title: "Alerts the team can act on",
+        accent: "can act on",
+        text: "Every detection becomes an alert with its species, priority and status, so nothing seen by a camera is missed.",
+        points: ["Priority and status on every alert", "Active, investigating, resolved", "Filter and search the history"],
+        visual: {
+          kind: "app",
+          shot: { src: "/media/products/bisonguard/alerts.webp", alt: "The BisonGuard alerts list with bison and turkey detections", width: 1714, height: 914, label: "BisonGuard · Alerts" },
+        },
+      },
+    ],
+    audience: ["Conservation teams", "Rangers", "Research institutions"],
+    solutions: ["herd-monitoring"],
   },
 ];
 

@@ -1,9 +1,8 @@
-import { ArrowUpRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 import { Parallax, Reveal, ScanReveal, WordRise } from "@/components/motion";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 export type Img = { src: string; alt: string; position?: string };
 export type Action = { label: string; href: string };
@@ -116,7 +115,7 @@ export function PageHero({
           as="h1"
           text={title}
           delay={0.35}
-          className="mt-5 max-w-[20ch] font-display text-[2.375rem] leading-[1.06] font-medium tracking-[-0.04em] text-white sm:text-[3.25rem] lg:text-[4rem]"
+          className="mt-5 max-w-[20ch] font-display text-[2.375rem] leading-[1.06] font-semibold tracking-[-0.03em] text-white sm:text-[3.25rem] lg:text-[4rem]"
         />
         {lead && (
           <Reveal delay={0.7} className="mt-6 max-w-[40rem] text-[1.0625rem] leading-relaxed text-white/80 sm:text-lg">
@@ -155,7 +154,6 @@ export function ButtonLink({
   const inner = (
     <>
       {children}
-      <ArrowUpRight size={18} aria-hidden />
     </>
   );
   if (external || href.startsWith("mailto:"))
@@ -182,7 +180,7 @@ export function Photo({ image, className, sizes = "(min-width: 1024px) 50vw, 100
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+        className="object-center transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
         style={{ objectPosition: image.position }}
       />
     </div>

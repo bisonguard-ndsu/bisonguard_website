@@ -34,7 +34,7 @@ export function FaqList({ items, className, defaultOpen = 0 }: { items: Faq[]; c
                 onClick={() => toggle(i)}
                 className="group flex w-full cursor-pointer items-start justify-between gap-6 py-6 text-left"
               >
-                <span className="font-display text-[1.125rem] leading-snug font-medium tracking-[-0.02em] text-fg transition-colors group-hover:text-primary sm:text-[1.25rem]">
+                <span className="font-display text-[1.125rem] leading-snug font-semibold tracking-[-0.02em] text-fg transition-colors group-hover:text-primary sm:text-[1.25rem]">
                   {f.q}
                 </span>
                 <Plus

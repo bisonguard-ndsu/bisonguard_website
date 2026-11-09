@@ -15,7 +15,7 @@ export function Logo({ className }: { className?: string; tone?: "dark" | "light
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
       <LogoMark className="h-7 w-7" />
-      <span className="font-display text-[1.125rem] leading-none font-medium tracking-[-0.04em] whitespace-nowrap text-fg">
+      <span className="font-display text-[1.125rem] leading-none font-semibold tracking-[-0.03em] whitespace-nowrap text-fg">
         InfiniCity<span className="text-fg-3"> Labs</span>
       </span>
     </span>
