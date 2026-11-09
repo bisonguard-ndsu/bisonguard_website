@@ -1,55 +1,113 @@
-import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Instrument_Sans, Schibsted_Grotesk } from "next/font/google";
+import type { Metadata } from "next";
+import { Barlow } from "next/font/google";
 import "./globals.css";
-import SiteHeader from "@/components/site-header";
-import SiteFooter from "@/components/site-footer";
+import Navbar from "@/components/navbar";
+import Footer from "@/components/footer";
+import { Toaster } from "@/components/ui/sonner";
 import CookieConsent from "@/components/cookie-consent";
-import { site } from "@/content/site";
 
-const instrument = Instrument_Sans({ subsets: ["latin"], variable: "--font-instrument", display: "swap" });
-const schibsted = Schibsted_Grotesk({ subsets: ["latin"], variable: "--font-schibsted", display: "swap" });
-const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", display: "swap" });
+const ibmPlex = Barlow({
+  variable: "--font-ibm-plex",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(site.url),
-  title: {
-    default: "InfiniCity Labs — Computer vision for road agencies and engineers",
-    template: "%s · InfiniCity Labs",
-  },
-  description: site.description,
+  metadataBase: new URL("https://infinicitylabs.org"),
+  title: "InfiniCity Labs | AI-Powered Smart Infrastructure",
+  description:
+    "InfiniCity Labs pioneers smart infrastructure and mobility solutions through advanced big data analytics, digital twins, and intelligent systems for civil engineering",
+  keywords: [
+    "civil engineering",
+    "AI",
+    "smart cities",
+    "infrastructure management",
+    "mobility",
+    "digital twins",
+    "transportation technology",
+    "pavement management",
+    "intelligent systems",
+  ],
+  authors: [{ name: "InfiniCity Labs" }],
   openGraph: {
     type: "website",
-    siteName: site.name,
-    url: site.url,
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "InfiniCity Labs" }],
+    locale: "en_US",
+    url: "https://infinicitylabs.org",
+    title: "InfiniCity Labs | Engineering the Future of Smart Cities",
+    description:
+      "Transforming urban infrastructure with AI-driven analytics, digital twins, and intelligent mobility systems.",
+    siteName: "InfiniCity Labs",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "InfiniCity Labs — Pioneering Intelligent Futures",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image", creator: "@InfiniCityLabs" },
-  icons: { icon: [{ url: "/favicon.ico", sizes: "any" }, { url: "/icon.svg", type: "image/svg+xml" }], apple: "/apple-icon.png" },
+  twitter: {
+    card: "summary_large_image",
+    title: "InfiniCity Labs | Engineering the Future of Smart Cities",
+    description:
+      "Transforming urban infrastructure with AI-driven analytics, digital twins, and intelligent mobility systems.",
+    images: ["/og.png"],
+    creator: "@InfiniCityLabs",
+  },
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "512x512" }],
+    shortcut: "/icon.png",
+    apple: [{ url: "/icon.png", sizes: "180x180", type: "image/png" }],
+  },
+  alternates: {
+    canonical: "https://infinicitylabs.org",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
-export const viewport: Viewport = { themeColor: "#12151b" };
-
-const orgJsonLd = {
+const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: site.name,
-  url: site.url,
-  logo: `${site.url}/icon.png`,
-  description: site.description,
-  email: site.email,
-  sameAs: site.social.map((s) => s.href),
+  name: "InfiniCity Labs",
+  url: "https://infinicitylabs.org",
+  logo: "https://infinicitylabs.org/icon.png",
+  description:
+    "Pioneering the future of infrastructure, mobility, and smart systems with cutting-edge big data analytics and digital twins.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    email: "info@infinicitylabs.org",
+  },
+  sameAs: [
+    "https://twitter.com/InfiniCityLabs",
+    "https://github.com/InfiniCityLabs",
+    "https://www.instagram.com/infinicitylabs/",
+    "https://www.linkedin.com/company/infinicity-labs/",
+  ],
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={`${instrument.variable} ${schibsted.variable} ${geistMono.variable}`}>
-      <body>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
-        <SiteHeader />
-        <main id="main" className="pt-[4.5rem]">
-          {children}
-        </main>
-        <SiteFooter />
+    <html lang="en">
+      <body
+        className={`${ibmPlex.variable} antialiased`}
+      >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <Navbar />
+        {children}
+        <Footer />
+        <Toaster />
         <CookieConsent />
       </body>
     </html>
