@@ -1,8 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
 import { Parallax, Reveal, ScanReveal, WordRise } from "@/components/motion";
 import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
+import Link from "next/link";
 
 export type Img = { src: string; alt: string; position?: string };
 export type Action = { label: string; href: string };
@@ -180,7 +180,7 @@ export function Photo({ image, className, sizes = "(min-width: 1024px) 50vw, 100
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
+        className="object-center transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
         style={{ objectPosition: image.position }}
       />
     </div>
