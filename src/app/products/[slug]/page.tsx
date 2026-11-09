@@ -10,12 +10,13 @@ import { getProductPage, productPages } from "@/content/product-pages";
 import { getProduct } from "@/content/products";
 import { productFaqs } from "@/content/faqs";
 import { AdamsPage } from "@/components/products/adams-page";
+import { BisonGuardPage } from "@/components/products/bisonguard-page";
 import { TmcPage } from "@/components/products/tmc-page";
 import { RoadLoggerPage } from "@/components/products/roadlogger-page";
 import { TurnflowPage } from "@/components/products/turnflow-page";
 
 /** Products with their own page design; the rest use the shared layout below. */
-const custom: Record<string, () => React.ReactNode> = { adams: AdamsPage, "traffic-management": TmcPage, turnflow: TurnflowPage, roadlogger: RoadLoggerPage };
+const custom: Record<string, () => React.ReactNode> = { adams: AdamsPage, "traffic-management": TmcPage, turnflow: TurnflowPage, roadlogger: RoadLoggerPage, bisonguard: BisonGuardPage };
 
 export const dynamicParams = false;
 export const generateStaticParams = () => productPages.map((p) => ({ slug: p.slug }));
